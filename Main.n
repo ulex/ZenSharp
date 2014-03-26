@@ -1,0 +1,186 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+using Nemerle.Peg;
+
+using System;
+using System.Console;
+using System.Collections.Generic;
+
+[Record]
+public variant TreePart{
+  | RuleList
+  | Scope {
+      Name : string;
+    }
+  public Rules : list[Rule];
+}
+
+[Record]
+public class Rule {
+  public Name : string;
+  public Rules : list[ConcatRule];
+}
+
+[Record]
+public class ConcatRule {
+  public Rules : list[LeafRule];
+}
+
+public variant LeafRule{
+  | String {
+      Value : string;
+      public override ToString() : string { $"String<$Value>"; }
+    }
+  | NonTerminal{
+      Value : string;
+      public override ToString() : string { $"NonTerminal<$Value>"; }
+    }
+  | ExpandRule {
+      Short : string;
+      Expand : string;
+      public override ToString() : string { $"ExpandRule<$Short,$Expand>"; }
+    }
+}
+
+[PegGrammar(Options = EmitDebugSources, start,
+    grammar
+    {
+      start : GenerateTree = generate+;
+      generate: TreePart = (rules sn / scope sn);
+
+      newLineCharacter : void = '\n' / '\r' / '\u2028' / '\u2029';
+      newLineWindows   : void = "\r\n";
+      newLine          : void = newLineWindows / newLineCharacter;
+      whitespace       : void = [Zs] / '\t' / '\v' / '\f';
+      space            : void = whitespace / newLine;
+      s                : void = whitespace*;
+      sn               : void = space*;
+      vmark            : void = '|';
+      describeMark     : void = "::=";
+
+      stringChar          : string = !"\"" [Any];
+      quoteEscapeSequence : string = "\"\"";
+      str                 : string = (quoteEscapeSequence / stringChar)*;
+      stringDecl          : string = '@'? '"' (str) '"';
+      identifier          : string = ([Lu, Ll, Lt, Lm, Lo, Nl, Nd] / '_' / '<' / '>' / '[' / ']')+;
+
+      scope : TreePart = "scope" s stringDecl s '{' sn rules? sn '}';
+
+      rules          : TreePart         = rule (s newLine sn rule)*;
+      expandRule     : LeafRule         = terminal / nonterminal;
+      concatRule     : ConcatRule       = expandRule (s expandRule)*;
+      ruleBody       : list[ConcatRule] = concatRule (s vmark s concatRule)*;
+      rule           : Rule             = identifier s describeMark s ruleBody;
+      leafShortCut   : LeafRule         = identifier s '=' s identifier;
+      terminalString : LeafRule         = stringDecl;
+      terminal       : LeafRule         = terminalString / leafShortCut;
+
+      nonterminal    : LeafRule         = identifier;
+    }
+)]
+public class CalcParser{
+  scope(_ : NToken, name : string, _ : NToken, rules : option[TreePart], _ : NToken) : TreePart{
+    match (rules){
+      | Some (rul is TreePart.RuleList) => TreePart.Scope(rul.Rules, name)
+      | None => null
+    }
+    ;
+  }
+
+  rules(first : Rule, tail : List[Rule]) : TreePart{
+    TreePart.RuleList([first] + tail.AsList());
+  }
+
+  concatRule(first : LeafRule, tail : List[LeafRule]) : ConcatRule{
+    ConcatRule([first] + tail.AsList());
+  }
+
+  ruleBody (crule : ConcatRule, tail : List[ConcatRule]): list[ConcatRule]{
+    [crule] + tail.AsList();
+  }
+  rule (id : string, rules : list[ConcatRule]): Rule{
+    Rule(id, rules)
+  }
+  leafShortCut (expand : string, _ : NToken, sho : string) : LeafRule{
+    LeafRule.ExpandRule(sho, expand);
+  }
+
+  terminalString (decl : string) : LeafRule{
+    LeafRule.String(decl);
+  }
+  nonterminal (id : string) : LeafRule{
+    LeafRule.NonTerminal(id)
+  }
+  identifier (sequence : NToken) : string {
+    GetText(sequence);
+  }
+  private quoteEscapeSequence(_ : NToken) : string{
+    "\"";
+  }
+  private stringChar (text : NToken) : string{
+    GetText(text)
+  }
+  private str(parts : List[string]) : string{
+    System.String.Concat(parts);
+  }
+  stringDecl(_ : NToken, _ : NToken, inside : string, _ : NToken) : string{
+    inside;
+  }
+
+  start(declaration : List[TreePart]) : GenerateTree{
+    // todo: use native nemerle list
+    def globalRules = List();
+    def scopes  = List();
+    foreach (treePart in declaration)
+    {
+      match (treePart){
+        | scope is TreePart.Scope => scopes.Add(scope)
+        | rules is TreePart.RuleList => globalRules.Add(rules)
+        | _ => ()
+      }
+    }
+    GenerateTree($[y | x in globalRules, y in x.Rules], scopes.AsList());
+  }
+}
+
+module Program
+{
+  Main() : void{
+    Main1();
+    _ = ReadLine();
+  }
+  
+  Main1() : void
+  {
+    def d = CalcParser();
+    def file = System.IO.File.ReadAllText("Templates.txt");
+    def (count, parseresult) = d.TryParse(file);
+    
+    when (count != file.Length || parseresult == null)
+      throw Exception("Parsing error");
+    
+     def templates = List(parseresult.GetTemplates());
+     //def templates = NList.ToList(parseresult.GetTemplates());
+     //def duplicates = NList.Group(templates, (l,r) => String.CompareOrdinal(l.Short, r.Short));
+    
+    def duplicates = MultiDict();
+    templates.ForEach(r => duplicates.AddMulti(r.Short, r.Expand));
+    def duplist = NList.ToList(duplicates.Longer2());
+    match (duplist) 
+    {
+      |  _ :: _ => { WriteLine(duplist); throw Exception("duplicates detected"); }
+      | _ => ();
+    }
+    
+    WriteLine(templates[0].Xml());
+      
+  }
+  
+  Main2() : void {
+    def test = [1,2,3,4,5,6,7];
+    def a = test.SplitFirst(p => p == 8);
+    WriteLine(a);
+  }
+}

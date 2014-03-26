@@ -1,0 +1,14 @@
+﻿sp       ::= " "
+cursor   ::= "$END$"
+input    ::= "$name$"
+access   ::= public=pu | private=p | protected=pr
+comTypes ::= string=s | bytes[]=by | byte=b
+
+scope "TypeMember" {
+  start  ::= field | floid
+  floid ::= "HELLO"
+  field    ::= access sp comTypes
+}
+
+scope "TypeMember, TypeAndNamespace" {
+}

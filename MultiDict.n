@@ -1,0 +1,29 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using SCG = System.Collections.Generic;
+using System.Linq;
+
+public class MultiDict[K,V] : Hashtable[K, list[V]]
+{
+  public AddMulti(key : K, val : V) : void{
+    match (Get(key)){
+      | None => this.Set(key, [val])
+      | Some (x) => this.Set(key, val :: x)
+    }
+  }
+
+  public Longer2() : SCG.IEnumerable[K * list[V]]
+  {
+    foreach (kvp in this)
+    {
+      match (kvp.Value){
+        | _ :: _ :: _ => yield (kvp.Key, kvp.Value)
+        | _ => ()
+      }
+    }
+  }
+}
