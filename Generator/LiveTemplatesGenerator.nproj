@@ -58,6 +58,8 @@
   <ItemGroup>
     <Compile Include="GenerateTree.n">
     </Compile>
+    <Compile Include="GuidUtility.n">
+    </Compile>
     <Compile Include="ListExtensions.n">
     </Compile>
     <Compile Include="Main.n" />

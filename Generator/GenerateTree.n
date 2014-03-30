@@ -9,6 +9,8 @@ using System.Collections.Generic;
 
 
 public class LiveTemplate {
+  public static LiveTemplateNamespaceGuid = Guid("9E476F88-E79A-405F-B15F-70AF8A336397");
+  
   public Short : string;
   public Expand : string;
   public Scope : string;
@@ -31,16 +33,8 @@ public class LiveTemplate {
     $"LiveTemplate<$Scope,$Short,$Expand>";
   }
   
-  public Xml() : string {
-    def esc(str) {System.Security.SecurityElement.Escape(str)};
-    $<#<Template uid="$(System.Guid.NewGuid())" shortcut="$(esc(Short))" description="$(esc(Expand))" text="$(esc(Expand))" reformat="True" shortenQualifiedReferences="True">
-    <Context>
-      <CSharpContext context="$Scope" minimumLanguageVersion="2.0"/>
-    </Context>
-    <Variables />
-    
-    <CustomProperties/>
-  </Template>#>
+  public Uid : Guid {
+    get { Logos.Utility.GuidUtility.Create(LiveTemplateNamespaceGuid, Short, 5) }
   }
 }
 
