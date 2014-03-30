@@ -1,0 +1,27 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+// shitty
+class XmlSerializer
+{
+  header = <#
+<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    #>;
+
+  footer = <#
+    </wpf:ResourceDictionary>
+    #>;
+
+    private PropertyTemplate(uid : Guid, key : string, val : object) : string {
+      def tname = val.GetType().Name;
+      def esc(str) {System.Security.SecurityElement.Escape(str)};
+      def template = <# <s:$tname x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=$(uid.ToString("N"))/$key">$(esc(val.ToString()))(</s:$tname> #>;
+      null;
+    }
+}

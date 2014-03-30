@@ -39,19 +39,19 @@
     <MacroReference Include="Nemerle.Peg.Macros, Version=1.2.0.175, Culture=neutral, PublicKeyToken=null">
       <Name>Nemerle.Peg.Macros</Name>
       <AssemblyName>Nemerle.Peg.Macros.dll</AssemblyName>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Nemerle\net-4.0\Nemerle.Peg.Macros.dll</HintPath>
+      <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.Peg.Macros.dll</HintPath>
       <Private>False</Private>
     </MacroReference>
     <Reference Include="mscorlib" />
     <Reference Include="Nemerle, Version=1.2.0.175, Culture=neutral, PublicKeyToken=e080a9c724e2bfcd">
       <Name>Nemerle</Name>
       <AssemblyName>Nemerle.dll</AssemblyName>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Nemerle\net-4.0\Nemerle.dll</HintPath>
+      <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.dll</HintPath>
     </Reference>
     <Reference Include="Nemerle.Peg, Version=1.2.0.175, Culture=neutral, PublicKeyToken=null">
       <Name>Nemerle.Peg</Name>
       <AssemblyName>Nemerle.Peg.dll</AssemblyName>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Nemerle\net-4.0\Nemerle.Peg.dll</HintPath>
+      <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.Peg.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -62,9 +62,10 @@
     </Compile>
     <Compile Include="Main.n" />
     <Compile Include="MultiDict.n">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.n" />
+    <Compile Include="XmlSerializer.n">
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
