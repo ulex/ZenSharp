@@ -1,0 +1,46 @@
+using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+using Nemerle.Peg;
+
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace Github.Ulex.LiveTemplatesGenerator
+{
+  public class LiveTemplate {
+    public static LiveTemplateNamespaceGuid = Guid("9E476F88-E79A-405F-B15F-70AF8A336397");
+
+    public Short : string;
+    public Expand : string;
+    public Scope : string;
+
+    public this(scope : string, rules : list[LeafRule]){
+      Scope = scope;
+      def expb = StringBuilder();
+      def shrb = StringBuilder();
+      foreach (rule in rules)
+        match (rule){
+          | x is LeafRule.String => _ = expb.Append(x.Value);
+          | x is LeafRule.ExpandRule => { _ = expb.Append(x.Expand); _ = shrb.Append(x.Short) };
+          | _ => ()
+        }
+      Short = shrb.ToString();
+      Expand = expb.ToString();
+    }
+
+    public override ToString() : string
+    {
+      $"LiveTemplate<$Scope,$Short,$Expand>";
+    }
+
+    public Uid : Guid
+    {
+      get { Logos.Utility.GuidUtility.Create(LiveTemplateNamespaceGuid, Short, 5) }
+    }
+  }
+}

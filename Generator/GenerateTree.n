@@ -7,82 +7,57 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 
+namespace Github.Ulex.LiveTemplatesGenerator {
+  [Record]
+  public class GenerateTree{
+    public GlobalRules : list[Rule];
+    public Scopes : list[TreePart.Scope];
 
-public class LiveTemplate {
-  public static LiveTemplateNamespaceGuid = Guid("9E476F88-E79A-405F-B15F-70AF8A336397");
-  
-  public Short : string;
-  public Expand : string;
-  public Scope : string;
-
-  public this(scope : string, rules : list[LeafRule]){
-    Scope = scope;
-    def expb = StringBuilder();
-    def shrb = StringBuilder();
-    foreach (rule in rules)
-      match (rule){
-        | x is LeafRule.String => _ = expb.Append(x.Value);
-        | x is LeafRule.ExpandRule => { _ = expb.Append(x.Expand); _ = shrb.Append(x.Short) };
-        | _ => ()
-      }
-    Short = shrb.ToString();
-    Expand = expb.ToString();
-  }
-
-  public override ToString() : string {
-    $"LiveTemplate<$Scope,$Short,$Expand>";
-  }
-  
-  public Uid : Guid {
-    get { Logos.Utility.GuidUtility.Create(LiveTemplateNamespaceGuid, Short, 5) }
-  }
-}
-
-[Record]
-public class GenerateTree{
-  public GlobalRules : list[Rule];
-  public Scopes : list[TreePart.Scope];
-
-   public GetTemplates() : IEnumerable[LiveTemplate]{
-      foreach (scope in Scopes)
-        foreach (liveTemplate in GetTemplatesScope(scope))
-          yield liveTemplate;
-   }
-
-   GetTemplatesScope(scope : TreePart.Scope) : IEnumerable[LiveTemplate]{
-     def scopeRules = GlobalRules + scope.Rules;
-     def startRule = scope.Rules.Find(a => a.Name == "start");
-     if (!startRule.IsSome)
-       throw Exception($"Start rule for scope $(scope.Name) not exist")
-     else
-       foreach (leafs in GetTemplatesRule(startRule.Value, scopeRules))
-       {
-          yield LiveTemplate(scope.Name, leafs);
-       }
-   }
-
-   GetTemplatesRule(rule : Rule, scopeRules : list[Rule]): IEnumerable[list[LeafRule]]{
-     foreach (crule in rule.Rules)
-     {
-       foreach (gen in GetTemplatesLr(crule.Rules, scopeRules)) yield gen;
+     public GetTemplates() : IEnumerable[LiveTemplate]
+    {
+        foreach (scope in Scopes)
+          foreach (liveTemplate in GetTemplatesScope(scope))
+            yield liveTemplate;
      }
-   }
 
-   GetTemplatesLr(leafRules : list[LeafRule], scopeRules : list[Rule]) : IEnumerable[list[LeafRule]]{
-     def (left, current, right) = leafRules.SplitFirst(lr => lr is LeafRule.NonTerminal);
-     match (current) {
-       | Some ( x is LeafRule.NonTerminal ) =>
+     GetTemplatesScope(scope : TreePart.Scope) : IEnumerable[LiveTemplate]
+    {
+       def scopeRules = GlobalRules + scope.Rules;
+       def startRule = scope.Rules.Find(a => a.Name == "start");
+       if (!startRule.IsSome)
+         throw Exception($"Start rule for scope $(scope.Name) not exist")
+       else
+         foreach (leafs in GetTemplatesRule(startRule.Value, scopeRules))
          {
-           def rule = scopeRules.Find(r => r.Name == x.Value);
-           unless (rule.IsSome) throw Exception($"Non-terminal rule '$(x.Value)' is not exist");
-
-           // Expand first non-terminal rule
-           foreach (expand in GetTemplatesRule(rule.Value, scopeRules))
-             // Expand tail rules
-             foreach (rightExpand in GetTemplatesLr(right, scopeRules))
-               yield left + expand + rightExpand;
+            yield LiveTemplate(scope.Name, leafs);
          }
-         | None => yield leafRules
      }
-   }
+
+     GetTemplatesRule(rule : Rule, scopeRules : list[Rule]): IEnumerable[list[LeafRule]]
+    {
+       foreach (crule in rule.Rules)
+       {
+         foreach (gen in GetTemplatesLr(crule.Rules, scopeRules)) yield gen;
+       }
+     }
+
+     GetTemplatesLr(leafRules : list[LeafRule], scopeRules : list[Rule]) : IEnumerable[list[LeafRule]]
+    {
+       def (left, current, right) = leafRules.SplitFirst(lr => lr is LeafRule.NonTerminal);
+       match (current) {
+         | Some ( x is LeafRule.NonTerminal ) =>
+           {
+             def rule = scopeRules.Find(r => r.Name == x.Value);
+             unless (rule.IsSome) throw Exception($"Non-terminal rule '$(x.Value)' is not exist");
+
+             // Expand first non-terminal rule
+             foreach (expand in GetTemplatesRule(rule.Value, scopeRules))
+               // Expand tail rules
+               foreach (rightExpand in GetTemplatesLr(right, scopeRules))
+                 yield left + expand + rightExpand;
+           }
+           | None => yield leafRules
+       }
+     }
+  }
 }

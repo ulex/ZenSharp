@@ -10,112 +10,76 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-// shitty
-class XmlSerializer
+namespace Github.Ulex.LiveTemplatesGenerator
 {
-  header = <#
-<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-    #>;
-
-  footer = <# </wpf:ResourceDictionary> #>;
-
-  matcher = Regex("\\$([^$]*)\\$");
-
-  WriteField(lt : LiveTemplate, name : string, to : TextWriter) : void
+  // shitty
+  class XmlSerializer
   {
-    // Boolean ; Field/=fieldname/@KeyIndexDefined       ; True
-    // String  ; Field/=fieldname/Expression/@EntryValue ; suggestVariableName()
-    // Int64   ; Field/=fieldname/Order/@EntryValue      ; 0
-    to.WriteLine(PropertyTemplate(lt.Uid, $"Field/=$name/@KeyIndexDefined", true));
-    to.WriteLine(PropertyTemplate(lt.Uid, $"Field/=$name/Expression/@EntryValue", $"suggestVariableName(\"$name\")"));
-    // PropertyTemplate(lt.Uid, $"Field/=$name/Order/@EntryValue", x);
-  }
+    header = <#
+  <wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+      #>;
 
-  WriteFields(lt : LiveTemplate, to : TextWriter) : void
-  {
-    foreach (m in matcher.Matches(lt.Expand)){
-      WriteField(lt, (m:>Match).Groups[1].Value, to);
-    }
-  }
+    footer = <# </wpf:ResourceDictionary> #>;
 
-  PropertyTemplate(uid : Guid, key : string, val : object) : string
-  {
-    def tname = val.GetType().Name;
-    def esc(str) {System.Security.SecurityElement.Escape(str)};
-    $<# <s:$tname x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=$(uid.ToString("N").ToUpper())/$key">$(esc(val.ToString()))</s:$tname>#>;
-  }
+    matcher = Regex("\\$([^$]*)\\$");
 
-
-  WriteTemplate (lt : LiveTemplate, to : TextWriter) : void
-  {
-    // Boolean ; @KeyIndexDefined                                  ; True
-    to.WriteLine(PropertyTemplate(lt.Uid, "@KeyIndexDefined", true));
-    // Boolean ; Applicability/=Live/@EntryIndexedValue            ; True
-    to.WriteLine(PropertyTemplate(lt.Uid, "Applicability/=Live/@EntryIndexedValue", true));
-    // String  ; Categories/=LiveTemplGenerator/@EntryIndexedValue ; Imported 3/14/2014
-    to.WriteLine(PropertyTemplate(lt.Uid, "Categories/=LiveTemplGenerator/@EntryIndexedValue", "LiveTemplatesGenerator"));
-
-    WriteFields(lt, to);
-    // Boolean ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined ; True
-    to.WriteLine(PropertyTemplate(lt.Uid, "Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined", true));
-    // String  ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue ; 2.0
-    to.WriteLine(PropertyTemplate(lt.Uid, "Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue", "2.0"));
-    // String  ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue ; InCSharpTypeMember
-    to.WriteLine(PropertyTemplate(lt.Uid, "Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue", lt.Scope));
-    // String  ; Shortcut/@EntryValue ; nu
-    to.WriteLine(PropertyTemplate(lt.Uid, "Shortcut/@EntryValue", lt.Short));
-    // Boolean ; ShortenQualifiedReferences/@EntryValue ; True
-    to.WriteLine(PropertyTemplate(lt.Uid, "ShortenQualifiedReferences/@EntryValue", true));
-    // String  ; Text/@EntryValue ; private uint $fieldname$ = $defaultvalue$ ; $END$
-    to.WriteLine(PropertyTemplate(lt.Uid, "Text/@EntryValue", lt.Expand));
-    to.WriteLine();
-  }
-
-  public Serialize(templates : IEnumerable[LiveTemplate], to : TextWriter) : void {
-    to.WriteLine(header);
-    foreach (lt in templates)
+    WriteField(lt : LiveTemplate, name : string, to : TextWriter) : void
     {
-      WriteTemplate(lt, to);
+      // Boolean ; Field/=fieldname/@KeyIndexDefined       ; True
+      // String  ; Field/=fieldname/Expression/@EntryValue ; suggestVariableName()
+      // Int64   ; Field/=fieldname/Order/@EntryValue      ; 0
+      to.WriteLine(PropertyTemplate(lt.Uid, $"Field/=$name/@KeyIndexDefined", true));
+      to.WriteLine(PropertyTemplate(lt.Uid, $"Field/=$name/Expression/@EntryValue", $"suggestVariableName(\"$name\")"));
+      // PropertyTemplate(lt.Uid, $"Field/=$name/Order/@EntryValue", x);
     }
-    to.WriteLine(footer);
+
+    WriteFields(lt : LiveTemplate, to : TextWriter) : void
+    {
+      foreach (m in matcher.Matches(lt.Expand)){
+        WriteField(lt, (m:>Match).Groups[1].Value, to);
+      }
+    }
+
+    PropertyTemplate(uid : Guid, key : string, val : object) : string
+    {
+      def tname = val.GetType().Name;
+      def esc(str) {System.Security.SecurityElement.Escape(str)};
+      $<# <s:$tname x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=$(uid.ToString("N").ToUpper())/$key">$(esc(val.ToString()))</s:$tname>#>;
+    }
+
+
+    WriteTemplate (lt : LiveTemplate, to : TextWriter) : void
+    {
+      // Boolean ; @KeyIndexDefined                                  ; True
+      to.WriteLine(PropertyTemplate(lt.Uid, "@KeyIndexDefined", true));
+      // Boolean ; Applicability/=Live/@EntryIndexedValue            ; True
+      to.WriteLine(PropertyTemplate(lt.Uid, "Applicability/=Live/@EntryIndexedValue", true));
+      // String  ; Categories/=LiveTemplGenerator/@EntryIndexedValue ; Imported 3/14/2014
+      to.WriteLine(PropertyTemplate(lt.Uid, "Categories/=LiveTemplGenerator/@EntryIndexedValue", "LiveTemplatesGenerator"));
+
+      WriteFields(lt, to);
+      // Boolean ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined ; True
+      to.WriteLine(PropertyTemplate(lt.Uid, "Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined", true));
+      // String  ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue ; 2.0
+      to.WriteLine(PropertyTemplate(lt.Uid, "Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue", "2.0"));
+      // String  ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue ; InCSharpTypeMember
+      to.WriteLine(PropertyTemplate(lt.Uid, "Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue", lt.Scope));
+      // String  ; Shortcut/@EntryValue ; nu
+      to.WriteLine(PropertyTemplate(lt.Uid, "Shortcut/@EntryValue", lt.Short));
+      // Boolean ; ShortenQualifiedReferences/@EntryValue ; True
+      to.WriteLine(PropertyTemplate(lt.Uid, "ShortenQualifiedReferences/@EntryValue", true));
+      // String  ; Text/@EntryValue ; private uint $fieldname$ = $defaultvalue$ ; $END$
+      to.WriteLine(PropertyTemplate(lt.Uid, "Text/@EntryValue", lt.Expand));
+      to.WriteLine();
+    }
+
+    public Serialize(templates : IEnumerable[LiveTemplate], to : TextWriter) : void {
+      to.WriteLine(header);
+      foreach (lt in templates)
+      {
+        WriteTemplate(lt, to);
+      }
+      to.WriteLine(footer);
+    }
   }
 }
-
-/*
-Boolean ; @KeyIndexDefined                                                                                    ; True
-Boolean ; Applicability/=Live/@EntryIndexedValue                                                              ; True
-String  ; Categories/=LiveTemplGenerator/@EntryIndexedValue                                                   ; Imported 3/14/2014
-Boolean ; Field/=defaultvalue/@KeyIndexDefined                                                                ; True
-String  ; Field/=defaultvalue/Expression/@EntryValue                                                          ; constant("value")
-Boolean ; Field/=fieldname/@KeyIndexDefined                                                                   ; True
-String  ; Field/=fieldname/Expression/@EntryValue                                                             ; suggestVariableName()
-Int64   ; Field/=fieldname/Order/@EntryValue                                                                  ; 0
-Boolean ; Reformat/@EntryValue                                                                                ; True
-Boolean ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined                                            ; True
-String  ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue ; 2.0
-String  ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue                                            ; InCSharpTypeMember
-String  ; Shortcut/@EntryValue                                                                                ; nu
-Boolean ; ShortenQualifiedReferences/@EntryValue                                                              ; True
-String  ; Text/@EntryValue                                                                                    ; private uint $fieldname$ = $defaultvalue$ ; $END$
-
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Categories/=Imported_00203_002F14_002F2014/@EntryIndexedValue">Imported 3/14/2014</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Field/=defaultvalue/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Field/=defaultvalue/Expression/@EntryValue">constant("value")</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Field/=defaultvalue/Order/@EntryValue">1</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Field/=fieldname/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Field/=fieldname/Expression/@EntryValue">suggestVariableName()</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Field/=fieldname/Order/@EntryValue">0</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Reformat/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue">InCSharpTypeMember</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Shortcut/@EntryValue">nu</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=010F18E4B64B0649A6697956AADDB48C/Text/@EntryValue">private uint $fieldname$ = $defaultvalue$;$END$</s:String>
-
-
-
-
-*/

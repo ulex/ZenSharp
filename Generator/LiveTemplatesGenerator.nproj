@@ -62,8 +62,12 @@
     </Compile>
     <Compile Include="ListExtensions.n">
     </Compile>
+    <Compile Include="LiveTemplate.n">
+    </Compile>
     <Compile Include="Main.n" />
     <Compile Include="MultiDict.n">
+    </Compile>
+    <Compile Include="Program.n">
     </Compile>
     <Compile Include="Properties\AssemblyInfo.n" />
     <Compile Include="XmlSerializer.n">

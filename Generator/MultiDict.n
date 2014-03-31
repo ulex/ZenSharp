@@ -7,22 +7,26 @@ using System;
 using SCG = System.Collections.Generic;
 using System.Linq;
 
-public class MultiDict[K,V] : Hashtable[K, list[V]]
+namespace Github.Ulex.LiveTemplatesGenerator
 {
-  public AddMulti(key : K, val : V) : void{
-    match (Get(key)){
-      | None => this.Set(key, [val])
-      | Some (x) => this.Set(key, val :: x)
-    }
-  }
-
-  public Longer2() : SCG.IEnumerable[K * list[V]]
+  public class MultiDict[K,V] : Hashtable[K, list[V]]
   {
-    foreach (kvp in this)
+    public AddMulti(key : K, val : V) : void
     {
-      match (kvp.Value){
-        | _ :: _ :: _ => yield (kvp.Key, kvp.Value)
-        | _ => ()
+      match (Get(key)){
+        | None => this.Set(key, [val])
+        | Some (x) => this.Set(key, val :: x)
+      }
+    }
+
+    public Longer2() : SCG.IEnumerable[K * list[V]]
+    {
+      foreach (kvp in this)
+      {
+        match (kvp.Value){
+          | _ :: _ :: _ => yield (kvp.Key, kvp.Value)
+          | _ => ()
+        }
       }
     }
   }

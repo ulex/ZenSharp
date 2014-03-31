@@ -1,0 +1,48 @@
+using Nemerle.Collections;
+
+using System;
+using System.Collections.Generic;
+using System.Console;
+
+namespace Github.Ulex.LiveTemplatesGenerator
+{
+  module Program
+  {
+    outputFile = "liveTemplates.DotSettings";
+    inputFile = "Templates.txt";
+    
+    Main() : void 
+    {
+      try
+      {
+        Run();
+      }
+      finally
+      {
+        WriteLine("Press any key to continue...");
+        _ = ReadKey();
+      }
+    }
+    
+    Run() : void
+    {
+      def d = CalcParser();
+      def file = System.IO.File.ReadAllText(inputFile);
+      def (count, parseresult) = d.TryParse(file);
+
+      assert(count == file.Length && parseresult != null, "Parsing error");
+
+      def templates = List(parseresult.GetTemplates());
+
+      def duplicates = MultiDict();
+      templates.ForEach(r => duplicates.AddMulti(r.Short, r.Expand));
+      def duplist = NList.ToList(duplicates.Longer2());
+      assert(duplist.IsEmpty(), $"duplicates detected\n$duplist");
+
+      using (def f = System.IO.StreamWriter(outputFile))
+        XmlSerializer().Serialize(templates, f);
+       
+      WriteLine($"Ok, written to $outputFile");
+    }
+  }
+}
