@@ -174,8 +174,9 @@ module Program
       | _ => ();
     }
     
-    WriteLine(templates[0].Xml());
-      
+    // WriteLine(templates[0].Xml());
+    using (def f = System.IO.StreamWriter("out.xml"))
+      XmlSerializer().Serialize(templates, f);
   }
   
   Main2() : void {

@@ -4,11 +4,9 @@ input    ::= "$name$"
 access   ::= public=pu | private=p | protected=pr
 comTypes ::= string=s | bytes[]=by | byte=b
 
-scope "TypeMember" {
+scope "InCSharpTypeMember" {
   start  ::= field | floid
   floid ::= "HELLO"
-  field    ::= access sp comTypes
+  field    ::= access sp comTypes " $fieldName$"
 }
 
-scope "TypeMember, TypeAndNamespace" {
-}
