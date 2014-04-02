@@ -77,7 +77,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates.txt">
+    <Content Include="Templates.ltg">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

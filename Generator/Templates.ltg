@@ -4,10 +4,12 @@ SCG         ::= "System.Collections.Generic"
 cursor      ::= "$END$"
 
 accessField    ::= private=f | protected=F
-accessProperty ::= "public" | private=_ |  protected=pr
+accessProperty ::= "public"=p | private=_p | protected=P
 accessMethod   ::= "public" | private=_ | protected=pr
 methodDecl     ::= <space> static=M | ""=m
+lazyPrivateSpec ::= "private "=_ | ""
 
+// test
 arraySpec   ::= "[]"=s | ""
 type        ::= <primType> | <compType>
 manualType  ::= "$type$"
@@ -24,9 +26,7 @@ scope "InCSharpTypeMember" {
   start  ::= <property>
   field    ::= <accessField> ""=f <space> <type> "$name$" ";"
   method ::= <accessMethod> <methodDecl> <space> <manualType> <space> "$name$" "(" <cursor> "){}"
-  property ::=  <defaultProperty> | ""=_p <privateSetProperty>
-  defaultProperty ::= accessProperty 
-  privateSetProperty ::=  "public" <space> <manualType> "$name" " { get; private set; }"
+  property ::=  <accessProperty> <space> <manualType> <space> "$name{get; " <lazyPrivateSpec> "set;}"
 }
 scope "InCSharpTypeAndNamespace" {
 

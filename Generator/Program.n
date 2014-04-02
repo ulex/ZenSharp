@@ -9,7 +9,7 @@ namespace Github.Ulex.LiveTemplatesGenerator
   module Program
   {
     outputFile = "liveTemplates.DotSettings";
-    inputFile = "Templates.txt";
+    inputFile = "Templates.ltg";
     
     Main() : void 
     {
