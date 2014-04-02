@@ -30,7 +30,10 @@ namespace Github.Ulex.LiveTemplatesGenerator
       def file = System.IO.File.ReadAllText(inputFile);
       def (count, parseresult) = d.TryParse(file);
 
-      assert(count == file.Length && parseresult != null, "Parsing error");
+      assert(count == file.Length && parseresult != null, {
+        def context = file.Substring(count, file.IndexOf('\r', count) - count);
+        $"Parsing error. Error at <$context>";
+      });
 
       def templates = List(parseresult.GetTemplates());
 

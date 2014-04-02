@@ -30,7 +30,7 @@ namespace Github.Ulex.LiveTemplatesGenerator
         quoteEscapeSequence : string = "\"\"";
         str                 : string = (quoteEscapeSequence / stringChar)*;
         stringDecl          : string = '@'? '"' (str) '"';
-        identifier          : string = ([Lu, Ll, Lt, Lm, Lo, Nl, Nd] / '_' / '<' / '>' / '[' / ']')+;
+        identifier          : string = ([Lu, Ll, Lt, Lm, Lo, Nl, Nd] / '_')+;
 
         scope : TreePart = "scope" s stringDecl s '{' sn rules? sn '}';
 
@@ -39,11 +39,11 @@ namespace Github.Ulex.LiveTemplatesGenerator
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
         ruleBody       : list[ConcatRule] = concatRule (s vmark s concatRule)*;
         rule           : Rule             = identifier s describeMark s ruleBody;
-        leafShortCut   : LeafRule         = identifier s '=' s identifier;
+        leafShortCut   : LeafRule         = (stringDecl / identifier) s '=' s identifier;
         terminalString : LeafRule         = stringDecl;
-        terminal       : LeafRule         = terminalString / leafShortCut;
+        terminal       : LeafRule         = leafShortCut / terminalString;
 
-        nonterminal    : LeafRule         = identifier;
+        nonterminal    : LeafRule         = "<" identifier ">";
       }
   )]
   public class CalcParser
@@ -77,7 +77,7 @@ namespace Github.Ulex.LiveTemplatesGenerator
     terminalString (decl : string) : LeafRule{
       LeafRule.String(decl);
     }
-    nonterminal (id : string) : LeafRule{
+    nonterminal (_ : NToken, id : string, _ : NToken) : LeafRule{
       LeafRule.NonTerminal(id)
     }
     identifier (sequence : NToken) : string {

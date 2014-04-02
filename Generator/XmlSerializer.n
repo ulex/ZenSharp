@@ -23,20 +23,31 @@ namespace Github.Ulex.LiveTemplatesGenerator
 
     matcher = Regex("\\$([^$]*)\\$");
 
-    WriteField(lt : LiveTemplate, name : string, to : TextWriter) : void
+    WriteField(lt : LiveTemplate, name : string, to : TextWriter, index : long) : void
     {
       // Boolean ; Field/=fieldname/@KeyIndexDefined       ; True
-      // String  ; Field/=fieldname/Expression/@EntryValue ; suggestVariableName()
-      // Int64   ; Field/=fieldname/Order/@EntryValue      ; 0
       to.WriteLine(PropertyTemplate(lt.Uid, $"Field/=$name/@KeyIndexDefined", true));
-      to.WriteLine(PropertyTemplate(lt.Uid, $"Field/=$name/Expression/@EntryValue", $"suggestVariableName(\"$name\")"));
-      // PropertyTemplate(lt.Uid, $"Field/=$name/Order/@EntryValue", x);
+      // Int64   ; Field/=fieldname/Order/@EntryValue      ; 0
+      to.WriteLine(PropertyTemplate(lt.Uid, $"Field/=$name/Order/@EntryValue", index));
+      // completeType()
+      def macros = match (name){
+        | "variable" => "suggestVariableName()";
+        | "type" => "guessExpectedType()";
+        | "name" => "completeSmart()";
+        | _ => "suggestTagName()";
+      };
+      // String  ; Field/=fieldname/Expression/@EntryValue ; suggestVariableName()
+      to.WriteLine(PropertyTemplate(lt.Uid, $"Field/=$name/Expression/@EntryValue", macros));
     }
 
     WriteFields(lt : LiveTemplate, to : TextWriter) : void
     {
-      foreach (m in matcher.Matches(lt.Expand)){
-        WriteField(lt, (m:>Match).Groups[1].Value, to);
+      foreach (m in matcher.Matches(lt.Expand) with index){
+        def name = (m:>Match).Groups[1].Value;
+        unless (name == "END")
+        {
+          WriteField(lt, name, to, index);
+        }
       }
     }
 
@@ -46,8 +57,7 @@ namespace Github.Ulex.LiveTemplatesGenerator
       def esc(str) {System.Security.SecurityElement.Escape(str)};
       $<# <s:$tname x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=$(uid.ToString("N").ToUpper())/$key">$(esc(val.ToString()))</s:$tname>#>;
     }
-
-
+    
     WriteTemplate (lt : LiveTemplate, to : TextWriter) : void
     {
       // Boolean ; @KeyIndexDefined                                  ; True
@@ -56,6 +66,8 @@ namespace Github.Ulex.LiveTemplatesGenerator
       to.WriteLine(PropertyTemplate(lt.Uid, "Applicability/=Live/@EntryIndexedValue", true));
       // String  ; Categories/=LiveTemplGenerator/@EntryIndexedValue ; Imported 3/14/2014
       to.WriteLine(PropertyTemplate(lt.Uid, "Categories/=LiveTemplGenerator/@EntryIndexedValue", "LiveTemplatesGenerator"));
+      // Reformat/@EntryValue">True</s:Boolean>
+      to.WriteLine(PropertyTemplate(lt.Uid, "Reformat/@EntryValue", true));
 
       WriteFields(lt, to);
       // Boolean ; Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined ; True

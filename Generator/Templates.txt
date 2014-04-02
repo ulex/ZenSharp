@@ -1,12 +1,33 @@
-﻿sp       ::= " "
-cursor   ::= "$END$"
-input    ::= "$name$"
-access   ::= public=pu | private=p | protected=pr
-comTypes ::= string=s | bytes[]=by | byte=b
+﻿space       ::= " "
+
+SCG         ::= "System.Collections.Generic"
+cursor      ::= "$END$"
+
+accessField    ::= private=f | protected=F
+accessProperty ::= "public" | private=_ |  protected=pr
+accessMethod   ::= "public" | private=_ | protected=pr
+methodDecl     ::= <space> static=M | ""=m
+
+arraySpec   ::= "[]"=s | ""
+type        ::= <primType> | <compType>
+manualType  ::= "$type$"
+primType    ::= string=s | byte=b | double=d | <manualType>
+
+genericArg  ::= "<" <primType> ">"
+scgTypes    ::= IList=l | IEnumerable=e
+generic2Arg ::= "<" <primType> ">"
+scg2Types   ::= SortedList=sl | IDictionary=di
+
+compType    ::= <SCG> "." <scgTypes> <genericArg> | <SCG> "." <scg2Types> <generic2Arg>
 
 scope "InCSharpTypeMember" {
-  start  ::= field | floid
-  floid ::= "HELLO"
-  field    ::= access sp comTypes " $fieldName$"
+  start  ::= <property>
+  field    ::= <accessField> ""=f <space> <type> "$name$" ";"
+  method ::= <accessMethod> <methodDecl> <space> <manualType> <space> "$name$" "(" <cursor> "){}"
+  property ::=  <defaultProperty> | ""=_p <privateSetProperty>
+  defaultProperty ::= accessProperty 
+  privateSetProperty ::=  "public" <space> <manualType> "$name" " { get; private set; }"
 }
+scope "InCSharpTypeAndNamespace" {
 
+}
