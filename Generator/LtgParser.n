@@ -15,7 +15,7 @@ namespace Github.Ulex.LiveTemplatesGenerator
       {
         start : GenerateTree = generate+;
         generate: TreePart = (rules sn / scope sn / comment);
-        comment          : TreePart = s "//" !newLine [Any]*;
+        comment          : TreePart = s "//" (!newLine [Any])* newLine;
         
         newLineCharacter : void = '\n' / '\r' / '\u2028' / '\u2029';
         newLineWindows   : void = "\r\n";
@@ -47,7 +47,7 @@ namespace Github.Ulex.LiveTemplatesGenerator
         nonterminal    : LeafRule         = "<" identifier ">";
       }
   )]
-  public class CalcParser
+  public class LtgParser
   {
     comment(_ : NToken, _ : NToken) : TreePart { 
       null;
