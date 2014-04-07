@@ -1,4 +1,14 @@
-﻿space ::= " "
+﻿// Что в итоге хочется получить
+// валидные разделители -,~_()`
+// M                   ::= public static void $name$() {}
+// Mi                  ::= public static int $name$() {}
+// _M~i                ::= private static IEnumerable<int> $name$() {}
+// MMain,itest         ::= public static void Main(int test) {}
+// MMain,oitest        ::= public static void Main(out int test) {}
+// MMain`i,i,itest     ::= public static void Main<int,int>(int test) {}
+// m~dHello,detest,sbi ::= public IEnumerable<double> Hello(decimal test, StringBuiler i){}
+
+space ::= " "
 
 // Resharper macros
 cursor ::= "$END$"
@@ -7,6 +17,8 @@ manualType ::= "$type$"
 // Fields
 field ::= <accessField> ""=f <space> <type> "$name$" ";"
 
+identifier ::= [Ll Lu Lt Lo Nd Nl Mn Mc Cf Pc Lm]
+
 // Methods
 method       ::= <accessMethod> <methodDecl> <space> <manualType> <space> "$name$" "(" <cursor> "){}"
 methodDecl   ::= <space> static=M | ""=m
@@ -14,7 +26,7 @@ accessMethod ::= "public" | private=_ | protected=pr
 
 // Auto properties
 property        ::= <accessProperty> <space> <manualType> <space> "$name{get; " <lazyPrivateSpec> "set;}"
-accessProperty  ::= "public"=p | private=_p | protected=P
+accessProperty  ::= "public"=p | private=_ | protected=P
 lazyPrivateSpec ::= "private "=_ | ""
 
 // Plain types

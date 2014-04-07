@@ -14,7 +14,7 @@ namespace Github.Ulex.LiveTemplatesGenerator
       grammar
       {
         start : GenerateTree = generate+;
-        generate: TreePart = (rules sn / scope sn / comment);
+        generate: TreePart = (rules / scope / comment) sn;
         comment          : TreePart = s "//" (!newLine [Any])* newLine;
         
         newLineCharacter : void = '\n' / '\r' / '\u2028' / '\u2029';
@@ -42,7 +42,8 @@ namespace Github.Ulex.LiveTemplatesGenerator
         rule           : Rule             = identifier s describeMark s ruleBody;
         leafShortCut   : LeafRule         = (stringDecl / identifier) s '=' s identifier;
         terminalString : LeafRule         = stringDecl;
-        terminal       : LeafRule         = leafShortCut / terminalString;
+        terminal       : LeafRule         = leafShortCut / symbolRange / terminalString;
+        symbolRange    : LeafRule         = "[" s (identifier s)+ s "]";
 
         nonterminal    : LeafRule         = "<" identifier ">";
       }
@@ -51,6 +52,10 @@ namespace Github.Ulex.LiveTemplatesGenerator
   {
     comment(_ : NToken, _ : NToken) : TreePart { 
       null;
+    }
+    
+    symbolRange(_ : NToken, ranges : List[string], _ : NToken) : LeafRule{
+      LeafRule.Range(ranges);
     }
 
     scope(_ : NToken, name : string, _ : NToken, rules : option[TreePart], _ : NToken) : TreePart{
@@ -155,6 +160,13 @@ namespace Github.Ulex.LiveTemplatesGenerator
         Expand : string;
         public override ToString() : string { $"ExpandRule<$Short,$Expand>"; }
       }
+    | Range {
+      RangeNames : List[string];
+      TestInRange(input : char) : bool {
+         def ranges = RangeNames.Map(name => RangeSets.GetRangeSetByName(name).Value);
+         ranges.Exists(r => r.In(input));
+      }
+    }
   }
 
 }
