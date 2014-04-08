@@ -20,7 +20,8 @@ field ::= <accessField> ""=f <space> <type> "$name$" ";"
 identifier ::= [Ll Lu Lt Lo Nd Nl Mn Mc Cf Pc Lm]
 
 // Methods
-method       ::= <accessMethod> <methodDecl> <space> <manualType> <space> "$name$" "(" <cursor> "){}"
+method       ::= <accessMethod> <methodDecl> <space> <manualType> <space> <methodName> "(" <cursor> "){}"
+methodname   ::=  "$name$" | <identifier>
 methodDecl   ::= <space> static=M | ""=m
 accessMethod ::= "public" | private=_ | protected=pr
 
@@ -43,7 +44,8 @@ SCG         ::= "System.Collections.Generic"
 compType    ::= <SCG> "." <scgTypes> <genericArg> | <SCG> "." <scg2Types> <generic2Arg>
 
 scope "InCSharpTypeMember" {
-  start    ::= <field> | <method> | <property>
+  //start    ::= <field> | <method> | <property>
+  start    ::=  <method>
 }
 
 scope "InCSharpTypeAndNamespace" {
