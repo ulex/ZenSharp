@@ -14,6 +14,8 @@ namespace Github.Ulex.ZenSharp.Core
 {
   public class LiveTemplate {
     public static LiveTemplateNamespaceGuid = Guid("9E476F88-E79A-405F-B15F-70AF8A336397");
+    
+    public Rules : list[LeafRule];
 
     public Short : string;
     public Expand : string;
@@ -21,6 +23,7 @@ namespace Github.Ulex.ZenSharp.Core
 
     public this(scope : string, rules : list[LeafRule]){
       Scope = scope;
+      Rules = rules;
       def expb = StringBuilder();
       def shrb = StringBuilder();
       foreach (rule in rules)

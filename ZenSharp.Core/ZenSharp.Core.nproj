@@ -71,6 +71,9 @@
     </Compile>
     <Compile Include="LiveTemplate.n">
     </Compile>
+    <Compile Include="LiveTemplateMatcher.n">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LtgParser.n" />
     <Compile Include="MultiDict.n">
     </Compile>
