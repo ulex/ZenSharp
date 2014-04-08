@@ -8,7 +8,7 @@ using System;
 using System.Console;
 using System.Collections.Generic;
 
-namespace Github.Ulex.LiveTemplatesGenerator
+namespace Github.Ulex.ZenSharp.Core
 {
   [PegGrammar(Options = EmitDebugSources, start,
       grammar

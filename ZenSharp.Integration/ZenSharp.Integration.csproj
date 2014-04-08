@@ -9,8 +9,8 @@
     <ProjectGuid>{9243D98D-91FD-4421-AC80-40ABBE1FBC84}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Serializer</RootNamespace>
-    <AssemblyName>Serializer</AssemblyName>
+    <RootNamespace>Github.Ulex.ZenSharp.Integration</RootNamespace>
+    <AssemblyName>ZenSharp.Integration</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -58,9 +58,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Generator\LiveTemplatesGenerator.nproj">
+    <ProjectReference Include="..\ZenSharp.Core\ZenSharp.Core.nproj">
       <Project>{EFA574E2-DE9C-4017-BB5C-8FC4CD8D5E80}</Project>
-      <Name>LiveTemplatesGenerator</Name>
+      <Name>ZenSharp.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

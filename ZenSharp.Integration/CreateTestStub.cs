@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-using JetBrains.DocumentModel;
 using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Feature.Services.CodeCompletion;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Settings;
@@ -18,7 +16,7 @@ using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
 using JetBrains.Util;
 
-namespace Serializer
+namespace Github.Ulex.ZenSharp.Integration
 {
     [Language(typeof(CSharpLanguage))]
     internal class CreateTestStub : ItemsProviderOfSpecificContext<CSharpCodeCompletionContext>

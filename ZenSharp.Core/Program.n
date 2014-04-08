@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Console;
 
-namespace Github.Ulex.LiveTemplatesGenerator
+namespace Github.Ulex.ZenSharp.Core
 {
   module Program
   {

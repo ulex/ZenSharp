@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer", "Serializer\Serializer.csproj", "{9243D98D-91FD-4421-AC80-40ABBE1FBC84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenSharp.Integration", "ZenSharp.Integration\ZenSharp.Integration.csproj", "{9243D98D-91FD-4421-AC80-40ABBE1FBC84}"
 EndProject
-Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "LiveTemplatesGenerator", "Generator\LiveTemplatesGenerator.nproj", "{EFA574E2-DE9C-4017-BB5C-8FC4CD8D5E80}"
+Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "ZenSharp.Core", "ZenSharp.Core\ZenSharp.Core.nproj", "{EFA574E2-DE9C-4017-BB5C-8FC4CD8D5E80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

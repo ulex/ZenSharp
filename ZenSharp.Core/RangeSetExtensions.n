@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Github.Ulex.LiveTemplatesGenerator
+namespace Github.Ulex.ZenSharp.Core
 {
   module RangeSetExtensions
   {

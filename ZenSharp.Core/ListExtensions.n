@@ -3,7 +3,7 @@ using Nemerle.Collections;
 using Nemerle.Text;
 using Nemerle.Utility;
 
-namespace Github.Ulex.LiveTemplatesGenerator
+namespace Github.Ulex.ZenSharp.Core
 {
   module ListExtensions
   {

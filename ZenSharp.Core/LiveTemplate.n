@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Github.Ulex.LiveTemplatesGenerator
+namespace Github.Ulex.ZenSharp.Core
 {
   public class LiveTemplate {
     public static LiveTemplateNamespaceGuid = Guid("9E476F88-E79A-405F-B15F-70AF8A336397");

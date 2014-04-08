@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Windows;
-using System.Xaml;
-using System.Xml;
 
 using JetBrains.Application.Settings.Storage;
 using JetBrains.Application.Settings.Storage.Persistence;
 using JetBrains.Util;
-using JetBrains.Util.Logging;
 
-namespace Serializer
+namespace Github.Ulex.ZenSharp.Integration
 {
     class Program
     {
