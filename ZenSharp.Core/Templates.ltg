@@ -1,13 +1,5 @@
-﻿// Что в итоге хочется получить
-// валидные разделители -,~_()`
-// M                   ::= public static void $name$() {}
-// Mi                  ::= public static int $name$() {}
-// _M~i                ::= private static IEnumerable<int> $name$() {}
-// MMain,itest         ::= public static void Main(int test) {}
-// MMain,oitest        ::= public static void Main(out int test) {}
-// MMain`i,i,itest     ::= public static void Main<int,int>(int test) {}
-// m~dHello,detest,sbi ::= public IEnumerable<double> Hello(decimal test, StringBuiler i){}
-
+﻿
+// Sample file
 space ::= " "
 
 // Resharper macros
@@ -17,7 +9,7 @@ manualType ::= "$type$"
 // Fields
 field ::= <accessField> ""=f <space> <type> "$name$" ";"
 
-identifier ::= [Ll Lu Lt Lo Nd Nl Mn Mc Cf Pc Lm]
+identifier ::= $name macros = "contant(""name"")"$
 
 // Methods
 method       ::= <accessMethod> <methodDecl> <space> <manualType> <space> <methodName> "(" <cursor> "){}"
@@ -44,7 +36,6 @@ SCG         ::= "System.Collections.Generic"
 compType    ::= <SCG> "." <scgTypes> <genericArg> | <SCG> "." <scg2Types> <generic2Arg>
 
 scope "InCSharpTypeMember" {
-  //start    ::= <field> | <method> | <property>
   start    ::=  <method>
 }
 

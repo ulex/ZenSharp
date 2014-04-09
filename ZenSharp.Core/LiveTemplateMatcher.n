@@ -14,27 +14,18 @@ namespace Github.Ulex.ZenSharp.Core
     private _bones : IEnumerable[LiveTemplate];
 
     IsMatch (lt : LiveTemplate, prefix : string) : bool {
-      def moveRange(r, pos) {
-
-        pos;
+      def rules = lt.Rules;
+/*
+      def applyRule(rule, pos, str) {
+        match (rule){
+          | x is LeafRule.Range => (
+          | x is LeafRule.ExpandRule => (false, pos + x.Short.Length)
+        }
       }
-
-      def applyRule(rule) {
-       // match (rule){
-         // | x is LeafRule.Range => moveRange(x, pos);
-        //}
-      }
-
+*/
       mutable pos = 0;
 
-      foreach (rule in lt.Rules){
-        def newpos = applyRule(rule);
-
-        //when (newpos == pos) break;
-      }
-
       pos >= prefix.Length;
-
     }
   }
 }
