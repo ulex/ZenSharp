@@ -33,10 +33,12 @@ namespace Github.Ulex.ZenSharp.Integration
             var template = new Template("sss" + new Random().Next(), "desctiption", "expand ($END$) end", false, true, false, TemplateApplicability.Live);
             template.UID = Guid.NewGuid();
             var iconManager = context.PsiModule.GetSolution().GetComponent<PsiIconManager>();
-            var myLookupItem = new MyLookupItem(iconManager, template, true);
             //collector.AddAtDefaultPlace(context.LookupItemsFactory.InitializeLookupItem(myLookupItem));
-            
-            collector.AddToTop(myLookupItem);
+
+            //collector.AddToTop(new MyLookupItem(iconManager, template, true, "with desc"));
+            //collector.AddToTop(new MyLookupItem(iconManager, template, false, "with no desc"));
+            collector.AddToTop(new MyLookupItem(iconManager, template, false, "IgnoreSoftOnSpace") {  IgnoreSoftOnSpace = false });
+            collector.AddToTop(new MyLookupItem(iconManager, template, false, "no desc no match") { _matchingResult = null });
             return true;
         }
 
@@ -52,22 +54,31 @@ namespace Github.Ulex.ZenSharp.Integration
     internal class MyLookupItem : TemplateLookupItem, ILookupItem
     {
         private readonly PsiIconManager _psiIconManager;
-
+        
+        private readonly string _her;
+        
         private RichText _displayName;
 
-        public MyLookupItem(PsiIconManager psiIconManager, Template template, bool showDescription)
+        public bool _dynamic = true;
+
+        public MatchingResult _matchingResult;
+
+        public MyLookupItem(PsiIconManager psiIconManager, Template template, bool showDescription, string her)
             : base(psiIconManager, template, showDescription)
         {
+            _matchingResult = new MatchingResult(3, "dd", 1000);
             _psiIconManager = psiIconManager;
+            _her = her;
         }
 
         bool ILookupItem.IsDynamic
         {
             get
             {
-                return true;
+                return _dynamic;
             }
         }
+
 
         IconId ILookupItem.Image
         {
@@ -81,7 +92,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             get
             {
-                return new RichText("hello" + new Random().Next());
+                return new RichText(_her + new Random().Next());
             }
         }
 
@@ -103,7 +114,7 @@ namespace Github.Ulex.ZenSharp.Integration
 
         MatchingResult ILookupItem.Match(string prefix, ITextControl textControl)
         {
-            return new MatchingResult(3, "dd", 1000);
+            return _matchingResult;
         }
     }
 }
