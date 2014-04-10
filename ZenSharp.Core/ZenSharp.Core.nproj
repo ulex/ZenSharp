@@ -75,7 +75,7 @@
     <Compile Include="Program.n">
     </Compile>
     <Compile Include="Properties\AssemblyInfo.n" />
-    <Compile Include="IdentifierTester.n">
+    <Compile Include="Identifier.n">
     </Compile>
     <Compile Include="XmlSerializer.n">
     </Compile>

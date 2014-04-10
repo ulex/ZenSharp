@@ -190,7 +190,7 @@ namespace Github.Ulex.ZenSharp.Core
 
       public override Match (input : string) : option[string]{
         def loop(pos){
-          if (pos >= input.Length || input[pos]=='-')
+          if (pos >= input.Length || !Identifier.IsIdentifier(input[pos]))
             pos;
           else
             loop(pos + 1);
