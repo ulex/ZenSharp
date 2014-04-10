@@ -10,10 +10,11 @@ using System.Linq;
 
 namespace Github.Ulex.ZenSharp.Core
 {
-  module RangeSetExtensions
+  module Identifier
   {
-    public In(this rs : RangeSet, ch : char) : bool {
-      rs.Ranges.Exists(r => ch >= r.from && ch <= r.to );
+    public IsIdentifier(this rs : char) : bool {
+      // ToDo: use range clasess from c# lexer specification
+      Char.IsLetterOrDigit(rs) || rs == '_';
     }
   }
 }

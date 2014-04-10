@@ -55,11 +55,6 @@
       <AssemblyName>Nemerle.Peg.dll</AssemblyName>
       <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.Peg.dll</HintPath>
     </Reference>
-    <Reference Include="Nemerle.Peg.Macros, Version=1.2.0.175, Culture=neutral, PublicKeyToken=null">
-      <Name>Nemerle.Peg.Macros</Name>
-      <AssemblyName>Nemerle.Peg.Macros.dll</AssemblyName>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Nemerle\net-4.0\Nemerle.Peg.Macros.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +75,7 @@
     <Compile Include="Program.n">
     </Compile>
     <Compile Include="Properties\AssemblyInfo.n" />
-    <Compile Include="RangeSetExtensions.n">
+    <Compile Include="IdentifierTester.n">
     </Compile>
     <Compile Include="XmlSerializer.n">
     </Compile>
