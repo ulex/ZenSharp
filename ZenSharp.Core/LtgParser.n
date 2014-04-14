@@ -163,13 +163,13 @@ namespace Github.Ulex.ZenSharp.Core
         Value : string;
         public override ToString() : string { $"String<$Value>"; }
         public override Match (input : string) : option[string]{
-          throw NotImplementedException();
+          Some(input)
         }
       }
     | NonTerminal{
         Value : string;
         public override ToString() : string { $"NonTerminal<$Value>"; }
-        public override Match (input : string) : option[string]{
+        public override Match (_ : string) : option[string]{
           throw NotImplementedException();
         }
       }
