@@ -11,21 +11,31 @@ namespace Github.Ulex.ZenSharp.Core
 {
   class LiveTemplateMatcher
   {
-    private _bones : IEnumerable[LiveTemplate];
+    private _tree : GenerateTree;
 
-    IsMatch (lt : LiveTemplate, prefix : string) : bool {
-      def rules = lt.Rules;
-/*
-      def applyRule(rule, pos, str) {
+    public this(tree : GenerateTree) {
+      _tree = tree;
+    }
+
+    FindRule (prefix : string, scopename : string) : LiveTemplate
+    {
+      def scope = _tree.FindScope(scopename);
+      def applyRule(rule : object, str) {
         match (rule){
-          | x is LeafRule.Range => (
-          | x is LeafRule.ExpandRule => (false, pos + x.Short.Length)
+          | cr is ConcatRule => {
+            mutable result = [];
+            foreach (rule in cr.Rules){
+              def appres = applyRule(rule);
+              when (appres == null) 
+              result = result + appres;
+            }
+            result;
+          };
+          | x is LeafRule => [(x, x.Match(str))];
         }
       }
-*/
-      mutable pos = 0;
 
-      pos >= prefix.Length;
+      LiveTemplate(scopename, applyRule(_tree, prefix));
     }
   }
 }

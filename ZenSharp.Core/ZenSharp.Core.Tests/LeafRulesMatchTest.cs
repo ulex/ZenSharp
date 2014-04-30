@@ -36,5 +36,13 @@ namespace ZenSharp.Core.Tests
             Assert.AreEqual(rule.Match("wr`aa").Value, "`aa");
             Assert.AreEqual(rule.Match("wr~aa").Value, "~aa");
         }
+
+
+        [Test]
+        public void TestString()
+        {
+            var rule = new LeafRule.String("short7");
+            Assert.AreEqual(rule.Match("wr").Value, "wr");
+        }
     }
 }

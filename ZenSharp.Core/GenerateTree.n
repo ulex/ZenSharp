@@ -20,17 +20,32 @@ namespace Github.Ulex.ZenSharp.Core {
             yield liveTemplate;
      }
 
-     GetTemplatesScope(scope : TreePart.Scope) : IEnumerable[LiveTemplate]
-    {
+     public FindScope(scopename : string) : TreePart.Scope
+     {
+        def scope = Scopes.Find(a => a.Name == scopename);
+        if (!scope.IsSome)
+          throw Exception($"scope with name $scopename not exist")
+        else
+          scope.Value;
+     }
+
+     public FindStartRule(scope : TreePart.Scope) : Rule
+     {
+        def startRule = scope.Rules.Find(a => a.Name == "start");
+        if (!startRule.IsSome)
+          throw Exception($"Start rule for scope $(scope.Name) not exist")
+        else
+          startRule.Value;
+     }
+
+      GetTemplatesScope(scope : TreePart.Scope) : IEnumerable[LiveTemplate]
+     {
        def scopeRules = GlobalRules + scope.Rules;
-       def startRule = scope.Rules.Find(a => a.Name == "start");
-       if (!startRule.IsSome)
-         throw Exception($"Start rule for scope $(scope.Name) not exist")
-       else
-         foreach (leafs in GetTemplatesRule(startRule.Value, scopeRules))
-         {
-            yield LiveTemplate(scope.Name, leafs);
-         }
+       def startRule = FindStartRule(scope);
+       foreach (leafs in GetTemplatesRule(startRule, scopeRules))
+       {
+          yield LiveTemplate(scope.Name, leafs);
+       }
      }
 
      GetTemplatesRule(rule : Rule, scopeRules : list[Rule]): IEnumerable[list[LeafRule]]
