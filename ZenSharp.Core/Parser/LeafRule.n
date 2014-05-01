@@ -1,0 +1,63 @@
+using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+using Nemerle.Peg;
+
+using System;
+using System.Console;
+using System.Collections.Generic;
+
+namespace Github.Ulex.ZenSharp.Core
+{
+  public variant LeafRule
+  {
+    | String {
+        Value : string;
+        public override ToString() : string { $"String<$Value>"; }
+        public override Match (input : string) : option[string]{
+          Some(input)
+        }
+      }
+    | NonTerminal{
+        Value : string;
+        public override ToString() : string { $"NonTerminal<$Value>"; }
+        public override Match (_ : string) : option[string]{
+          throw NotImplementedException();
+        }
+      }
+    | ExpandRule {
+        Short : string;
+        Expand : string;
+        public override ToString() : string { $"ExpandRule<$Short,$Expand>"; }
+        public override Match (input : string) : option[string]{
+          if (input.StartsWith(Short))
+            Some(input.Remove(0, Short.Length));
+          else
+            None();
+        }
+      }
+    | Substitution {
+      Name : string;
+      Params: List[(string * string)];
+
+      public override Match (input : string) : option[string]{
+        def loop(pos){
+          if (pos >= input.Length || !Identifier.IsIdentifier(input[pos]))
+            pos;
+          else
+            loop(pos + 1);
+        }
+
+        def matchedCount = loop(0);
+        if (matchedCount != 0)
+          Some(input.Remove(0, matchedCount));
+        // maybe retun input? (no match, but valid)
+        else
+        None();
+      }
+    }
+
+    public abstract Match (input : string) : option[string];
+  }
+}

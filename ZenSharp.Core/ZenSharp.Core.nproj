@@ -60,34 +60,48 @@
   <ItemGroup>
     <Compile Include="GenerateTree.n">
     </Compile>
-    <Compile Include="GuidUtility.n">
-    </Compile>
-    <Compile Include="ListExtensions.n">
-    </Compile>
     <Compile Include="LiveTemplate.n">
     </Compile>
     <Compile Include="LiveTemplateMatcher.n">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LtgParser.n" />
-    <Compile Include="MultiDict.n">
+    <Compile Include="Parser\ConcatRule.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parser\LeafRule.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parser\LtgParser.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parser\Rule.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parser\TreePart.n">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Program.n">
     </Compile>
     <Compile Include="Properties\AssemblyInfo.n" />
-    <Compile Include="Identifier.n">
+    <Compile Include="Utils\GuidUtility.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utils\Identifier.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utils\ListExtensions.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utils\MultiDict.n">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="XmlSerializer.n">
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Parser" />
     <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates.ltg">
-      <SubType>Content</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(Nemerle)\Nemerle.MSBuild.targets" />
   <!--

@@ -1,0 +1,18 @@
+using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+using Nemerle.Peg;
+
+using System;
+using System.Console;
+using System.Collections.Generic;
+
+namespace Github.Ulex.ZenSharp.Core
+{
+  [Record]
+  public class ConcatRule
+  {
+    public Rules : list[LeafRule];
+  }
+}
