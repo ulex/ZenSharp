@@ -7,36 +7,36 @@ cursor ::= "$END$"
 manualType ::= "$type$"
 
 // Fields
-field ::= <accessField> ""=f <space> <type> "$name$" ";"
+field ::= accessField ""=f space type "$name$" ";"
 
 identifier ::= $name macros = "contant(""name"")"$
 
 // Methods
-method       ::= <accessMethod> <methodDecl> <space> <manualType> <space> <methodName> "(" <cursor> "){}"
-methodname   ::=  "$name$" | <identifier>
-methodDecl   ::= <space> static=M | ""=m
+method       ::= accessMethod methodDecl space manualType space methodName "(" cursor "){}"
+methodname   ::=  "$name$" | identifier
+methodDecl   ::= space static=M | ""=m
 accessMethod ::= "public" | private=_ | protected=pr
 
 // Auto properties
-property        ::= <accessProperty> <space> <manualType> <space> "$name{get; " <lazyPrivateSpec> "set;}"
+property        ::= accessProperty space manualType space "$name{get; " lazyPrivateSpec "set;}"
 accessProperty  ::= "public"=p | private=_ | protected=P
 lazyPrivateSpec ::= "private "=_ | ""
 
 // Plain types
 arraySpec  ::= "[]"=s | ""
-type       ::= <primType> | <compType>
-primType   ::= string=s | byte=b | double=d | <manualType>
+type       ::= primType | compType
+primType   ::= string=s | byte=b | double=d | manualType
 
 // Complex types
-genericArg  ::= "<" <primType> ">"
+genericArg  ::= "<" primType ">"
 scgTypes    ::= IList=l | IEnumerable=e
-generic2Arg ::= "<" <primType> ">"
+generic2Arg ::= "<" primType ">"
 scg2Types   ::= SortedList=sl | IDictionary=di
 SCG         ::= "System.Collections.Generic"
-compType    ::= <SCG> "." <scgTypes> <genericArg> | <SCG> "." <scg2Types> <generic2Arg>
+compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
 
 scope "InCSharpTypeMember" {
-  start    ::=  <method>
+  start    ::=  method
 }
 
 scope "InCSharpTypeAndNamespace" {

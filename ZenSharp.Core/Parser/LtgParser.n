@@ -32,6 +32,7 @@ namespace Github.Ulex.ZenSharp.Core
         str                 : string = (quoteEscapeSequence / stringChar)*;
         stringDecl          : string = '@'? '"' (str) '"';
         identifier          : string = ([Lu, Ll, Lt, Lm, Lo, Nl, Nd] / '_')+;
+        stridentifier       : string = stringDecl / identifier;
 
         scope : TreePart = "scope" s stringDecl s '{' sn rules? sn '}';
 
@@ -40,13 +41,13 @@ namespace Github.Ulex.ZenSharp.Core
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
         ruleBody       : list[ConcatRule] = concatRule (s vmark s concatRule)*;
         rule           : Rule             = identifier s describeMark s ruleBody;
-        leafShortCut   : LeafRule         = (stringDecl / identifier) s '=' s identifier;
+        leafShortCut   : LeafRule         = stridentifier s '=' s identifier;
         terminalString : LeafRule         = stringDecl;
         terminal       : LeafRule         = leafShortCut / substituion / terminalString;
         substituion    : LeafRule         = "$" s (identifier) s (substituionPar s)* "$";
         substituionPar : string * string  = identifier s "=" s stringDecl;
 
-        nonterminal    : LeafRule         = "<" identifier ">";
+        nonterminal    : LeafRule         = identifier;
       }
   )]
   public class LtgParser
@@ -94,7 +95,7 @@ namespace Github.Ulex.ZenSharp.Core
     terminalString (decl : string) : LeafRule{
       LeafRule.String(decl);
     }
-    nonterminal (_ : NToken, id : string, _ : NToken) : LeafRule{
+    nonterminal (id : string) : LeafRule{
       LeafRule.NonTerminal(id)
     }
     identifier (sequence : NToken) : string {
@@ -127,7 +128,17 @@ namespace Github.Ulex.ZenSharp.Core
       }
       GenerateTree($[y | x in globalRules, y in x.Rules], scopes.AsList());
     }
-  }
+    
+    public ParseAll(input : string) : GenerateTree {
+      def d = LtgParser();
+      def (count, parseresult) = d.TryParse(input);
 
-  
+      assert(count == input.Length && parseresult != null, {
+        def context = input.Substring(0, count);
+        $"Parsing error. Parsed part is <$context>";
+      });
+      
+      parseresult;
+    }
+  }
 }
