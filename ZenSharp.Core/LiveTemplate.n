@@ -14,7 +14,7 @@ namespace Github.Ulex.ZenSharp.Core
 {
   public class LiveTemplate {
     public static LiveTemplateNamespaceGuid = Guid("9E476F88-E79A-405F-B15F-70AF8A336397");
-    
+
     public Rules : list[LeafRule];
 
     public Short : string;

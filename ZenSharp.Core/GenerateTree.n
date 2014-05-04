@@ -13,7 +13,7 @@ namespace Github.Ulex.ZenSharp.Core {
     public GlobalRules : list[Rule];
     public Scopes : list[TreePart.Scope];
 
-     public GetTemplates() : IEnumerable[LiveTemplate]
+    public GetTemplates() : IEnumerable[LiveTemplate]
     {
         foreach (scope in Scopes)
           foreach (liveTemplate in GetTemplatesScope(scope))
@@ -29,6 +29,15 @@ namespace Github.Ulex.ZenSharp.Core {
           scope.Value;
      }
 
+     public FindRule(rulename : string, scopeRules : list[Rule]) : Rule
+     {
+       def rule = scopeRules.Find(r => r.Name == rulename);
+       if (rule.IsSome)
+         rule.Value
+       else
+         throw Exception($"Non-terminal rule '$rulename' is not exist");
+     }
+
      public FindStartRule(scope : TreePart.Scope) : Rule
      {
         def startRule = scope.Rules.Find(a => a.Name == "start");
@@ -37,6 +46,7 @@ namespace Github.Ulex.ZenSharp.Core {
         else
           startRule.Value;
      }
+
 
       GetTemplatesScope(scope : TreePart.Scope) : IEnumerable[LiveTemplate]
      {
@@ -62,11 +72,10 @@ namespace Github.Ulex.ZenSharp.Core {
        match (current) {
          | Some ( x is LeafRule.NonTerminal ) =>
            {
-             def rule = scopeRules.Find(r => r.Name == x.Value);
-             unless (rule.IsSome) throw Exception($"Non-terminal rule '$(x.Value)' is not exist");
+             def rule = FindRule(x.Value, scopeRules);
 
              // Expand first non-terminal rule
-             foreach (expand in GetTemplatesRule(rule.Value, scopeRules))
+             foreach (expand in GetTemplatesRule(rule, scopeRules))
                // Expand tail rules
                foreach (rightExpand in GetTemplatesLr(right, scopeRules))
                  yield left + expand + rightExpand;

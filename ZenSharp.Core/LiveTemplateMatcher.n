@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Github.Ulex.ZenSharp.Core
 {
-  class LiveTemplateMatcher
+  public class LiveTemplateMatcher
   {
     private _tree : GenerateTree;
 
@@ -17,25 +17,67 @@ namespace Github.Ulex.ZenSharp.Core
       _tree = tree;
     }
 
-    FindRule (prefix : string, scopename : string) : LiveTemplate
+    [Record]
+    public class MatchResult {
+      public Success : bool;
+      public Tail : string;
+      public Rules : list[LeafRule];
+
+      public this(mr : bool) {
+        Success = mr;
+      }
+    }
+
+    public Match (prefix : string, scopename : string) : MatchResult
     {
       def scope = _tree.FindScope(scopename);
-      def applyRule(rule : object, str) {
+      def scopeRules = _tree.GlobalRules + scope.Rules;
+
+      // circle reference fix
+      mutable tryMatchRuleVar;
+
+      def tryMathcLeafRule(rule : LeafRule, acc : MatchResult) : MatchResult {
         match (rule){
-          | cr is ConcatRule => {
-            mutable result = [];
-            foreach (rule in cr.Rules){
-              def appres = applyRule(rule);
-              when (appres == null) 
-              result = result + appres;
+          | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.FindRule(x.Value, scopeRules).Rules, acc.Tail);
+          | lr => {
+              def newtail = lr.Match(acc.Tail);
+              match (newtail){
+                | Some(x) => MatchResult(true, x, rule :: acc.Rules) // todo: wrong order
+                | None => MatchResult(false)
+              }
             }
-            result;
-          };
-          | x is LeafRule => [(x, x.Match(str))];
         }
       }
 
-      LiveTemplate(scopename, applyRule(_tree, prefix));
+      def tryMatchConcatRule (rules : list[LeafRule], acc : MatchResult) : MatchResult {
+        match (rules) {
+          | x :: xs => {
+            def r = tryMathcLeafRule(x, acc);
+            if (!acc.Success)
+              r
+            else
+              tryMatchConcatRule(xs, r);
+          }
+          | _ => acc;
+        }
+      }
+
+      def tryMatchRule (rules : list[ConcatRule], tail : string) : MatchResult {
+        match (rules) {
+          | x :: xs =>
+            {
+              def r = tryMatchConcatRule(x.Rules, MatchResult(true, tail, []));
+              if (r.Success)
+                r
+              else
+                tryMatchRule(xs, tail);
+            };
+          | _ => MatchResult(false, null, null);
+        }
+      }
+      tryMatchRuleVar = tryMatchRule;
+
+      tryMatchRule(_tree.FindStartRule(scope).Rules, prefix);
     }
   }
 }
