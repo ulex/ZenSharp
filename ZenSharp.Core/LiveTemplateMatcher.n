@@ -38,7 +38,7 @@ namespace Github.Ulex.ZenSharp.Core
 
       def tryMathcLeafRule(rule : LeafRule, acc : MatchResult) : MatchResult {
         match (rule){
-          | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.FindRule(x.Value, scopeRules).Rules, acc.Tail);
+          | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.FindRule(x.Value, scopeRules).Rules, acc);
           | lr => {
               def newtail = lr.Match(acc.Tail);
               match (newtail){
@@ -62,22 +62,22 @@ namespace Github.Ulex.ZenSharp.Core
         }
       }
 
-      def tryMatchRule (rules : list[ConcatRule], tail : string) : MatchResult {
+      def tryMatchRule (rules : list[ConcatRule], acc : MatchResult) : MatchResult {
         match (rules) {
           | x :: xs =>
             {
-              def r = tryMatchConcatRule(x.Rules, MatchResult(true, tail, []));
+              def r = tryMatchConcatRule(x.Rules, acc);
               if (r.Success)
                 r
               else
-                tryMatchRule(xs, tail);
+                tryMatchRule(xs, acc);
             };
-          | _ => MatchResult(false, null, null);
+          | _ => MatchResult(false, acc.Tail, acc.Rules);
         }
       }
       tryMatchRuleVar = tryMatchRule;
 
-      tryMatchRule(_tree.FindStartRule(scope).Rules, prefix);
+      tryMatchRule(_tree.FindStartRule(scope).Rules, MatchResult(true, prefix, []));
     }
   }
 }

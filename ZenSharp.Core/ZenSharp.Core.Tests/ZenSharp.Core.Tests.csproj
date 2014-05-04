@@ -31,10 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nemerle, Version=1.2.0.175, Culture=neutral, PublicKeyToken=e080a9c724e2bfcd, processorArchitecture=MSIL" />
-    <Reference Include="Nemerle.Peg, Version=1.2.0.175, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.Peg.Macros.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -52,11 +48,23 @@
   <ItemGroup>
     <Compile Include="LeafRulesMatchTest.cs" />
     <Compile Include="LiveTemplateMatcherTest.cs" />
+    <Compile Include="LtgSamples.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LtgSamples.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\jack.ltg" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LtgSamples.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LtgSamples.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

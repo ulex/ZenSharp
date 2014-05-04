@@ -12,8 +12,16 @@ namespace ZenSharp.Core.Tests
         [Test]
         public void Test()
         {
-            var tree = new LtgParser().Parse(TestParser.grammar1).Value;
-            var mr = new LiveTemplateMatcher(tree).Match("h", "some");
+            var tree = new LtgParser().ParseAll(LtgSamples.jack);
+            var mr = new LiveTemplateMatcher(tree).Match("hs", "house");
+            Console.WriteLine(mr);
+        }
+
+        [Test]
+        public void TestBase()
+        {
+            var tree = new LtgParser().ParseAll(LtgSamples.jack);
+            var mr = new LiveTemplateMatcher(tree).Match("titCat", "house");
             Console.WriteLine(mr);
         }
     }

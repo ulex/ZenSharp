@@ -1,0 +1,15 @@
+﻿// This is the house that Jack built.
+// This is the cheese that lay in the house that Jack built.
+// This is the rat that ate the cheese
+// That lay in the house that Jack built.
+
+tjb      ::= "that Jack built"=tjb
+thisis   ::= "This is the"=tit
+s        ::= " "
+sentence ::= $sencence par="value" par2="sample" $
+sep      ::= "-"
+
+scope "house" {
+  base  ::= thisis s sentence
+  start ::= base | base sep tjb
+}
