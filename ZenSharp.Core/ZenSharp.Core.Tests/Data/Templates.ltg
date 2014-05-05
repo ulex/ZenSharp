@@ -13,7 +13,7 @@ identifier ::= $name macros = "contant(""name"")"$
 
 // Methods
 method       ::= accessMethod methodDecl space manualType space methodName "(" cursor "){}"
-methodName   ::=  "$name$" | identifier
+methodName   ::=  $name$ | identifier
 methodDecl   ::= space static=M | ""=m
 accessMethod ::= "public" | private=_ | protected=pr
 

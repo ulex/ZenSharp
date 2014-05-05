@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DevTests.cs" />
     <Compile Include="LeafRulesMatchTest.cs" />
     <Compile Include="LiveTemplateMatcherTest.cs" />
     <Compile Include="LtgSamples.Designer.cs">
@@ -58,12 +59,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\jack.ltg" />
+    <None Include="Data\Templates.ltg" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LtgSamples.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LtgSamples.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
