@@ -13,10 +13,11 @@ namespace ZenSharp.Core.Tests
         public void TestExpandRule()
         {
             var rule = new LeafRule.ExpandRule("short7", "expand");
-            Assert.AreEqual(rule.Match("short7ending").Value, "ending");
-            Assert.AreEqual(rule.Match("short7").Value, "");
-            Assert.AreEqual(rule.Match("short7short7").Value, "short7");
-            Assert.IsTrue(rule.Match("wr").IsNone);
+            Assert.AreEqual(rule.Match("short7ending").Short, "short7");
+            Assert.AreEqual(rule.Match("short7ending").Expand, "expand");
+            Assert.AreEqual(rule.Match("short7").Short, "short7");
+            Assert.AreEqual(rule.Match("short7short7").Short, "short7");
+            Assert.IsFalse(rule.Match("wr").Success);
         }
 
         [Test, ExpectedException(typeof(NotImplementedException))]
@@ -30,11 +31,11 @@ namespace ZenSharp.Core.Tests
         public void TestSubstitution()
         {
             var rule = new LeafRule.Substitution("hello", new List<N.Tuple<string, string>>());
-            Assert.AreEqual(rule.Match("short7").Value, "");
-            Assert.AreEqual(rule.Match("wr").Value, "");
-            Assert.AreEqual(rule.Match("wr,aa").Value, ",aa");
-            Assert.AreEqual(rule.Match("wr`aa").Value, "`aa");
-            Assert.AreEqual(rule.Match("wr~aa").Value, "~aa");
+            Assert.AreEqual(rule.Match("short7").Short, "short7");
+            Assert.AreEqual(rule.Match("wr").Short, "wr");
+            Assert.AreEqual(rule.Match("wr,aa").Short, "wr");
+            Assert.AreEqual(rule.Match("wr`aa").Short, "wr");
+            Assert.AreEqual(rule.Match("wr~aa").Short, "wr");
         }
 
 
@@ -42,7 +43,9 @@ namespace ZenSharp.Core.Tests
         public void TestString()
         {
             var rule = new LeafRule.String("short7");
-            Assert.AreEqual(rule.Match("wr").Value, "wr");
+            Assert.IsTrue(rule.Match("wr").Success);
+            Assert.AreEqual(rule.Match("wr").Expand, "short7");
+            Assert.AreEqual(rule.Match("wr").Short, "");
         }
     }
 }

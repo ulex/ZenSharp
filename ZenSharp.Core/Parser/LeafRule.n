@@ -15,14 +15,14 @@ namespace Github.Ulex.ZenSharp.Core
     | String {
         Value : string;
         public override ToString() : string { $"String<$Value>"; }
-        public override Match (input : string) : option[string]{
-          Some(input)
+        public override Match(input : string) : LeafMatchResult {
+          LeafMatchResult(true, "", Value)
         }
       }
-    | NonTerminal{
+    | NonTerminal {
         Value : string;
         public override ToString() : string { $"NonTerminal<$Value>"; }
-        public override Match (_ : string) : option[string]{
+        public override Match(_ : string) : LeafMatchResult {
           throw NotImplementedException();
         }
       }
@@ -30,34 +30,53 @@ namespace Github.Ulex.ZenSharp.Core
         Short : string;
         Expand : string;
         public override ToString() : string { $"ExpandRule<$Short,$Expand>"; }
-        public override Match (input : string) : option[string]{
+        public override Match(input : string) : LeafMatchResult {
           if (input.StartsWith(Short))
-            Some(input.Remove(0, Short.Length));
+            LeafMatchResult(true, Short, Expand);
           else
-            None();
+            LeafMatchResult(false);
         }
       }
     | Substitution {
-      Name : string;
-      Params: List[(string * string)];
+        Name : string;
+        Params: List[(string * string)];
 
-      public override Match (input : string) : option[string]{
-        def loop(pos){
-          if (pos >= input.Length || !Identifier.IsIdentifier(input[pos]))
-            pos;
+        public override Match (input : string) : LeafMatchResult {
+          def loop(pos){
+            if (pos >= input.Length || !Identifier.IsIdentifier(input[pos]))
+              pos;
+            else
+              loop(pos + 1);
+          }
+
+          def matchedCount = loop(0);
+          if (matchedCount != 0){
+            def matchString = input.Substring(0, matchedCount);
+            LeafMatchResult(true, matchString, matchString);
+          }
           else
-            loop(pos + 1);
+            LeafMatchResult(false);
         }
+    }
 
-        def matchedCount = loop(0);
-        if (matchedCount != 0)
-          Some(input.Remove(0, matchedCount));
-        // maybe retun input? (no match, but valid)
+    [Record]
+    public class LeafMatchResult {
+      public Success : bool;
+      public Short : string;
+      public Expand : string;
+
+      public this(success : bool){
+        Success = success;
+      }
+
+      public Crop(input : string) : string {
+        if (String.IsNullOrEmpty(input) || String.IsNullOrEmpty(Short))
+          input;
         else
-        None();
+          input.Remove(0, Short.Length);
       }
     }
 
-    public abstract Match (input : string) : option[string];
+    public abstract Match (input : string) : LeafMatchResult;
   }
 }

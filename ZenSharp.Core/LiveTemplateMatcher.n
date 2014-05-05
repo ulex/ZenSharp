@@ -26,6 +26,16 @@ namespace Github.Ulex.ZenSharp.Core
       public this(mr : bool) {
         Success = mr;
       }
+
+      public Expand(prefix : string) : string {
+        def loop(tail, input, acc){
+          match (tail){
+            | x :: xs => {def matchResult = x.Match(input); loop(xs, matchResult.Crop(input), acc + matchResult.Expand); }
+            | _ => acc
+          }
+        }
+        loop(Rules, prefix, "");
+      }
     }
 
     public Match (prefix : string, scopename : string) : MatchResult
@@ -40,11 +50,8 @@ namespace Github.Ulex.ZenSharp.Core
         match (rule){
           | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.FindRule(x.Value, scopeRules).Rules, acc);
           | lr => {
-              def newtail = lr.Match(acc.Tail);
-              match (newtail){
-                | Some(x) => MatchResult(true, x, rule :: acc.Rules) // todo: wrong order
-                | None => MatchResult(false)
-              }
+              def leafMatch = lr.Match(acc.Tail);
+              MatchResult(leafMatch.Success, leafMatch.Crop(acc.Tail), rule :: acc.Rules)
             }
         }
       }
@@ -77,7 +84,8 @@ namespace Github.Ulex.ZenSharp.Core
       }
       tryMatchRuleVar = tryMatchRule;
 
-      tryMatchRule(_tree.FindStartRule(scope).Rules, MatchResult(true, prefix, []));
+      def result = tryMatchRule(_tree.FindStartRule(scope).Rules, MatchResult(true, prefix, []));
+      MatchResult(result.Success, result.Tail, result.Rules.Reverse());
     }
   }
 }
