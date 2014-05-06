@@ -58,7 +58,7 @@ namespace Github.Ulex.ZenSharp.Core
 
     substituion(_ : NToken, name : string, options : List[(string * string)], _ : NToken) : LeafRule
     {
-      LeafRule.Substitution(name, options);
+      LeafRule.Substitution(name, options.AsList());
     }
 
     substituionPar(k : string, _ : NToken, v : string) : (string * string)

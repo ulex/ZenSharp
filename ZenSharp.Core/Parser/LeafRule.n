@@ -31,7 +31,7 @@ namespace Github.Ulex.ZenSharp.Core
         Expand : string;
         public override ToString() : string { $"ExpandRule<$Short,$Expand>"; }
         public override Match(input : string) : LeafMatchResult {
-          if (input.StartsWith(Short))
+          if (input.StartsWith(Short) && input.Length > 0)
             LeafMatchResult(true, Short, Expand);
           else
             LeafMatchResult(false);
@@ -39,7 +39,30 @@ namespace Github.Ulex.ZenSharp.Core
       }
     | Substitution {
         Name : string;
-        Params: List[(string * string)];
+        Params: list[(string * string)];
+
+        public Item[s : string] : option[string]{
+          get{
+            def v = Params.Find(k => k[0] == s);
+            if (v.IsSome) Some(v.Value[1]) else None();
+          }
+        }
+        private Prop[T](prop : string, default : T) : T {
+          def val = this[prop];
+          if (val.IsSome) Convert.ChangeType(val.Value, typeof(T), Globalization.CultureInfo.InvariantCulture) :> T;
+          else default;
+        }
+
+        public Default : string {
+          get{
+            Prop("default", "");
+          }
+        }
+        public CanBeNull : bool{
+          get{
+            !String.IsNullOrEmpty(Default);
+          }
+        }
 
         public override Match (input : string) : LeafMatchResult {
           def loop(pos){
@@ -53,6 +76,9 @@ namespace Github.Ulex.ZenSharp.Core
           if (matchedCount != 0){
             def matchString = input.Substring(0, matchedCount);
             LeafMatchResult(true, matchString, matchString);
+          }
+          else if (CanBeNull){
+            LeafMatchResult(true, "", Default);
           }
           else
             LeafMatchResult(false);
