@@ -46,7 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DevTests.cs" />
+    <Compile Include="TestTemplates.cs" />
     <Compile Include="LeafRulesMatchTest.cs" />
     <Compile Include="LiveTemplateMatcherTest.cs" />
     <Compile Include="LtgSamples.Designer.cs">

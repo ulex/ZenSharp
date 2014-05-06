@@ -5,6 +5,8 @@ using NUnit.Framework;
 using Github.Ulex.ZenSharp.Core;
 using N = Nemerle.Builtins;
 
+using Nemerle.Collections;
+
 namespace ZenSharp.Core.Tests
 {
     internal sealed class LeafRulesMatchTest
@@ -30,7 +32,7 @@ namespace ZenSharp.Core.Tests
         [Test]
         public void TestSubstitution()
         {
-            var rule = new LeafRule.Substitution("hello", new List<N.Tuple<string, string>>());
+            var rule = new LeafRule.Substitution("hello", new List<N.Tuple<string, string>>().AsList());
             Assert.AreEqual(rule.Match("short7").Short, "short7");
             Assert.AreEqual(rule.Match("wr").Short, "wr");
             Assert.AreEqual(rule.Match("wr,aa").Short, "wr");

@@ -9,13 +9,14 @@ manualType ::= "$type$"
 // Fields
 field ::= accessField ""=f space type "$name$" ";"
 
-identifier ::= $name macros = "contant(""name"")"$
+identifier ::= $name default="$name$" macros = "contant(""name"")"$
 
 // Methods
-method       ::= accessMethod methodDecl space manualType space methodName "(" cursor "){}"
-methodName   ::=  $name$ | identifier
+method       ::= accessMethod methodDecl space type space methodName "(" methodArgs ") {}" | "public static void $name$(" methodArgs ") {}"=M | "public void $name$(" methodArgs ") {}"=m
+methodArgs   ::= cursor
+methodName   ::=  identifier
 methodDecl   ::= space static=M | ""=m
-accessMethod ::= "public" | private=_ | protected=pr
+accessMethod ::= private=_ | protected=pr | "public"
 
 // Auto properties
 property        ::= accessProperty space manualType space "$name{get; " lazyPrivateSpec "set;}"
@@ -25,11 +26,11 @@ lazyPrivateSpec ::= "private "=_ | ""
 // Plain types
 arraySpec  ::= "[]"=s | ""
 type       ::= primType | compType
-primType   ::= string=s | byte=b | double=d | manualType
+primType   ::= string=s | byte=b | double=d | int=i
 
 // Complex types
 genericArg  ::= "<" primType ">"
-scgTypes    ::= IList=l | IEnumerable=e
+scgTypes    ::= IList=l | IEnumerable="~"
 generic2Arg ::= "<" primType ">"
 scg2Types   ::= SortedList=sl | IDictionary=di
 SCG         ::= "System.Collections.Generic"

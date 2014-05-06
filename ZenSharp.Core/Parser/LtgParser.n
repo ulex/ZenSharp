@@ -41,7 +41,7 @@ namespace Github.Ulex.ZenSharp.Core
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
         ruleBody       : list[ConcatRule] = concatRule (s vmark s concatRule)*;
         rule           : Rule             = identifier s describeMark s ruleBody;
-        leafShortCut   : LeafRule         = stridentifier s '=' s identifier;
+        leafShortCut   : LeafRule         = stridentifier s '=' s stridentifier;
         terminalString : LeafRule         = stringDecl;
         terminal       : LeafRule         = leafShortCut / substituion / terminalString;
         substituion    : LeafRule         = "$" s (identifier) s (substituionPar s)* "$";
