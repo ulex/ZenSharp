@@ -46,7 +46,7 @@ namespace Github.Ulex.ZenSharp.Core
       // circle reference fix
       mutable tryMatchRuleVar;
 
-      def tryMathcLeafRule(rule : LeafRule, acc : MatchResult) : MatchResult {
+      def tryMatchLeafRule(rule : LeafRule, acc : MatchResult) : MatchResult {
         match (rule){
           | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.FindRule(x.Value, scopeRules).Rules, acc);
           | lr => {
@@ -59,8 +59,8 @@ namespace Github.Ulex.ZenSharp.Core
       def tryMatchConcatRule (rules : list[LeafRule], acc : MatchResult) : MatchResult {
         match (rules) {
           | x :: xs => {
-            def r = tryMathcLeafRule(x, acc);
-            if (!acc.Success)
+            def r = tryMatchLeafRule(x, acc);
+            if (!r.Success)
               r
             else
               tryMatchConcatRule(xs, r);
