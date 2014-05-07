@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<actions>
+  <insert group-id="ReSharper" position="last">
+    <action id="LtgParser.EditConfig" text="Open ZenSharp config dir" shortcut="Ctrl+Alt+7" image="gist" />
+  </insert>
+</actions>
+

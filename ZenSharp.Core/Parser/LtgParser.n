@@ -39,7 +39,7 @@ namespace Github.Ulex.ZenSharp.Core
         rules          : TreePart         = rule (s newLine sn rule)*;
         expandRule     : LeafRule         = terminal / nonterminal;
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
-        ruleBody       : list[ConcatRule] = concatRule (s vmark s concatRule)*;
+        ruleBody       : list[ConcatRule] = concatRule (s vmark sn concatRule)*;
         rule           : Rule             = identifier s describeMark s ruleBody;
         leafShortCut   : LeafRule         = stridentifier s '=' s stridentifier;
         terminalString : LeafRule         = stringDecl;

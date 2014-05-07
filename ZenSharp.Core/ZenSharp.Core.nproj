@@ -49,6 +49,7 @@
       <Name>Nemerle</Name>
       <AssemblyName>Nemerle.dll</AssemblyName>
       <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Nemerle.Peg, Version=1.2.0.175, Culture=neutral, PublicKeyToken=null">
       <Name>Nemerle.Peg</Name>
