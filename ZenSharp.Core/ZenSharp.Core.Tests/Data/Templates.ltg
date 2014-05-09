@@ -12,12 +12,12 @@ field ::= accessField ""=f space type "$name$" ";"
 identifier ::= $name default="$name$" macros = "contant(""name"")"$
 
 // Methods
-method       ::= accessMethod methodDecl space type space methodName "(" methodArgs ") {}" |
-                 "public static void $name$(" methodArgs ") {}"=M |
-                 "public void $name$(" methodArgs ") {}"=m
+method       ::= accessMethod space  methodInstStatic space methodDecl
+methodDecl ::= type space methodName "(" methodArgs ") {}"
+methodType ::= type | "void"
 methodArgs   ::= cursor
 methodName   ::= identifier
-methodDecl   ::= space static=M | ""=m
+methodInstStatic ::= static=M | ""=m
 accessMethod ::= private=_ | protected=pr | "public"
 
 // Auto properties

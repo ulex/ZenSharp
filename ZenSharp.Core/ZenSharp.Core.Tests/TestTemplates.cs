@@ -30,6 +30,13 @@ namespace ZenSharp.Core.Tests
         }
 
         [Test]
+        public void TestExpands_M()
+        {
+            VerifySameExpand("_M", "public static void $name$($END$) {}");
+        }
+
+
+        [Test]
         public void TestExpandsMiTest()
         {
             VerifySameExpand("MiTest", "public static int Test($END$) {}");
