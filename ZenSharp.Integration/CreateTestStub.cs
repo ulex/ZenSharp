@@ -39,7 +39,10 @@ namespace Github.Ulex.ZenSharp.Integration
             //collector.AddToTop(new MyLookupItem(iconManager, template, true, "with desc"));
             //collector.AddToTop(new MyLookupItem(iconManager, template, false, "with no desc"));
             var ltgConfig = context.PsiModule.GetSolution().GetComponent<LtgConfigWatcher>();
-            collector.AddToTop(new MyLookupItem(iconManager, template, false, "IgnoreSoftOnSpace", ltgConfig.Tree) { IgnoreSoftOnSpace = false });
+            if (ltgConfig.Tree != null)
+            {
+                collector.AddToTop(new MyLookupItem(iconManager, template, false, ltgConfig.Tree) { IgnoreSoftOnSpace = false });
+            }
             return true;
         }
 
@@ -47,7 +50,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             foreach (var item in collector.Items.OfType<MyLookupItem>())
             {
-                item.Template.Shortcut = "sss" + new Random().Next();
+                //item.Template.Shortcut = "sss" + new Random().Next();
             }
         }
     }
@@ -56,35 +59,28 @@ namespace Github.Ulex.ZenSharp.Integration
     {
         private readonly PsiIconManager _psiIconManager;
 
-        private readonly string _her;
-
-        private RichText _displayName;
-
-        public bool _dynamic = true;
-
         public MatchingResult _matchingResult;
 
-        private string _prefix;
+        private string _matchExpand;
 
         private Template _template;
 
         private GenerateTree _tree;
 
-        public MyLookupItem(PsiIconManager psiIconManager, Template template, bool showDescription, string her, GenerateTree tree)
+        public MyLookupItem(PsiIconManager psiIconManager, Template template, bool showDescription, GenerateTree tree)
             : base(psiIconManager, template, showDescription)
         {
             _tree = tree;
             _template = template;
             _matchingResult = new MatchingResult(3, "dd", 1000);
             _psiIconManager = psiIconManager;
-            _her = her;
         }
 
         bool ILookupItem.IsDynamic
         {
             get
             {
-                return _dynamic;
+                return true;
             }
         }
 
@@ -101,7 +97,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             get
             {
-                return new RichText(_template.Text) + _prefix;
+                return new RichText(_template.Text + "|" + _matchExpand);
             }
         }
 
@@ -113,6 +109,7 @@ namespace Github.Ulex.ZenSharp.Integration
             ISolution solution,
             bool keepCaretStill)
         {
+
             base.Accept(textControl, nameRange, lookupItemInsertType, suffix, solution, keepCaretStill);
         }
 
@@ -128,7 +125,11 @@ namespace Github.Ulex.ZenSharp.Integration
                 return null;
             }
             var matcher = new LiveTemplateMatcher(_tree);
-            _prefix = matcher.Match(prefix, "InCSharpTypeMember").Expand(prefix);
+            _matchExpand = matcher.Match(prefix, "InCSharpTypeMember").Expand(prefix);
+            if (!string.IsNullOrEmpty(_matchExpand))
+            {
+                _template.Text = _matchExpand;
+            }
             return _matchingResult;
         }
     }

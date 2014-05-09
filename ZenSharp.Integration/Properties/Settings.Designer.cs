@@ -25,7 +25,7 @@ namespace Github.Ulex.ZenSharp.Integration.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Template.ltg")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Templates.ltg")]
         public string ConfigPath {
             get {
                 return ((string)(this["ConfigPath"]));

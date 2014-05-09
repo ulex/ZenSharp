@@ -19,10 +19,13 @@ namespace Github.Ulex.ZenSharp.Integration
 
         public LtgConfigWatcher()
         {
-            _watcher = new FileSystemWatcher(AssemblyDir, "*.ltg");
-            _watcher.EnableRaisingEvents = true;
-            _watcher.Changed += (sender, args) => Reload();
-            Reload();
+            _watcher = new FileSystemWatcher(AssemblyDir, "*.ltg")
+                {
+                    EnableRaisingEvents = true,
+                    NotifyFilter = NotifyFilters.LastWrite
+                };
+            _watcher.Changed += (sender, args) => Reload(true);
+            Reload(false);
         }
 
         public GenerateTree Tree
@@ -59,15 +62,16 @@ namespace Github.Ulex.ZenSharp.Integration
             }
         }
 
-        private void Reload()
+        private void Reload(bool showmsg)
         {
             try
             {
                 _tree = new LtgParser().ParseAll(File.ReadAllText(ConfigPath));
+                if (showmsg) MessageBox.ShowInfo("Config updated");
             }
             catch (Exception e)
             {
-                MessageBox.ShowError(e.ToString(), e.Source);   
+                if (showmsg) MessageBox.ShowError(e.ToString(), e.Source);   
             }
         }
 
