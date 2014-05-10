@@ -14,7 +14,8 @@ namespace ZenSharp.Core.Tests
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            _tree = new LtgParser().ParseAll(LtgSamples.Templates);
+            // TOdo: move it to auto generated test
+            //_tree = new LtgParser().ParseAll(LtgSamples.Templates);
         }
 
         [Test]

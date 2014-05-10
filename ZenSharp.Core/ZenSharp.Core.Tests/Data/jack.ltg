@@ -10,6 +10,7 @@ sentence ::= $sencence par="value" par2="sample" $
 sep      ::= "-"
 
 scope "house" {
+  // Test: jack -> some
   base  ::= thisis s sentence
   start ::= base | base sep tjb
 }

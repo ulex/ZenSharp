@@ -41,33 +41,38 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="ZenSharp.Core">
-      <HintPath>..\bin\Debug\ZenSharp.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestTemplates.cs" />
-    <Compile Include="LeafRulesMatchTest.cs" />
-    <Compile Include="LiveTemplateMatcherTest.cs" />
-    <Compile Include="LtgSamples.Designer.cs">
+    <Compile Include="ExpandTestGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LtgSamples.resx</DependentUpon>
+      <DependentUpon>ExpandTestGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="LeafRulesMatchTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\jack.ltg" />
     <None Include="Data\Templates.ltg" />
+    <None Include="ExpandTestGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExpandTestGenerator.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LtgSamples.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LtgSamples.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZenSharp.Core.nproj">
+      <Project>{efa574e2-de9c-4017-bb5c-8fc4cd8d5e80}</Project>
+      <Name>ZenSharp.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
