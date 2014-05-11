@@ -19,34 +19,39 @@ using System;
 using Github.Ulex.ZenSharp.Core;
 using NUnit.Framework;
 
-namespace ZenSharp.Core.Tests {
+namespace ZenSharp.Core.Tests
+{
 <#
 string folder = Host.ResolvePath("Data");
 var ltgFiles = Directory.GetFiles(folder).Select(LtgFileInfo.FromFile);
 foreach (var file in ltgFiles) { #>
-  [TestFixture]
-  public class <#= file.FileName #>Tests
-  {
-    #region Input of ltg
-    private string _content= <#= file.ContentString #>;
-    #endregion Input of ltg
-    private GenerateTree _tree;
-    [TestFixtureSetUp]
-    public void LoadTree(){
-      _tree = new LtgParser().ParseAll(_content);
-      }
-     <# foreach (var test in file.Tests) {#>
-      [Test]
-      public void Test<#= test.TestName #>(){
+    [TestFixture]
+    public class <#= file.FileName #>Tests
+    {
+        #region Input of ltg
+        private string _content = <#= file.ContentString #>;
+        #endregion Input of ltg
+        private GenerateTree _tree;
+        private LiveTemplateMatcher _ltm;
+        [TestFixtureSetUp]
+        public void LoadTree()
+        {
+            _tree = new LtgParser().ParseAll(_content);
+            _ltm = new LiveTemplateMatcher(_tree);
+        }
+<#          foreach (var test in file.Tests) {#>
+
+
+        [Test]
+        public void Test<#= test.TestName #>()
+        {
             string input = <#= test.Short #>;
-            var ltm = new LiveTemplateMatcher(_tree);
-            var m = ltm.Match(input, <#= test.Scope #>);
+            var m = _ltm.Match(input, <#= test.Scope #>);
             var expand = m.Expand(input);
             Assert.AreEqual(<#= test.Expand #>, expand);
-        }
-     <#}
-     #>
-  }
+        }<#}#>
+
+    }
 <#} // end file foreach
 #>
 }
@@ -74,13 +79,13 @@ public sealed class LtgFileInfo
 
           var match = Regex.Match(line, "// ?Test: ?([^-]*)->(.*)$");
           if (match.Success)
-		  {
-		    tests.Add(new TestInfo {
+      {
+        tests.Add(new TestInfo {
               Short = ToDeclStr(match.Groups[1].Value.Trim()),
-              Expand = ToDeclStr(match.Groups[1].Value.Trim()),
-			  Scope = ToDeclStr(curscope)
+              Expand = ToDeclStr(match.Groups[2].Value.Trim()),
+        Scope = ToDeclStr(curscope)
             });
-		  }
+      }
         }
 
         return new LtgFileInfo()
@@ -100,7 +105,7 @@ public sealed class LtgFileInfo
       public string Scope { get; set; }
       public string Short { get; set; }
       public string Expand { get; set; }
-      public string TestName { get { return new string((Short + "_" + Expand).Where(ch => Char.IsLetter(ch) || ch == '-').ToArray()); } }
+      public string TestName { get { return new string((Short + "_" + Expand).Where(ch => Char.IsLetter(ch) || ch == '-' ||  ch == '_').ToArray()); } }
   }
 }
 #>

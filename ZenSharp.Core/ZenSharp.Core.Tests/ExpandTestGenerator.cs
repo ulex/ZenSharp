@@ -11,12 +11,13 @@ using System;
 using Github.Ulex.ZenSharp.Core;
 using NUnit.Framework;
 
-namespace ZenSharp.Core.Tests {
-  [TestFixture]
-  public class jackTests
-  {
-    #region Input of ltg
-    private string _content= @"// This is the house that Jack built.
+namespace ZenSharp.Core.Tests
+{
+    [TestFixture]
+    public class jackTests
+    {
+        #region Input of ltg
+        private string _content = @"// This is the house that Jack built.
 // This is the cheese that lay in the house that Jack built.
 // This is the rat that ate the cheese
 // That lay in the house that Jack built.
@@ -33,26 +34,31 @@ scope ""house"" {
   start ::= base | base sep tjb
 }
 ";
-    #endregion Input of ltg
-    private GenerateTree _tree;
-    [TestFixtureSetUp]
-    public void LoadTree(){
-      _tree = new LtgParser().ParseAll(_content);
-      }
-           [Test]
-      public void Testjackjack(){
-            string input = @"jack";
-            var ltm = new LiveTemplateMatcher(_tree);
-            var m = ltm.Match(input, @"house");
-            var expand = m.Expand(input);
-            Assert.AreEqual(@"jack", expand);
+        #endregion Input of ltg
+        private GenerateTree _tree;
+        private LiveTemplateMatcher _ltm;
+        [TestFixtureSetUp]
+        public void LoadTree()
+        {
+            _tree = new LtgParser().ParseAll(_content);
+            _ltm = new LiveTemplateMatcher(_tree);
         }
-       }
-  [TestFixture]
-  public class TemplatesTests
-  {
-    #region Input of ltg
-    private string _content= @"
+
+
+        [Test]
+        public void Testjack_some()
+        {
+            string input = @"jack";
+            var m = _ltm.Match(input, @"house");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"some", expand);
+        }
+    }
+    [TestFixture]
+    public class TemplatesTests
+    {
+        #region Input of ltg
+        private string _content = @"
 // Sample file
 space ::= "" ""
 
@@ -93,6 +99,16 @@ SCG         ::= ""System.Collections.Generic""
 compType    ::= SCG ""."" scgTypes genericArg | SCG ""."" scg2Types generic2Arg
 
 scope ""InCSharpTypeMember"" {
+  // Test: m -> public void $name$($END$) {}
+  // Test: M -> public static void $name$($END$) {}
+  // Test: _M -> public static void $name$($END$) {}
+  // Test: MiTest -> public static int Test($END$) {}
+  // Test: _M~i -> private static System.Collections.Generic.IEnumerable<int> $name$($END$) {}
+  // Test: _M~sEnu -> private static System.Collections.Generic.IEnumerable<string> Enu($END$) {}
+  // Test: MMain,itest -> public static void Main(int test) {}
+  // Test: MMain,oitest -> public static void Main(out int test) {}
+  // Test: MMain`i,i,itest -> public static void Main<int,int>(int test) {}
+  // Test: m~dHello,detest,sbi -> public IEnumerable<double> Hello(decimal test, StringBuiler i){}
   start    ::=  method
 }
 
@@ -100,13 +116,107 @@ scope ""InCSharpTypeAndNamespace"" {
 
 }
 ";
-    #endregion Input of ltg
-    private GenerateTree _tree;
-    [TestFixtureSetUp]
-    public void LoadTree(){
-      _tree = new LtgParser().ParseAll(_content);
-      }
-       }
+        #endregion Input of ltg
+        private GenerateTree _tree;
+        private LiveTemplateMatcher _ltm;
+        [TestFixtureSetUp]
+        public void LoadTree()
+        {
+            _tree = new LtgParser().ParseAll(_content);
+            _ltm = new LiveTemplateMatcher(_tree);
+        }
+
+
+        [Test]
+        public void Testm_publicvoidnameEND()
+        {
+            string input = @"m";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"public void $name$($END$) {}", expand);
+        }
+
+        [Test]
+        public void TestM_publicstaticvoidnameEND()
+        {
+            string input = @"M";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"public static void $name$($END$) {}", expand);
+        }
+
+        [Test]
+        public void Test_M_publicstaticvoidnameEND()
+        {
+            string input = @"_M";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"public static void $name$($END$) {}", expand);
+        }
+
+        [Test]
+        public void TestMiTest_publicstaticintTestEND()
+        {
+            string input = @"MiTest";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"public static int Test($END$) {}", expand);
+        }
+
+        [Test]
+        public void Test_Mi_privatestaticSystemCollectionsGenericIEnumerableintnameEND()
+        {
+            string input = @"_M~i";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"private static System.Collections.Generic.IEnumerable<int> $name$($END$) {}", expand);
+        }
+
+        [Test]
+        public void Test_MsEnu_privatestaticSystemCollectionsGenericIEnumerablestringEnuEND()
+        {
+            string input = @"_M~sEnu";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"private static System.Collections.Generic.IEnumerable<string> Enu($END$) {}", expand);
+        }
+
+        [Test]
+        public void TestMMainitest_publicstaticvoidMaininttest()
+        {
+            string input = @"MMain,itest";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"public static void Main(int test) {}", expand);
+        }
+
+        [Test]
+        public void TestMMainoitest_publicstaticvoidMainoutinttest()
+        {
+            string input = @"MMain,oitest";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"public static void Main(out int test) {}", expand);
+        }
+
+        [Test]
+        public void TestMMainiiitest_publicstaticvoidMainintintinttest()
+        {
+            string input = @"MMain`i,i,itest";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"public static void Main<int,int>(int test) {}", expand);
+        }
+
+        [Test]
+        public void TestmdHellodetestsbi_publicIEnumerabledoubleHellodecimaltestStringBuileri()
+        {
+            string input = @"m~dHello,detest,sbi";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+            Assert.AreEqual(@"public IEnumerable<double> Hello(decimal test, StringBuiler i){}", expand);
+        }
+    }
 }
 
 

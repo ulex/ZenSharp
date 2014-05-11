@@ -39,6 +39,16 @@ SCG         ::= "System.Collections.Generic"
 compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
 
 scope "InCSharpTypeMember" {
+  // Test: m -> public void $name$($END$) {}
+  // Test: M -> public static void $name$($END$) {}
+  // Test: _M -> public static void $name$($END$) {}
+  // Test: MiTest -> public static int Test($END$) {}
+  // Test: _M~i -> private static System.Collections.Generic.IEnumerable<int> $name$($END$) {}
+  // Test: _M~sEnu -> private static System.Collections.Generic.IEnumerable<string> Enu($END$) {}
+  // Test: MMain,itest -> public static void Main(int test) {}
+  // Test: MMain,oitest -> public static void Main(out int test) {}
+  // Test: MMain`i,i,itest -> public static void Main<int,int>(int test) {}
+  // Test: m~dHello,detest,sbi -> public IEnumerable<double> Hello(decimal test, StringBuiler i){}
   start    ::=  method
 }
 

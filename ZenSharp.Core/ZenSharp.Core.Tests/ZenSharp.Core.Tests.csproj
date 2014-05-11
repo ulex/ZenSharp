@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestTemplates.cs" />
     <Compile Include="ExpandTestGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
