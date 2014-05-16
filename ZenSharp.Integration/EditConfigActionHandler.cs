@@ -9,7 +9,7 @@ using JetBrains.Util;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
-    [ActionHandler("LtgParser.EditConfig")]
+    [ActionHandler("ZenSharp.EditConfig")]
     public class EditConfigActionHandler : IActionHandler
     {
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)

@@ -74,6 +74,7 @@ namespace Github.Ulex.ZenSharp.Integration
             _template = template;
             _matchingResult = new MatchingResult(3, "dd", 1000);
             _psiIconManager = psiIconManager;
+            IgnoreSoftOnSpace = false;
         }
 
         bool ILookupItem.IsDynamic

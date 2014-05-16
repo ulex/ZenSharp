@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UpdateMacroDefinition.cs" />
     <Compile Include="CreateTestStub.cs" />
     <Compile Include="EditConfigActionHandler.cs" />
     <Compile Include="LtgConfigWatcher.cs" />
@@ -103,11 +104,6 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-      <Copy
-          DestinationFolder="$(OutputPath)"
-          SourceFiles="$(OutputPath)\..\..\ZenSharp.Core\ZenSharp.Core.Tests\Data\Templates.ltg"
-          SkipUnchangedFiles="true"
-          />
+    <Copy DestinationFolder="$(OutputPath)" SourceFiles="$(OutputPath)\..\..\ZenSharp.Core\ZenSharp.Core.Tests\Data\Templates.ltg" SkipUnchangedFiles="true" />
   </Target>
-
 </Project>

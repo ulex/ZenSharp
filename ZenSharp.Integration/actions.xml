@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0"?>
 <actions>
   <insert group-id="ReSharper" position="last">
-    <action id="LtgParser.EditConfig" text="Open ZenSharp config dir" shortcut="Ctrl+Alt+7" image="gist" />
+    <action-group id="ZenSharp" text="ZenSharp" shared="true">
+      <action id="ZenSharp.EditConfig" text="Open ZenSharp config dir" shortcut="Control+Alt+7"  />
+      <action id="ZenSharp.UpdateMacroDefinition" text="Update existed macro.ltg"  />
+    </action-group>
   </insert>
 </actions>
 
