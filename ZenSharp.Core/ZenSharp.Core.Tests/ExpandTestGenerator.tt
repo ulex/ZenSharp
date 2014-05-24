@@ -48,7 +48,9 @@ foreach (var file in ltgFiles) { #>
             string input = <#= test.Short #>;
             var m = _ltm.Match(input, <#= test.Scope #>);
             var expand = m.Expand(input);
-            Assert.AreEqual(<#= test.Expand #>, expand);
+			Assert.IsTrue(m.Success);
+			Assert.AreEqual(string.Empty, m.Tail, "Tail is not empty");
+            Assert.AreEqual(<#= test.Expand #>, expand, "Expand diffs");
         }<#}#>
 
     }
