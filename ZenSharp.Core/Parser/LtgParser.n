@@ -14,8 +14,8 @@ namespace Github.Ulex.ZenSharp.Core
       grammar
       {
         start : GenerateTree = generate+;
-        generate: TreePart = sn (rules / scope / comment) sn;
-        comment          : TreePart = s "//" (!newLine [Any])* newLine;
+        generate: TreePart = sn (rules / scope / comment);
+        comment          : TreePart = s "//" (!newLine [Any])* sn;
 
         newLineCharacter : void = '\n' / '\r' / '\u2028' / '\u2029';
         newLineWindows   : void = "\r\n";
@@ -34,9 +34,9 @@ namespace Github.Ulex.ZenSharp.Core
         identifier          : string = ([Lu, Ll, Lt, Lm, Lo, Nl, Nd] / '_')+;
         stridentifier       : string = stringDecl / identifier;
 
-        scope : TreePart = "scope" s stringDecl s '{' sn rules? sn '}';
+        scope : TreePart = "scope" s stringDecl s '{' sn (rules / comment)* '}' sn;
 
-        rules          : TreePart         = rule (s newLine sn rule)*;
+        rules          : TreePart         = rule sn (rule sn)*;
         expandRule     : LeafRule         = terminal / nonterminal;
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
         ruleBody       : list[ConcatRule] = concatRule (s vmark sn concatRule)*;
@@ -65,13 +65,17 @@ namespace Github.Ulex.ZenSharp.Core
     {
       (k,v);
     }
+//scope(_ : Nemerle.Peg.NToken, _ : string, _ : Nemerle.Peg.NToken, _ : System.Collections.Generic.List[Github.Ulex.ZenSharp.Core.TreePart], _ : Nemerle.Peg.NToken) : Github.Ulex.ZenSharp.Core.TreePart	C:\Python27\ZenSharp\ZenSharp.Core\Parser\LtgParser.n	37	9	ZenSharp.Core
 
-    scope(_ : NToken, name : string, _ : NToken, rules : option[TreePart], _ : NToken) : TreePart{
-      match (rules){
-        | Some (rul is TreePart.RuleList) => TreePart.Scope(rul.Rules, name)
-        | None => null
+    scope(_ : NToken, name : string, _ : NToken, rules : List[TreePart], _ : NToken) : TreePart{
+      def loop(rules : list[TreePart], acc : list[Rule]) {
+        match (rules){
+          | null :: xs => loop(xs, acc)
+          | x :: xs  => acc + loop(xs, acc + (x :> TreePart.RuleList).Rules)
+          | _ => acc
+        }
       }
-      ;
+      TreePart.Scope(loop(NList.AsList(rules), []), name);
     }
 
     rules(first : Rule, tail : List[Rule]) : TreePart{
