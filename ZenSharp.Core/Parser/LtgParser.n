@@ -65,7 +65,6 @@ namespace Github.Ulex.ZenSharp.Core
     {
       (k,v);
     }
-//scope(_ : Nemerle.Peg.NToken, _ : string, _ : Nemerle.Peg.NToken, _ : System.Collections.Generic.List[Github.Ulex.ZenSharp.Core.TreePart], _ : Nemerle.Peg.NToken) : Github.Ulex.ZenSharp.Core.TreePart	C:\Python27\ZenSharp\ZenSharp.Core\Parser\LtgParser.n	37	9	ZenSharp.Core
 
     scope(_ : NToken, name : string, _ : NToken, rules : List[TreePart], _ : NToken) : TreePart{
       def loop(rules : list[TreePart], acc : list[Rule]) {

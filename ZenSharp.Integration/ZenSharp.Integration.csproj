@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UpdateMacroDefinition.cs" />
-    <Compile Include="CreateTestStub.cs" />
+    <Compile Include="ZenSharpItemsProvider.cs" />
     <Compile Include="EditConfigActionHandler.cs" />
     <Compile Include="LtgConfigWatcher.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -60,6 +60,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZenSharpLookupItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
