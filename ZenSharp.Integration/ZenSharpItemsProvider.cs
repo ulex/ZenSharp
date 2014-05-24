@@ -23,19 +23,20 @@ namespace Github.Ulex.ZenSharp.Integration
 
         protected override bool AddLookupItems(CSharpCodeCompletionContext context, GroupedItemsCollector collector)
         {
-            var template = new Template("sss" + new Random().Next(), "desctiption", "expand ($END$) end", false, true, false, TemplateApplicability.Live);
-            template.UID = Guid.NewGuid();
             var iconManager = context.PsiModule.GetSolution().GetComponent<PsiIconManager>();
-            //collector.AddAtDefaultPlace(context.LookupItemsFactory.InitializeLookupItem(myLookupItem));
 
-            //collector.AddToTop(new MyLookupItem(iconManager, template, true, "with desc"));
-            //collector.AddToTop(new MyLookupItem(iconManager, template, false, "with no desc"));
             var ltgConfig = context.PsiModule.GetSolution().GetComponent<LtgConfigWatcher>();
             if (ltgConfig.Tree != null)
             {
-                collector.AddToTop(new ZenSharpLookupItem(iconManager, template, false, ltgConfig.Tree) { IgnoreSoftOnSpace = false });
+                var template = new Template("shortcut", "desctiption", "text", true, true, false, TemplateApplicability.Live)
+                    {
+                        UID = Guid.NewGuid()
+                    };
+                collector.AddToTop(new ZenSharpLookupItem(iconManager, template, ltgConfig.Tree));
+                return true;
             }
-            return true;
+
+            return false;
         }
 
         protected override void TransformItems(CSharpCodeCompletionContext context, GroupedItemsCollector collector)

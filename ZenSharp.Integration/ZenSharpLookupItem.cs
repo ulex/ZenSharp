@@ -26,14 +26,14 @@ namespace Github.Ulex.ZenSharp.Integration
         private string _matchExpand;
 
         public ZenSharpLookupItem(
-            PsiIconManager psiIconManager, Template template, bool showDescription, GenerateTree tree)
-            : base(psiIconManager, template, showDescription)
+            PsiIconManager psiIconManager, Template template, GenerateTree tree)
+            : base(psiIconManager, template, true)
         {
             _tree = tree;
             _template = template;
             _matchingResult = new MatchingResult(3, "dd", 10000);
             _psiIconManager = psiIconManager;
-            IgnoreSoftOnSpace = false;
+            IgnoreSoftOnSpace = true;
         }
 
         RichText ILookupItem.DisplayName
@@ -48,7 +48,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             get
             {
-                return _psiIconManager.ExtendToTypicalSize(ServicesThemedIcons.Recursion2.Id);
+                return _psiIconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
             }
         }
 
