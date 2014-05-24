@@ -9,15 +9,15 @@ manualType ::= "$type$"
 // Fields
 field ::= accessField ""=f space type "$name$" ";"
 
-identifier ::= $name default="$name$" macros = "contant(""name"")"$
+identifier ::= $name default="$name$" macros = "constant(""name"")"$
 
 // Methods
-method       ::= accessMethod space  methodInstStatic space methodDecl
-methodDecl ::= type space methodName "(" methodArgs ") {}"
-methodType ::= type | "void"
+method       ::= accessMethod space methodInstStatic methodDecl
+methodDecl ::= type methodDecl2 | "void" methodDecl2
+methodDecl2::= space methodName "(" methodArgs ") {}"
 methodArgs   ::= cursor
 methodName   ::= identifier
-methodInstStatic ::= static=M | ""=m
+methodInstStatic ::= "static "=M | ""=m
 accessMethod ::= private=_ | protected=pr | "public"
 
 // Auto properties
@@ -39,9 +39,11 @@ SCG         ::= "System.Collections.Generic"
 compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
 
 scope "InCSharpTypeMember" {
+  start    ::=  method | other
+  other ::= "Verifiers.Verify(" cursor ")"=verify
   // Test: m -> public void $name$($END$) {}
   // Test: M -> public static void $name$($END$) {}
-  // Test: _M -> public static void $name$($END$) {}
+  // Test: _M -> private static void $name$($END$) {}
   // Test: MiTest -> public static int Test($END$) {}
   // Test: _M~i -> private static System.Collections.Generic.IEnumerable<int> $name$($END$) {}
   // Test: _M~sEnu -> private static System.Collections.Generic.IEnumerable<string> Enu($END$) {}
@@ -49,7 +51,6 @@ scope "InCSharpTypeMember" {
   // Test: MMain,oitest -> public static void Main(out int test) {}
   // Test: MMain`i,i,itest -> public static void Main<int,int>(int test) {}
   // Test: m~dHello,detest,sbi -> public IEnumerable<double> Hello(decimal test, StringBuiler i){}
-  start    ::=  method
 }
 
 scope "InCSharpTypeAndNamespace" {

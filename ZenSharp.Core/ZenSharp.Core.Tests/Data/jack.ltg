@@ -7,10 +7,11 @@ tjb      ::= "that Jack built"=tjb
 thisis   ::= "This is the"=tit
 s        ::= " "
 sentence ::= $sencence par="value" par2="sample" $
-sep      ::= "-"
+sep      ::= ", "=","
 
 scope "house" {
-  // Test: jack -> some
   base  ::= thisis s sentence
   start ::= base | base sep tjb
+  // Test: tithouse -> This is the house
+  // Test: tithouse,tjb -> This is the house
 }
