@@ -40,7 +40,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             get
             {
-                return new RichText(_template.Text + "|" + _matchExpand);
+                return new RichText(_template.Text );
             }
         }
 
@@ -52,6 +52,7 @@ namespace Github.Ulex.ZenSharp.Integration
             }
         }
 
+#if !RESHARPER_71
         bool ILookupItem.IsDynamic
         {
             get
@@ -59,6 +60,7 @@ namespace Github.Ulex.ZenSharp.Integration
                 return true;
             }
         }
+#endif
 
         public void Accept(
             ITextControl textControl, 
@@ -68,7 +70,7 @@ namespace Github.Ulex.ZenSharp.Integration
             ISolution solution, 
             bool keepCaretStill)
         {
-            this.Accept(textControl, nameRange, lookupItemInsertType, suffix, solution, keepCaretStill);
+            base.Accept(textControl, nameRange, lookupItemInsertType, suffix, solution, keepCaretStill);
         }
 
         public bool AcceptIfOnlyMatched(LookupItemAcceptanceContext itemAcceptanceContext)

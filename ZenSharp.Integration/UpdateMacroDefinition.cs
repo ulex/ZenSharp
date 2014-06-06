@@ -13,6 +13,7 @@ using JetBrains.Util;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
+#if !RESHARPER_71
     [ActionHandler("ZenSharp.UpdateMacroDefinition")]
     public class UpdateMacroDefinition : IActionHandler
     {
@@ -42,4 +43,6 @@ namespace Github.Ulex.ZenSharp.Integration
                 }
         }
     }
+
+#endif
 }

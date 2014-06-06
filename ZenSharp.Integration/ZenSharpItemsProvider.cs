@@ -30,7 +30,9 @@ namespace Github.Ulex.ZenSharp.Integration
             {
                 var template = new Template("shortcut", "desctiption", "text", true, true, false, TemplateApplicability.Live)
                     {
-                        UID = Guid.NewGuid()
+#if !RESHARPER_71
+            UID = Guid.NewGuid()
+#endif
                     };
                 collector.AddToTop(new ZenSharpLookupItem(iconManager, template, ltgConfig.Tree));
                 return true;
