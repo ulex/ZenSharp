@@ -15,7 +15,7 @@ namespace Github.Ulex.ZenSharp.Core
     | String {
         Value : string;
         public override ToString() : string { $"String<$Value>"; }
-        public override Match(input : string) : LeafMatchResult {
+        public override Match(_ : string) : LeafMatchResult {
           LeafMatchResult(true, "", Value)
         }
       }

@@ -40,7 +40,7 @@ namespace Github.Ulex.ZenSharp.Core
 
     public Match (prefix : string, scopename : string) : MatchResult
     {
-      def scope = _tree.FindScope(scopename);
+      def scope = _tree.GetScope(scopename);
       def scopeRules = _tree.GlobalRules + scope.Rules;
 
       // circle reference fix
@@ -48,7 +48,7 @@ namespace Github.Ulex.ZenSharp.Core
 
       def tryMatchLeafRule(rule : LeafRule, acc : MatchResult) : MatchResult {
         match (rule){
-          | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.FindRule(x.Value, scopeRules).Rules, acc);
+          | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.GetRule(x.Value, scopeRules).Rules, acc);
           | lr => {
               def leafMatch = lr.Match(acc.Tail);
               MatchResult(leafMatch.Success, leafMatch.Crop(acc.Tail), rule :: acc.Rules)
@@ -84,7 +84,7 @@ namespace Github.Ulex.ZenSharp.Core
       }
       tryMatchRuleVar = tryMatchRule;
 
-      def result = tryMatchRule(_tree.FindStartRule(scope).Rules, MatchResult(true, prefix, []));
+      def result = tryMatchRule(_tree.GetStartRule(scope).Rules, MatchResult(true, prefix, []));
       MatchResult(result.Success, result.Tail, result.Rules.Reverse());
     }
   }
