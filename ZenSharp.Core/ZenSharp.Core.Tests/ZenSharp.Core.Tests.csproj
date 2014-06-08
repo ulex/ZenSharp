@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nemerle, Version=1.2.0.175, Culture=neutral, PublicKeyToken=e080a9c724e2bfcd, processorArchitecture=MSIL" />
+    <Reference Include="Nemerle" />
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>

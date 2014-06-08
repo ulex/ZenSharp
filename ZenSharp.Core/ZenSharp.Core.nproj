@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,23 +38,27 @@
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <MacroReference Include="Nemerle.Peg.Macros, Version=1.2.0.175, Culture=neutral, PublicKeyToken=null">
+    <MacroReference Include="Nemerle.Peg.Macros">
       <Name>Nemerle.Peg.Macros</Name>
       <AssemblyName>Nemerle.Peg.Macros.dll</AssemblyName>
       <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.Peg.Macros.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
     </MacroReference>
     <Reference Include="mscorlib" />
-    <Reference Include="Nemerle, Version=1.2.0.175, Culture=neutral, PublicKeyToken=e080a9c724e2bfcd">
+    <Reference Include="Nemerle">
       <Name>Nemerle</Name>
       <AssemblyName>Nemerle.dll</AssemblyName>
       <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.dll</HintPath>
       <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Nemerle.Peg, Version=1.2.0.175, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Nemerle.Peg">
       <Name>Nemerle.Peg</Name>
       <AssemblyName>Nemerle.Peg.dll</AssemblyName>
       <HintPath>$(ProgramFiles)\Nemerle\net-4.0\Nemerle.Peg.dll</HintPath>
+      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
