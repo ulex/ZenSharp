@@ -78,12 +78,12 @@ space ::= "" ""
 
 // Resharper macros
 cursor ::= ""$END$""
-manualType ::= ""$type$""
 
 // Fields
 field ::= accessField """"=f space type ""$name$"" "";""
 
-identifier ::= $name default=""$name$"" macros = ""constant(""""name"""")""$
+identifier ::= $name default=""$name$"" macros = ""completeType(""""\0"""")""$
+suggType ::= $type default=""$type$"" macros = ""completeType(""""\0"""")""$ """"=""_""
 
 // Methods
 method       ::= accessMethod space methodInstStatic methodDecl
@@ -95,8 +95,8 @@ methodInstStatic ::= ""static ""=M | """"=m
 accessMethod ::= private=_ | protected=pr | ""public""
 
 // Auto properties
-property        ::= accessProperty space manualType space ""$name{get; "" lazyPrivateSpec ""set;}""
-accessProperty  ::= ""public""=p | private=_ | protected=P
+property        ::= accessProperty space suggType space ""$END$""
+accessProperty  ::= ""public""=p | private=_p | protected=P
 lazyPrivateSpec ::= ""private ""=_ | """"
 
 // Plain types
@@ -113,8 +113,9 @@ SCG         ::= ""System.Collections.Generic""
 compType    ::= SCG ""."" scgTypes genericArg | SCG ""."" scg2Types generic2Arg
 
 scope ""InCSharpTypeMember"" {
-  start    ::=  method | other
+  start    ::=  method | property | other
   other ::= ""Verifiers.Verify("" cursor "")""=verify
+  // Test: pType_ -> public $type$ $END$
   // Test: m -> public void $name$($END$) {}
   // Test: M -> public static void $name$($END$) {}
   // Test: _M -> private static void $name$($END$) {}
@@ -141,6 +142,17 @@ scope ""InCSharpTypeAndNamespace"" {
             _ltm = new LiveTemplateMatcher(_tree);
         }
 
+
+        [Test]
+        public void TestpType__publictypeEND()
+        {
+            string input = @"pType_";
+            var m = _ltm.Match(input, @"InCSharpTypeMember");
+            var expand = m.Expand(input);
+			Assert.IsTrue(m.Success);
+			Assert.AreEqual(string.Empty, m.Tail, "Tail is not empty");
+            Assert.AreEqual(@"public $type$ $END$", expand, "Expand diffs");
+        }
 
         [Test]
         public void Testm_publicvoidnameEND()

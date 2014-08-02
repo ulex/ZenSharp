@@ -14,7 +14,7 @@ namespace Github.Ulex.ZenSharp.Core
   {
     public IsIdentifier(this rs : char) : bool {
       // ToDo: use range clasess from c# lexer specification
-      Char.IsLetterOrDigit(rs) || rs == '_';
+      Char.IsLetterOrDigit(rs); //|| rs == '_';
     }
   }
 }

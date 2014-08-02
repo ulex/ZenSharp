@@ -16,7 +16,7 @@ namespace Github.Ulex.ZenSharp.Core
         Value : string;
         public override ToString() : string { $"String<$Value>"; }
         public override Match(_ : string) : LeafMatchResult {
-          LeafMatchResult(true, "", Value)
+          LeafMatchResult(true, "", Value, this)
         }
       }
     | NonTerminal {
@@ -32,7 +32,7 @@ namespace Github.Ulex.ZenSharp.Core
         public override ToString() : string { $"ExpandRule<$Short,$Expand>"; }
         public override Match(input : string) : LeafMatchResult {
           if (input.StartsWith(Short) && input.Length > 0)
-            LeafMatchResult(true, Short, Expand);
+            LeafMatchResult(true, Short, Expand, this);
           else
             LeafMatchResult(false);
         }
@@ -58,6 +58,13 @@ namespace Github.Ulex.ZenSharp.Core
             Prop("default", "");
           }
         }
+        
+        public Macros : string {
+          get{
+            Prop("macros", "");
+          }
+        }
+        
         public CanBeNull : bool{
           get{
             !String.IsNullOrEmpty(Default);
@@ -73,12 +80,13 @@ namespace Github.Ulex.ZenSharp.Core
           }
 
           def matchedCount = loop(0);
+          def expandPattern = "$" + Name + "$";
           if (matchedCount != 0){
             def matchString = input.Substring(0, matchedCount);
-            LeafMatchResult(true, matchString, matchString);
+            LeafMatchResult(true, matchString, expandPattern, this);
           }
           else if (CanBeNull){
-            LeafMatchResult(true, "", Default);
+            LeafMatchResult(true, "", expandPattern, this);
           }
           else
             LeafMatchResult(false);
@@ -90,6 +98,7 @@ namespace Github.Ulex.ZenSharp.Core
       public Success : bool;
       public Short : string;
       public Expand : string;
+      public This : LeafRule;
 
       public this(success : bool){
         Success = success;

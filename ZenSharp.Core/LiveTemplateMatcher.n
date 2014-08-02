@@ -28,13 +28,21 @@ namespace Github.Ulex.ZenSharp.Core
       }
 
       public Expand(prefix : string) : string {
+        def builder = System.Text.StringBuilder();
+        foreach (r in ReMatchLeafs(prefix)){
+          _ = builder.Append(r.Expand)
+        }
+        builder.ToString();
+      }
+
+      public ReMatchLeafs(prefix : string) : IEnumerable[LeafRule.LeafMatchResult]{
         def loop(tail, input, acc){
           match (tail){
-            | x :: xs => {def matchResult = x.Match(input); loop(xs, matchResult.Crop(input), acc + matchResult.Expand); }
+            | x :: xs => {def matchResult = x.Match(input); loop(xs, matchResult.Crop(input), matchResult :: acc); }
             | _ => acc
           }
         }
-        loop(Rules, prefix, "");
+        loop(Rules, prefix, []).Reverse();
       }
     }
 

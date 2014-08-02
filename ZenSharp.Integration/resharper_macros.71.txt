@@ -1,0 +1,240 @@
+// getCreationTime
+// Date and time when the file was created in specified {#0:format}
+// Evaluates file creation date and time
+// P: String
+
+// list
+// {#0:Comma-delimited list of values}
+// Displays the specified list of values.
+// P: String
+
+// spacestounderstrokes
+// Value of {#0:another variable}, where spaces will be replaced with '_'
+// Changes spaces to '_' (i.e. "do something usefull" into "do_something_usefull"
+// P: VariableReference
+
+// arrayVariable
+// Suggest an array variable
+// Suggests variable which type is array type
+
+// fixedTypeName
+// Insert reference to {#0:type}
+// Evaluates to selected type name.
+// P: Type
+
+// capitalize
+// Value of {#0:another variable} with the first character in upper case
+// Capitalizes string value (i.e. changes case of the first letter to upper)
+// P: VariableReference
+
+// clipboard
+// Clipboard content
+// Evaluates to current textual clipboard content
+
+// complete
+// Execute basic completion
+// Show basic code completion list at the point where the variable is evaluated
+
+// completeSmart
+// Execute smart completion
+// Show smart code completion list at the point where the variable is evaluated
+
+// completeType
+// Execute type completion
+// Show type completion list at the point where the variable is evaluated
+// P: Type
+
+// constant
+// {#0:Constant value}
+// Evaluates to the specified constant value.
+// P: String
+
+// typeMember
+// Containing type member name
+// Evaluates to short name of the most inner containing type member (e.g. method or property).
+
+// typeName
+// Containing type name
+// Evaluates to short name of the most inner containing type.
+
+// context
+// Provides list of items describing current context
+// Provides list of items describing current context. This includes file name, containing type name, namespace name, etc.
+
+// getCurrentDate
+// Current date in specified {#0:format}
+// Evaluates current date
+// P: String
+
+// getCurrentTime
+// Current date and time in specified {#0:format}
+// Evaluates current date
+// P: String
+
+// getCurrentNamespace
+// Containing namespace
+// Evaluates name of the containing namespace
+
+// decapitalize
+// Value of {#0:another variable} with the first character in lower case
+// Decapitalizes string value (i.e. changes case of the first letter to lower)
+// P: VariableReference
+
+// getDefaultNamespace
+// Default namespace
+// Gets default namespace for the current project
+
+// fileDefaultNamespace
+// Default namespace for current file
+// Gets default namespace for the current file
+
+// getFileName
+// Current file name
+// Evaluates current file name
+
+// getFileNameWithoutExtension
+// Current file name without extension
+// Evaluates current file name without extension
+
+// getFullUserName
+// Full user name of the current user
+// Evaluates full name of the current user
+
+// guessElementType
+// Guess element type of collection represented by {#0:variable}
+// Analyzes code and guesses type of element of a collection.
+// P: VariableReference
+
+// guessExpectedElementType
+// Guess element type for expected collection type
+// Guess element type if a collection type is expected at this point
+
+// guessExpectedType
+// Guess type expected at this point
+// Guess type expected at this point
+// P: Type
+
+// guessKeyType
+// Guess key type of dictionary represented by {#0:variable}
+// Analyzes code and guesses type of key of a dictionary collection.
+// P: VariableReference
+
+// guessValueType
+// Guess value type of dictionary represented by {#0:variable}
+// Analyzes code and guesses type of value of a dictionary collection.
+// P: VariableReference
+
+// guid
+// New GUID
+// Generates new Globally Unique Identifier (GUID)
+
+// lineNumber
+// Current line number
+// Evaluates to number of the line macro is evaluated at.
+
+// getOutputName
+// Current project output assembly name
+// Evaluates output assembly name for the current project
+
+// parameterOfType
+// Suggest parameter of {#0:type}
+// Suggests parameters of the specified type.
+// P: Type
+
+// getProjectName
+// Name of the current project
+// Evaluates current project name
+
+// getSolutionName
+// Current solution name
+// Evaluates current solution name
+
+// enumerableVariable
+// Suggest enumerable variable
+// Suggests visible variable that can be enumerated (that is, used in foreach loop as collection)
+
+// suggestIndexVariable
+// Suggest name for an index variable
+// Suggests non-used name which can be used for an index variable at the evaluation point.
+
+// suggestVariableName
+// Suggest name for a variable
+// When exectuted in variable declaration (where variable name should stand), suggests name for the variable.
+
+// variableOfType
+// Suggest variable of {#0:type}
+// Suggests variables of the specified type.
+// P: Type
+
+// suggestVariableType
+// Suggest type for a new variable
+// Suggest type for a new variable declared in the template
+
+// getUserName
+// Short name of the current user
+// Evaluates current user name
+
+// dependancyPropertyType
+// DependencyProperty type
+// Evaluates to dependency property type specific to current framework
+
+// suggestAttributeNameByTag
+// Suggests attribute name by tag
+// Suggests attribute name used in the same tags in current document
+
+// suggestAttributeValue
+// Suggest attribute value
+// Suggest attribute value for current html tag attribute
+
+// suggestTagName
+// Suggests tag name
+// Suggests tag name used in current document
+
+// AspMasterpageContentGenerator
+// ASP.NET Masterpage content generator
+// Generate content for masterpage content placeholders at the point where the variable is evaluated
+
+// AspMvcController
+// ASP.NET MVC Controller
+// Show completion list with available ASP.NET MVC Controllers at the point where the variable is evaluated
+
+// AspMvcAction
+// ASP.NET MVC Action
+// Show completion list with available ASP.NET MVC Actions at the point where the variable is evaluated
+
+// runAtServer
+// Insert runat="server" if server-side tag selected
+// Insert runat="server" if server-side tag selected
+
+// fileheader
+// File header
+// Inserts the file header specified in the ReSharper options.
+
+// castToLeftSideType
+// Cast to the required type (if the cast is necessary)
+// Inserts (if required) cast to the type which is expected at the left side of assignment expression.
+
+// fullTagName
+// Full tag name
+// Inserts full name of containing tag
+
+// suggestXmlAttributeNameByTag
+// Suggests XML attribute name by tag
+// Suggests XML attribute name used in the same tags in current document
+
+// suggestAttributeName
+// Suggests XML attribute name
+// Suggests XML attribute name used in current document
+
+// suggestXmlTagName
+// Suggests XML tag name
+// Suggests XML tag name used in current document
+
+// tagName
+// Tag name
+// Inserts name of containing tag without namespace
+
+// tagNamespace
+// Tag namespace
+// Inserts namespace of containing tag
+

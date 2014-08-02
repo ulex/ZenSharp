@@ -49,6 +49,7 @@
       <DependentUpon>ExpandTestGenerator.tt</DependentUpon>
     </Compile>
     <Compile Include="LeafRulesMatchTest.cs" />
+    <Compile Include="LiveTemplateMatcherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestParser.cs" />
   </ItemGroup>

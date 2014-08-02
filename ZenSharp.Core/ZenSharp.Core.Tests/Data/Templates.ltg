@@ -4,12 +4,13 @@ space ::= " "
 
 // Resharper macros
 cursor ::= "$END$"
-manualType ::= "$type$"
 
 // Fields
 field ::= accessField ""=f space type "$name$" ";"
 
-identifier ::= $name default="$name$" macros = "constant(""name"")"$
+identifier ::= $name default="$name$" macros = "completeType(""\0"")"$
+suggType ::= $type default="$type$" macros = "completeType(""\0"")"$ suggTypeFollower
+suggTypeFollower ::= ""="_"
 
 // Methods
 method       ::= accessMethod space methodInstStatic methodDecl
@@ -21,13 +22,13 @@ methodInstStatic ::= "static "=M | ""=m
 accessMethod ::= private=_ | protected=pr | "public"
 
 // Auto properties
-property        ::= accessProperty space manualType space "$name{get; " lazyPrivateSpec "set;}"
-accessProperty  ::= "public"=p | private=_ | protected=P
+property        ::= accessProperty space suggType space "{ get; set; }" "$END$"
+accessProperty  ::= "public"=p | private=_p | protected=P
 lazyPrivateSpec ::= "private "=_ | ""
 
 // Plain types
 arraySpec  ::= "[]"=s | ""
-type       ::= primType | compType
+type       ::= primType | compType | suggType
 primType   ::= string=s | byte=b | double=d | int=i
 
 // Complex types
@@ -39,10 +40,14 @@ SCG         ::= "System.Collections.Generic"
 compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
 
 scope "InCSharpTypeMember" {
-  start    ::=  method | other
+  start    ::=  method | property | other
   other ::= "Verifiers.Verify(" cursor ")"=verify
+  // Test: pType_ -> public $type$ $END$
+
+  // Methods:
   // Test: m -> public void $name$($END$) {}
   // Test: M -> public static void $name$($END$) {}
+  // Test: prmName -> protected void Name($END$) {}
   // Test: _M -> private static void $name$($END$) {}
   // Test: MiTest -> public static int Test($END$) {}
   // Test: _M~i -> private static System.Collections.Generic.IEnumerable<int> $name$($END$) {}
@@ -51,8 +56,11 @@ scope "InCSharpTypeMember" {
   // Test: MMain,oitest -> public static void Main(out int test) {}
   // Test: MMain`i,i,itest -> public static void Main<int,int>(int test) {}
   // Test: m~dHello,detest,sbi -> public IEnumerable<double> Hello(decimal test, StringBuiler i){}
+
+  // Auto-properties
+  // Test: pType,Name -> public $type$ Name { get; set; }
 }
 
 scope "InCSharpTypeAndNamespace" {
-
+  start ::= "innamespace" = "innamespace"
 }

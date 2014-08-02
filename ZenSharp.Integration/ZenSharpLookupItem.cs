@@ -30,7 +30,7 @@ namespace Github.Ulex.ZenSharp.Integration
         private readonly GenerateTree _tree;
 
         private string _matchExpand;
-
+        
         public ZenSharpLookupItem(PsiIconManager psiIconManager, Template template, GenerateTree tree, IEnumerable<ITemplateScopePoint> scopePoints)
             : base(psiIconManager, template, true)
         {
@@ -108,6 +108,17 @@ namespace Github.Ulex.ZenSharp.Integration
             {
                 _matchExpand = matchResult.Expand(prefix);
                 _template.Text = _matchExpand;
+                var appliedRules = matchResult.ReMatchLeafs(prefix);
+                foreach (var subst in appliedRules.Where(ar => ar.This is LeafRule.Substitution))
+                {
+                    var rule = (LeafRule.Substitution)subst.This;
+                    var macros = rule.Macros.Replace("\\0", subst.Short);
+                    if (string.IsNullOrEmpty(macros))
+                    {
+                        macros = "complete()";
+                    }
+                    _template["$" + rule.Name  + "$"] = macros;
+                }
                 return _matchingResult;
             }
             else
