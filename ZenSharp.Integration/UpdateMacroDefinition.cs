@@ -7,10 +7,18 @@ using JetBrains.ActionManagement;
 using JetBrains.Application;
 using JetBrains.Application.Components;
 using JetBrains.Application.DataContext;
+using JetBrains.Application.Settings;
+using JetBrains.Application.src.Settings;
 using JetBrains.Interop.WinApi;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.LiveTemplates;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Macros;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Settings;
 using JetBrains.ReSharper.LiveTemplates;
 using JetBrains.Util;
+
+using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
+
+using System.Linq;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -45,6 +53,27 @@ namespace Github.Ulex.ZenSharp.Integration
         }
     }
 #else
+
+    [ShellComponent]
+    public class StoreComponent
+    {
+        private readonly ISettingsStore _store;
+
+        public StoreComponent(ISettingsStore store)
+        {
+            _store = store;
+        }
+
+        public ISettingsStore Store
+        {
+            get
+            {
+                return _store;
+            }
+        }
+    }
+
+
     [ActionHandler("ZenSharp.UpdateMacroDefinition")]
     public class UpdateMacroDefinition : IActionHandler
     {
@@ -55,6 +84,9 @@ namespace Github.Ulex.ZenSharp.Integration
 
         public void Execute(IDataContext context, DelegateExecute nextExecute)
         {
+            Dev(context);
+
+
             var viewer = Shell.Instance.GetComponents<IMacro>();
             using (var f = File.CreateText("c:\\out.txt"))
                 foreach (var macroDefinition in viewer)
@@ -73,6 +105,21 @@ namespace Github.Ulex.ZenSharp.Integration
                         f.WriteLine();
                     }
                 }
+        }
+
+        private void Dev(IDataContext context)
+        {
+            var solution = context.GetData(DataConstants.SOLUTION);
+            var textConrol = context.GetData(JetBrains.TextControl.DataContext.DataConstants.TEXT_CONTROL);
+
+            var manager = Shell.Instance.GetComponent<LiveTemplatesManager>();
+
+            var templates = Shell.Instance.GetComponent<StoredTemplatesProvider>();
+
+            var bound = Shell.Instance.GetComponent<StoreComponent>().Store.BindToContextTransient(ContextRange.Smart((l, cont) => context));
+            var allTemplates = templates.EnumerateTemplates(bound, TemplateApplicability.Live, true);
+
+            Debug.Assert(false);
         }
     }
 #endif

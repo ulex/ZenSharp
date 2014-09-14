@@ -8,6 +8,7 @@ using JetBrains.ReSharper.Feature.Services.LiveTemplates.Scope;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Util;
 using JetBrains.ReSharper.Feature.Services.Lookup;
 using JetBrains.ReSharper.Feature.Services.Resources;
+using JetBrains.ReSharper.LiveTemplates;
 using JetBrains.ReSharper.LiveTemplates.Templates;
 using JetBrains.ReSharper.Psi;
 using JetBrains.TextControl;
@@ -117,7 +118,7 @@ namespace Github.Ulex.ZenSharp.Integration
                     {
                         macros = "complete()";
                     }
-                    _template["$" + rule.Name  + "$"] = macros;
+                    _template.Fields.Add(new TemplateField(rule.Name, macros, 0));
                 }
                 return _matchingResult;
             }
