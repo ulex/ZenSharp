@@ -47,13 +47,5 @@ namespace Github.Ulex.ZenSharp.Integration
 
             return false;
         }
-
-        protected override void TransformItems(CSharpCodeCompletionContext context, GroupedItemsCollector collector)
-        {
-            foreach (var item in collector.Items.OfType<ZenSharpLookupItem>())
-            {
-                //item.Template.Shortcut = "sss" + new Random().Next();
-            }
-        }
     }
 }

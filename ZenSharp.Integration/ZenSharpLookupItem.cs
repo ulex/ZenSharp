@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Github.Ulex.ZenSharp.Core;
+using Github.Ulex.ZenSharp.Integration.Extension;
 
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Scope;
@@ -15,6 +16,8 @@ using JetBrains.TextControl;
 using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
 using JetBrains.Util;
+
+using NLog;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -31,7 +34,9 @@ namespace Github.Ulex.ZenSharp.Integration
         private readonly GenerateTree _tree;
 
         private string _matchExpand;
-        
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         public ZenSharpLookupItem(PsiIconManager psiIconManager, Template template, GenerateTree tree, IEnumerable<ITemplateScopePoint> scopePoints)
             : base(psiIconManager, template, true)
         {
@@ -108,22 +113,26 @@ namespace Github.Ulex.ZenSharp.Integration
             if (matchResult.Success)
             {
                 _matchExpand = matchResult.Expand(prefix);
+                _logger.Debug("Template text: {0}", _matchExpand);
                 _template.Text = _matchExpand;
+                _template.Fields.Clear();
                 var appliedRules = matchResult.ReMatchLeafs(prefix);
                 foreach (var subst in appliedRules.Where(ar => ar.This is LeafRule.Substitution))
                 {
                     var rule = (LeafRule.Substitution)subst.This;
-                    var macros = rule.Macros.Replace("\\0", subst.Short);
+                    var macros = rule.Macro().Replace("\\0", subst.Short);
                     if (string.IsNullOrEmpty(macros))
                     {
                         macros = "complete()";
                     }
+                    _logger.Debug("Completing macros : {0}, {1}", macros, rule.Name);
                     _template.Fields.Add(new TemplateField(rule.Name, macros, 0));
                 }
                 return _matchingResult;
             }
             else
             {
+                _logger.Debug("No completition found for {0} in scope {1}", prefix, scopeName);
                 return null;
             }
         }

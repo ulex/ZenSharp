@@ -41,27 +41,21 @@ namespace Github.Ulex.ZenSharp.Core
         Name : string;
         Params: list[(string * string)];
 
-        public Item[s : string] : option[string]{
+        public Item[s : string] : string{
           get{
             def v = Params.Find(k => k[0] == s);
-            if (v.IsSome) Some(v.Value[1]) else None();
+            if (v.IsSome) v.Value[1] else null;
           }
         }
         private Prop[T](prop : string, default : T) : T {
           def val = this[prop];
-          if (val.IsSome) Convert.ChangeType(val.Value, typeof(T), Globalization.CultureInfo.InvariantCulture) :> T;
+          if (val != null) Convert.ChangeType(val, typeof(T), Globalization.CultureInfo.InvariantCulture) :> T;
           else default;
         }
 
         public Default : string {
           get{
             Prop("default", "");
-          }
-        }
-        
-        public Macros : string {
-          get{
-            Prop("macros", "");
           }
         }
         

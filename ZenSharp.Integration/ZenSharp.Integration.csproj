@@ -38,6 +38,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net40\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -50,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extension\LeafSubstitution.cs" />
     <Compile Include="UpdateMacroDefinition.cs" />
     <Compile Include="ZenSharpItemsProvider.cs" />
     <Compile Include="EditConfigActionHandler.cs" />
