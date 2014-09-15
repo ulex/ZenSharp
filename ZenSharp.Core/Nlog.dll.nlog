@@ -1,0 +1,16 @@
+﻿<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <targets>
+      <target name="f1" 
+              xsi:type="File" 
+              fileName="${nlogdir}/logs/logfile.txt" 
+              layout="${longdate} | ${level:uppercase=true:padding=-5} | ${message}"/>
+      <target xsi:type="Chainsaw"
+          name="chainsaw"
+          address="tcp://127.0.0.1:4448">
+      </target>
+    </targets>
+    <rules>
+      <logger name="*" minlevel="Trace" writeTo="Chainsaw" />
+
+    </rules>
+</nlog>

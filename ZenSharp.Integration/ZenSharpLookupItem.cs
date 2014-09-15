@@ -35,7 +35,7 @@ namespace Github.Ulex.ZenSharp.Integration
 
         private string _matchExpand;
 
-        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        private static Logger _log = LogManager.GetCurrentClassLogger();
 
         public ZenSharpLookupItem(PsiIconManager psiIconManager, Template template, GenerateTree tree, IEnumerable<ITemplateScopePoint> scopePoints)
             : base(psiIconManager, template, true)
@@ -46,6 +46,7 @@ namespace Github.Ulex.ZenSharp.Integration
             _matchingResult = new MatchingResult(3, "dd", 10000);
             _psiIconManager = psiIconManager;
             //IgnoreSoftOnSpace = true;
+            _log.Info("Creating ZenSharpLookupItem with template = {0}", template);
         }
 
         RichText ILookupItem.DisplayName
@@ -92,8 +93,10 @@ namespace Github.Ulex.ZenSharp.Integration
 
         MatchingResult ILookupItem.Match(string prefix, ITextControl textControl)
         {
+            _log.Info("Mathc prefix = {0}", prefix);
             if (_tree == null)
             {
+                _log.Warn("Tree is null, return.");
                 return null;
             }
 
@@ -103,6 +106,7 @@ namespace Github.Ulex.ZenSharp.Integration
             {
                 scopeName = scopeName ?? (_tree.IsScopeExist(scope1) ? scope1 : null);
             }
+            _log.Info("Scope name = {0}", scopeName);
 
             if (scopeName == null)
             {
@@ -113,26 +117,33 @@ namespace Github.Ulex.ZenSharp.Integration
             if (matchResult.Success)
             {
                 _matchExpand = matchResult.Expand(prefix);
-                _logger.Debug("Template text: {0}", _matchExpand);
+                _log.Debug("Template text: {0}", _matchExpand);
+
                 _template.Text = _matchExpand;
+
                 _template.Fields.Clear();
                 var appliedRules = matchResult.ReMatchLeafs(prefix);
                 foreach (var subst in appliedRules.Where(ar => ar.This is LeafRule.Substitution))
                 {
                     var rule = (LeafRule.Substitution)subst.This;
-                    var macros = rule.Macro().Replace("\\0", subst.Short);
+                    var macros = rule.Macro();
                     if (string.IsNullOrEmpty(macros))
                     {
                         macros = "complete()";
                     }
-                    _logger.Debug("Completing macros : {0}, {1}", macros, rule.Name);
+                    else
+                    {
+                        macros = macros.Replace("\\0", subst.Short);
+                    }
+                    _log.Info("Completing macros : {0}, {1}", macros, rule.Name);
                     _template.Fields.Add(new TemplateField(rule.Name, macros, 0));
                 }
+                _log.Info("Successfull match. return {0}", _matchingResult);
                 return _matchingResult;
             }
             else
             {
-                _logger.Debug("No completition found for {0} in scope {1}", prefix, scopeName);
+                _log.Debug("No completition found for {0} in scope {1}", prefix, scopeName);
                 return null;
             }
         }

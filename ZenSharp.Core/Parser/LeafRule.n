@@ -5,8 +5,10 @@ using Nemerle.Utility;
 using Nemerle.Peg;
 
 using System;
+using System.Linq;
 using System.Console;
 using System.Collections.Generic;
+
 
 namespace Github.Ulex.ZenSharp.Core
 {
@@ -77,13 +79,18 @@ namespace Github.Ulex.ZenSharp.Core
           def expandPattern = "$" + Name + "$";
           if (matchedCount != 0){
             def matchString = input.Substring(0, matchedCount);
-            LeafMatchResult(true, matchString, expandPattern, this);
+            LeafMatchResult(true, matchString, matchString, this);
           }
           else if (CanBeNull){
             LeafMatchResult(true, "", expandPattern, this);
           }
           else
             LeafMatchResult(false);
+        }
+        
+        public override ToString() : string {
+          def kvpFormat(kvp: string * string) { string.Format("{0}={1}", kvp[0], kvp[1]); }
+          string.Format("Substitution<{0}:{1}>", Name, string.Join(", ", Params.Map(kvpFormat)));
         }
     }
 

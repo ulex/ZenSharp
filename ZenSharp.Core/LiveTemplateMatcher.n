@@ -6,11 +6,14 @@ using Nemerle.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NLog;
 
 namespace Github.Ulex.ZenSharp.Core
 {
   public class LiveTemplateMatcher
   {
+    private static _log = LogManager.GetCurrentClassLogger();
+    
     private _tree : GenerateTree;
 
     public this(tree : GenerateTree) {
@@ -48,6 +51,7 @@ namespace Github.Ulex.ZenSharp.Core
 
     public Match (prefix : string, scopename : string) : MatchResult
     {
+      _log.Info("Trying to match [{0}] in scope {1}", prefix, scopename);
       def scope = _tree.GetScope(scopename);
       def scopeRules = _tree.GlobalRules + scope.Rules;
 
@@ -93,6 +97,8 @@ namespace Github.Ulex.ZenSharp.Core
       tryMatchRuleVar = tryMatchRule;
 
       def result = tryMatchRule(_tree.GetStartRule(scope).Rules, MatchResult(true, prefix, []));
+      _log.Info("Match result: {0}, tail: {1}, rules: {2}", result.Success, result.Tail, result.Rules);
+      
       MatchResult(result.Success, result.Tail, result.Rules.Reverse());
     }
   }
