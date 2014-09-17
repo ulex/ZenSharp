@@ -1,31 +1,20 @@
-﻿using System.Configuration;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
+﻿using System;
 
 using JetBrains.ActionManagement;
 using JetBrains.Application;
-using JetBrains.Application.Components;
 using JetBrains.Application.DataContext;
-using JetBrains.Application.Settings;
-using JetBrains.Application.src.Settings;
-using JetBrains.Interop.WinApi;
-using JetBrains.ReSharper.Feature.Services.LiveTemplates.LiveTemplates;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Macros;
-using JetBrains.ReSharper.Feature.Services.LiveTemplates.Settings;
 using JetBrains.ReSharper.LiveTemplates;
-using JetBrains.Util;
 
-using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
-
-using System.Linq;
+using NLog;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
-#if !RESHARPER_71
     [ActionHandler("ZenSharp.UpdateMacroDefinition")]
     public class UpdateMacroDefinition : IActionHandler
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
         {
             return true;
@@ -33,94 +22,29 @@ namespace Github.Ulex.ZenSharp.Integration
 
         public void Execute(IDataContext context, DelegateExecute nextExecute)
         {
-            var viewer = Shell.Instance.GetComponents<IMacroDefinition>();
-            using (var f = File.CreateText("c:\\out.txt"))
+            try
+            {
+                var viewer = Shell.Instance.GetComponents<IMacroDefinition>();
                 foreach (var macroDefinition in viewer)
                 {
                     var attr = MacroDescriptionFormatter.GetMacroAttribute(macroDefinition);
                     if (attr != null)
                     {
-                        f.WriteLine("// {0}", attr.Name);
-                        f.WriteLine("// {0}", attr.ShortDescription);
-                        f.WriteLine("// {0}", attr.LongDescription);
+                        Log.Info("// {0}", attr.Name);
+                        Log.Info("// {0}", attr.ShortDescription);
+                        Log.Info("// {0}", attr.LongDescription);
                         foreach (var parameterInfo in macroDefinition.Parameters)
                         {
-                            f.WriteLine("// P: {0}", parameterInfo.ParameterType.ToString());
+                            Log.Info("// P: {0}", parameterInfo.ParameterType);
                         }
-                        f.WriteLine();
+                        Log.Info(string.Empty);
                     }
                 }
-        }
-    }
-#else
-
-    [ShellComponent]
-    public class StoreComponent
-    {
-        private readonly ISettingsStore _store;
-
-        public StoreComponent(ISettingsStore store)
-        {
-            _store = store;
-        }
-
-        public ISettingsStore Store
-        {
-            get
+            }
+            catch (Exception e)
             {
-                return _store;
+                Log.Error("IMacro definition enumeration failed", e);
             }
         }
     }
-
-
-    [ActionHandler("ZenSharp.UpdateMacroDefinition")]
-    public class UpdateMacroDefinition : IActionHandler
-    {
-        public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
-        {
-            return true;
-        }
-
-        public void Execute(IDataContext context, DelegateExecute nextExecute)
-        {
-            Dev(context);
-
-
-            var viewer = Shell.Instance.GetComponents<IMacro>();
-            using (var f = File.CreateText("c:\\out.txt"))
-                foreach (var macroDefinition in viewer)
-                {
-                    var macroAttributeArray = (MacroAttribute[])macroDefinition.GetType().GetCustomAttributes(typeof(MacroAttribute), false);
-                    if (macroAttributeArray.Length == 1)
-                    {
-                        var attr = macroAttributeArray[0];
-                        f.WriteLine("// {0}", attr.Name);
-                        f.WriteLine("// {0}", attr.ShortDescription);
-                        f.WriteLine("// {0}", attr.LongDescription);
-                        foreach (var parameterInfo in macroDefinition.Parameters)
-                        {
-                            f.WriteLine("// P: {0}", parameterInfo.ParameterType.ToString());
-                        }
-                        f.WriteLine();
-                    }
-                }
-        }
-
-        private void Dev(IDataContext context)
-        {
-            var solution = context.GetData(DataConstants.SOLUTION);
-            var textConrol = context.GetData(JetBrains.TextControl.DataContext.DataConstants.TEXT_CONTROL);
-
-            var manager = Shell.Instance.GetComponent<LiveTemplatesManager>();
-
-            var templates = Shell.Instance.GetComponent<StoredTemplatesProvider>();
-
-            var bound = Shell.Instance.GetComponent<StoreComponent>().Store.BindToContextTransient(ContextRange.Smart((l, cont) => context));
-            var allTemplates = templates.EnumerateTemplates(bound, TemplateApplicability.Live, true);
-
-            Debug.Assert(false);
-        }
-    }
-#endif
 }

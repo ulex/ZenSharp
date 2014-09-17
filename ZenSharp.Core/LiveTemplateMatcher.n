@@ -22,9 +22,9 @@ namespace Github.Ulex.ZenSharp.Core
 
     [Record]
     public class MatchResult {
-      public Success : bool;
-      public Tail : string;
-      public Rules : list[LeafRule];
+      public Success : bool { get; private set; }
+      public Tail : string { get; private set };
+      public Rules : list[LeafRule] { get; private set; }
 
       public this(mr : bool) {
         Success = mr;

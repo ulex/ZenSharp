@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extension\LeafSubstitution.cs" />
+    <Compile Include="Extension\MatchResultExtension.cs" />
     <Compile Include="UpdateMacroDefinition.cs" />
     <Compile Include="ZenSharpItemsProvider.cs" />
     <Compile Include="EditConfigActionHandler.cs" />
