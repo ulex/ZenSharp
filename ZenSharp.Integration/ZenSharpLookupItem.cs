@@ -123,7 +123,7 @@ namespace Github.Ulex.ZenSharp.Integration
             foreach (var subst in appliedRules.Where(ar => ar.This is LeafRule.Substitution))
             {
                 var rule = (LeafRule.Substitution)subst.This;
-                var macros = rule.Macro();
+                var macros = rule.Macros();
                 if (string.IsNullOrEmpty(macros))
                 {
                     macros = "complete()";

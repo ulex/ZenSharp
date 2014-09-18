@@ -3,9 +3,9 @@ using System.IO;
 using System.Reflection;
 
 using Github.Ulex.ZenSharp.Core;
-using Github.Ulex.ZenSharp.Integration.Properties;
 
 using JetBrains.Application;
+using JetBrains.Application.Settings;
 using JetBrains.Util;
 
 namespace Github.Ulex.ZenSharp.Integration
@@ -17,9 +17,15 @@ namespace Github.Ulex.ZenSharp.Integration
 
         private GenerateTree _tree;
 
-        public LtgConfigWatcher()
+        private readonly ZenSharpSettings _zenSettings;
+
+        public LtgConfigWatcher(ISettingsStore settingsStore)
         {
-            _watcher = new FileSystemWatcher(AssemblyDir, "*.ltg")
+            var boundSettings = settingsStore.BindToContextTransient(ContextRange.ApplicationWide);
+            _zenSettings = boundSettings.GetKey<ZenSharpSettings>(SettingsOptimization.DoMeSlowly);
+
+            // todo: support change dir
+            _watcher = new FileSystemWatcher(Path.GetDirectoryName(_zenSettings.TreePath), "*.ltg")
                 {
                     EnableRaisingEvents = true,
                     NotifyFilter = NotifyFilters.LastWrite
@@ -36,37 +42,11 @@ namespace Github.Ulex.ZenSharp.Integration
             }
         }
 
-        private string ConfigPath
-        {
-            get
-            {
-                var path = Settings.Default.ConfigPath;
-                if (Path.IsPathRooted(path))
-                {
-                    return path;
-                }
-                else
-                {
-                    return Path.Combine(AssemblyDir, path);
-                }
-            }
-        }
-
-        private static string AssemblyDir
-        {
-            get
-            {
-                var curpath = Assembly.GetExecutingAssembly().Location;
-                var assemblyDir = Path.GetDirectoryName(curpath);
-                return assemblyDir;
-            }
-        }
-
         private void Reload(bool showmsg)
         {
             try
             {
-                _tree = new LtgParser().ParseAll(File.ReadAllText(ConfigPath));
+                _tree = new LtgParser().ParseAll(File.ReadAllText(_zenSettings.TreePath));
                 if (showmsg) MessageBox.ShowInfo("Config updated");
             }
             catch (Exception e)
