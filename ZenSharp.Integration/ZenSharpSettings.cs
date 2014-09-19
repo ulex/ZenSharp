@@ -12,7 +12,7 @@ namespace Github.Ulex.ZenSharp.Integration
         [SettingsEntry("Templates.ltg", "Path to ltg file")]
         public string TreeFilename { get; set; }
 
-        public string TreePath
+        public string GetTreePath
         {
             get
             {

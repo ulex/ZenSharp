@@ -117,6 +117,5 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <Copy DestinationFolder="$(OutputPath)" SourceFiles="$(OutputPath)\..\..\ZenSharp.Core\ZenSharp.Core.Tests\Data\Templates.ltg" SkipUnchangedFiles="true" />
   </Target>
 </Project>

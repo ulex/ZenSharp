@@ -1,37 +1,46 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 
 using Github.Ulex.ZenSharp.Core;
 
 using JetBrains.Application;
 using JetBrains.Application.Settings;
-using JetBrains.Util;
+
+using NLog;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
     [ShellComponent]
     internal sealed class LtgConfigWatcher : IDisposable
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         private readonly FileSystemWatcher _watcher;
 
         private GenerateTree _tree;
 
-        private readonly ZenSharpSettings _zenSettings;
-
+        private readonly IContextBoundSettingsStore _boundSettings;
+        
         public LtgConfigWatcher(ISettingsStore settingsStore)
         {
-            var boundSettings = settingsStore.BindToContextTransient(ContextRange.ApplicationWide);
-            _zenSettings = boundSettings.GetKey<ZenSharpSettings>(SettingsOptimization.DoMeSlowly);
+            _boundSettings = settingsStore.BindToContextTransient(ContextRange.ApplicationWide);
 
             // todo: support change dir
-            _watcher = new FileSystemWatcher(Path.GetDirectoryName(_zenSettings.TreePath), "*.ltg")
+            _watcher = new FileSystemWatcher(Path.GetDirectoryName(ZenSettings.GetTreePath), "*.ltg")
                 {
                     EnableRaisingEvents = true,
                     NotifyFilter = NotifyFilters.LastWrite
                 };
-            _watcher.Changed += (sender, args) => Reload(true);
-            Reload(false);
+            _watcher.Changed += (sender, args) => Reload();
+            Reload();
+        }
+
+        private ZenSharpSettings ZenSettings
+        {
+            get
+            {
+                return _boundSettings.GetKey<ZenSharpSettings>(SettingsOptimization.DoMeSlowly);
+            }
         }
 
         public GenerateTree Tree
@@ -42,16 +51,18 @@ namespace Github.Ulex.ZenSharp.Integration
             }
         }
 
-        private void Reload(bool showmsg)
+        private void Reload()
         {
             try
             {
-                _tree = new LtgParser().ParseAll(File.ReadAllText(_zenSettings.TreePath));
-                if (showmsg) MessageBox.ShowInfo("Config updated");
+                var path = ZenSettings.GetTreePath;
+                _tree = new LtgParser().ParseAll(File.ReadAllText(path));
+                Log.Info("Config reloaded from {0}", path);
             }
             catch (Exception e)
             {
-                if (showmsg) MessageBox.ShowError(e.ToString(), e.Source);   
+                Log.Error("Error loading config", e);
+                throw;
             }
         }
 

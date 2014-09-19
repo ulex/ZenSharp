@@ -8,21 +8,21 @@ cursor ::= "$END$"
 // Fields
 field ::= accessField ""=f space type "$name$" ";"
 
-identifier ::= $name default="$name$" macros = "completeType(""\0"")"$
+identifier ::= $name default="$name$" macros = "complete()"$
 suggType ::= $type default="$type$" macros = "completeType(""\0"")"$ suggTypeFollower
 suggTypeFollower ::= ""="_"
 
 // Methods
 method       ::= accessMethod space methodInstStatic methodDecl
 methodDecl ::= type methodDecl2 | "void" methodDecl2
-methodDecl2::= space methodName "(" methodArgs ") {}"
+methodDecl2::= space methodName "(" methodArgs ") { $END$ }"
 methodArgs   ::= cursor
 methodName   ::= identifier
 methodInstStatic ::= "static "=M | ""=m
 accessMethod ::= private=_ | protected=pr | "public"
 
 // Auto properties
-property        ::= accessProperty space suggType space "{ get; set; }" "$END$"
+property        ::= accessProperty space type space identifier "{ get; set; }" "$END$"
 accessProperty  ::= "public"=p | private=_p | protected=P
 lazyPrivateSpec ::= "private "=_ | ""
 

@@ -22,8 +22,9 @@ using NUnit.Framework;
 namespace ZenSharp.Core.Tests
 {
 <#
-string folder = Host.ResolvePath("Data");
-var ltgFiles = Directory.GetFiles(folder).Select(LtgFileInfo.FromFile);
+string folderTest = Host.ResolvePath("Data");
+string folder = Host.ResolvePath("../../ZenSharp.Integration");
+var ltgFiles = Directory.GetFiles(folder, "*.ltg").Concat(Directory.GetFiles(folderTest)).Select(LtgFileInfo.FromFile);
 foreach (var file in ltgFiles) { #>
     [TestFixture]
     public class <#= file.FileName #>Tests

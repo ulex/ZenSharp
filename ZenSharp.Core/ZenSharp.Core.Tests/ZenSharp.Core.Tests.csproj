@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\jack.ltg" />
-    <None Include="Data\Templates.ltg" />
     <None Include="ExpandTestGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ExpandTestGenerator.cs</LastGenOutput>
