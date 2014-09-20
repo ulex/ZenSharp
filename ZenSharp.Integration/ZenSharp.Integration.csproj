@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Extension\LeafSubstitution.cs" />
     <Compile Include="Extension\MatchResultExtension.cs" />
+    <Compile Include="Option\ExceptionConverter.cs" />
     <Compile Include="Option\ZenSettingsPage.xaml.cs">
       <DependentUpon>ZenSettingsPage.xaml</DependentUpon>
     </Compile>

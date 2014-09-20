@@ -6,6 +6,9 @@ using System.Windows.Navigation;
 
 using Github.Ulex.ZenSharp.Core;
 
+using JetBrains.Application;
+using JetBrains.Application.Components;
+using JetBrains.Application.DataContext;
 using JetBrains.Application.Settings;
 using JetBrains.DataFlow;
 using JetBrains.UI.Application.PluginSupport;
@@ -16,6 +19,8 @@ using JetBrains.UI.Resources;
 using Microsoft.Win32;
 
 using NLog;
+
+using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -28,12 +33,15 @@ namespace Github.Ulex.ZenSharp.Integration
         private const string pageId = "ZenSettingsPageId";
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        public ZenSettingsPage(Lifetime lifetime, OptionsSettingsSmartContext settings)
+        public ZenSettingsPage(Lifetime lifetime, OptionsSettingsSmartContext settings, IComponentContainer container)
         {
             settings.SetBinding(lifetime, (ZenSharpSettings s) => s.TreeFilename, this, PathProperty);
             InitializeComponent();
             Id = pageId;
+            _zenWatcher = container.GetComponent<LtgConfigWatcher>();
         }
+
+        private LtgConfigWatcher _zenWatcher;
 
         public static readonly DependencyProperty PathProperty = DependencyProperty.Register("Path", typeof(string), typeof(ZenSettingsPage), new PropertyMetadata(default(string)));
 
@@ -49,10 +57,35 @@ namespace Github.Ulex.ZenSharp.Integration
             }
         }
 
+        public static readonly DependencyProperty PostValidationErrorProperty = DependencyProperty.Register("PostValidationError", typeof(Exception), typeof(ZenSettingsPage), new PropertyMetadata(default(Exception)));
+
+        public Exception PostValidationError
+        {
+            get
+            {
+                return (Exception)GetValue(PostValidationErrorProperty);
+            }
+            set
+            {
+                SetValue(PostValidationErrorProperty, value);
+            }
+        }
+
         public string Id { get; private set; }
 
         public bool OnOk()
         {
+            try
+            {
+                // todo: use settings notification options
+                _zenWatcher.Reload(Path);
+                _zenWatcher.ReinitializeWatcher(Path);
+            }
+            catch(Exception exception)
+            {
+                PostValidationError = exception;
+                return false;
+            }
             return true;
         }
 

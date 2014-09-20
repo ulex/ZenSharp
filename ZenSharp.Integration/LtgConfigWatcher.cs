@@ -15,7 +15,7 @@ namespace Github.Ulex.ZenSharp.Integration
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private readonly FileSystemWatcher _watcher;
+        private FileSystemWatcher _watcher;
 
         private GenerateTree _tree;
 
@@ -25,14 +25,33 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             _boundSettings = settingsStore.BindToContextTransient(ContextRange.ApplicationWide);
 
-            // todo: support change dir
-            _watcher = new FileSystemWatcher(Path.GetDirectoryName(ZenSettings.GetTreePath), "*.ltg")
-                {
-                    EnableRaisingEvents = true,
-                    NotifyFilter = NotifyFilters.LastWrite
-                };
-            _watcher.Changed += (sender, args) => Reload();
-            Reload();
+            var path = ZenSettings.GetTreePath;
+            try
+            {
+                ReinitializeWatcher(path);
+                Reload(path);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+
+        public void ReinitializeWatcher(string path)
+        {
+            if (_watcher != null)
+            {
+                var watcher = _watcher;
+                _watcher = null;
+                watcher.Dispose();
+            }
+
+            _watcher = new FileSystemWatcher(Path.GetDirectoryName(path), "*.ltg")
+            {
+                EnableRaisingEvents = true,
+                NotifyFilter = NotifyFilters.LastWrite
+            };
+            _watcher.Changed += (sender, args) => Reload(path);
         }
 
         private ZenSharpSettings ZenSettings
@@ -51,11 +70,11 @@ namespace Github.Ulex.ZenSharp.Integration
             }
         }
 
-        private void Reload()
+        public void Reload(string file)
         {
             try
             {
-                var path = ZenSettings.GetTreePath;
+                var path = file;
                 _tree = new LtgParser().ParseAll(File.ReadAllText(path));
                 Log.Info("Config reloaded from {0}", path);
             }
