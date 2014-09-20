@@ -62,5 +62,7 @@ scope "InCSharpTypeMember" {
 }
 
 scope "InCSharpTypeAndNamespace" {
-  start ::= "innamespace" = "innamespace"
+  start ::= class | interface | enum
+  class ::= "internal class"=c space classBody
+  classBody ::= identifier "{" cursor "}"
 }

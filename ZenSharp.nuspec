@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>ZenSharp</id>
+    <version>$version$</version>
+    <title>ZenSharp auto completion plugin</title>
+    <authors>Alexander Ulitin</authors>
+    <description>description</description>
+    <releaseNotes>initial release</releaseNotes>
+    <copyright>Alexander Ulitin</copyright>
+    <tags>livetemplates code completion ltg</tags>
+    <projectUrl>https://github.com/ulex/ZenSharp</projectUrl>
+    <iconUrl>https://raw.github.com/ulex/IntroduceNsAlias/master/icon.png</iconUrl>
+    <dependencies>
+      <dependency id="ReSharper" version="8.2"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\NLog.dll" target="ReSharper\v8.2\plugins"/>
+    <file src="bin\Release\Nemerle.dll" target="ReSharper\v8.2\plugins"/>
+    <file src="bin\Release\Nemerle.Peg.dll" target="ReSharper\v8.2\plugins"/>
+    <file src="bin\Release\ZenSharp.Core.dll" target="ReSharper\v8.2\plugins"/>
+    <file src="bin\Release\ZenSharp.Integration.dll" target="ReSharper\v8.2\plugins"/>
+    <file src="bin\Release\Nlog.dll.nlog" target="ReSharper\v8.2\plugins"/>
+    <file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\v8.2\plugins"/>
+  </files>
+</package>
