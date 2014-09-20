@@ -35,6 +35,8 @@ namespace Github.Ulex.ZenSharp.Integration
 
         private readonly IconId _iconId;
 
+        private string _displayName;
+
         public ZenSharpLookupItem(Template template, GenerateTree tree, IEnumerable<string> scopes, IconId iconId)
             : base(null, template, true)
         {
@@ -45,13 +47,14 @@ namespace Github.Ulex.ZenSharp.Integration
             _matchingResult = new MatchingResult(3, "dd", 10000);
             Log.Info("Creating ZenSharpLookupItem with template = {0}", template);
             _iconId = iconId;
+            _displayName = _template.Text;
         }
 
         RichText ILookupItem.DisplayName
         {
             get
             {
-                return new RichText(_template.Text );
+                return new RichText(_displayName);
             }
         }
 
@@ -101,9 +104,10 @@ namespace Github.Ulex.ZenSharp.Integration
             var matchResult = matcher.Match(prefix, scopeName);
             if (matchResult.Success)
             {
-                var matchExpand = matchResult.ExpandDisplay(prefix);
-                Log.Debug("Template text: {0}", matchExpand);
+                var matchExpand = matchResult.Expand(prefix);
                 _template.Text = matchExpand;
+                Log.Debug("Template text: {0}", matchExpand);
+                _displayName = matchResult.ExpandDisplay(prefix);
 
                 FillMacros(prefix, matchResult);
                 Log.Info("Successfull match in scope [{1}]. Text: [{2}]. Return [{0}]", _matchingResult, scopeName, matchExpand);
