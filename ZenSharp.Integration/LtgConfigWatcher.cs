@@ -51,7 +51,16 @@ namespace Github.Ulex.ZenSharp.Integration
                 EnableRaisingEvents = true,
                 NotifyFilter = NotifyFilters.LastWrite
             };
-            _watcher.Changed += (sender, args) => Reload(path);
+            _watcher.Changed += (sender, args) => SafeReload(path);
+        }
+
+        private void SafeReload(string path)
+        {
+            try
+            {
+                Reload(path);
+            }
+            catch{}
         }
 
         private ZenSharpSettings ZenSettings
