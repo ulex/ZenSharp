@@ -37,7 +37,8 @@ namespace Github.Ulex.ZenSharp.Core
         scope : TreePart = "scope" s stringDecl s '{' sn (rules / comment)* '}' sn;
 
         rules          : TreePart         = rule sn (rule sn)*;
-        expandRule     : LeafRule         = terminal / nonterminal;
+        expandRule     : LeafRule         = terminal / nonterminal / brackets;
+        brackets       : LeafRule         = "(" s ruleBody s ")";
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
         ruleBody       : list[ConcatRule] = concatRule (s vmark sn concatRule)*;
         rule           : Rule             = identifier s describeMark s ruleBody;
@@ -98,21 +99,30 @@ namespace Github.Ulex.ZenSharp.Core
     terminalString (decl : string) : LeafRule{
       LeafRule.String(decl);
     }
+    
     nonterminal (id : string) : LeafRule{
       LeafRule.NonTerminal(id)
     }
+    
+    brackets(_ : NToken, ruleBody : list[ConcatRule], _ : NToken) : LeafRule{
+      LeafRule.InsideRule(ruleBody); 
+    }
+    
     identifier (sequence : NToken) : string {
       GetText(sequence);
     }
     private quoteEscapeSequence(_ : NToken) : string{
       "\"";
     }
+    
     private stringChar (text : NToken) : string{
       GetText(text)
     }
+    
     private str(parts : List[string]) : string{
       System.String.Concat(parts);
     }
+    
     stringDecl(_ : NToken, _ : NToken, inside : string, _ : NToken) : string{
       inside;
     }

@@ -14,7 +14,7 @@ suggTypeFollower ::= ""="_"
 
 // Methods
 method       ::= accessMethod space methodInstStatic methodDecl
-methodDecl ::= type methodDecl2 | "void" methodDecl2
+methodDecl ::= (type | "void") methodDecl2
 methodDecl2::= space methodName "(" methodArgs ") { $END$ }"
 methodArgs   ::= cursor
 methodName   ::= identifier

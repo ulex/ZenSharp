@@ -28,6 +28,13 @@ namespace Github.Ulex.ZenSharp.Core
           throw NotImplementedException();
         }
       }
+    | InsideRule {
+        public override ToString() : string { "InsideRule<>"; }
+        public Rules : list[ConcatRule];
+        public override Match(_ : string) : LeafMatchResult {
+          throw NotImplementedException();
+        }
+      }
     | ExpandRule {
         Short : string;
         Expand : string;

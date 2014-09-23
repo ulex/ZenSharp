@@ -61,6 +61,7 @@ namespace Github.Ulex.ZenSharp.Core
       def tryMatchLeafRule(rule : LeafRule, acc : MatchResult) : MatchResult {
         match (rule){
           | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.GetRule(x.Value, scopeRules).Rules, acc);
+          | x is LeafRule.InsideRule => tryMatchRuleVar(x.Rules, acc);
           | lr => {
               def leafMatch = lr.Match(acc.Tail);
               MatchResult(leafMatch.Success, leafMatch.Crop(acc.Tail), rule :: acc.Rules)

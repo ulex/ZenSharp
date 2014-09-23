@@ -15,10 +15,5 @@ namespace Github.Ulex.ZenSharp.Core
   {
     public Name : string;
     public Rules : list[ConcatRule];
-
-    public Match (_ : string) : list[LeafRule]
-    {
-      null;
-    }
   }
 }
