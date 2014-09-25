@@ -5,21 +5,10 @@ space ::= " "
 // Resharper macros
 cursor ::= "$END$"
 
-// Fields
-field ::= accessField ""=f space type "$name$" ";"
-
 identifier ::= $name default="$name$" macros = "complete()"$
 suggType ::= $type default="$type$" macros = "completeType(""\0"")"$ suggTypeFollower
 suggTypeFollower ::= ""="_"
 
-// Methods
-method       ::= accessMethod space methodInstStatic methodDecl
-methodDecl ::= (type | "void") methodDecl2
-methodDecl2::= space methodName "(" methodArgs ") { $END$ }"
-methodArgs   ::= cursor
-methodName   ::= identifier
-methodInstStatic ::= "static "=M | ""=m
-accessMethod ::= private=_ | protected=pr | "public"
 
 // Auto properties
 property        ::= accessProperty space type space identifier "{ get; set; }" "$END$"
@@ -40,7 +29,10 @@ SCG         ::= "System.Collections.Generic"
 compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
 
 scope "InCSharpTypeMember" {
-  start    ::=  method | property | other
+  start    ::=  method | property | field | other
+  method ::= (private=_ | protected=pr | "public") space ("static "=M | ""=m) (type | "void") space identifier "(" cursor ") { $END$ }"
+  field ::= ("private"=f | "private readonly"=F) space type space identifier ";"
+
   other ::= "Verifiers.Verify(" cursor ")"=verify
   // Test: pType_ -> public $type$ $END$
 
@@ -63,6 +55,7 @@ scope "InCSharpTypeMember" {
 
 scope "InCSharpTypeAndNamespace" {
   start ::= class | interface | enum
-  class ::= "internal class"=c space classBody
+  class ::= ("internal class"=c | "public class"=pc | "private class"=_pc) space classBody
+  interface ::= "internal interface"=i space classBody
   classBody ::= identifier "{" cursor "}"
 }

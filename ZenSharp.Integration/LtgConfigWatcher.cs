@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 using Github.Ulex.ZenSharp.Core;
 
@@ -46,7 +47,9 @@ namespace Github.Ulex.ZenSharp.Integration
                 watcher.Dispose();
             }
 
-            _watcher = new FileSystemWatcher(Path.GetDirectoryName(path), "*.ltg")
+            var directoryName = Path.GetDirectoryName(path);
+            Log.Info("Create file system wather on directory {0}", directoryName);
+            _watcher = new FileSystemWatcher(directoryName, "*.ltg")
             {
                 EnableRaisingEvents = true,
                 NotifyFilter = NotifyFilters.LastWrite
@@ -58,9 +61,13 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             try
             {
+                Log.Info("Reloading config from {0}", path);
                 Reload(path);
             }
-            catch{}
+            catch (Exception e)
+            {
+                Log.Error("Error updating ltg config:");
+            }
         }
 
         private ZenSharpSettings ZenSettings

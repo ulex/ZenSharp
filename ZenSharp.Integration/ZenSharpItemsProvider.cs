@@ -33,6 +33,8 @@ namespace Github.Ulex.ZenSharp.Integration
 
         protected override bool AddLookupItems(CSharpCodeCompletionContext context, GroupedItemsCollector collector)
         {
+            Log.Info("Add lookupitems");
+
             var solution = context.PsiModule.GetSolution();
             if (solution == null) return false;
 
@@ -46,13 +48,13 @@ namespace Github.Ulex.ZenSharp.Integration
             var scopePoints = provider.ProvideScopePoints(templateContext);
             if (ltgConfig.Tree != null)
             {
-                var template = new Template("shortcut", "desctiption", "text", true, true, false, TemplateApplicability.Live)
+                var template = new Template("", "", "", true, true, false, TemplateApplicability.Live)
                 {
                     UID = Guid.NewGuid()
                 };
                 var scopes = scopePoints.Select(sp => sp.GetType().Name);
                 var iconId = iconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
-                collector.AddToTop(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
+                collector.AddAtDefaultPlace(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes.ToList(), iconId));
                 return true;
             }
             else

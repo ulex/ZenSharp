@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 
 using Github.Ulex.ZenSharp.Core;
 using Github.Ulex.ZenSharp.Integration.Extension;
@@ -29,6 +31,9 @@ namespace Github.Ulex.ZenSharp.Integration
 
         private readonly MatchingResult _matchingResult;
 
+        /// <summary>
+        /// todo: remove
+        /// </summary>
         private readonly Template _template;
 
         private readonly GenerateTree _tree;
@@ -82,17 +87,16 @@ namespace Github.Ulex.ZenSharp.Integration
         MatchingResult ILookupItem.Match(string prefix, ITextControl textControl)
         {
             Log.Info("Match prefix = {0}", prefix);
-            if (_tree == null)
+            if (_tree == null || string.IsNullOrEmpty(prefix))
             {
                 Log.Error("Expand tree is null, return.");
                 return null;
             }
-
             var matcher = new LiveTemplateMatcher(_tree);
             string scopeName = null;
-            foreach (var scope1 in _scopes)
+            foreach (var scope in _scopes)
             {
-                scopeName = scopeName ?? (_tree.IsScopeExist(scope1) ? scope1 : null);
+                scopeName = scopeName ?? (_tree.IsScopeExist(scope) ? scope : null);
             }
             Log.Debug("Scope name = {0}", scopeName);
 
@@ -100,7 +104,19 @@ namespace Github.Ulex.ZenSharp.Integration
             {
                 return null;
             }
+            try
+            {
+                return GetMatchingResult(prefix, matcher, scopeName);
+            }
+            catch (Exception e)
+            {
+                Log.Error("Exception during match", e);
+                return null;
+            }
+        }
 
+        private MatchingResult GetMatchingResult(string prefix, LiveTemplateMatcher matcher, string scopeName)
+        {
             var matchResult = matcher.Match(prefix, scopeName);
             if (matchResult.Success)
             {
