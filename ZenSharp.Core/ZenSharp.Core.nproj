@@ -66,6 +66,11 @@
       <HintPath>..\packages\NLog.3.1.0.0\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <Name>System.Core</Name>
+      <AssemblyName>System.Core.dll</AssemblyName>
+      <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GenerateTree.n">
@@ -93,6 +98,9 @@
     <Compile Include="Program.n">
     </Compile>
     <Compile Include="Properties\AssemblyInfo.n" />
+    <Compile Include="Utils\RuleFactory.n">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Utils\GuidUtility.n">
       <SubType>Code</SubType>
     </Compile>

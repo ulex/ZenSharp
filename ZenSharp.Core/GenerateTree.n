@@ -4,12 +4,15 @@ using Nemerle.Text;
 using Nemerle.Utility;
 
 using System;
+using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 
-namespace Github.Ulex.ZenSharp.Core {
+namespace Github.Ulex.ZenSharp.Core 
+{
   [Record]
-  public class GenerateTree{
+  public class GenerateTree
+  {
     public GlobalRules : list[Rule];
     public Scopes : list[TreePart.Scope];
 
@@ -24,11 +27,11 @@ namespace Github.Ulex.ZenSharp.Core {
      {
         def scope = Scopes.Find(a => a.Name == scopename);
         if (!scope.IsSome)
-          throw Exception($"scope with name $scopename not exist")
+          throw Exception($"scope with name $scopename does not exist")
         else
           scope.Value;
      }
-     
+
      public IsScopeExist(scopename : string) : bool
      {
         def scope = Scopes.Find(a => a.Name == scopename);
@@ -41,14 +44,14 @@ namespace Github.Ulex.ZenSharp.Core {
        if (rule.IsSome)
          rule.Value
        else
-         throw Exception($"Non-terminal rule '$rulename' is not exist");
+         throw Exception($"Non-terminal rule '$rulename' does not exist");
      }
 
      public GetStartRule(scope : TreePart.Scope) : Rule
      {
         def startRule = scope.Rules.Find(a => a.Name == "start");
         if (!startRule.IsSome)
-          throw Exception($"Start rule for scope $(scope.Name) not exist")
+          throw Exception($"Start rule for scope $(scope.Name) does not exist")
         else
           startRule.Value;
      }
@@ -88,6 +91,29 @@ namespace Github.Ulex.ZenSharp.Core {
            }
            | None => yield leafRules
        }
+     }
+
+     public ExtendWithAnotherTree ( tree : GenerateTree, namePrefix : string ) : GenerateTree 
+     {
+       def prefix = namePrefix + ":";
+       //def existedNames = HashSet(GlobalRules.Select(f => f.Name));
+       def patchLeafRule(leaf)
+       {
+         null;
+       }
+       def patchRule(rule) {
+         rule.Patch(prefix + rule.Name, patchLeafRule);
+       }
+       def patchScope(scope){
+         TreePart.Scope(scope.Rules.Select(patchRule).NToList(), scope.Name);
+       }
+       
+       def newGlobalRules = tree.GlobalRules.Select(patchRule).NToList();
+       def updatedScopes = tree.Scopes.Select(patchScope).NToList();
+       
+       
+       
+       null;
      }
   }
 }
