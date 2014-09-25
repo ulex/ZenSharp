@@ -3,14 +3,14 @@
       <target name="f1" 
               xsi:type="File" 
               fileName="${nlogdir}/logs/logfile.txt" 
-              layout="${longdate} | ${level:uppercase=true:padding=-5} | ${message}"/>
+              layout="${longdate} | ${level:uppercase=true:padding=-5} | ${message}${exception:format=tostring}"/>
       <target xsi:type="Chainsaw"
           name="chainsaw"
           address="tcp://127.0.0.1:4448">
       </target>
     </targets>
     <rules>
-      <logger name="*" minlevel="Trace" writeTo="Chainsaw" />
+      <logger name="*" minlevel="Trace" writeTo="f1" />
 
     </rules>
 </nlog>
