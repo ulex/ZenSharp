@@ -5,9 +5,10 @@ space ::= " "
 // Resharper macros
 cursor ::= "$END$"
 
-identifier ::= $name default="$name$" macros = "complete()"$
-suggType ::= $type default="$type$" macros = "completeType(""\0"")"$ suggTypeFollower
-suggTypeFollower ::= ""="_"
+identifier ::= <name default="$name$" macros = "complete()">
+// really bad working now
+// suggType ::= <type default="$type$" text="$type$" macros = "completeType()"> suggTypeFollower
+//suggTypeFollower ::= ""="_"
 
 
 // Auto properties
@@ -17,7 +18,7 @@ lazyPrivateSpec ::= "private "=_ | ""
 
 // Plain types
 arraySpec  ::= "[]"=s | ""
-type       ::= primType | compType | suggType
+type       ::= primType arraySpec | compType
 primType   ::= string=s | byte=b | double=d | int=i
 
 // Complex types
@@ -28,12 +29,17 @@ scg2Types   ::= SortedList=sl | IDictionary=di
 SCG         ::= "System.Collections.Generic"
 compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
 
+
+nunittest ::= "[Test] public void Test" identifier "(){ " cursor " }"
+
+
 scope "InCSharpTypeMember" {
   start    ::=  method | property | field | other
   method ::= (private=_ | protected=pr | "public") space ("static "=M | ""=m) (type | "void") space identifier "(" cursor ") { $END$ }"
   field ::= ("private"=f | "private readonly"=F) space type space identifier ";"
 
-  other ::= "Verifiers.Verify(" cursor ")"=verify
+  other ::= "Verifiers.Verify(" cursor ")"=verify  | ""=test nunittest
+
   // Test: pType_ -> public $type$ $END$
 
   // Methods:
@@ -54,7 +60,9 @@ scope "InCSharpTypeMember" {
 }
 
 scope "InCSharpTypeAndNamespace" {
-  start ::= class | interface | enum
+  start ::= class | interface | 
+    "[NUnit.Framework.TestFixture] internal class "=testf identifier "{ " ( nunittest | cursor) " }"
+
   class ::= ("internal class"=c | "public class"=pc | "private class"=_pc) space classBody
   interface ::= "internal interface"=i space classBody
   classBody ::= identifier "{" cursor "}"

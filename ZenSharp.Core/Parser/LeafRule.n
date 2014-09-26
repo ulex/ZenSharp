@@ -64,7 +64,13 @@ namespace Github.Ulex.ZenSharp.Core
 
         public Default : string {
           get{
-            Prop("default", "");
+            Prop("default", null);
+          }
+        }
+        
+        public Text : string {
+          get{
+            Prop("text", null);
           }
         }
         
@@ -86,10 +92,10 @@ namespace Github.Ulex.ZenSharp.Core
           def expandPattern = "$" + Name + "$";
           if (matchedCount != 0){
             def matchString = input.Substring(0, matchedCount);
-            LeafMatchResult(true, matchString, matchString, this);
+            LeafMatchResult(true, matchString, if(Text == null) {matchString} else {Text}, this);
           }
           else if (CanBeNull){
-            LeafMatchResult(true, "", expandPattern, this);
+              LeafMatchResult(true, "", if(Text == null) {expandPattern} else {Text}, this);
           }
           else
             LeafMatchResult(false);

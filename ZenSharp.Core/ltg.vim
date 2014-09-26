@@ -11,18 +11,18 @@ elseif exists("b:current_syntax")
 endif
 "}}}
 
-syn match bnfNonTerminal "<\a\w*>" contained
-syn region bnfProduction start="^\s*\a" end="::="me=e-3 contained
-syn region bnfComment start="^\s*//" end="$" contained
-syn match bnfOr "|\|{\|}\|=" contained
-syn match bnfSeperator "::=" contained
-syn match bnfComment "#.*$" contained
-syn match bnfQuoted #".*"# contains=bnfNonTerminal,bnfProduction,bnfSeperator,bnfLiteral,bnfTerminalRangeDelim,bnfTerminalRange
-syn match bnfQuoted #'.*'# contains=bnfNonTerminal,bnfProduction,bnfSeperator,bnfLiteral,bnfTerminalRangeDelim,bnfTerminalRange
-syn match bnfLiteral #"[ \w]*"# contained
-syn match bnfTerminal "^.*$" contains=bnfNonTerminal,bnfProduction,bnfSeperator,bnfOr,bnfComment,bnfLiteral,bnfTerminalRangeDelim,bnfTerminalRange,bnfQuoted
+syn match bnfNonTerminal "\a\w*"
+syn region bnfProduction start="^\s*\a" end="::="me=e-3
+syn region bnfComment start="^\s*//" end="$"
+syn region ltgSub start="<\s*" end="\>" contains=bnfString
+syn match bnfOr "|\|{\|}\|="
+syn match bnfSeperator "::="
+syn match bnfComment "#.*$"
+syn region bnfString  start=+"+ skip=+""+ end=+"+
+
+syn match bnfTerminal "\\w"
 syn keyword bnfScopeKw scope contained
-syn match bnfScope #scope[^{]*{# contains=bnfScopeKw,bnfOr
+syn match bnfScope #scope[^{]*{# contains=bnfScopeKw,bnfOr,bnfString
 
 hi link bnfNonTerminal	Type
 hi link bnfProduction 	Identifier
@@ -32,6 +32,7 @@ hi link bnfTerminal 	Constant
 hi link bnfComment 		Comment
 hi link bnfScopeKw Keyword
 hi link bnfTerminalRange bnfTerminal
-hi link bnfQuoted bnfTerminal
+hi link bnfString String
 hi link bnfLiteral 	 	String
+hi link ltgSub Conditional
 

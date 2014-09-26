@@ -45,7 +45,7 @@ namespace Github.Ulex.ZenSharp.Core
         leafShortCut   : LeafRule         = stridentifier s '=' s stridentifier;
         terminalString : LeafRule         = stringDecl;
         terminal       : LeafRule         = leafShortCut / substituion / terminalString;
-        substituion    : LeafRule         = "$" s (identifier) s (substituionPar s)* "$";
+        substituion    : LeafRule         = "<" s (identifier) s (substituionPar s)* ">";
         substituionPar : string * string  = identifier s "=" s stringDecl;
 
         nonterminal    : LeafRule         = identifier;
