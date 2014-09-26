@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ZenSharp</id>
-    <version>$version$</version>
+    <version>1.0.0.0</version>
     <title>ZenSharp auto completion plugin</title>
     <authors>Alexander Ulitin</authors>
     <description>description</description>

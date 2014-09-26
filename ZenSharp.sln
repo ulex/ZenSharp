@@ -11,10 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenSharp.Core.Tests", "ZenS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DAADCB1B-EC51-4030-A54B-C037312AC013}"
 	ProjectSection(SolutionItems) = preProject
+		build.bat = build.bat
+		buildNuPack.ps1 = buildNuPack.ps1
 		.nuget\packages.config = .nuget\packages.config
+		ZenSharp.nuspec = ZenSharp.nuspec
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenSharp.NuPackage", "ZenSharp.NuPackage.csproj", "{31E8D05B-6DE6-4853-AFE2-2451C414A38B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{7D63C907-EF8D-43B0-B94A-18A316C8D6C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +37,6 @@ Global
 		{1390A507-A540-4FCD-B2F5-5455D21F35F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1390A507-A540-4FCD-B2F5-5455D21F35F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1390A507-A540-4FCD-B2F5-5455D21F35F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31E8D05B-6DE6-4853-AFE2-2451C414A38B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31E8D05B-6DE6-4853-AFE2-2451C414A38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31E8D05B-6DE6-4853-AFE2-2451C414A38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31E8D05B-6DE6-4853-AFE2-2451C414A38B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
