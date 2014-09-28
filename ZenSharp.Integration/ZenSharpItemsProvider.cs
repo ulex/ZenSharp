@@ -52,9 +52,10 @@ namespace Github.Ulex.ZenSharp.Integration
                 {
                     UID = Guid.NewGuid()
                 };
-                var scopes = scopePoints.Select(sp => sp.GetType().Name);
+                var scopes = scopePoints.Select(sp => sp.GetType().Name).ToList();
+                Log.Debug("Current scopes: {0}", string.Join(",", scopes));
                 var iconId = iconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
-                collector.AddAtDefaultPlace(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes.ToList(), iconId));
+                collector.AddAtDefaultPlace(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
                 return true;
             }
             else
