@@ -56,6 +56,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSharpExtendedScopeProvider.cs" />
     <Compile Include="Extension\LeafSubstitution.cs" />
     <Compile Include="Extension\MatchResultExtension.cs" />
     <Compile Include="Option\ExceptionConverter.cs" />
