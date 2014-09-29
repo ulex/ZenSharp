@@ -15,6 +15,7 @@ namespace Github.Ulex.ZenSharp.Core
       {
         start : GenerateTree = generate+;
         generate: TreePart = sn (rules / scope / comment);
+        // Todo: comment to lexer parsing level
         comment          : TreePart = s "//" (!newLine [Any])* sn;
 
         newLineCharacter : void = '\n' / '\r' / '\u2028' / '\u2029';
@@ -40,7 +41,7 @@ namespace Github.Ulex.ZenSharp.Core
         expandRule     : LeafRule         = terminal / nonterminal / brackets;
         brackets       : LeafRule         = "(" s ruleBody s ")";
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
-        ruleBody       : list[ConcatRule] = concatRule (s vmark sn concatRule)*;
+        ruleBody       : list[ConcatRule] = concatRule (sn vmark sn concatRule)*;
         rule           : Rule             = identifier s describeMark s ruleBody;
         leafShortCut   : LeafRule         = stridentifier s '=' s stridentifier;
         terminalString : LeafRule         = stringDecl;

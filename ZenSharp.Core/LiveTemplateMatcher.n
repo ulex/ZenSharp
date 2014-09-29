@@ -53,7 +53,9 @@ namespace Github.Ulex.ZenSharp.Core
     {
       _log.Info("Trying to match [{0}] in scope {1}", prefix, scopename);
       def scope = _tree.GetScope(scopename);
-      def scopeRules = _tree.GlobalRules + scope.Rules;
+      
+      // scope rules can override global rules
+      def scopeRules = scope.Rules + _tree.GlobalRules;
 
       // circle reference fix
       mutable tryMatchRuleVar;

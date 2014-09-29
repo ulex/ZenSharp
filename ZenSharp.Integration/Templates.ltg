@@ -1,30 +1,30 @@
-﻿
+﻿// C# templates
 // Sample file
+
 space ::= " "
 
 // Resharper macros
 cursor ::= "$END$"
-
 identifier ::= <name default="$name$" macros = "complete()">
 // really bad working now
 // suggType ::= <type default="$type$" text="$type$" macros = "completeType()"> suggTypeFollower
 //suggTypeFollower ::= ""="_"
 
-
 // Auto properties
-property        ::= accessProperty space type space identifier "{ get; set; }" "$END$"
+property        ::= accessProperty space type space identifier propertyBody
+propertyBody    ::= "{ get;" lazyPrivateSpec " set; }"
 accessProperty  ::= "public"=p | private=_p | protected=P
-lazyPrivateSpec ::= "private "=_ | ""
+lazyPrivateSpec ::= ""="+" | "private "
 
 // Plain types
 arraySpec  ::= "[]"=s | ""
-type       ::= primType arraySpec | compType
+type       ::=  compType | primType arraySpec
 primType   ::= string=s | byte=b | double=d | int=i
 
 // Complex types
 genericArg  ::= "<" primType ">"
 scgTypes    ::= IList=l | IEnumerable="~"
-generic2Arg ::= "<" primType ">"
+generic2Arg ::= "<" primType ", " primType ">"
 scg2Types   ::= SortedList=sl | IDictionary=di
 SCG         ::= "System.Collections.Generic"
 compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
@@ -33,12 +33,12 @@ compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
 nunittest ::= "[Test] public void Test" identifier "(){ " cursor " }"
 
 
-scope "InCSharpTypeMember" {
+scope "InCSharpClass" {
   start    ::=  method | property | field | other
-  method ::= (private=_ | protected=pr | "public") space ("static "=M | ""=m) (type | "void") space identifier "(" cursor ") { $END$ }"
+  method ::= (private=_ | protected=pr | "public") space ("static "=M | ""=m) (type | "void") space identifier "(" cursor ") { " cursor " }"
   field ::= ("private"=f | "private readonly"=F) space type space identifier ";"
 
-  other ::= "Verifiers.Verify(" cursor ")"=verify  | ""=test nunittest
+  other ::=  ""=test nunittest
 
   // Test: pType_ -> public $type$ $END$
 
@@ -60,10 +60,22 @@ scope "InCSharpTypeMember" {
 }
 
 scope "InCSharpTypeAndNamespace" {
-  start ::= class | interface | 
-    "[NUnit.Framework.TestFixture] internal class "=testf identifier "{ " ( nunittest | cursor) " }"
+  start ::= class
+    | interface
+    | "[NUnit.Framework.TestFixture] internal class "=testf identifier "{ " ( nunittest | cursor) " }"
 
   class ::= ("internal class"=c | "public class"=pc | "private class"=_pc) space classBody
   interface ::= "internal interface"=i space classBody
   classBody ::= identifier "{" cursor "}"
+}
+
+scope "InCSharpInterface" {
+  // override global rule
+  accessProperty ::= ""=p
+  propertyBody ::= "{get; }" cursor
+  start ::= ""=foo
+    | property
+}
+
+scope "InCSharpStatement" {
 }

@@ -39,6 +39,8 @@ namespace Github.Ulex.ZenSharp.Integration
             InitializeComponent();
             Id = pageId;
             _zenWatcher = container.GetComponent<LtgConfigWatcher>();
+            // show exception info if any
+            OnOk();
         }
 
         private LtgConfigWatcher _zenWatcher;
