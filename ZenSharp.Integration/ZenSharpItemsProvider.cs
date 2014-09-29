@@ -41,7 +41,7 @@ namespace Github.Ulex.ZenSharp.Integration
             var ltgConfig = solution.GetComponent<LtgConfigWatcher>();
 
             var iconManager = solution.GetComponent<PsiIconManager>();
-            var provider = solution.GetComponent<CSharpScopeProvider>();
+            var provider = solution.GetComponent<CSharpExtendedScopeProvider>();
             var textControl = context.BasicContext.TextControl;
 
             var templateContext = new TemplateAcceptanceContext(solution, textControl.Document, textControl.Caret.Offset());
@@ -52,7 +52,7 @@ namespace Github.Ulex.ZenSharp.Integration
                 {
                     UID = Guid.NewGuid()
                 };
-                var scopes = scopePoints.Select(sp => sp.GetType().Name).ToList();
+                var scopes = scopePoints.ToList();
                 Log.Debug("Current scopes: {0}", string.Join(",", scopes));
                 var iconId = iconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
                 collector.AddAtDefaultPlace(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
