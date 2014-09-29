@@ -120,20 +120,34 @@ namespace Github.Ulex.ZenSharp.Integration
             var matchResult = matcher.Match(prefix, scopeName);
             if (matchResult.Success)
             {
-                var matchExpand = matchResult.Expand(prefix);
-                _template.Text = matchExpand;
-                Log.Debug("Template text: {0}", matchExpand);
-                _displayName = matchResult.ExpandDisplay(prefix);
-
-                FillMacros(prefix, matchResult);
-                Log.Info("Successfull match in scope [{1}]. Text: [{2}]. Return [{0}]", _matchingResult, scopeName, matchExpand);
+                FillText(prefix, matchResult);
+                Log.Info("Successfull match in scope [{1}]. Return [{0}]", _matchingResult, scopeName);
                 return _matchingResult;
+            }
+            else if(matchResult.Suggestion != null && string.IsNullOrEmpty(matchResult.Suggestion.Tail))
+            {
+                FillText(prefix, matchResult.Suggestion);
+                Log.Info("Suggestion match in scope [{1}] with result [{0}]", _matchingResult, scopeName);
+
+                // todo: review parameters
+                return new MatchingResult(prefix.Length, "z", 1);
             }
             else
             {
                 Log.Info("No completition found for {0} in scope {1}", prefix, scopeName);
                 return null;
             }
+        }
+
+        private string FillText(string prefix, LiveTemplateMatcher.MatchResult matchResult)
+        {
+            var matchExpand = matchResult.Expand(prefix);
+            _template.Text = matchExpand;
+            Log.Debug("Template text: {0}", matchExpand);
+            _displayName = matchResult.ExpandDisplay(prefix);
+
+            FillMacros(prefix, matchResult);
+            return matchExpand;
         }
 
         private void FillMacros(string prefix, LiveTemplateMatcher.MatchResult matchResult)

@@ -48,8 +48,27 @@ namespace Github.Ulex.ZenSharp.Core
         loop(Rules, prefix, []).Reverse();
       }
     }
+    
+    public class MatchResultWithSuggestion : MatchResult {
+      public Suggestion : MatchResult;
+      
+      public this(success : bool, tail : string, rules : list[LeafRule], suggestion : MatchResult)
+      {
+        base(success, tail, rules);
+        // choose best fit 
+        if (suggestion == null || tail.Length < suggestion.Tail.Length){
+          Suggestion = this;
+        } else{
+          Suggestion = suggestion;
+        }
+      }
+      
+      public this(mr : MatchResult, suggestion : MatchResult){
+        this(mr.Success, mr.Tail, mr.Rules, suggestion);
+      }
+    }
 
-    public Match (prefix : string, scopename : string) : MatchResult
+    public Match (prefix : string, scopename : string) : MatchResultWithSuggestion
     {
       _log.Info("Trying to match [{0}] in scope {1}", prefix, scopename);
       def scope = _tree.GetScope(scopename);
@@ -60,18 +79,18 @@ namespace Github.Ulex.ZenSharp.Core
       // circle reference fix
       mutable tryMatchRuleVar;
 
-      def tryMatchLeafRule(rule : LeafRule, acc : MatchResult) : MatchResult {
+      def tryMatchLeafRule(rule : LeafRule, acc){
         match (rule){
           | x is LeafRule.NonTerminal => tryMatchRuleVar(_tree.GetRule(x.Value, scopeRules).Rules, acc);
           | x is LeafRule.InsideRule => tryMatchRuleVar(x.Rules, acc);
           | lr => {
               def leafMatch = lr.Match(acc.Tail);
-              MatchResult(leafMatch.Success, leafMatch.Crop(acc.Tail), rule :: acc.Rules)
+              MatchResultWithSuggestion(leafMatch.Success, leafMatch.Crop(acc.Tail), rule :: acc.Rules, acc.Suggestion)
             }
         }
       }
 
-      def tryMatchConcatRule (rules : list[LeafRule], acc : MatchResult) : MatchResult {
+      def tryMatchConcatRule (rules : list[LeafRule], acc){
         match (rules) {
           | x :: xs => {
             def r = tryMatchLeafRule(x, acc);
@@ -84,7 +103,7 @@ namespace Github.Ulex.ZenSharp.Core
         }
       }
 
-      def tryMatchRule (rules : list[ConcatRule], acc : MatchResult) : MatchResult {
+      def tryMatchRule (rules : list[ConcatRule], acc){
         match (rules) {
           | x :: xs =>
             {
@@ -92,17 +111,19 @@ namespace Github.Ulex.ZenSharp.Core
               if (r.Success)
                 r
               else
-                tryMatchRule(xs, acc);
+                tryMatchRule(xs, MatchResultWithSuggestion(acc, r.Suggestion));
             };
-          | _ => MatchResult(false, acc.Tail, acc.Rules);
+          | _ => MatchResultWithSuggestion(false, acc.Tail, acc.Rules, acc.Suggestion);
         }
       }
       tryMatchRuleVar = tryMatchRule;
 
-      def result = tryMatchRule(_tree.GetStartRule(scope).Rules, MatchResult(true, prefix, []));
+      def iSuggest = MatchResult(false, prefix, []);
+      def result = tryMatchRule(_tree.GetStartRule(scope).Rules, MatchResultWithSuggestion(true, prefix, [], iSuggest));
       _log.Info("Match result: {0}, tail: {1}, rules: {2}", result.Success, result.Tail, result.Rules);
       
-      MatchResult(result.Success, result.Tail, result.Rules.Reverse());
+      def suggestion = MatchResult(result.Suggestion.Success, result.Suggestion.Tail, result.Suggestion.Rules.Reverse());
+      MatchResultWithSuggestion(result.Success, result.Tail, result.Rules.Reverse(), suggestion);
     }
   }
 }
