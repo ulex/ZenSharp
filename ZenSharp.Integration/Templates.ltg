@@ -1,25 +1,18 @@
 ﻿// C# templates
 // Sample file
-
 space ::= " "
+cursor ::= "$END$"
 
 // Resharper macros
-cursor ::= "$END$"
 identifier ::= <name default="$name$" macros = "complete()">
-// really bad working now
-// suggType ::= <type default="$type$" text="$type$" macros = "completeType()"> suggTypeFollower
-//suggTypeFollower ::= ""="_"
+identifier2 ::= <name2 default="$name2$" macros = "complete()">
+// really bad working now, sorry :(
+// suggType ::= <type default="$type$" text="$type$" macros = "completeType()">
 
-// Auto properties
-property        ::= accessProperty space type space identifier propertyBody
-propertyBody    ::= "{ get;" lazyPrivateSpec " set; }"
-accessProperty  ::= "public"=p | private=_p | protected=P
-lazyPrivateSpec ::= ""="+" | "private "
-
-// Plain types
-arraySpec  ::= "[]"=s | ""
-type       ::=  compType | primType arraySpec
-primType   ::= string=s | byte=b | double=d | int=i
+// Primive types
+maybeType  ::= type | "void"
+type       ::= compType | primType ("[]"=s | "")
+primType   ::= string=s | byte=by | bool=b | double=d | int=i | "System.Guid"=g
 
 // Complex types
 genericArg  ::= "<" primType ">"
@@ -27,55 +20,46 @@ scgTypes    ::= IList=l | IEnumerable="~"
 generic2Arg ::= "<" primType ", " primType ">"
 scg2Types   ::= SortedList=sl | IDictionary=di
 SCG         ::= "System.Collections.Generic"
-compType    ::= SCG "." scgTypes genericArg | SCG "." scg2Types generic2Arg
+compType    ::= SCG "." (scgTypes genericArg | scg2Types generic2Arg)
 
+methodArgs ::= "()"
 
-nunittest ::= "[Test] public void Test" identifier "(){ " cursor " }"
-
+access ::= internal=i | public=p | private=_ | protected=P
+// Auto properties
+property        ::= access (" abstract"=pa | " static"=P | ""=p) space type space identifier propertyBody
+propertyBody    ::= "{ get;" lazyPrivateSpec " set; }"
+lazyPrivateSpec ::= ""="+" | "private "
 
 scope "InCSharpClass" {
   start    ::=  method | property | field | other
-  method ::= (private=_ | protected=pr | "public") space ("static "=M | ""=m) (type | "void") space identifier "(" cursor ") { " cursor " }"
-  field ::= ("private"=f | "private readonly"=F) space type space identifier ";"
+  method ::= access space ("abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs " { " cursor " }"
+  field ::= access space type space identifier ("="="=" identifier2 ";" | ";")
 
   other ::=  ""=test nunittest
-
-  // Test: pType_ -> public $type$ $END$
-
-  // Methods:
-  // Test: m -> public void $name$($END$) {}
-  // Test: M -> public static void $name$($END$) {}
-  // Test: prmName -> protected void Name($END$) {}
-  // Test: _M -> private static void $name$($END$) {}
-  // Test: MiTest -> public static int Test($END$) {}
-  // Test: _M~i -> private static System.Collections.Generic.IEnumerable<int> $name$($END$) {}
-  // Test: _M~sEnu -> private static System.Collections.Generic.IEnumerable<string> Enu($END$) {}
-  // Test: MMain,itest -> public static void Main(int test) {}
-  // Test: MMain,oitest -> public static void Main(out int test) {}
-  // Test: MMain`i,i,itest -> public static void Main<int,int>(int test) {}
-  // Test: m~dHello,detest,sbi -> public IEnumerable<double> Hello(decimal test, StringBuiler i){}
-
-  // Auto-properties
-  // Test: pType,Name -> public $type$ Name { get; set; }
 }
 
 scope "InCSharpTypeAndNamespace" {
-  start ::= class
+  start ::=
+    | class
     | interface
-    | "[NUnit.Framework.TestFixture] internal class "=testf identifier "{ " ( nunittest | cursor) " }"
 
-  class ::= ("internal class"=c | "public class"=pc | "private class"=_pc) space classBody
-  interface ::= "internal interface"=i space classBody
+  class ::= access "class"=c space classBody
+  interface ::= access "interface"=i space classBody
   classBody ::= identifier "{" cursor "}"
 }
 
 scope "InCSharpInterface" {
-  // override global rule
-  accessProperty ::= ""=p
-  propertyBody ::= "{get; }" cursor
-  start ::= ""=foo
+  start ::=
     | property
+    | method
+
+  propertyBody ::= "{ get; }"
+  method ::= " "=m type space identifier methodArgs
 }
 
 scope "InCSharpStatement" {
 }
+
+// Extensions:
+// | "[NUnit.Framework.TestFixture] internal class "=testf identifier "{ " ( nunittest | cursor) " }"
+// identifier ::= <name default="$name$" macros = "complete()">
