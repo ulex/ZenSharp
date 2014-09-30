@@ -48,6 +48,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExpandTestGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetContextTests.cs" />
     <Compile Include="LeafRulesMatchTest.cs" />
     <Compile Include="LiveTemplateMatcherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

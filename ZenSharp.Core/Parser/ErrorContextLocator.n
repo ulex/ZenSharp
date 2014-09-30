@@ -1,0 +1,33 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Github.Ulex.ZenSharp.Core
+{
+  public module ErrorContextLocator
+  {
+    public GetContext(input : string, index : int) : string {
+      if (index >= input.Length){
+        "At the end of file";
+      } else {
+        def nextInd = input.IndexOf('\n', index);
+        def prevInd = input.LastIndexOf('\n', index);
+        def prev = if (prevInd == -1) 0 else prevInd;
+        def length = if (nextInd == -1) input.Length - prev else nextInd - prev;
+
+        def lineNu = input.Substring(0, index).Count(ch => ch == '\n') + 1;
+
+        string.Format("Error at line {0}, column {1}: cant parse {2}{3} ",
+                      lineNu,
+                      index - prev,
+                      Environment.NewLine,
+                      input.Substring(prev, length));
+      }
+    }
+  }
+}

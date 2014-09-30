@@ -5,6 +5,7 @@ using Nemerle.Utility;
 using Nemerle.Peg;
 
 using System;
+using System.Linq;
 using System.Console;
 using System.Collections.Generic;
 
@@ -42,7 +43,7 @@ namespace Github.Ulex.ZenSharp.Core
         brackets       : LeafRule         = "(" s ruleBody s ")";
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
         ruleBody       : list[ConcatRule] = concatRule (sn vmark sn concatRule)*;
-        rule           : Rule             = identifier s describeMark s ruleBody;
+        rule           : Rule             = identifier s describeMark sn vmark? s ruleBody;
         leafShortCut   : LeafRule         = stridentifier s '=' s stridentifier;
         terminalString : LeafRule         = stringDecl;
         terminal       : LeafRule         = leafShortCut / substituion / terminalString;
@@ -148,7 +149,7 @@ namespace Github.Ulex.ZenSharp.Core
       def (count, parseresult) = d.TryParse(input);
 
       assert(count == input.Length && parseresult != null, {
-        def context = input.Substring(0, count);
+        def context = ErrorContextLocator.GetContext(input, count + 1);
         $"Parsing error. Parsed part is <$context>";
       });
       

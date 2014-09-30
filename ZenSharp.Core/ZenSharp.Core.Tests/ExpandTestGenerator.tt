@@ -30,7 +30,7 @@ foreach (var file in ltgFiles) { #>
     public class <#= file.FileName #>Tests
     {
         #region Input of ltg
-        private string _content = <#= file.ContentString #>;
+        public string _content = <#= file.ContentString #>;
         #endregion Input of ltg
         private GenerateTree _tree;
         private LiveTemplateMatcher _ltm;

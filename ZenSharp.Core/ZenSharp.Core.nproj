@@ -83,6 +83,9 @@
     <Compile Include="Parser\ConcatRule.n">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Parser\ErrorContextLocator.n">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Parser\LeafRule.n">
       <SubType>Code</SubType>
     </Compile>
