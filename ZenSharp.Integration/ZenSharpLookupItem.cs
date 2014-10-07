@@ -93,26 +93,31 @@ namespace Github.Ulex.ZenSharp.Integration
                 return null;
             }
             var matcher = new LiveTemplateMatcher(_tree);
-            string scopeName = null;
-            foreach (var scope in _scopes)
-            {
-                scopeName = scopeName ?? (_tree.IsScopeExist(scope) ? scope : null);
-            }
-            Log.Debug("Scope name = {0}", scopeName);
+            var matchedScopes = _scopes.Where(s => _tree.IsScopeExist(s)).ToList();
+            Log.Debug("Matched scopes = {0}", string.Join(", ", matchedScopes));
 
-            if (scopeName == null)
+            if (matchedScopes.Count == 0)
             {
                 return null;
             }
-            try
+
+            foreach (var scope in matchedScopes)
             {
-                return GetMatchingResult(prefix, matcher, scopeName);
+                try
+                {
+                    var matchingResult = GetMatchingResult(prefix, matcher, scope);
+                    if (matchingResult != null)
+                    {
+                        return matchingResult;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Exception during match", e);
+                    return null;
+                }
             }
-            catch (Exception e)
-            {
-                Log.Error("Exception during match", e);
-                return null;
-            }
+            return null;
         }
 
         private MatchingResult GetMatchingResult(string prefix, LiveTemplateMatcher matcher, string scopeName)
@@ -142,11 +147,14 @@ namespace Github.Ulex.ZenSharp.Integration
         private string FillText(string prefix, LiveTemplateMatcher.MatchResult matchResult)
         {
             var matchExpand = matchResult.Expand(prefix);
-            _template.Text = matchExpand;
             Log.Debug("Template text: {0}", matchExpand);
-            _displayName = matchResult.ExpandDisplay(prefix);
+            if (!string.IsNullOrEmpty(matchExpand))
+            {
+                _template.Text = matchExpand;
+                _displayName = matchResult.ExpandDisplay(prefix);
 
-            FillMacros(prefix, matchResult);
+                FillMacros(prefix, matchResult);
+            }
             return matchExpand;
         }
 
