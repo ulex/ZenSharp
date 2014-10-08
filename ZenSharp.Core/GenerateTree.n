@@ -93,17 +93,22 @@ namespace Github.Ulex.ZenSharp.Core
        }
      }
 
-     public ExtendWithAnotherTree ( tree : GenerateTree, namePrefix : string ) : GenerateTree 
+     public ExtendWithAnotherTree(tree : GenerateTree, namePrefix : string) : GenerateTree 
      {
        def prefix = namePrefix + ":";
-       //def existedNames = HashSet(GlobalRules.Select(f => f.Name));
+       
        def patchLeafRule(leaf)
        {
-         null;
+         match (leaf){
+            | x is LeafRule.NonTerminal => LeafRule.NonTerminal(prefix + x.Value);
+            | x => x;
+         }
        }
+       
        def patchRule(rule) {
          rule.Patch(prefix + rule.Name, patchLeafRule);
        }
+       
        def patchScope(scope){
          TreePart.Scope(scope.Rules.Select(patchRule).NToList(), scope.Name);
        }
@@ -111,9 +116,7 @@ namespace Github.Ulex.ZenSharp.Core
        def newGlobalRules = tree.GlobalRules.Select(patchRule).NToList();
        def updatedScopes = tree.Scopes.Select(patchScope).NToList();
        
-       
-       
-       null;
+       GenerateTree(GlobalRules + newGlobalRules, Scopes + updatedScopes);
      }
   }
 }
