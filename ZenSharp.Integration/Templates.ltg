@@ -6,25 +6,25 @@ cursor ::= "$END$"
 // Resharper macros
 identifier ::= <name default="$name$" macros = "complete()">
 identifier2 ::= <name2 default="$name2$" macros = "complete()">
-// really bad working now, sorry :(
-// suggType ::= <type default="$type$" text="$type$" macros = "completeType()">
+
+suggType ::= <type short="t" expand="$type$" macros = "complete()">
 
 // Primive types
 maybeType  ::= type | "void"
-type       ::= compType | primType ("[]"=s | "")
+type       ::= compType | primType ("[]"=a | "") | suggType
 primType   ::= string=s | byte=by | bool=b | double=d | int=i | "System.Guid"=g
 
 // Complex types
-genericArg  ::= "<" primType ">"
+genericArg  ::= "<" type ">"
 scgTypes    ::= IList=l | IEnumerable="~"
-generic2Arg ::= "<" primType ", " primType ">"
+generic2Arg ::= "<" type ", " type ">"
 scg2Types   ::= SortedList=sl | IDictionary=di
 SCG         ::= "System.Collections.Generic"
 compType    ::= SCG "." (scgTypes genericArg | scg2Types generic2Arg)
 
 methodArgs ::= "()"
 
-access ::= internal=i | public=p | private=_ | protected=P
+access ::= (internal=i | public=p | private=_ | protected=P) space
 // Auto properties
 property        ::= access (" abstract"=pa | " static"=P | ""=p) space type space identifier propertyBody
 propertyBody    ::= "{ get;" lazyPrivateSpec " set; }"
@@ -32,8 +32,8 @@ lazyPrivateSpec ::= ""="+" | "private "
 
 scope "InCSharpClass" {
   start    ::=  method | property | field | other
-  method ::= access space ("abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs " { " cursor " }"
-  field ::= access space type space identifier ("="="=" identifier2 ";" | ";")
+  method ::= access ("abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs " { " cursor " }"
+  field ::= access type space identifier ("="="=" identifier2 ";" | ";")
 
   other ::=  ""=test nunittest
 }
