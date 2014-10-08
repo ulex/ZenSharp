@@ -6,6 +6,7 @@ using Github.Ulex.ZenSharp.Core;
 
 using JetBrains.Application;
 using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
 
 using NLog;
 
@@ -21,11 +22,10 @@ namespace Github.Ulex.ZenSharp.Integration
         private GenerateTree _tree;
 
         private readonly IContextBoundSettingsStore _boundSettings;
-        
+
         public LtgConfigWatcher(ISettingsStore settingsStore)
         {
             _boundSettings = settingsStore.BindToContextTransient(ContextRange.ApplicationWide);
-
             var path = ZenSettings.GetTreePath;
             try
             {
@@ -48,7 +48,7 @@ namespace Github.Ulex.ZenSharp.Integration
             }
 
             var directoryName = Path.GetDirectoryName(path);
-            Log.Info("Create file system wather on directory {0}", directoryName);
+            Log.Info("Create file system watcher on directory {0}", directoryName);
             _watcher = new FileSystemWatcher(directoryName, "*.ltg")
             {
                 EnableRaisingEvents = true,

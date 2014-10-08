@@ -67,13 +67,19 @@ namespace Github.Ulex.ZenSharp.Core
             Prop("default", null);
           }
         }
-        
-        public Text : string {
+
+        public Expand : string {
           get{
-            Prop("text", null);
+            Prop("expand", null);
           }
         }
-        
+
+        public Short : string {
+          get{
+            Prop("short", null);
+          }
+        }
+
         public CanBeNull : bool{
           get{
             !String.IsNullOrEmpty(Default);
@@ -88,19 +94,24 @@ namespace Github.Ulex.ZenSharp.Core
               loop(pos + 1);
           }
 
-          def matchedCount = loop(0);
-          def expandPattern = "$" + Name + "$";
-          if (matchedCount != 0){
-            def matchString = input.Substring(0, matchedCount);
-            LeafMatchResult(true, matchString, if(Text == null) {matchString} else {Text}, this);
+          if (Short != null && Expand != null){
+            def em = LeafRule.ExpandRule(Short,Expand).Match(input);
+            LeafMatchResult(em.Success, em.Short, em.Expand, this);
+          } 
+          else 
+          {
+            def matchedCount = loop(0);
+            if (matchedCount != 0){
+              def matchString = input.Substring(0, matchedCount);
+              LeafMatchResult(true, matchString, matchString, this);
+            }
+            else if (CanBeNull)
+              LeafMatchResult(true, "", Default, this);
+            else
+              LeafMatchResult(false);
           }
-          else if (CanBeNull){
-              LeafMatchResult(true, "", if(Text == null) {expandPattern} else {Text}, this);
-          }
-          else
-            LeafMatchResult(false);
         }
-        
+
         public override ToString() : string {
           def kvpFormat(kvp: string * string) { string.Format("{0}={1}", kvp[0], kvp[1]); }
           string.Format("Substitution<{0}:{1}>", Name, string.Join(", ", Params.Map(kvpFormat)));

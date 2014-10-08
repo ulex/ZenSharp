@@ -79,6 +79,8 @@ namespace Github.Ulex.ZenSharp.Integration
             }
         }
 
+        public bool CanShrink { get{return true;} }
+
         bool ILookupItem.AcceptIfOnlyMatched(LookupItemAcceptanceContext itemAcceptanceContext)
         {
             return true;
