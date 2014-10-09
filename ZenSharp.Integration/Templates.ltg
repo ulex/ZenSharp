@@ -26,16 +26,19 @@ methodArgs ::= "()"
 
 access ::= (internal=i | public=p | private=_ | protected=P) space
 // Auto properties
-property        ::= access (" abstract"=pa | " static"=P | ""=p) space type space identifier propertyBody
+property        ::= access ("abstract "=pa | "static "=P | ""=p) type space identifier propertyBody cursor
 propertyBody    ::= "{ get;" lazyPrivateSpec " set; }"
 lazyPrivateSpec ::= ""="+" | "private "
 
+method ::= access ("abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs methodBody
+methodBoy ::= " { " cursor " }"
+
 scope "InCSharpClass" {
   start    ::=  method | property | field | other
-  method ::= access ("abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs " { " cursor " }"
   field ::= access type space identifier ("="="=" identifier2 ";" | ";")
 
-  other ::=  ""=test nunittest
+  other ::=
+    | ""=test "[NUnit.Framework.TestAttribute] public void Test" identifier "(){" cursor "}"
 }
 
 scope "InCSharpTypeAndNamespace" {
@@ -43,18 +46,21 @@ scope "InCSharpTypeAndNamespace" {
     | class
     | interface
 
-  class ::= access "class"=c space classBody
+  // todo: '?' specifier
+  class ::= access ("sealed "=s | "") ("class"=c | "static class"=C) space  classBody
   interface ::= access "interface"=i space classBody
   classBody ::= identifier "{" cursor "}"
 }
 
 scope "InCSharpInterface" {
   start ::=
-    | property
+    | type space identifier propertyBody cursor
     | method
+    | property
 
   propertyBody ::= "{ get; }"
-  method ::= " "=m type space identifier methodArgs
+  access ::= ""
+  methodBody ::= ";"
 }
 
 scope "InCSharpStatement" {
