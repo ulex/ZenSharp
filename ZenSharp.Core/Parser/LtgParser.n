@@ -39,7 +39,8 @@ namespace Github.Ulex.ZenSharp.Core
         scope : TreePart = "scope" s stringDecl s '{' sn (rules / comment)* '}' sn;
 
         rules          : TreePart         = rule sn (rule sn)*;
-        expandRule     : LeafRule         = terminal / nonterminal / brackets;
+        expandRule     : LeafRule         = terminal / nonterminal / maybeBrackets /  brackets;
+        maybeBrackets  : LeafRule         = "(" s ruleBody s ")?";
         brackets       : LeafRule         = "(" s ruleBody s ")";
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
         ruleBody       : list[ConcatRule] = concatRule (sn vmark sn concatRule)*;
@@ -108,6 +109,12 @@ namespace Github.Ulex.ZenSharp.Core
     
     brackets(_ : NToken, ruleBody : list[ConcatRule], _ : NToken) : LeafRule{
       LeafRule.InsideRule(ruleBody); 
+    }
+    
+    maybeBrackets(_ : NToken, ruleBody : list[ConcatRule], _ : NToken) : LeafRule{
+      def parseablePart = ConcatRule([LeafRule.InsideRule(ruleBody)]);
+      def emptyAlternative =  ConcatRule([LeafRule.String(string.Empty)]);
+      LeafRule.InsideRule([parseablePart, emptyAlternative]); 
     }
     
     identifier (sequence : NToken) : string {
