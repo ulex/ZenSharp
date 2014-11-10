@@ -1,27 +1,33 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Windows.Annotations;
 
 using Github.Ulex.ZenSharp.Core;
 
 using JetBrains.Application;
 using JetBrains.Application.Settings;
 using JetBrains.DataFlow;
+using JetBrains.IDE;
+using JetBrains.ProjectModel;
+using JetBrains.TextControl;
+using JetBrains.TextControl.Coords;
+using JetBrains.Util;
 
 using NLog;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
-    [ShellComponent]
+    [SolutionComponent]
     internal sealed class LtgConfigWatcher : IDisposable
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        private readonly IContextBoundSettingsStore _boundSettings;
+
         private FileSystemWatcher _watcher;
 
         private GenerateTree _tree;
-
-        private readonly IContextBoundSettingsStore _boundSettings;
 
         public LtgConfigWatcher(ISettingsStore settingsStore)
         {
@@ -30,11 +36,29 @@ namespace Github.Ulex.ZenSharp.Integration
             try
             {
                 ReinitializeWatcher(path);
+                WriteDefaultTemplates(path);
                 Reload(path);
             }
             catch (Exception e)
             {
                 Log.Error(e);
+            }
+        }
+
+        private void WriteDefaultTemplates(string path)
+        {
+            if (!File.Exists(path))
+            {
+                using (var resStream = typeof(LtgConfigWatcher).Assembly.GetManifestResourceStream("Github.Ulex.ZenSharp.Integration.Templates.ltg"))
+                {
+                    if (resStream != null)
+                    {
+                        using (var fstream = File.OpenWrite(path))
+                        {
+                            resStream.CopyTo(fstream);
+                        }
+                    }
+                }
             }
         }
 
@@ -64,9 +88,10 @@ namespace Github.Ulex.ZenSharp.Integration
                 Log.Info("Reloading config from {0}", path);
                 Reload(path);
             }
-            catch (Exception e)
+            catch (ParsingException e)
             {
                 Log.Error("Error updating ltg config:");
+                MessageBox.ShowError(string.Format("Sorry for this stupid notification type, but some problem occupied when loading ZenSharp config: {0}", e.Message), "ZenSharp error");
             }
         }
 

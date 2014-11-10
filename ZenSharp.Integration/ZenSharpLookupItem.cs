@@ -164,20 +164,26 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             _template.Fields.Clear();
             var appliedRules = matchResult.ReMatchLeafs(prefix);
+            var appliedSubsNames = new List<string>();
             foreach (var subst in appliedRules.Where(ar => ar.This is LeafRule.Substitution))
             {
                 var rule = (LeafRule.Substitution)subst.This;
-                var macros = rule.Macros();
-                if (string.IsNullOrEmpty(macros))
+                if (!appliedSubsNames.Contains(rule.Name))
                 {
-                    macros = "complete()";
+                    appliedSubsNames.Add(rule.Name);
+
+                    var macros = rule.Macros();
+                    if (string.IsNullOrEmpty(macros))
+                    {
+                        macros = "complete()";
+                    }
+                    else
+                    {
+                        macros = macros.Replace("\\0", subst.Short);
+                    }
+                    Log.Debug("Place holder macro: {0}, {1}", macros, rule.Name);
+                    _template.Fields.Add(new TemplateField(rule.Name, macros, 0));
                 }
-                else
-                {
-                    macros = macros.Replace("\\0", subst.Short);
-                }
-                Log.Debug("Place holder macro: {0}, {1}", macros, rule.Name);
-                _template.Fields.Add(new TemplateField(rule.Name, macros, 0));
             }
         }
     }

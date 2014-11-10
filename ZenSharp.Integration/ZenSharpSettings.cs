@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 
 using JetBrains.Application.Settings;
@@ -32,9 +33,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             get
             {
-                var curpath = Assembly.GetExecutingAssembly().Location;
-                var assemblyDir = Path.GetDirectoryName(curpath);
-                return assemblyDir;
+                return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
         }
     }

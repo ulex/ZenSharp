@@ -10,6 +10,7 @@ using NLog;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
+    /*
     [ActionHandler("ZenSharp.UpdateMacroDefinition")]
     public class UpdateMacroDefinition : IActionHandler
     {
@@ -47,4 +48,5 @@ namespace Github.Ulex.ZenSharp.Integration
             }
         }
     }
+    */
 }

@@ -2,8 +2,8 @@
 <actions>
   <insert group-id="ReSharper" position="last">
     <action-group id="ZenSharp" text="ZenSharp" shared="true">
-      <action id="ZenSharp.EditConfig" text="Open ZenSharp config dir" shortcut="Control+Alt+7"  />
-      <action id="ZenSharp.UpdateMacroDefinition" text="Update existed macro.ltg"  />
+      <action id="ZenSharp.EditConfig" text="Edit ZenSharp config" shortcut="Control+Shift+Alt+7"  />
+      <!--<action id="ZenSharp.UpdateMacroDefinition" text="Update existed macro.ltg"  />-->
     </action-group>
   </insert>
 </actions>
