@@ -3,42 +3,57 @@
 space ::= " "
 cursor ::= "$END$"
 
-// Resharper macros
+// Resharper macros:
 identifier ::= <name default="$name$" macros = "complete()">
 identifier2 ::= <name2 default="$name2$" macros = "complete()">
 
+//
+// Types:
+//
 suggType ::= <type short="t" expand="$type$" macros = "complete()">
 
-// Primive types
+// Primive types:
 maybeType  ::= type | "void"
-type       ::= compType | primType ("[]"=a | "") | suggType
+type       ::= generic | primType ("[]"=a)? | suggType
 primType   ::= string=s | byte=by | bool=b | double=d | int=i | "System.Guid"=g
 
-// Complex types
-genericArg  ::= "<" type ">"
-scgTypes    ::= IList=l | IEnumerable="~"
-generic2Arg ::= "<" type ", " type ">"
-scg2Types   ::= SortedList=sl | IDictionary=di
-SCG         ::= "System.Collections.Generic"
-compType    ::= SCG "." (scgTypes genericArg | scg2Types generic2Arg)
+// Complex types:
+generic1 ::= (SCG "." ("IList"=l | "IEnumerable"="~")) "<" type ">"
+generic2 ::= (SCG "." ("SortedList"=sl | "IDictionary"=di)) "<" type ", " type ">"
+SCG      ::= "System.Collections.Generic"
+generic ::= generic1 | generic2
 
-methodArgs ::= "()"
 
 access ::= (internal=i | public=p | private=_ | protected=P) space
-// Auto properties
+
+// Auto properties:
 property        ::= access ("abstract "=pa | "static "=P | ""=p) type space identifier propertyBody cursor
 propertyBody    ::= "{ get;" lazyPrivateSpec " set; }"
 lazyPrivateSpec ::= ""="+" | "private "
 
+// Methods:
 method ::= access ("abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs methodBody
-methodBoy ::= " { " cursor " }"
+methodBody ::= " { " cursor " }"
+methodArgs ::= "()"
+
+// Consts:
+const ::= access "const "=c primType space identifier "= """ identifier """;"
+
+// Fields:
+field ::= access ("readonly "=r)? type space identifier ("="="=" identifier2 ";" | ";")
+
+// Classes:
+class ::= access ("sealed "=s)? ("class"=c | "static class"=C) space  classBody
+classBody ::= identifier "{" cursor "}"
 
 scope "InCSharpClass" {
-  start    ::=  method | property | field | other
-  field ::= access type space identifier ("="="=" identifier2 ";" | ";")
+  start    ::=  method | property | field | const | other
 
   other ::=
+    | ""=tsetup "[NUnit.Framework.SetUpAttribute] public void TestSetup(){" cursor "}"
+    | ""=tfsetup "[NUnit.Framework.TestFixtureSetUpAttribute] public void FixtureSetup(){" cursor "}"
     | ""=test "[NUnit.Framework.TestAttribute] public void Test" identifier "(){" cursor "}"
+    | class
 }
 
 scope "InCSharpTypeAndNamespace" {
@@ -46,10 +61,7 @@ scope "InCSharpTypeAndNamespace" {
     | class
     | interface
 
-  // todo: '?' specifier
-  class ::= access ("sealed "=s | "") ("class"=c | "static class"=C) space  classBody
   interface ::= access "interface"=i space classBody
-  classBody ::= identifier "{" cursor "}"
 }
 
 scope "InCSharpInterface" {
@@ -58,14 +70,12 @@ scope "InCSharpInterface" {
     | method
     | property
 
-  propertyBody ::= "{ get; }"
+  propertyBody ::= "{ get; }" | "{ get; set; }"="+"
   access ::= ""
   methodBody ::= ";"
 }
 
 scope "InCSharpStatement" {
+  start ::=
+    | "if ("=ifr identifier " == null) return;"
 }
-
-// Extensions:
-// | "[NUnit.Framework.TestFixture] internal class "=testf identifier "{ " ( nunittest | cursor) " }"
-// identifier ::= <name default="$name$" macros = "complete()">
