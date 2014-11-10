@@ -80,6 +80,9 @@
     <Compile Include="LiveTemplateMatcher.n">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Parser\ParsingException.n">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Parser\ConcatRule.n">
       <SubType>Code</SubType>
     </Compile>

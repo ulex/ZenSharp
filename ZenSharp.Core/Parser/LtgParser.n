@@ -39,7 +39,7 @@ namespace Github.Ulex.ZenSharp.Core
         scope : TreePart = "scope" s stringDecl s '{' sn (rules / comment)* '}' sn;
 
         rules          : TreePart         = rule sn (rule sn)*;
-        expandRule     : LeafRule         = terminal / nonterminal / maybeBrackets /  brackets;
+        expandRule     : LeafRule         = terminal / nonterminal / maybeNonterminal / maybeBrackets /  brackets;
         maybeBrackets  : LeafRule         = "(" s ruleBody s ")?";
         brackets       : LeafRule         = "(" s ruleBody s ")";
         concatRule     : ConcatRule       = expandRule (s expandRule)*;
@@ -51,7 +51,8 @@ namespace Github.Ulex.ZenSharp.Core
         substituion    : LeafRule         = "<" s (identifier) s (substituionPar s)* ">";
         substituionPar : string * string  = identifier s "=" s stringDecl;
 
-        nonterminal    : LeafRule         = identifier;
+        nonterminal      : LeafRule = identifier;
+        maybeNonterminal : LeafRule = identifier "?";
       }
   )]
   public class LtgParser
@@ -103,6 +104,10 @@ namespace Github.Ulex.ZenSharp.Core
       LeafRule.String(decl);
     }
     
+    maybeNonterminal (id : string, _ : NToken) : LeafRule{
+      LeafRule.InsideRule([ConcatRule([LeafRule.NonTerminal(id)]), ConcatRule([])])
+    }
+    
     nonterminal (id : string) : LeafRule{
       LeafRule.NonTerminal(id)
     }
@@ -113,7 +118,7 @@ namespace Github.Ulex.ZenSharp.Core
     
     maybeBrackets(_ : NToken, ruleBody : list[ConcatRule], _ : NToken) : LeafRule{
       def parseablePart = ConcatRule([LeafRule.InsideRule(ruleBody)]);
-      def emptyAlternative =  ConcatRule([LeafRule.String(string.Empty)]);
+      def emptyAlternative =  ConcatRule([]);
       LeafRule.InsideRule([parseablePart, emptyAlternative]); 
     }
     
@@ -155,12 +160,15 @@ namespace Github.Ulex.ZenSharp.Core
       def d = LtgParser();
       def (count, parseresult) = d.TryParse(input);
 
-      assert(count == input.Length && parseresult != null, {
+      if(count == input.Length && parseresult != null)
+      {
+         parseresult;
+      }
+      else
+      {
         def context = ErrorContextLocator.GetContext(input, count + 1);
-        $"Parsing error. Parsed part is <$context>";
-      });
-      
-      parseresult;
+        throw ParsingException($"Parsing error. Parsed part is <$context>", input, count);
+      }
     }
   }
 }

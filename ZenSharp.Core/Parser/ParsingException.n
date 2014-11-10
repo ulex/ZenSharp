@@ -1,0 +1,23 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Github.Ulex.ZenSharp.Core
+{
+  public class ParsingException : Exception
+  {
+    public Input : string { get; set; };
+    public ParsedCount: int { get; set; };
+    
+    public this(message : string, input : string, parsedCount : int){
+      base(message);
+      Input = input;
+      ParsedCount = parsedCount;
+    }
+  }
+}
