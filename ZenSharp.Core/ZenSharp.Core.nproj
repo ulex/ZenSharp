@@ -125,6 +125,10 @@
     <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Nlog.dll.deploy.nlog">
+      <SubType>Content</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Nlog.dll.nlog">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

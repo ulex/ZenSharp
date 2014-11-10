@@ -1,0 +1,11 @@
+﻿<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <targets>
+      <target name="f1" 
+              xsi:type="File" 
+              fileName="${nlogdir}/logs/logfile.txt" 
+              layout="${longdate} | ${level:uppercase=true:padding=-5} | ${message}${exception:format=tostring}"/>
+    </targets>
+    <rules>
+      <logger name="*" minlevel="Error" writeTo="f1" />
+    </rules>
+</nlog>

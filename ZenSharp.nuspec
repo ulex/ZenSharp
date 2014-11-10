@@ -16,12 +16,12 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\NLog.dll" target="ReSharper\v8.2\plugins"/>
-    <file src="bin\Release\Nemerle.dll" target="ReSharper\v8.2\plugins"/>
-    <file src="bin\Release\Nemerle.Peg.dll" target="ReSharper\v8.2\plugins"/>
-    <file src="bin\Release\ZenSharp.Core.dll" target="ReSharper\v8.2\plugins"/>
-    <file src="bin\Release\ZenSharp.Integration.dll" target="ReSharper\v8.2\plugins"/>
-    <file src="bin\Release\Nlog.dll.nlog" target="ReSharper\v8.2\plugins"/>
-    <file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\v8.2\plugins"/>
+    <file src="bin\Release\NLog.dll" target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\Nemerle.dll" target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\Nemerle.Peg.dll" target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\ZenSharp.Core.dll" target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\ZenSharp.Integration.dll" target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\Nlog.dll.deploy.nlog" target="ReSharper\v8.2\plugins\Nlog.dll.nlog"/>
+    <file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\v8.2\plugins\"/>
   </files>
 </package>

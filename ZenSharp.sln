@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{7D63C907
 		build.bat = build.bat
 		buildNuPack.ps1 = buildNuPack.ps1
 		.nuget\packages.config = .nuget\packages.config
+		ZenSharp.nuspec = ZenSharp.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenSharp.Integration.Tests", "ZenSharp.Integration\ZenSharp.Integration.Tests\ZenSharp.Integration.Tests.csproj", "{3B0B25FB-2E5E-4491-8038-8EE96FEE237D}"
@@ -40,11 +41,9 @@ Global
 		{1390A507-A540-4FCD-B2F5-5455D21F35F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1390A507-A540-4FCD-B2F5-5455D21F35F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1390A507-A540-4FCD-B2F5-5455D21F35F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1390A507-A540-4FCD-B2F5-5455D21F35F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B0B25FB-2E5E-4491-8038-8EE96FEE237D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B0B25FB-2E5E-4491-8038-8EE96FEE237D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B0B25FB-2E5E-4491-8038-8EE96FEE237D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B0B25FB-2E5E-4491-8038-8EE96FEE237D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
