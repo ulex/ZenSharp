@@ -5,7 +5,11 @@
     <version>1.0.0.0</version>
     <title>ZenSharp auto completion plugin</title>
     <authors>Alexander Ulitin</authors>
-    <description>description</description>
+    <description>
+      A shortcuts language for defining ReSharper live template items. You can specify your own live template scheme using flexible language. 
+Free and open source. More information on github.
+Support for 9.0 EAP will be available soon.
+    </description>
     <releaseNotes>initial release</releaseNotes>
     <copyright>Alexander Ulitin</copyright>
     <tags>livetemplates code completion ltg</tags>
@@ -16,12 +20,12 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\NLog.dll" target="ReSharper\v8.2\plugins\"/>
-    <file src="bin\Release\Nemerle.dll" target="ReSharper\v8.2\plugins\"/>
-    <file src="bin\Release\Nemerle.Peg.dll" target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\NLog.dll" target="ReSharper\vAny\plugins\"/>
+    <file src="bin\Release\Nemerle.dll" target="ReSharper\vAny\plugins\"/>
+    <file src="bin\Release\Nemerle.Peg.dll" target="ReSharper\vAny\plugins\"/>
     <file src="bin\Release\ZenSharp.Core.dll" target="ReSharper\v8.2\plugins\"/>
     <file src="bin\Release\ZenSharp.Integration.dll" target="ReSharper\v8.2\plugins\"/>
-    <file src="bin\Release\Nlog.dll.deploy.nlog" target="ReSharper\v8.2\plugins\Nlog.dll.nlog"/>
-    <file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\Nlog.dll.deploy.nlog" target="ReSharper\vAny\plugins\Nlog.dll.nlog"/>
+    <!--<file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\vAny\plugins\"/>-->
   </files>
 </package>
