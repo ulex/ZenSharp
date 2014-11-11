@@ -10,7 +10,7 @@ $xml.OuterXml > out.nuspec
 
 nuget.exe pack out.nuspec
 
-Move-Item *.nupkg .\bin\Release
+Move-Item *.nupkg .\bin\Release -Force
 ri .\out.nuspec
 
 popd

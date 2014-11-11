@@ -40,7 +40,8 @@ function Update-SourceVersion
 
      get-content $o.FullName |
         %{$_ -replace 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)', $NewVersion } |
-        %{$_ -replace 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)', $NewFileVersion }  > $TmpFile
+        %{$_ -replace 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)', $NewFileVersion }  |
+        Set-Content -Encoding UTF8 $TmpFile
 
      move-item $TmpFile $o.FullName -force
   }
@@ -56,17 +57,4 @@ function Update-AllAssemblyInfoFiles ( $version )
 }
 
 
-# validate arguments
-$r= [System.Text.RegularExpressions.Regex]::Match($args[0], "^[0-9]+(\.[0-9]+){1,3}$");
-
-if ($r.Success)
-{
-  Update-AllAssemblyInfoFiles $args[0];
-}
-else
-{
-  echo " ";
-  echo "Bad Input!"
-  echo " ";
-  Usage ;
-}
+Update-AllAssemblyInfoFiles $args[0];
