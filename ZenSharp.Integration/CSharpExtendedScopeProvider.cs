@@ -4,19 +4,25 @@ using System.Collections.Generic;
 using JetBrains.Application;
 using JetBrains.DocumentModel;
 using JetBrains.ProjectModel;
+using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Context;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.LiveTemplates;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Scope;
-using JetBrains.ReSharper.LiveTemplates.CSharp.Context;
-using JetBrains.ReSharper.LiveTemplates.CSharp.Scope;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Impl.Tree;
 using JetBrains.ReSharper.Psi.CSharp.Parsing;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Files;
-using JetBrains.ReSharper.Psi.Services.CSharp;
 using JetBrains.ReSharper.Psi.Tree;
+#if RESHARPER_82
+using JetBrains.ReSharper.Psi.Services.CSharp;
+#endif 
+
+#if RESHARPER_90
+using JetBrains.ReSharper.Resources.Shell;
+using IDocCommentBlockNode = JetBrains.ReSharper.Psi.Tree.IDocCommentBlock;
+#endif
 
 namespace Github.Ulex.ZenSharp.Integration
 {

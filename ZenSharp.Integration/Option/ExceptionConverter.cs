@@ -2,8 +2,6 @@
 using System.Globalization;
 using System.Windows.Data;
 
-using JetBrains.ReSharper.Psi.BuildScripts.Icons;
-
 namespace Github.Ulex.ZenSharp.Integration
 {
     internal sealed class ExceptionConverter : IValueConverter

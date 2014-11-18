@@ -20,12 +20,23 @@ Support for 9.0 EAP will be available soon.
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\NLog.dll" target="ReSharper\v8.2\plugins\"/>
-    <file src="bin\Release\Nemerle.dll" target="ReSharper\v8.2\plugins\"/>
-    <file src="bin\Release\Nemerle.Peg.dll" target="ReSharper\v8.2\plugins\"/>
-    <file src="bin\Release\ZenSharp.Core.dll" target="ReSharper\v8.2\plugins\"/>
-    <file src="bin\Release\ZenSharp.Integration.dll" target="ReSharper\v8.2\plugins\"/>
     <!--<file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\vAny\plugins\"/>-->
-    <file src="bin\Release\Nlog.dll.deploy.nlog" target="ReSharper\v8.2\plugins\Nlog.dll.nlog"/>
+
+    <!-- 8.2 -->
+    <file src="bin\Release\NLog.dll"                    target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\Nemerle.dll"                 target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\Nemerle.Peg.dll"             target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\ZenSharp.Core.dll"           target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\ZenSharp.Integration.dll"    target="ReSharper\v8.2\plugins\"/>
+    <file src="bin\Release\Nlog.dll.deploy.nlog"        target="ReSharper\v8.2\plugins\Nlog.dll.nlog"/>
+
+    <!-- 9.0 -->
+    <file src="bin\Release\NLog.dll"                    target="ReSharper\v9.0\plugins\"/>
+    <file src="bin\Release\Nemerle.dll"                 target="ReSharper\v9.0\plugins\"/>
+    <file src="bin\Release\Nemerle.Peg.dll"             target="ReSharper\v9.0\plugins\"/>
+    <file src="bin\Release\ZenSharp.Core.dll"           target="ReSharper\v9.0\plugins\"/>
+    <file src="bin\Release\ZenSharp.Integration_90.dll" target="ReSharper\v9.0\plugins\ZenSharp.Integration.dll"/>
+    <file src="bin\Release\Nlog.dll.deploy.nlog"        target="ReSharper\v9.0\plugins\Nlog.dll.nlog"/>
+
   </files>
 </package>

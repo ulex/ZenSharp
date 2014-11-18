@@ -1,23 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Context;
-using JetBrains.ReSharper.Feature.Services.LiveTemplates.Scope;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Settings;
-using JetBrains.ReSharper.Feature.Services.Lookup;
 using JetBrains.ReSharper.Feature.Services.Resources;
-using JetBrains.ReSharper.LiveTemplates.CSharp.Scope;
-using JetBrains.ReSharper.LiveTemplates.Templates;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.TextControl;
 
 using NLog;
+#if RESHARPER_82
+using JetBrains.ReSharper.Feature.Services.Lookup;
+using JetBrains.ReSharper.LiveTemplates.Templates;
+#endif
+
+#if RESHARPER_90
+using JetBrains.Util;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
+#endif
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -44,7 +48,13 @@ namespace Github.Ulex.ZenSharp.Integration
             var provider = solution.GetComponent<CSharpExtendedScopeProvider>();
             var textControl = context.BasicContext.TextControl;
 
-            var templateContext = new TemplateAcceptanceContext(solution, textControl.Document, textControl.Caret.Offset());
+            var offset = textControl.Caret.Offset();
+#if RESHARPER_90
+            var templateContext = new TemplateAcceptanceContext(solution, textControl.Document, offset, new TextRange(offset));
+#else
+            var templateContext = new TemplateAcceptanceContext(solution, textControl.Document, offset);
+#endif
+
             var scopePoints = provider.ProvideScopePoints(templateContext);
             if (ltgConfig.Tree != null)
             {

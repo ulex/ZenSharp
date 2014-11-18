@@ -1,21 +1,24 @@
-﻿using System.Configuration;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-
-using JetBrains.ActionManagement;
+﻿using JetBrains.ActionManagement;
 using JetBrains.Application;
 using JetBrains.Application.DataContext;
 using JetBrains.Application.Settings;
 using JetBrains.IDE;
-using JetBrains.ProjectModel;
 using JetBrains.Util;
 
 using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
+#if RESHARPER_90
+using JetBrains.ReSharper.Resources.Shell;
+using JetBrains.UI.ActionsRevised;using IActionHandler = JetBrains.UI.ActionsRevised.IAction;
+#endif
+
 namespace Github.Ulex.ZenSharp.Integration
 {
+#if RESHARPER_90
+    [Action("ZenSharp.EditConfig")]
+#else
     [ActionHandler("ZenSharp.EditConfig")]
+#endif
     public class EditConfigActionHandler : IActionHandler
     {
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)

@@ -1,22 +1,28 @@
+
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Formatters;
 
 using Github.Ulex.ZenSharp.Core;
 using Github.Ulex.ZenSharp.Integration.Extension;
 
-using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Util;
 using JetBrains.ReSharper.Feature.Services.Lookup;
-using JetBrains.ReSharper.LiveTemplates;
-using JetBrains.ReSharper.LiveTemplates.Templates;
 using JetBrains.TextControl;
 using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
-using JetBrains.Util;
 
 using NLog;
+#if RESHARPER_82
+using JetBrains.ReSharper.LiveTemplates;
+using JetBrains.ReSharper.LiveTemplates.Templates;
+#endif
+#if RESHARPER_90
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
+#endif
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -86,8 +92,14 @@ namespace Github.Ulex.ZenSharp.Integration
             return true;
         }
 
+#if RESHARPER_90
+        MatchingResult ILookupItem.Match(PrefixMatcher prefixMatcher, ITextControl textControl)
+        {
+            string prefix = prefixMatcher.Prefix;
+#else
         MatchingResult ILookupItem.Match(string prefix, ITextControl textControl)
         {
+#endif
             Log.Info("Match prefix = {0}", prefix);
             if (_tree == null || string.IsNullOrEmpty(prefix))
             {

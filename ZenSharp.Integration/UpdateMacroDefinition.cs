@@ -4,7 +4,6 @@ using JetBrains.ActionManagement;
 using JetBrains.Application;
 using JetBrains.Application.DataContext;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Macros;
-using JetBrains.ReSharper.LiveTemplates;
 
 using NLog;
 
