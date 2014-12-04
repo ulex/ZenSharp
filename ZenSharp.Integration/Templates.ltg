@@ -27,7 +27,7 @@ generic ::= generic1 | generic2
 access ::= (internal=i | public=p | private=_ | protected=P) space
 
 // Auto properties:
-property        ::= access ("abstract "=pa | "static "=P | ""=p) type space identifier propertyBody cursor
+property        ::= access ("abstract "=pa | "static "=P | "virtual "=pv | ""=p) type space identifier propertyBody cursor
 propertyBody    ::= "{ get;" lazyPrivateSpec " set; }"
 lazyPrivateSpec ::= ""="+" | "private "
 
