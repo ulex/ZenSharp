@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ReSharperSdk Condition="'$(ReSharperSdk)'==''">$(LOCALAPPDATA)\JetBrains\Installations\ReSharperPlatformVs12</ReSharperSdk>
-    <ReSharperSdkBinaries Condition="'$(ReSharperSdkBinaries)'==''">$(ReSharperSdk)</ReSharperSdkBinaries>
-    <ReSharperSdkTools Condition="'$(ReSharperSdkTools)'==''">$(ReSharperSdk)\Tools</ReSharperSdkTools>
-  </PropertyGroup>
-</Project>

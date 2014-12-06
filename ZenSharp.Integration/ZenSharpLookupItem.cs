@@ -1,4 +1,3 @@
-
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 
 using System;
@@ -20,6 +19,7 @@ using JetBrains.ReSharper.LiveTemplates;
 using JetBrains.ReSharper.LiveTemplates.Templates;
 #endif
 #if RESHARPER_90
+using PrefixMatcher = JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems.PrefixMatcher;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
 #endif

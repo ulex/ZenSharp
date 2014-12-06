@@ -11,14 +11,19 @@ using JetBrains.Application.Components;
 using JetBrains.Application.DataContext;
 using JetBrains.Application.Settings;
 using JetBrains.DataFlow;
-using JetBrains.UI.Application.PluginSupport;
+
 using JetBrains.UI.CrossFramework;
 using JetBrains.UI.Options;
+using JetBrains.UI.Options.OptionPages;
 using JetBrains.UI.Resources;
 
 using Microsoft.Win32;
 
 using NLog;
+
+#if RESHARPER_82
+using JetBrains.UI.Application.PluginSupport;
+#endif
 
 using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
@@ -27,7 +32,7 @@ namespace Github.Ulex.ZenSharp.Integration
     /// <summary>
     /// Interaction logic for ZenSettingsPage.xaml
     /// </summary>
-    [OptionsPage(pageId, "ZenSharp", typeof(OptionsThemedIcons.Plugins), ParentId = PluginsPage.Pid)]
+    [OptionsPage(pageId, "ZenSharp", typeof(OptionsThemedIcons.Plugins), ParentId = EnvironmentPage.Pid)]
     public partial class ZenSettingsPage : IOptionsPage
     {
         private const string pageId = "ZenSettingsPageId";

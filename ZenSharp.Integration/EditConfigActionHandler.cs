@@ -8,18 +8,31 @@ using JetBrains.Util;
 using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
 #if RESHARPER_90
+using JetBrains.UI.MenuGroups;
 using JetBrains.ReSharper.Resources.Shell;
-using JetBrains.UI.ActionsRevised;using IActionHandler = JetBrains.UI.ActionsRevised.IAction;
+using JetBrains.UI.ActionsRevised;
+using JetBrains.ReSharper.Feature.Services.Menu;
 #endif
+
 
 namespace Github.Ulex.ZenSharp.Integration
 {
 #if RESHARPER_90
-    [Action("ZenSharp.EditConfig")]
+    [ActionGroup(ActionGroupInsertStyles.Embedded)]
+    public class ZenSharpGroup : IAction, IInsertLast<VsMainMenuGroup>
+    {
+        public ZenSharpGroup(Separator sep, EditConfigActionHandler handler)
+        {
+        }
+    }
+
+    [Action("Edit ZenSharp templates", Id = 11122233)]
+    public class EditConfigActionHandler : IExecutableAction
 #else
+
     [ActionHandler("ZenSharp.EditConfig")]
-#endif
     public class EditConfigActionHandler : IActionHandler
+#endif
     {
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
         {

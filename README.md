@@ -12,8 +12,8 @@ How it's work:
 
 How do I get it?
 ---
-You can install directly into ReSharper 8.2 via the Extension Manager in the
-ReSharper menu. Version for 9.0 EAP will be available soon.
+You can install directly into ReSharper 8.2 or 9.0 via the Extension Manager in the
+ReSharper menu.
 
 Rules
 ---

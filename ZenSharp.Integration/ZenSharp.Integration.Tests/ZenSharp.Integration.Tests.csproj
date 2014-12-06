@@ -49,6 +49,7 @@
     <Compile Include="CSharpExtendedScopeProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetupFixture.cs" />
+    <Compile Include="ZoneMarker.cs" />
     <Content Include="test\data\CSharpExtendedScopeProviderTest\InterfaceRoot.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
