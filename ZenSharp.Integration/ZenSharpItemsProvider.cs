@@ -13,11 +13,13 @@ using JetBrains.TextControl;
 
 using NLog;
 #if RESHARPER_82
+using JetBrains.Application;
 using JetBrains.ReSharper.Feature.Services.Lookup;
 using JetBrains.ReSharper.LiveTemplates.Templates;
 #endif
 
 #if RESHARPER_90
+using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Util;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
@@ -42,7 +44,7 @@ namespace Github.Ulex.ZenSharp.Integration
             var solution = context.PsiModule.GetSolution();
             if (solution == null) return false;
 
-            var ltgConfig = solution.GetComponent<LtgConfigWatcher>();
+            var ltgConfig = Shell.Instance.GetComponent<LtgConfigWatcher>();
 
             var iconManager = solution.GetComponent<PsiIconManager>();
             var provider = solution.GetComponent<CSharpExtendedScopeProvider>();

@@ -48,7 +48,7 @@ namespace Github.Ulex.ZenSharp.Integration
 
             var solution = context.GetData(DataConstants.SOLUTION);
             EditorManager.GetInstance(solution)
-                .OpenFile(FileSystemPath.CreateByCanonicalPath(settings.GetTreePath), true, TabOptions.Default);
+                .OpenFile(FileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename)), true, TabOptions.Default);
         }
     }
 }

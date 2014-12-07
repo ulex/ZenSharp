@@ -18,9 +18,12 @@ using NLog;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
-    [SolutionComponent]
+    [ShellComponent]
     internal sealed class LtgConfigWatcher : IDisposable
     {
+        /// <summary>
+        /// Todo: user R# logger
+        /// </summary>
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         private readonly IContextBoundSettingsStore _boundSettings;
@@ -32,7 +35,12 @@ namespace Github.Ulex.ZenSharp.Integration
         public LtgConfigWatcher(ISettingsStore settingsStore)
         {
             _boundSettings = settingsStore.BindToContextTransient(ContextRange.ApplicationWide);
-            var path = ZenSettings.GetTreePath;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            var path = ZenSharpSettings.GetTreePath(ZenSettings.TreeFilename);
             try
             {
                 ReinitializeWatcher(path);
@@ -49,6 +57,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             if (!File.Exists(path))
             {
+                Log.Info("Saving default templates to {0}", path);
                 using (var resStream = typeof(LtgConfigWatcher).Assembly.GetManifestResourceStream("Github.Ulex.ZenSharp.Integration.Templates.ltg"))
                 {
                     if (resStream != null)

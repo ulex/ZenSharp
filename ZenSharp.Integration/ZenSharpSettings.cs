@@ -1,4 +1,6 @@
-﻿using System;
+﻿using JetBrains.Util;
+
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -18,26 +20,27 @@ namespace Github.Ulex.ZenSharp.Integration
         [SettingsEntry("Templates.ltg", "Path to ltg file")]
         public string TreeFilename { get; set; }
 
-        public string GetTreePath
+        public static string GetTreePath(string treeFilename)
         {
-            get
+            if (treeFilename.IsNullOrEmpty())
             {
-                var path = TreeFilename;
-                if (Path.IsPathRooted(path))
-                {
-                    return path;
-                }
-                else
-                {
-                    return Path.Combine(DefaultDir, path);
-                }
+                return null;
+            }
+            if (!string.IsNullOrEmpty(treeFilename) && Path.IsPathRooted(treeFilename))
+            {
+                return treeFilename;
+            }
+            else
+            {
+                return Path.Combine(DefaultDir, treeFilename);
             }
         }
 
-        public static string DefaultDir
+        private static string DefaultDir
         {
             get
             {
+                // todo: store ltg iside ReSharper config
                 return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
         }

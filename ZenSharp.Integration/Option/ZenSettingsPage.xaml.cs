@@ -11,7 +11,6 @@ using JetBrains.Application.Components;
 using JetBrains.Application.DataContext;
 using JetBrains.Application.Settings;
 using JetBrains.DataFlow;
-
 using JetBrains.UI.CrossFramework;
 using JetBrains.UI.Options;
 using JetBrains.UI.Options.OptionPages;
@@ -23,6 +22,9 @@ using NLog;
 
 #if RESHARPER_82
 using JetBrains.UI.Application.PluginSupport;
+#endif
+#if RESHARPER_90
+using JetBrains.ReSharper.Resources.Shell;
 #endif
 
 using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
@@ -43,7 +45,7 @@ namespace Github.Ulex.ZenSharp.Integration
             settings.SetBinding(lifetime, (ZenSharpSettings s) => s.TreeFilename, this, PathProperty);
             InitializeComponent();
             Id = pageId;
-            _zenWatcher = container.GetComponent<LtgConfigWatcher>();
+            _zenWatcher = Shell.Instance.GetComponent<LtgConfigWatcher>();
             // show exception info if any
             OnOk();
         }
@@ -85,8 +87,9 @@ namespace Github.Ulex.ZenSharp.Integration
             try
             {
                 // todo: use settings notification options
-                _zenWatcher.Reload(Path);
-                _zenWatcher.ReinitializeWatcher(Path);
+                var fullPath = ZenSharpSettings.GetTreePath(Path);
+                _zenWatcher.Reload(fullPath);
+                _zenWatcher.ReinitializeWatcher(fullPath);
             }
             catch(Exception exception)
             {
