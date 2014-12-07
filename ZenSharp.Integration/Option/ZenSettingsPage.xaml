@@ -18,7 +18,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0">Path to ZenSharp configuration file:</Label>
+        <Label Grid.Row="0">Path to ZenSharp configuration file: (by default in MyDocuments folder)</Label>
         <DockPanel Grid.Row="1">
             <Button Margin="5" DockPanel.Dock="Right" Click="ButtonBase_OnClick">...</Button>
             <TextBox Margin="5" Text="{Binding Path}"/>

@@ -85,7 +85,9 @@ namespace Github.Ulex.ZenSharp.Integration
             _watcher = new FileSystemWatcher(directoryName, "*.ltg")
             {
                 EnableRaisingEvents = true,
-                NotifyFilter = NotifyFilters.LastWrite
+
+                // visual studio 2013 save file to temporary and rename it
+                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime
             };
             _watcher.Changed += (sender, args) => SafeReload(path);
         }
@@ -97,7 +99,7 @@ namespace Github.Ulex.ZenSharp.Integration
                 Log.Info("Reloading config from {0}", path);
                 Reload(path);
             }
-            catch (ParsingException e)
+            catch (Exception e)
             {
                 Log.Error("Error updating ltg config:");
                 MessageBox.ShowError(string.Format("Sorry for this stupid notification type, but some problem occupied when loading ZenSharp config: {0}", e.Message), "ZenSharp error");
