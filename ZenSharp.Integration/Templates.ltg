@@ -28,8 +28,8 @@ access ::= (internal=i | public=p | private=_ | protected=P) space
 
 // Auto properties:
 property        ::= access ("abstract "=pa | "static "=P | "virtual "=pv | ""=p) type space identifier propertyBody cursor
-propertyBody    ::= "{ get;" lazyPrivateSpec " set; }"
-lazyPrivateSpec ::= "private "="+p" | "protected "="+P" | ""
+propertyBody    ::= "{ get;" propertySetAccessor " set; }"
+propertySetAccessor ::= "protected "="+p" | ""="+" | "private "
 
 // Methods:
 method ::= access ("abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs methodBody
