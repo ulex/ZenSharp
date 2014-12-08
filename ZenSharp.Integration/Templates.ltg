@@ -44,7 +44,7 @@ field ::= access ("readonly "=r)? type space identifier ("="="=" identifier2 ";"
 
 // Classes:
 class ::= access ("sealed "=s)? ("class"=c | "static class"=C) space  classBody
-classBody ::= identifier "{" cursor "}"
+classBody ::= identifier (" : "=":" type)? "{" cursor "}"
 
 scope "InCSharpClass" {
   start    ::=  method | property | field | const | other
