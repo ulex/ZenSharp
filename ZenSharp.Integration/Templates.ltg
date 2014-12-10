@@ -46,6 +46,9 @@ field ::= access ("readonly "=r)? type space identifier ("="="=" identifier2 ";"
 class ::= access ("sealed "=s)? ("class"=c | "static class"=C) space  classBody
 classBody ::= identifier (" : "=":" type)? "{" cursor "}"
 
+//Enums:
+enum ::= access space "enum"=e space identifier "{" cursor "}"
+
 scope "InCSharpClass" {
   start    ::=  method | property | field | const | other
 
@@ -60,6 +63,7 @@ scope "InCSharpTypeAndNamespace" {
   start ::=
     | class
     | interface
+    | enum
 
   interface ::= access "interface"=i space classBody
 }
