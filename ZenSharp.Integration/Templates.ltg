@@ -15,7 +15,7 @@ suggType ::= <type short="t" expand="$type$" macros = "complete()">
 // Primive types:
 maybeType  ::= type | "void"
 type       ::= generic | primType ("[]"=a)? | suggType
-primType   ::= string=s | byte=by | bool=b | double=d | int=i | uint=ui | "System.Guid"=g
+primType   ::= string=s | byte=by | bool=b | "System.DateTime"=dt | double=d | int=i | uint=ui | "System.Guid"=g
 
 // Complex types:
 generic1 ::= (SCG "." ("IList"=l | "IEnumerable"="~")) "<" type ">"
