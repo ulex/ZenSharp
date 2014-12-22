@@ -15,6 +15,71 @@ How do I get it?
 You can install directly into ReSharper 8.2 or 9.0 via the Extension Manager in the
 ReSharper menu.
 
+Predifined templates
+---
+ZenSharp shipped with a lot of standart templates.
+
+<+> means cursor position after expand template by pressing Tab.
+
+**Examples** in scope, where method definition is allowed:
+
+<!-- btw: «how to memo» really non readable markdown, sorry :) -->
+| shortcut | expand to                                              | how to memo                                                     |
+|----------|--------------------------------------------------------|-----------------------------------------------------------------|
+| pps      | `public string $name$ { get; set; } $END$`             | **p**ublic **p**roperty **s**tring                              |
+| \_rs     | `private readonly string $name$; $END$ `               | [**_** is private] **r**eadonly **s**tring                      |
+| pvm      | `public virtual void $name$($END$) { } `               | **p**ublic **v**irtual **m**ethod                               |
+| pM~s     | `public static IEnumerable<string> $name$($END$) { } ` | public [static **M**ethod] [**~** is IEnumerable] of **s**tring |
+| pamb     | `public abstract bool $name$($END$) { } `              | **p**ublic **a**bstract **m**ethod **b**ool                     |
+
+**Examples** where type declaration is allowed:
+
+| shortcut | expand to                                | how to memo                     |
+|----------|------------------------------------------|---------------------------------|
+| pi       | `public interface $name$ { $END$ }`      | **p**ublic **i**nterface        |
+| psc      | `public sealed class $name$ { $END$ }`   | **p**ublic **s**ealed **c**lass |
+| pc:t     | `public class $name$ : $type$ { $END$ }` | **p**ublic  **c**lass **:t**ype |
+| ie       | `internal enum $name$ { $END$ }`         | **i**nternal **e**num           |
+
+**Hint**: you can always write variable name after shortcut. For example, you can type `ppsPropertyName` and
+by pressing tab it magically expand to `public string PropertyName {get; set; }`.
+
+
+#### Access
+| shortcut | expand to |
+|----------|-----------|
+| p        | public    |
+| _        | private   |
+| i        | internal  |
+| P        | protected |
+
+
+#### Types
+| shortcut | expand to | note                                  |
+|----------|-----------|---------------------------------------|
+| t        | $type$    | ask user for custom type after expand |
+
+##### Primitive types
+| shortcut | expand to |
+|----------|-----------|
+| s        | string    |
+| by       | byte      |
+| b        | bool      |
+| dt       | DateTime  |
+| d        | double    |
+| i        | int       |
+| ui       | uint      |
+| g        | Guid      |
+
+##### Generic types
+| shortcut | expand to       |
+|----------|-----------------|
+| l        | IList<T1>       |
+| ~        | IEnumerable<T1> |
+| sl       | SortedList<T1>  |
+| di       | Dictionary<T1>  |
+
+
 Rules
 ---
 Simplest rule for expand text `cw` into `System.Console.WriteLine($END$)`(this
