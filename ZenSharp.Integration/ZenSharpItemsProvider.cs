@@ -34,7 +34,7 @@ namespace Github.Ulex.ZenSharp.Integration
 
         protected override bool IsAvailable(CSharpCodeCompletionContext context)
         {
-            return true;
+            return context.ReplaceRangeWithJoinedArguments.Length != 0;
         }
 
         protected override bool AddLookupItems(CSharpCodeCompletionContext context, GroupedItemsCollector collector)
