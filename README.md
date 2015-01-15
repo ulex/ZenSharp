@@ -70,6 +70,9 @@ by pressing tab it magically expand to `public string PropertyName {get; set; }`
 | i        | int       |
 | ui       | uint      |
 | g        | Guid      |
+| dc       | decimal   |
+| b?       | bool?     |
+
 
 ##### Generic types
 | shortcut | expand to       |
@@ -88,7 +91,7 @@ rule is ordinary ReSharper live template) will looks like `start ::=
 
 More complex rule, a sort of predifined live template for define class in scope,
 where class declaration is allowed. In ordinary live templates, if you want to
-specify class acccess before executing live template, you must define
+specify class access before executing live template, you must define
 independed live templates one for `"public class"`=`pc`, another for `"internal class"=ic`
 But class can be also be sealed. Or static. And same access modifier can be
 applied to interface and enum.

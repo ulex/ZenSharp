@@ -22,7 +22,7 @@ namespace Github.Ulex.ZenSharp.Integration
     internal sealed class LtgConfigWatcher : IDisposable
     {
         /// <summary>
-        /// Todo: user R# logger
+        /// Todo: use R# logger
         /// </summary>
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
