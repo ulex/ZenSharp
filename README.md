@@ -19,7 +19,7 @@ Predifined templates
 ---
 ZenSharp shipped with a lot of standart templates.
 
-<+> means cursor position after expand template by pressing Tab.
+`$END$` means cursor position after expand template by pressing Tab.
 
 **Examples** in scope, where method definition is allowed:
 
@@ -40,6 +40,7 @@ ZenSharp shipped with a lot of standart templates.
 | psc      | `public sealed class $name$ { $END$ }`   | **p**ublic **s**ealed **c**lass |
 | pc:t     | `public class $name$ : $type$ { $END$ }` | **p**ublic  **c**lass **:t**ype |
 | ie       | `internal enum $name$ { $END$ }`         | **i**nternal **e**num           |
+|some|some|some|
 
 **Hint**: you can always write variable name after shortcut. For example, you can type `ppsPropertyName` and
 by pressing tab it magically expand to `public string PropertyName {get; set; }`.
@@ -120,3 +121,7 @@ ZenSharp written in C# and Nemerle programming language. You can install it from
 ZenSharp depend on nuget packages ReSharper.SDK and nunit.framwork. Use nuget package restore for them.
 
 After this, ZenSharp can be built either msbuild or Visual Studio.
+
+<!--
+vim:tw=140:
+-->
