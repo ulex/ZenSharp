@@ -143,10 +143,15 @@
     <Compile Include="CSharpExtendedScopeProvider.cs" />
     <Compile Include="Extension\LeafSubstitution.cs" />
     <Compile Include="Extension\MatchResultExtension.cs" />
+    <Compile Include="ZenLanguage\ZenLanguageService.cs" />
+    <Compile Include="ZenLanguage\ZenLexerFactory.cs" />
+    <Compile Include="ZenLanguage\ZenProjectFileLanguageService.cs" />
+    <Compile Include="ZenLanguage\ZenLanguage.cs" />
     <Compile Include="Option\ExceptionConverter.cs" />
     <Compile Include="Option\ZenSettingsPage.xaml.cs">
       <DependentUpon>ZenSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ZenLanguage\ZenProjectFileType.cs" />
     <Compile Include="ZenSharpSettings.cs" />
     <Compile Include="UpdateMacroDefinition.cs" />
     <Compile Include="ZenSharpItemsProvider.cs" />
