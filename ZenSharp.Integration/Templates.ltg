@@ -79,6 +79,10 @@ scope "InCSharpInterface" {
   methodBody ::= ";"
 }
 
+scope "InCSharpStruct" {
+ // start ::= ""
+}
+
 scope "InCSharpStatement" {
   start ::=
     | "if ("=ifr identifier " == null) return;"

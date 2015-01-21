@@ -97,6 +97,8 @@ namespace Github.Ulex.ZenSharp.Integration
                         yield return "InCSharpInterface";
                     if (treeNode.GetContainingNode<IClassDeclaration>() != null)
                         yield return "InCSharpClass";
+                    if (treeNode.GetContainingNode<IStructDeclaration>() != null)
+                        yield return "InCSharpStruct";
                 }
                 else
                 {
