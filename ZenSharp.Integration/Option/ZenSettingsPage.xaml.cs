@@ -84,24 +84,24 @@ namespace Github.Ulex.ZenSharp.Integration
 
         public bool OnOk()
         {
+            return true;
+        }
+
+        public bool ValidatePage()
+        {
             try
             {
                 // todo: use settings notification options
                 var fullPath = ZenSharpSettings.GetTreePath(Path);
                 _zenWatcher.Reload(fullPath);
                 _zenWatcher.ReinitializeWatcher(fullPath);
+                return true;
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 PostValidationError = exception;
                 return false;
             }
-            return true;
-        }
-
-        public bool ValidatePage()
-        {
-            return true;
         }
 
         public EitherControl Control
