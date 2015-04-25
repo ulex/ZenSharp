@@ -27,6 +27,11 @@ using JetBrains.UI.Application.PluginSupport;
 using JetBrains.ReSharper.Resources.Shell;
 #endif
 
+#if RESHARPER_91
+using JetBrains.ReSharper.Resources.Shell;
+#endif
+
+
 using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
 namespace Github.Ulex.ZenSharp.Integration

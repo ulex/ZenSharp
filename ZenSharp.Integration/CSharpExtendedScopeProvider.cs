@@ -15,6 +15,11 @@ using JetBrains.ReSharper.Psi.CSharp.Parsing;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Files;
 using JetBrains.ReSharper.Psi.Tree;
+
+#if RESHARPER_91
+using JetBrains.ReSharper.Resources.Shell;
+#endif
+
 #if RESHARPER_82
 using JetBrains.ReSharper.Psi.Services.CSharp;
 #endif 
@@ -61,13 +66,13 @@ namespace Github.Ulex.ZenSharp.Integration
 
                 yield return "InCSharpFile";
                 var treeNode = element;
+                
+#if RESHARPER_91
+                if (treeNode.GetContainingNode<IDocCommentNode>(true) != null) yield break;
+#else
                 if (treeNode.GetContainingNode<IDocCommentBlockNode>(true) != null) yield break;
+#endif
 
-                var genericToken = treeNode.GetContainingNode<CSharpGenericToken>(true);
-                if (genericToken != null && genericToken.GetTokenType() == CSharpTokenType.STRING_LITERAL)
-                {
-                    yield break;
-                }
                 if (treeNode is ICSharpCommentNode || treeNode is IPreprocessorDirective)
                 {
                     treeNode = treeNode.PrevSibling;

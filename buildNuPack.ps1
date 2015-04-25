@@ -21,6 +21,14 @@ $packages = @{
         'IntegrationDll' = 'bin\Release.R90\ZenSharp.Integration.dll';
         'TargetDir' = 'DotFiles\';
     };
+	"ZenSharp_R91" = @{
+		'PackageId' = 'Ulex.ZenSharp91';
+        'PackageVersion' = $version;
+        'DependencyId' = 'wave';
+        'DependencyVersion' = '[2.0]';
+        'IntegrationDll' = 'bin\Release.R91\ZenSharp.Integration.dll';
+        'TargetDir' = 'DotFiles\';
+    };
 }
 foreach ($p in $packages.Values){
     $properties = [String]::Join(";" ,($p.GetEnumerator() | % {("{0}={1}" -f @($_.Key, $_.Value))}))

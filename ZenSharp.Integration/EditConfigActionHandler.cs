@@ -7,7 +7,7 @@ using JetBrains.Util;
 
 using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
-#if RESHARPER_90
+#if RESHARPER_90 || RESHARPER_91
 using JetBrains.UI.MenuGroups;
 using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.UI.ActionsRevised;
@@ -17,7 +17,7 @@ using JetBrains.ReSharper.Feature.Services.Menu;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
-#if RESHARPER_90
+#if RESHARPER_90 || RESHARPER_91
     [ActionGroup(ActionGroupInsertStyles.Embedded)]
     public class ZenSharpGroup : IAction, IInsertLast<VsMainMenuGroup>
     {

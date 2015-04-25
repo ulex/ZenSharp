@@ -6,10 +6,12 @@ using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Context;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Settings;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.Resources;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.TextControl;
+using JetBrains.Util;
 
 using NLog;
 #if RESHARPER_82
@@ -22,6 +24,11 @@ using JetBrains.ReSharper.LiveTemplates.Templates;
 using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Util;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
+#endif
+
+#if RESHARPER_91
+using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 #endif
 
@@ -51,7 +58,7 @@ namespace Github.Ulex.ZenSharp.Integration
             var textControl = context.BasicContext.TextControl;
 
             var offset = textControl.Caret.Offset();
-#if RESHARPER_90
+#if RESHARPER_90 || RESHARPER_91
             var templateContext = new TemplateAcceptanceContext(solution, textControl.Document, offset, new TextRange(offset));
 #else
             var templateContext = new TemplateAcceptanceContext(solution, textControl.Document, offset);
@@ -67,7 +74,11 @@ namespace Github.Ulex.ZenSharp.Integration
                 var scopes = scopePoints.ToList();
                 Log.Debug("Current scopes: {0}", string.Join(",", scopes));
                 var iconId = iconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
+#if RESHARPER_91
+                collector.Add(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
+#else
                 collector.AddAtDefaultPlace(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
+#endif
                 return true;
             }
             else

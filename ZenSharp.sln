@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenSharp.Integration", "ZenSharp.Integration\ZenSharp.Integration.csproj", "{9243D98D-91FD-4421-AC80-40ABBE1FBC84}"
 EndProject
@@ -25,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenSharp.Integration.Tests", "ZenSharp.Integration\ZenSharp.Integration.Tests\ZenSharp.Integration.Tests.csproj", "{3B0B25FB-2E5E-4491-8038-8EE96FEE237D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenSharp.Integration_90", "ZenSharp.Integration\ZenSharp.Integration_90.csproj", "{8AD55666-BA22-45BB-9BED-4DEFDB612617}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenSharp.Integration_91", "ZenSharp.Integration\ZenSharp.Integration_91.csproj", "{0F533A6E-E130-11E4-88A7-74D435B9EFD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{8AD55666-BA22-45BB-9BED-4DEFDB612617}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AD55666-BA22-45BB-9BED-4DEFDB612617}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AD55666-BA22-45BB-9BED-4DEFDB612617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F533A6E-E130-11E4-88A7-74D435B9EFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F533A6E-E130-11E4-88A7-74D435B9EFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F533A6E-E130-11E4-88A7-74D435B9EFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F533A6E-E130-11E4-88A7-74D435B9EFD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+
+#if !RESHARPER_91
 using System.Windows.Annotations;
+#endif
 
 using Github.Ulex.ZenSharp.Core;
 

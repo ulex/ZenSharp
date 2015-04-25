@@ -7,8 +7,10 @@ using System.Linq;
 using Github.Ulex.ZenSharp.Core;
 using Github.Ulex.ZenSharp.Integration.Extension;
 
+
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Util;
 using JetBrains.ReSharper.Feature.Services.Lookup;
+using JetBrains.Text;
 using JetBrains.TextControl;
 using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
@@ -18,8 +20,14 @@ using NLog;
 using JetBrains.ReSharper.LiveTemplates;
 using JetBrains.ReSharper.LiveTemplates.Templates;
 #endif
+
 #if RESHARPER_90
 using PrefixMatcher = JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems.PrefixMatcher;
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
+#endif
+
+#if RESHARPER_91
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
 #endif
@@ -54,8 +62,7 @@ namespace Github.Ulex.ZenSharp.Integration
             _tree = tree;
             _scopes = scopes;
             _template = template;
-            // todo: what is it?
-            _matchingResult = new MatchingResult(3, "dd", 10000);
+            // fixme: what is it?
             Log.Info("Creating ZenSharpLookupItem with template = {0}", template);
             _iconId = iconId;
             _displayName = _template.Text;
@@ -92,7 +99,7 @@ namespace Github.Ulex.ZenSharp.Integration
             return true;
         }
 
-#if RESHARPER_90
+#if RESHARPER_90 || RESHARPER_91
         MatchingResult ILookupItem.Match(PrefixMatcher prefixMatcher, ITextControl textControl)
         {
             string prefix = prefixMatcher.Prefix;
@@ -149,7 +156,13 @@ namespace Github.Ulex.ZenSharp.Integration
                 Log.Info("Suggestion match in scope [{1}] with result [{0}]", _matchingResult, scopeName);
 
                 // todo: review parameters
+#if RESHARPER_91
+                return new MatchingResult(prefix.Length, "z", 1, MatcherScore.NoTypos);
+
+#else
                 return new MatchingResult(prefix.Length, "z", 1);
+
+#endif
             }
             else
             {
