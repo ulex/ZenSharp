@@ -3,6 +3,7 @@ using System.Linq;
 
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure;
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Context;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Settings;
@@ -10,27 +11,11 @@ using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.Resources;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
+using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
 using NLog;
-#if RESHARPER_82
-using JetBrains.Application;
-using JetBrains.ReSharper.Feature.Services.Lookup;
-using JetBrains.ReSharper.LiveTemplates.Templates;
-#endif
-
-#if RESHARPER_90
-using JetBrains.ReSharper.Resources.Shell;
-using JetBrains.Util;
-using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
-using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
-#endif
-
-#if RESHARPER_91
-using JetBrains.ReSharper.Resources.Shell;
-using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
-#endif
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -49,7 +34,10 @@ namespace Github.Ulex.ZenSharp.Integration
             Log.Info("Add lookupitems");
 
             var solution = context.PsiModule.GetSolution();
-            if (solution == null) return false;
+            if (solution == null)
+            {
+                return false;
+            }
 
             var ltgConfig = Shell.Instance.GetComponent<LtgConfigWatcher>();
 
@@ -58,11 +46,11 @@ namespace Github.Ulex.ZenSharp.Integration
             var textControl = context.BasicContext.TextControl;
 
             var offset = textControl.Caret.Offset();
-#if RESHARPER_90 || RESHARPER_91
-            var templateContext = new TemplateAcceptanceContext(solution, textControl.Document, offset, new TextRange(offset));
-#else
-            var templateContext = new TemplateAcceptanceContext(solution, textControl.Document, offset);
-#endif
+            var templateContext = new TemplateAcceptanceContext(
+                solution,
+                textControl.Document,
+                offset,
+                new TextRange(offset));
 
             var scopePoints = provider.ProvideScopePoints(templateContext);
             if (ltgConfig.Tree != null)
@@ -81,11 +69,7 @@ namespace Github.Ulex.ZenSharp.Integration
 #endif
                 return true;
             }
-            else
-            {
-                Log.Warn("Lookup item for completion is not added, because ZenSharp expand tree is not loaded.");
-            }
-
+            Log.Warn("Lookup item for completion is not added, because ZenSharp expand tree is not loaded.");
             return false;
         }
     }

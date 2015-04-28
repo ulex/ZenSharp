@@ -13,7 +13,7 @@ How it's work:
 How do I get it?
 ---
 You can install directly into ReSharper 8.2 or 9.0 via the Extension Manager in the
-ReSharper menu.
+ReSharper menu. (8.2 support removed, but binary version still available in R# gallery)
 
 Predifined templates
 ---

@@ -1,20 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-
-#if !RESHARPER_91
-using System.Windows.Annotations;
-#endif
 
 using Github.Ulex.ZenSharp.Core;
 
 using JetBrains.Application;
 using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
-using JetBrains.IDE;
-using JetBrains.ProjectModel;
-using JetBrains.TextControl;
-using JetBrains.TextControl.Coords;
 using JetBrains.Util;
 
 using NLog;

@@ -1,5 +1,3 @@
-using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,35 +5,21 @@ using System.Linq;
 using Github.Ulex.ZenSharp.Core;
 using Github.Ulex.ZenSharp.Integration.Extension;
 
-
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
+using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Util;
-using JetBrains.ReSharper.Feature.Services.Lookup;
 using JetBrains.Text;
 using JetBrains.TextControl;
 using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
 
 using NLog;
-#if RESHARPER_82
-using JetBrains.ReSharper.LiveTemplates;
-using JetBrains.ReSharper.LiveTemplates.Templates;
-#endif
-
-#if RESHARPER_90
-using PrefixMatcher = JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems.PrefixMatcher;
-using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
-using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
-#endif
-
-#if RESHARPER_91
-using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
-using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
-#endif
 
 namespace Github.Ulex.ZenSharp.Integration
 {
     /// <summary>
-    /// todo: remove inherence
+    ///     todo: remove inherence
     /// </summary>
     internal class ZenSharpLookupItem : TemplateLookupItem, ILookupItem
     {
@@ -43,10 +27,8 @@ namespace Github.Ulex.ZenSharp.Integration
 
         private readonly IEnumerable<string> _scopes;
 
-        private readonly MatchingResult _matchingResult;
-
         /// <summary>
-        /// todo: remove
+        ///     todo: remove
         /// </summary>
         private readonly Template _template;
 
@@ -70,29 +52,23 @@ namespace Github.Ulex.ZenSharp.Integration
 
         RichText ILookupItem.DisplayName
         {
-            get
-            {
-                return new RichText(_displayName);
-            }
+            get { return new RichText(_displayName); }
+        }
+
+        bool ILookupItem.CanShrink
+        {
+            get { return true; }
         }
 
         IconId ILookupItem.Image
         {
-            get
-            {
-                return _iconId;
-            }
+            get { return _iconId; }
         }
 
         bool ILookupItem.IsDynamic
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
-
-        public bool CanShrink { get{return true;} }
 
         bool ILookupItem.AcceptIfOnlyMatched(LookupItemAcceptanceContext itemAcceptanceContext)
         {
@@ -147,28 +123,31 @@ namespace Github.Ulex.ZenSharp.Integration
             if (matchResult.Success)
             {
                 FillText(prefix, matchResult);
-                Log.Info("Successfull match in scope [{1}]. Return [{0}]", _matchingResult, scopeName);
-                return _matchingResult;
+                Log.Info("Successfull match in scope [{1}]. Return [{0}]", matchResult, scopeName);
+                return CreateMatchingResult(prefix);
             }
-            else if(matchResult.Suggestion != null && string.IsNullOrEmpty(matchResult.Suggestion.Tail))
+            else if (matchResult.Suggestion != null && string.IsNullOrEmpty(matchResult.Suggestion.Tail))
             {
                 FillText(prefix, matchResult.Suggestion);
-                Log.Info("Suggestion match in scope [{1}] with result [{0}]", _matchingResult, scopeName);
+                Log.Info("Suggestion match in scope [{1}] with result [{0}]", matchResult, scopeName);
 
-                // todo: review parameters
-#if RESHARPER_91
-                return new MatchingResult(prefix.Length, "z", 1, MatcherScore.NoTypos);
-
-#else
-                return new MatchingResult(prefix.Length, "z", 1);
-
-#endif
+                return CreateMatchingResult(prefix);
             }
             else
             {
                 Log.Info("No completition found for {0} in scope {1}", prefix, scopeName);
                 return null;
             }
+        }
+
+        private static MatchingResult CreateMatchingResult(string prefix)
+        {
+            // todo: review parameters
+#if RESHARPER_91
+            return new MatchingResult(prefix.Length, "z", 1, MatcherScore.NoTypos);
+#else
+            return new MatchingResult(prefix.Length, "z", 1);
+#endif
         }
 
         private string FillText(string prefix, LiveTemplateMatcher.MatchResult matchResult)

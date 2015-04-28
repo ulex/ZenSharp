@@ -1,32 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using JetBrains.Application;
 using JetBrains.DocumentModel;
-using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Context;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.LiveTemplates;
-using JetBrains.ReSharper.Feature.Services.LiveTemplates.Scope;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
-using JetBrains.ReSharper.Psi.CSharp.Impl.Tree;
-using JetBrains.ReSharper.Psi.CSharp.Parsing;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Files;
 using JetBrains.ReSharper.Psi.Tree;
-
-#if RESHARPER_91
 using JetBrains.ReSharper.Resources.Shell;
-#endif
-
-#if RESHARPER_82
-using JetBrains.ReSharper.Psi.Services.CSharp;
-#endif 
-
 #if RESHARPER_90
-using JetBrains.ReSharper.Resources.Shell;
 using IDocCommentBlockNode = JetBrains.ReSharper.Psi.Tree.IDocCommentBlock;
+
 #endif
 
 namespace Github.Ulex.ZenSharp.Integration
@@ -35,15 +22,21 @@ namespace Github.Ulex.ZenSharp.Integration
     public sealed class CSharpExtendedScopeProvider
     {
         /// <summary>
-        /// Too lazy to implement full ITemplateScopePoint
+        ///     Too lazy to implement full ITemplateScopePoint
         /// </summary>
         public IEnumerable<string> ProvideScopePoints(TemplateAcceptanceContext tacContext)
         {
             var solution = tacContext.Solution;
             var document = tacContext.Document;
-            if (document == null) yield break;
+            if (document == null)
+            {
+                yield break;
+            }
             var psiSource = document.GetPsiSourceFile(solution);
-            if (psiSource == null) yield break;
+            if (psiSource == null)
+            {
+                yield break;
+            }
 
             using (ReadLockCookie.Create())
             {
@@ -60,24 +53,36 @@ namespace Github.Ulex.ZenSharp.Integration
                     yield break;
                 }
                 var file = psiSource.GetPsiFile<CSharpLanguage>(documentRange);
-                if (file == null || !Equals(file.Language, CSharpLanguage.Instance)) yield break;
+                if (file == null || !Equals(file.Language, CSharpLanguage.Instance))
+                {
+                    yield break;
+                }
                 var element = file.FindTokenAt(document, caretOffset - prefix.Length);
-                if (element == null) yield break;
+                if (element == null)
+                {
+                    yield break;
+                }
 
                 yield return "InCSharpFile";
                 var treeNode = element;
-                
+
 #if RESHARPER_91
                 if (treeNode.GetContainingNode<IDocCommentNode>(true) != null) yield break;
 #else
-                if (treeNode.GetContainingNode<IDocCommentBlockNode>(true) != null) yield break;
+                if (treeNode.GetContainingNode<IDocCommentBlockNode>(true) != null)
+                {
+                    yield break;
+                }
 #endif
 
                 if (treeNode is ICSharpCommentNode || treeNode is IPreprocessorDirective)
                 {
                     treeNode = treeNode.PrevSibling;
                 }
-                if (treeNode == null) yield break;
+                if (treeNode == null)
+                {
+                    yield break;
+                }
 
                 var context = CSharpReparseContext.FindContext(treeNode);
                 if (context == null)
@@ -86,7 +91,9 @@ namespace Github.Ulex.ZenSharp.Integration
                 }
 
                 if (treeNode.GetContainingNode<IEnumDeclaration>() != null)
+                {
                     yield return "InCSharpEnum";
+                }
 
                 var containingType = treeNode.GetContainingNode<ICSharpTypeDeclaration>(true);
                 if (containingType == null && TestNode<ICSharpNamespaceDeclaration>(context, "namespace N {}", false))
@@ -98,22 +105,34 @@ namespace Github.Ulex.ZenSharp.Integration
                     yield return "InCSharpTypeMember";
                     // Extend here: 
                     // Already in type member, 
-                    if (treeNode.GetContainingNode<IInterfaceDeclaration>() != null) 
+                    if (treeNode.GetContainingNode<IInterfaceDeclaration>() != null)
+                    {
                         yield return "InCSharpInterface";
+                    }
                     if (treeNode.GetContainingNode<IClassDeclaration>() != null)
+                    {
                         yield return "InCSharpClass";
+                    }
                     if (treeNode.GetContainingNode<IStructDeclaration>() != null)
+                    {
                         yield return "InCSharpStruct";
+                    }
                 }
                 else
                 {
                     bool acceptsExpression = TestNode<IPostfixOperatorExpression>(context, "a++", true);
                     if (TestNode<IBreakStatement>(context, "break;", false))
+                    {
                         yield return "InCSharpStatement";
+                    }
                     else if (acceptsExpression)
+                    {
                         yield return "InCSharpExpression";
+                    }
                     if (!acceptsExpression && TestNode<IQuerySelectClause>(context, "select x", false))
+                    {
                         yield return "InCSharpQuery";
+                    }
                 }
             }
         }

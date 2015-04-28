@@ -1,23 +1,16 @@
 ﻿using JetBrains.ActionManagement;
-using JetBrains.Application;
 using JetBrains.Application.DataContext;
 using JetBrains.Application.Settings;
 using JetBrains.IDE;
+using JetBrains.ReSharper.Resources.Shell;
+using JetBrains.UI.ActionsRevised;
+using JetBrains.UI.MenuGroups;
 using JetBrains.Util;
 
 using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
-#if RESHARPER_90 || RESHARPER_91
-using JetBrains.UI.MenuGroups;
-using JetBrains.ReSharper.Resources.Shell;
-using JetBrains.UI.ActionsRevised;
-using JetBrains.ReSharper.Feature.Services.Menu;
-#endif
-
-
 namespace Github.Ulex.ZenSharp.Integration
 {
-#if RESHARPER_90 || RESHARPER_91
     [ActionGroup(ActionGroupInsertStyles.Embedded)]
     public class ZenSharpGroup : IAction, IInsertLast<VsMainMenuGroup>
     {
@@ -28,11 +21,6 @@ namespace Github.Ulex.ZenSharp.Integration
 
     [Action("Edit ZenSharp templates", Id = 11122233)]
     public class EditConfigActionHandler : IExecutableAction
-#else
-
-    [ActionHandler("ZenSharp.EditConfig")]
-    public class EditConfigActionHandler : IActionHandler
-#endif
     {
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
         {
@@ -48,7 +36,10 @@ namespace Github.Ulex.ZenSharp.Integration
 
             var solution = context.GetData(DataConstants.SOLUTION);
             EditorManager.GetInstance(solution)
-                .OpenFile(FileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename)), true, TabOptions.Default);
+                .OpenFile(
+                    FileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename)),
+                    true,
+                    TabOptions.Default);
         }
     }
 }
