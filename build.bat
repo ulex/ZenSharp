@@ -1,5 +1,6 @@
 @echo off
 SET PATH=%PATH%;C:\Windows\Microsoft.NET\Framework64\v4.0.30319
+SET HostFullIdentifier=
 
 if not defined version set /P VERSION=Version:
 

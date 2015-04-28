@@ -24,13 +24,7 @@ Free and open source. More information on github.
   <files>
     <!--<file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\vAny\plugins\"/>-->
 
-    <!-- 9.0+ -->
-    <file src="bin\Release\NLog.dll"                    target="$TargetDir$\"/>
-    <file src="bin\Release\Nemerle.dll"                 target="$TargetDir$\"/>
-    <file src="bin\Release\Nemerle.Peg.dll"             target="$TargetDir$\"/>
-    <file src="bin\Release\ZenSharp.Core.dll"           target="$TargetDir$\"/>
-    <file src="$IntegrationDll$"                        target="$TargetDir$\ZenSharp.Integration.dll"/>
-    <file src="bin\Release\Nlog.dll.deploy.nlog"        target="$TargetDir$\Nlog.dll.nlog"/>
+    <file src="ZenSharp.dll" target="DotFiles\ZenSharp.dll"/>
 
   </files>
 </package>

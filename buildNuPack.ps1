@@ -5,27 +5,11 @@ $version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo((gi .\bin\Releas
 write-host "Version = $version"
 
 $packages = @{
-	"ZenSharp" = @{
-		'PackageId' = 'ZenSharp';
-        'PackageVersion' = $version;
-        'DependencyId' = 'ReSharper';
-        'DependencyVersion' = '8.2';
-        'IntegrationDll' = 'bin\Release\ZenSharp.Integration.dll';
-        'TargetDir' = 'ReSharper\v8.2\plugins';
-    };
-	"ZenSharp_R9" = @{
+	"ZenSharp_R91" = @{
 		'PackageId' = 'Ulex.ZenSharp';
         'PackageVersion' = $version;
         'DependencyId' = 'Wave';
-        'DependencyVersion' = '[1.0]';
-        'IntegrationDll' = 'bin\Release.R90\ZenSharp.Integration.dll';
-        'TargetDir' = 'DotFiles\';
-    };
-	"ZenSharp_R91" = @{
-		'PackageId' = 'Ulex.ZenSharp91';
-        'PackageVersion' = $version;
-        'DependencyId' = 'wave';
-        'DependencyVersion' = '[2.0]';
+        'DependencyVersion' = '[2.0, 3.0)';
         'IntegrationDll' = 'bin\Release.R91\ZenSharp.Integration.dll';
         'TargetDir' = 'DotFiles\';
     };
@@ -33,7 +17,9 @@ $packages = @{
 foreach ($p in $packages.Values){
     $properties = [String]::Join(";" ,($p.GetEnumerator() | % {("{0}={1}" -f @($_.Key, $_.Value))}))
     write-host $properties
+    .\ilmerge.bat $p['IntegrationDll']
     nuget.exe pack $nuspec -Properties $properties
+    ri ZenSharp.dll
 }
 
 Move-Item *.nupkg .\bin\Release -Force
