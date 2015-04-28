@@ -25,6 +25,7 @@ Free and open source. More information on github.
     <!--<file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\vAny\plugins\"/>-->
 
     <file src="ZenSharp.dll" target="DotFiles\ZenSharp.dll"/>
+    <file src="bin\Release\Nlog.dll.deploy.nlog" target="DotFiles\Nlog.dll.nlog"/>
 
   </files>
 </package>

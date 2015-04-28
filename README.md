@@ -122,6 +122,8 @@ ZenSharp depend on nuget packages ReSharper.SDK and nunit.framwork. Use nuget pa
 
 After this, ZenSharp can be built either msbuild or Visual Studio.
 
+If you want to build nupkg you also need ILmerge.
+
 <!--
 vim:tw=140:
 -->
