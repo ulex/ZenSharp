@@ -17,9 +17,8 @@ $packages = @{
 foreach ($p in $packages.Values){
     $properties = [String]::Join(";" ,($p.GetEnumerator() | % {("{0}={1}" -f @($_.Key, $_.Value))}))
     write-host $properties
-    .\ilmerge.bat $p['IntegrationDll']
+#.\ilmerge.bat $p['IntegrationDll']
     nuget.exe pack $nuspec -Properties $properties
-    ri ZenSharp.dll
 }
 
 Move-Item *.nupkg .\bin\Release -Force
