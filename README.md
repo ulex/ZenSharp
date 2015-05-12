@@ -26,11 +26,15 @@ ZenSharp shipped with a lot of standart templates.
 <!-- btw: «how to memo» really non readable markdown, sorry :) -->
 | shortcut | expand to                                              | how to memo                                                     |
 |----------|--------------------------------------------------------|-----------------------------------------------------------------|
-| pps      | `public string $name$ { get; set; } $END$`             | **p**ublic **p**roperty **s**tring                              |
+| pps      | `public string $name$ { get; private set; } $END$`     | **p**ublic **p**roperty **s**tring                              |
+| ppsAge   | `public string Age {get; private set;} $END$`          | **p**ublic **p**roperty **s**tring Name                         |
+| pps+     | `public string $name$ { get; set; } $END$`             | **p**ublic **p**roperty **s**tring more access!                 |
+| ppsA+p   | `public string A {get; protected set;} $END$`          | **p**ublic **p**roperty **s**tring more access!**p**rotected    |
 | \_rs     | `private readonly string $name$; $END$ `               | [**_** is private] **r**eadonly **s**tring                      |
 | pvm      | `public virtual void $name$($END$) { } `               | **p**ublic **v**irtual **m**ethod                               |
 | pM~s     | `public static IEnumerable<string> $name$($END$) { } ` | public [static **M**ethod] [**~** is IEnumerable] of **s**tring |
 | pamb     | `public abstract bool $name$($END$) { } `              | **p**ublic **a**bstract **m**ethod **b**ool                     |
+
 
 **Examples** where type declaration is allowed:
 
@@ -40,7 +44,6 @@ ZenSharp shipped with a lot of standart templates.
 | psc      | `public sealed class $name$ { $END$ }`   | **p**ublic **s**ealed **c**lass |
 | pc:t     | `public class $name$ : $type$ { $END$ }` | **p**ublic  **c**lass **:t**ype |
 | ie       | `internal enum $name$ { $END$ }`         | **i**nternal **e**num           |
-|some|some|some|
 
 **Hint**: you can always write variable name after shortcut. For example, you can type `ppsPropertyName` and
 by pressing tab it magically expand to `public string PropertyName {get; set; }`.
