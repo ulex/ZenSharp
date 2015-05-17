@@ -5,7 +5,6 @@ using JetBrains.Application;
 using JetBrains.Application.DataContext;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Macros;
 
-using NLog;
 
 namespace Github.Ulex.ZenSharp.Integration
 {

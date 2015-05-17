@@ -14,15 +14,14 @@ using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.TextControl;
 using JetBrains.Util;
-
-using NLog;
+using JetBrains.Util.Logging;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
     [Language(typeof(CSharpLanguage))]
     internal class ZenSharpItemsProvider : ItemsProviderOfSpecificContext<CSharpCodeCompletionContext>
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = Logger.GetLogger(typeof(ZenSharpItemsProvider));
 
         protected override bool IsAvailable(CSharpCodeCompletionContext context)
         {
@@ -60,7 +59,7 @@ namespace Github.Ulex.ZenSharp.Integration
                     UID = Guid.NewGuid()
                 };
                 var scopes = scopePoints.ToList();
-                Log.Debug("Current scopes: {0}", string.Join(",", scopes));
+                Log.Trace("Current scopes: {0}", string.Join(",", scopes));
                 var iconId = iconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
 #if RESHARPER_91
                 collector.Add(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));

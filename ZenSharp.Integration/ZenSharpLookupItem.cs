@@ -13,8 +13,8 @@ using JetBrains.Text;
 using JetBrains.TextControl;
 using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
-
-using NLog;
+using JetBrains.Util;
+using JetBrains.Util.Logging;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -23,7 +23,7 @@ namespace Github.Ulex.ZenSharp.Integration
     /// </summary>
     internal class ZenSharpLookupItem : TemplateLookupItem, ILookupItem
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = Logger.GetLogger(typeof(ZenSharpLookupItem));
 
         private readonly IEnumerable<string> _scopes;
 
@@ -91,7 +91,7 @@ namespace Github.Ulex.ZenSharp.Integration
             }
             var matcher = new LiveTemplateMatcher(_tree);
             var matchedScopes = _scopes.Where(s => _tree.IsScopeExist(s)).ToList();
-            Log.Debug("Matched scopes = {0}", string.Join(", ", matchedScopes));
+            Log.Trace("Matched scopes = {0}", string.Join(", ", matchedScopes));
 
             if (matchedScopes.Count == 0)
             {
@@ -153,7 +153,7 @@ namespace Github.Ulex.ZenSharp.Integration
         private string FillText(string prefix, LiveTemplateMatcher.MatchResult matchResult)
         {
             var matchExpand = matchResult.Expand(prefix);
-            Log.Debug("Template text: {0}", matchExpand);
+            Log.Trace("Template text: {0}", matchExpand);
             if (!string.IsNullOrEmpty(matchExpand))
             {
                 _template.Text = matchExpand;
@@ -185,7 +185,7 @@ namespace Github.Ulex.ZenSharp.Integration
                     {
                         macros = macros.Replace("\\0", subst.Short);
                     }
-                    Log.Debug("Place holder macro: {0}, {1}", macros, rule.Name);
+                    Log.Trace("Place holder macro: {0}, {1}", macros, rule.Name);
                     _template.Fields.Add(new TemplateField(rule.Name, macros, 0));
                 }
             }

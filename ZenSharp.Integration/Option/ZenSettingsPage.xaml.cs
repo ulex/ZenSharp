@@ -11,10 +11,10 @@ using JetBrains.UI.CrossFramework;
 using JetBrains.UI.Options;
 using JetBrains.UI.Options.OptionPages;
 using JetBrains.UI.Resources;
+using JetBrains.Util;
+using JetBrains.Util.Logging;
 
 using Microsoft.Win32;
-
-using NLog;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -26,7 +26,7 @@ namespace Github.Ulex.ZenSharp.Integration
     {
         private const string pageId = "ZenSettingsPageId";
 
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = Logger.GetLogger(typeof(ZenSettingsPage));
 
         public ZenSettingsPage(Lifetime lifetime, OptionsSettingsSmartContext settings, IComponentContainer container)
         {

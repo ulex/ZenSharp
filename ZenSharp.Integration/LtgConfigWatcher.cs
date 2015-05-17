@@ -6,18 +6,14 @@ using Github.Ulex.ZenSharp.Core;
 using JetBrains.Application;
 using JetBrains.Application.Settings;
 using JetBrains.Util;
-
-using NLog;
+using JetBrains.Util.Logging;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
     [ShellComponent]
     internal sealed class LtgConfigWatcher : IDisposable
     {
-        /// <summary>
-        /// Todo: use R# logger
-        /// </summary>
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = Logger.GetLogger(typeof(LtgConfigWatcher));
 
         private readonly IContextBoundSettingsStore _boundSettings;
 
