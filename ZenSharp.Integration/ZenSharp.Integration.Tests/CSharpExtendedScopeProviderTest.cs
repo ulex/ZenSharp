@@ -31,10 +31,13 @@ namespace ZenSharp.Integration.Tests
             var caretPosition = GetCaretPosition();
             using (ITextControl textControl = OpenTextControl(testProject, caretPosition))
             {
+                var caretOffset = textControl.Caret.Offset();
                 var context = new TemplateAcceptanceContext(
                     testProject.GetSolution(),
                     textControl.Document,
-                    textControl.Caret.Offset());
+                    caretOffset,
+                    new TextRange(caretOffset));
+
                 base.ExecuteWithGold(
                     sb =>
                     {

@@ -69,9 +69,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ZenSharp.Core.nproj">
       <Project>{efa574e2-de9c-4017-bb5c-8fc4cd8d5e80}</Project>
       <Name>ZenSharp.Core</Name>
