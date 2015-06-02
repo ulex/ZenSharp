@@ -10,9 +10,7 @@
 Free and open source. More information on github.
     </description>
     <releaseNotes>
-      Support for ReSharper 9.1
-      Support for ReSharper 9.0
-      initial release
+      Bug fix, new syntax.
     </releaseNotes>
     <copyright>Alexander Ulitin</copyright>
     <tags>livetemplates code completion ltg</tags>
