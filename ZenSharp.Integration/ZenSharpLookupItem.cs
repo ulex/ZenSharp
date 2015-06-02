@@ -75,14 +75,9 @@ namespace Github.Ulex.ZenSharp.Integration
             return true;
         }
 
-#if RESHARPER_90 || RESHARPER_91
         MatchingResult ILookupItem.Match(PrefixMatcher prefixMatcher, ITextControl textControl)
         {
             string prefix = prefixMatcher.Prefix;
-#else
-        MatchingResult ILookupItem.Match(string prefix, ITextControl textControl)
-        {
-#endif
             Log.Info("Match prefix = {0}", prefix);
             if (_tree == null || string.IsNullOrEmpty(prefix))
             {
@@ -143,11 +138,7 @@ namespace Github.Ulex.ZenSharp.Integration
         private static MatchingResult CreateMatchingResult(string prefix)
         {
             // todo: review parameters
-#if RESHARPER_91
             return new MatchingResult(prefix.Length, "z", 1, MatcherScore.NoTypos);
-#else
-            return new MatchingResult(prefix.Length, "z", 1);
-#endif
         }
 
         private string FillText(string prefix, LiveTemplateMatcher.MatchResult matchResult)

@@ -5,18 +5,7 @@ using System.IO;
 using System.Reflection;
 
 using JetBrains.Application.Settings;
-
-#if RESHARPER_82
-using JetBrains.ReSharper.Settings;
-#endif
-
-#if RESHARPER_90
 using JetBrains.ReSharper.Resources.Settings;
-#endif
-
-#if RESHARPER_91
-using JetBrains.ReSharper.Resources.Settings;
-#endif
 
 namespace Github.Ulex.ZenSharp.Integration
 {

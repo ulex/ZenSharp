@@ -61,11 +61,7 @@ namespace Github.Ulex.ZenSharp.Integration
                 var scopes = scopePoints.ToList();
                 Log.Trace("Current scopes: {0}", string.Join(",", scopes));
                 var iconId = iconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
-#if RESHARPER_91
                 collector.Add(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
-#else
-                collector.AddAtDefaultPlace(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
-#endif
                 return true;
             }
             Log.Warn("Lookup item for completion is not added, because ZenSharp expand tree is not loaded.");

@@ -11,10 +11,6 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Files;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Resources.Shell;
-#if RESHARPER_90
-using IDocCommentBlockNode = JetBrains.ReSharper.Psi.Tree.IDocCommentBlock;
-
-#endif
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -66,14 +62,7 @@ namespace Github.Ulex.ZenSharp.Integration
                 yield return "InCSharpFile";
                 var treeNode = element;
 
-#if RESHARPER_91
                 if (treeNode.GetContainingNode<IDocCommentNode>(true) != null) yield break;
-#else
-                if (treeNode.GetContainingNode<IDocCommentBlockNode>(true) != null)
-                {
-                    yield break;
-                }
-#endif
 
                 if (treeNode is ICSharpCommentNode || treeNode is IPreprocessorDirective)
                 {
