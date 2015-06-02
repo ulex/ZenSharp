@@ -34,7 +34,7 @@ propertySetAccessor ::= "protected "="+p" | ""="+" | "private "
 // Methods:
 method ::= access ("virtual "=vm | "abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs methodBody
 methodBody ::= " { " cursor " }"
-methodArgs ::=  "(" (""="," arg)? ")"
+methodArgs ::=  "(" ((""="," | ""="(") arg)? ")"
 arg ::= primType " " identifier2
 
 // Consts:
