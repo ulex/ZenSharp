@@ -103,40 +103,40 @@ namespace Github.Ulex.ZenSharp.Core
     terminalString (decl : string) : LeafRule{
       LeafRule.String(decl);
     }
-    
+
     maybeNonterminal (id : string, _ : NToken) : LeafRule{
       LeafRule.InsideRule([ConcatRule([LeafRule.NonTerminal(id)]), ConcatRule([])])
     }
-    
+
     nonterminal (id : string) : LeafRule{
       LeafRule.NonTerminal(id)
     }
-    
+
     brackets(_ : NToken, ruleBody : list[ConcatRule], _ : NToken) : LeafRule{
       LeafRule.InsideRule(ruleBody); 
     }
-    
+
     maybeBrackets(_ : NToken, ruleBody : list[ConcatRule], _ : NToken) : LeafRule{
       def parseablePart = ConcatRule([LeafRule.InsideRule(ruleBody)]);
       def emptyAlternative =  ConcatRule([]);
       LeafRule.InsideRule([parseablePart, emptyAlternative]); 
     }
-    
+
     identifier (sequence : NToken) : string {
       GetText(sequence);
     }
     private quoteEscapeSequence(_ : NToken) : string{
       "\"";
     }
-    
+
     private stringChar (text : NToken) : string{
       GetText(text)
     }
-    
+
     private str(parts : List[string]) : string{
       System.String.Concat(parts);
     }
-    
+
     stringDecl(_ : NToken, _ : NToken, inside : string, _ : NToken) : string{
       inside;
     }
@@ -155,14 +155,14 @@ namespace Github.Ulex.ZenSharp.Core
       }
       GenerateTree($[y | x in globalRules, y in x.Rules], scopes.AsList());
     }
-    
+
     public ParseAll(input : string) : GenerateTree {
       def d = LtgParser();
       def (count, parseresult) = d.TryParse(input);
 
       if(count == input.Length && parseresult != null)
       {
-         parseresult;
+        parseresult;
       }
       else
       {

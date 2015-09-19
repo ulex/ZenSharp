@@ -17,7 +17,7 @@ namespace Github.Ulex.ZenSharp.Core
       {
         ConcatRule(crule.Rules.Select(patch).NToList());
       }
-      
+
       Rule(newname, rule.Rules.Select(patchConcat).NToList())
     }
   }

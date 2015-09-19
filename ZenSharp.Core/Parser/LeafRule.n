@@ -116,7 +116,7 @@ namespace Github.Ulex.ZenSharp.Core
           def kvpFormat(kvp: string * string) { string.Format("{0}={1}", kvp[0], kvp[1]); }
           string.Format("Substitution<{0}:{1}>", Name, string.Join(", ", Params.Map(kvpFormat)));
         }
-    }
+      }
 
     [Record]
     public class LeafMatchResult {

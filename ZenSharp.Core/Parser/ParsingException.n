@@ -13,7 +13,7 @@ namespace Github.Ulex.ZenSharp.Core
   {
     public Input : string { get; set; };
     public ParsedCount: int { get; set; };
-    
+
     public this(message : string, input : string, parsedCount : int){
       base(message);
       Input = input;

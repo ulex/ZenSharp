@@ -45,10 +45,10 @@ namespace Github.Ulex.ZenSharp.Core
         loop(Rules, prefix, []).Reverse();
       }
     }
-    
+
     public class MatchResultWithSuggestion : MatchResult {
       public Suggestion : MatchResult;
-      
+
       public this(success : bool, tail : string, rules : list[LeafRule], suggestion : MatchResult)
       {
         base(success, tail, rules);
@@ -59,7 +59,7 @@ namespace Github.Ulex.ZenSharp.Core
           Suggestion = suggestion;
         }
       }
-      
+
       public this(mr : MatchResult, suggestion : MatchResult){
         this(mr.Success, mr.Tail, mr.Rules, suggestion);
       }
@@ -68,7 +68,7 @@ namespace Github.Ulex.ZenSharp.Core
     public Match (prefix : string, scopename : string) : MatchResultWithSuggestion
     {
       def scope = _tree.GetScope(scopename);
-      
+
       // scope rules can override global rules
       def scopeRules = scope.Rules + _tree.GlobalRules;
 
@@ -89,11 +89,11 @@ namespace Github.Ulex.ZenSharp.Core
       def tryMatchConcatRule (rules : list[LeafRule], acc){
         match (rules) {
           | x :: xs => {
-            def r = tryMatchLeafRule(x, acc);
-            if (!r.Success)
-              r
-            else
-              tryMatchConcatRule(xs, r);
+              def r = tryMatchLeafRule(x, acc);
+              if (!r.Success)
+                r
+              else
+                tryMatchConcatRule(xs, r);
           }
           | _ => acc;
         }
@@ -116,7 +116,7 @@ namespace Github.Ulex.ZenSharp.Core
 
       def iSuggest = MatchResult(false, prefix, []);
       def result = tryMatchRule(_tree.GetStartRule(scope).Rules, MatchResultWithSuggestion(true, prefix, [], iSuggest));
-      
+
       def suggestion = MatchResult(result.Suggestion.Success, result.Suggestion.Tail, result.Suggestion.Rules.Reverse());
       MatchResultWithSuggestion(result.Success, result.Tail, result.Rules.Reverse(), suggestion);
     }
