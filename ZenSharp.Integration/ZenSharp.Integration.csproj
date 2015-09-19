@@ -13,7 +13,6 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <BaseIntermediateOutputPath>obj.R91\</BaseIntermediateOutputPath>
     <JetReferencesNoFilter>true</JetReferencesNoFilter>
     <NuGetPackageImportStamp>e82289e7</NuGetPackageImportStamp>
   </PropertyGroup>
@@ -22,16 +21,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\bin\Debug.R91\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;RESHARPER_91</DefineConstants>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>..\bin\Release.R91\</OutputPath>
-    <DefineConstants>TRACE;RESHARPER_91</DefineConstants>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,7 +46,6 @@
       <DependentUpon>ZenSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ZenSharpSettings.cs" />
-    <Compile Include="UpdateMacroDefinition.cs" />
     <Compile Include="ZenSharpItemsProvider.cs" />
     <Compile Include="EditConfigActionHandler.cs" />
     <Compile Include="LtgConfigWatcher.cs" />

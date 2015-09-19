@@ -70,8 +70,6 @@
   <ItemGroup>
     <Compile Include="GenerateTree.n">
     </Compile>
-    <Compile Include="LiveTemplate.n">
-    </Compile>
     <Compile Include="LiveTemplateMatcher.n">
       <SubType>Code</SubType>
     </Compile>
@@ -96,13 +94,8 @@
     <Compile Include="Parser\TreePart.n">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Program.n">
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.n" />
     <Compile Include="Utils\RuleFactory.n">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\GuidUtility.n">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utils\Identifier.n">
@@ -113,8 +106,6 @@
     </Compile>
     <Compile Include="Utils\MultiDict.n">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="XmlSerializer.n">
     </Compile>
   </ItemGroup>
   <ItemGroup>
