@@ -15,7 +15,8 @@ suggType ::= <type short="t" expand="$type$" macros = "complete()">
 // Primive types:
 maybeType  ::= type | "void"
 type       ::= generic | primType ("?"="?")? ("[]"=a)? | suggType
-primType   ::= string=s | byte=by | bool=b | "System.DateTime"=dt | decimal=dc | double=d | int=i | uint=ui | "System.Guid"=g | "System.Uri"=u | "System.Xml.Linq.XElement"=x
+primType   ::= string=s | byte=by | bool=b | "System.DateTime"=dt | decimal=dc | double=d | int=i | uint=ui | "System.Guid"=g | "System.Uri"=u | "System.Xml.Linq.XElement"=x |
+               object=o
 
 // Complex types:
 generic1 ::= (SCG "." ("IList"=l | "IEnumerable"="~")) "<" type ">"
@@ -27,7 +28,7 @@ generic ::= generic1 | generic2
 access ::= (internal=i | public=p | private=_ | protected=P) space
 
 // Auto properties:
-property        ::= access ("abstract "=pa | "static "=P | "virtual "=pv | ""=p) type space identifier propertyBody cursor
+property        ::= access ("abstract "=ap | "static "=P | "virtual "=vp | ""=p) type space identifier propertyBody cursor
 propertyBody    ::= "{ get;" propertySetAccessor " set; }"
 propertySetAccessor ::= "protected "="+p" | ""="+" | "private "
 
@@ -58,6 +59,7 @@ scope "InCSharpClass" {
     | ""=tfsetup "[NUnit.Framework.TestFixtureSetUpAttribute] public void FixtureSetup(){" cursor "}"
     | ""=test "[NUnit.Framework.TestAttribute] public void Test" identifier "(){" cursor "}"
     | class
+	| ""=dbset "public DBSet<" identifier " > " identifier "s {get; set; }"
 }
 
 scope "InCSharpTypeAndNamespace" {
@@ -87,4 +89,5 @@ scope "InCSharpStruct" {
 scope "InCSharpStatement" {
   start ::=
     | "if ("=ifr identifier " == null) return;"
+	| "Log."=l (Fatal=f | Info=i | Error=e | Trace=t | Debug=d) "(""" cursor """);"
 }
