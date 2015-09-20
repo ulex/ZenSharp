@@ -2,6 +2,7 @@
 using System.Linq;
 
 using JetBrains.ProjectModel;
+using JetBrains.ReSharper.Feature.Services.CodeCompletion;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion.Infrastructure;
@@ -60,9 +61,17 @@ namespace Github.Ulex.ZenSharp.Integration
                 };
                 var scopes = scopePoints.ToList();
                 Log.Trace("Current scopes: {0}", string.Join(",", scopes));
-                var iconId = iconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
-                collector.Add(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
-                return true;
+
+                if (scopes.Any(scopename => ltgConfig.Tree.IsScopeExist(scopename)))
+                {
+                    var iconId = iconManager.ExtendToTypicalSize(ServicesThemedIcons.LiveTemplate.Id);
+                    collector.Add(new ZenSharpLookupItem(template, ltgConfig.Tree, scopes, iconId));
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             Log.Warn("Lookup item for completion is not added, because ZenSharp expand tree is not loaded.");
             return false;
