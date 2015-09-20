@@ -44,7 +44,6 @@ namespace Github.Ulex.ZenSharp.Integration
             _tree = tree;
             _scopes = scopes;
             _template = template;
-            // fixme: what is it?
             Log.Info("Creating ZenSharpLookupItem with template = {0}", template);
             _iconId = iconId;
             _displayName = _template.Text;
@@ -78,12 +77,15 @@ namespace Github.Ulex.ZenSharp.Integration
         MatchingResult ILookupItem.Match(PrefixMatcher prefixMatcher, ITextControl textControl)
         {
             string prefix = prefixMatcher.Prefix;
+            if (string.IsNullOrEmpty(prefix)) return null;
+
             Log.Info("Match prefix = {0}", prefix);
-            if (_tree == null || string.IsNullOrEmpty(prefix))
+            if (_tree == null)
             {
                 Log.Error("Expand tree is null, return.");
                 return null;
             }
+
             var matcher = new LiveTemplateMatcher(_tree);
             var matchedScopes = _scopes.Where(s => _tree.IsScopeExist(s)).ToList();
             Log.Trace("Matched scopes = {0}", string.Join(", ", matchedScopes));
