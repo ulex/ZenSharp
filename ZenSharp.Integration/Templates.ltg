@@ -33,7 +33,13 @@ propertyBody    ::= "{ get;" propertySetAccessor " set; }"
 propertySetAccessor ::= "protected "="+p" | ""="+" | "private "
 
 // Methods:
-method ::= access ("virtual "=vm | "abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs methodBody
+methodAttributes ::=
+    | "[NUnit.Framework.SetUpAttribute]"=su
+    | "[NUnit.Framework.TestFixtureSetUpAttribute]"=tfsu
+    | "[NUnit.Framework.TearDownAttribute]"=td
+    | "[NUnit.Framework.TestCaseAttribute]"=tc
+    | "[NUnit.Framework.TestAttribute]"=t
+method ::= (methodAttributes)? access ("virtual "=vm | "abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs methodBody
 methodBody ::= " { " cursor " }"
 methodArgs ::=  "(" ((""="," | ""="(") arg)? ")"
 arg ::= primType " " identifier2
@@ -45,7 +51,8 @@ const ::= access "const "=c primType space identifier "= """ identifier """;"
 field ::= access ("readonly "=r)? type space identifier ("="="=" identifier2 ";" | ";")
 
 // Classes:
-class ::= access ("sealed "=s)? ("class"=c | "static class"=C) space  classBody
+classAtributes ::= ("[NUnit.Framework.TestFixtureAttribute]" = tf)?
+class ::= classAtributes access ("sealed "=s)? ("class"=c | "static class"=C) space  classBody
 classBody ::= identifier (" : "=":" type)? "{" cursor "}"
 
 //Enums:
@@ -55,9 +62,6 @@ scope "InCSharpClass" {
   start    ::=  method | property | field | const | other
 
   other ::=
-    | ""=tsetup "[NUnit.Framework.SetUpAttribute] public void TestSetup(){" cursor "}"
-    | ""=tfsetup "[NUnit.Framework.TestFixtureSetUpAttribute] public void FixtureSetup(){" cursor "}"
-    | ""=test "[NUnit.Framework.TestAttribute] public void Test" identifier "(){" cursor "}"
     | class
 	| ""=dbset "public DBSet<" identifier " > " identifier "s {get; set; }"
 }
