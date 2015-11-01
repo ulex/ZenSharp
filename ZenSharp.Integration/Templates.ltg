@@ -36,6 +36,7 @@ propertySetAccessor ::= "protected "="+p" | ""="+" | "private "
 methodAttributes ::=
     | "[NUnit.Framework.SetUpAttribute]"=su
     | "[NUnit.Framework.TestFixtureSetUpAttribute]"=tfsu
+    | "[NUnit.Framework.TestFixtureTearDownAttribute]"=tftd
     | "[NUnit.Framework.TearDownAttribute]"=td
     | "[NUnit.Framework.TestCaseAttribute]"=tc
     | "[NUnit.Framework.TestAttribute]"=t
