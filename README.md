@@ -24,16 +24,18 @@ ZenSharp shipped with a lot of standart templates.
 **Examples** in scope, where method definition is allowed:
 
 <!-- btw: «how to memo» really non readable markdown, sorry :) -->
-| shortcut | expand to                                              | how to memo                                                     |
-|----------|--------------------------------------------------------|-----------------------------------------------------------------|
-| pps      | `public string $name$ { get; private set; } $END$`     | **p**ublic **p**roperty **s**tring                              |
-| ppsAge   | `public string Age {get; private set;} $END$`          | **p**ublic **p**roperty **s**tring Name                         |
-| pps+     | `public string $name$ { get; set; } $END$`             | **p**ublic **p**roperty **s**tring more access!                 |
-| ppsA+p   | `public string A {get; protected set;} $END$`          | **p**ublic **p**roperty **s**tring more access!**p**rotected    |
-| \_rs     | `private readonly string $name$; $END$ `               | [**_** is private] **r**eadonly **s**tring                      |
-| pvm      | `public virtual void $name$($END$) { } `               | **p**ublic **v**irtual **m**ethod                               |
-| pM~s     | `public static IEnumerable<string> $name$($END$) { } ` | public [static **M**ethod] [**~** is IEnumerable] of **s**tring |
-| pamb     | `public abstract bool $name$($END$) { } `              | **p**ublic **a**bstract **m**ethod **b**ool                     |
+| shortcut | expand to                                              | how to memo                                                                 |
+|----------|--------------------------------------------------------|-----------------------------------------------------------------------------|
+| pps      | `public string $name$ { get; private set; } $END$`     | **p**ublic **p**roperty **s**tring                                          |
+| ppsAge   | `public string Age {get; private set;} $END$`          | **p**ublic **p**roperty **s**tring Name                                     |
+| pps+     | `public string $name$ { get; set; } $END$`             | **p**ublic **p**roperty **s**tring more access!                             |
+| ppsA+p   | `public string A {get; protected set;} $END$`          | **p**ublic **p**roperty **s**tring more access!**p**rotected                |
+| \_rs     | `private readonly string $name$; $END$ `               | [**_** is private] **r**eadonly **s**tring                                  |
+| pvm      | `public virtual void $name$($END$) { } `               | **p**ublic **v**irtual **m**ethod                                           |
+| pM~s     | `public static IEnumerable<string> $name$($END$) { } ` | public [static **M**ethod] _returning_ [**~** is IEnumerable] of **s**tring | 
+| pamb     | `public abstract bool $name$($END$) { } `              | **p**ublic **a**bstract **m**ethod **b**ool                                 |
+| pmiaTest | `public int[] Test() { $END$ }`                        | **p**ublic **m**ethod _returning_ **i**nt **a**rray Name                    |
+
 
 
 **Examples** where type declaration is allowed:
@@ -59,9 +61,12 @@ by pressing tab it magically expand to `public string PropertyName {get; set; }`
 
 
 #### Types
-| shortcut | expand to | note                                  |
-|----------|-----------|---------------------------------------|
-| t        | $type$    | ask user for custom type after expand |
+| shortcut | expand to | note                                            |
+|----------|-----------|-------------------------------------------------|
+| t        | $type$    | ask user for custom type after expand           |
+| sa       | string[]  | any prim type end with `a` — array of this type |
+| b?       | bool?     | any prim type end with `?` — Nullable type      |
+
 
 ##### Primitive types
 | shortcut | expand to |
@@ -86,6 +91,20 @@ by pressing tab it magically expand to `public string PropertyName {get; set; }`
 | sl       | SortedList<T1>  |
 | di       | Dictionary<T1>  |
 
+##### NUnit attributes #####
+Some useful examples to help wring NUnit tests:
+(this templates will be built in with ZenSharp for ReSharper 10, or you can grab it from
+[repo](https://github.com/ulex/ZenSharp/blob/master/ZenSharp.Integration/Templates.ltg) today)
+
+
+| shortcut               | expand to                                                  |
+|------------------------|------------------------------------------------------------|
+| **su**pmSetup          | `[SetUp] public void Setup() { $END$ }`                    |
+| **tfsu**pmFixtureSetup | `[TestFixuteSetUp] public void FixtureSetup() { $END$ }`   |
+| **tftd**FixtureDown    | `[TestFixuteTearDown] public void FixtureDown() { $END$ }` |
+| **td**pmTearDown       | `[TearDown] public void Test() { $END$ }`                  |
+| **tc**pmTest           | `[TestCase] public void Test() { $END$ }`                  |
+| **t**pmTest            | `[Test] public void Test() { $END$ }`                      |
 
 Rules
 ---
