@@ -68,8 +68,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenerateTree.n">
-    </Compile>
     <Compile Include="LiveTemplateMatcher.n">
       <SubType>Code</SubType>
     </Compile>
