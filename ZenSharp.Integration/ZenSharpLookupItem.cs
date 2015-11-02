@@ -39,7 +39,7 @@ namespace Github.Ulex.ZenSharp.Integration
         private string _displayName;
 
         public ZenSharpLookupItem(Template template, GenerateTree tree, IEnumerable<string> scopes, IconId iconId)
-            : base(null, template, true)
+            : base(template, true)
         {
             _tree = tree;
             _scopes = scopes;
