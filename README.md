@@ -15,9 +15,9 @@ How do I get it?
 You can install directly into ReSharper 8.2 or 9.0 via the Extension Manager in the
 ReSharper menu. (8.2 support removed, but binary version still available in R# gallery)
 
-Predifined templates
+Predefined templates
 ---
-ZenSharp shipped with a lot of standart templates.
+ZenSharp shipped with a lot of standard templates.
 
 `$END$` means cursor position after expand template by pressing Tab.
 
@@ -112,10 +112,10 @@ Simplest rule for expand text `cw` into `System.Console.WriteLine($END$)`(this
 rule is ordinary ReSharper live template) will looks like `start ::=
 "cw"="System.Console.WriteLine($END$)"`
 
-More complex rule, a sort of predifined live template for define class in scope,
+More complex rule, a sort of predefined live template for define class in scope,
 where class declaration is allowed. In ordinary live templates, if you want to
 specify class access before executing live template, you must define
-independed live templates one for `"public class"`=`pc`, another for `"internal class"=ic`
+independent live templates one for `"public class"`=`pc`, another for `"internal class"=ic`
 But class can be also be sealed. Or static. And same access modifier can be
 applied to interface and enum.
 
