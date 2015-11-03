@@ -100,8 +100,8 @@ Some useful examples to help wring NUnit tests:
 | shortcut               | expand to                                                  |
 |------------------------|------------------------------------------------------------|
 | **su**pmSetup          | `[SetUp] public void Setup() { $END$ }`                    |
-| **tfsu**pmFixtureSetup | `[TestFixuteSetUp] public void FixtureSetup() { $END$ }`   |
-| **tftd**FixtureDown    | `[TestFixuteTearDown] public void FixtureDown() { $END$ }` |
+| **tfsu**pmFixtureSetup | `[TestFixtureSetUp] public void FixtureSetup() { $END$ }`   |
+| **tftd**FixtureDown    | `[TestFixtureTearDown] public void FixtureDown() { $END$ }` |
 | **td**pmTearDown       | `[TearDown] public void Test() { $END$ }`                  |
 | **tc**pmTest           | `[TestCase] public void Test() { $END$ }`                  |
 | **t**pmTest            | `[Test] public void Test() { $END$ }`                      |
