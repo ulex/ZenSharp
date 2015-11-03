@@ -12,7 +12,7 @@ How it's work:
 
 How do I get it?
 ---
-You can install directly into ReSharper 8.2 or 9.0 via the Extension Manager in the
+You can install directly into ReSharper 10, 9.2, 9.0, 8.2 via the Extension Manager in the
 ReSharper menu. (8.2 support removed, but binary version still available in R# gallery)
 
 Predefined templates
@@ -32,7 +32,7 @@ ZenSharp shipped with a lot of standard templates.
 | ppsA+p   | `public string A {get; protected set;} $END$`          | **p**ublic **p**roperty **s**tring more access!**p**rotected                |
 | \_rs     | `private readonly string $name$; $END$ `               | [**_** is private] **r**eadonly **s**tring                                  |
 | pvm      | `public virtual void $name$($END$) { } `               | **p**ublic **v**irtual **m**ethod                                           |
-| pM~s     | `public static IEnumerable<string> $name$($END$) { } ` | public [static **M**ethod] _returning_ [**~** is IEnumerable] of **s**tring | 
+| pM~s     | `public static IEnumerable<string> $name$($END$) { } ` | public [static **M**ethod] _returning_ [**~** is IEnumerable] of **s**tring |
 | pamb     | `public abstract bool $name$($END$) { } `              | **p**ublic **a**bstract **m**ethod **b**ool                                 |
 | pmiaTest | `public int[] Test() { $END$ }`                        | **p**ublic **m**ethod _returning_ **i**nt **a**rray Name                    |
 
@@ -93,18 +93,17 @@ by pressing tab it magically expand to `public string PropertyName {get; set; }`
 
 ##### NUnit attributes #####
 Some useful examples to help wring NUnit tests:
-(this templates will be built in with ZenSharp for ReSharper 10, or you can grab it from
 [repo](https://github.com/ulex/ZenSharp/blob/master/ZenSharp.Integration/Templates.ltg) today)
 
 
-| shortcut               | expand to                                                  |
-|------------------------|------------------------------------------------------------|
-| **su**pmSetup          | `[SetUp] public void Setup() { $END$ }`                    |
+| shortcut               | expand to                                                   |
+|------------------------|-------------------------------------------------------------|
+| **su**pmSetup          | `[SetUp] public void Setup() { $END$ }`                     |
 | **tfsu**pmFixtureSetup | `[TestFixtureSetUp] public void FixtureSetup() { $END$ }`   |
 | **tftd**FixtureDown    | `[TestFixtureTearDown] public void FixtureDown() { $END$ }` |
-| **td**pmTearDown       | `[TearDown] public void Test() { $END$ }`                  |
-| **tc**pmTest           | `[TestCase] public void Test() { $END$ }`                  |
-| **t**pmTest            | `[Test] public void Test() { $END$ }`                      |
+| **td**pmTearDown       | `[TearDown] public void Test() { $END$ }`                   |
+| **tc**pmTest           | `[TestCase] public void Test() { $END$ }`                   |
+| **t**pmTest            | `[Test] public void Test() { $END$ }`                       |
 
 Rules
 ---
