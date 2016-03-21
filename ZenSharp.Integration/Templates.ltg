@@ -6,7 +6,6 @@ cursorb ::= "(" cursor ")"
 // Resharper macros:
 identifier ::= <name default="$name$" macros = "complete()">
 identifier2 ::= <name2 default="$name2$" macros = "complete()">
-
 //
 // Types:
 //
@@ -17,6 +16,7 @@ maybeType  ::= type | "void"
 type       ::= generic | primType ("?"="?")? ("[]"=a)? | suggType
 primType   ::= string=s | byte=by | bool=b | "System.DateTime"=dt | decimal=dc | double=d | int=i | uint=ui | "System.Guid"=g | "System.Uri"=u | "System.Xml.Linq.XElement"=x |
                object=o
+taskType   ::= "System.Threading.Tasks.Task"
 
 // Complex types:
 generic1 ::= (SCG "." ("IList"=l | "IEnumerable"="~")) "<" type ">"
@@ -40,7 +40,9 @@ methodAttributes ::=
     | "[NUnit.Framework.TearDownAttribute]"=td
     | "[NUnit.Framework.TestCaseAttribute]"=tc
     | "[NUnit.Framework.TestAttribute]"=t
-method ::= (methodAttributes)? access ("virtual "=vm | "abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs methodBody
+method_async ::= (methodAttributes)? access "async" space ("virtual "=vm | "abstract "=am | "static "=M | ""=m)   (taskType "<"=T type ">" | taskType ""=T) space identifier methodArgs methodBody
+method_generic ::= (methodAttributes)? access ("virtual "=vm | "abstract "=am | "static "=M | ""=m) (type | "void") space identifier methodArgs methodBody
+method ::= method_async | method_generic
 methodBody ::= " { " cursor " }"
 methodArgs ::=  "(" ((""="," | ""="(") arg)? ")"
 arg ::= primType " " identifier2
