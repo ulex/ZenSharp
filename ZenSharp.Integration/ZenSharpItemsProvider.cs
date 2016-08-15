@@ -55,7 +55,7 @@ namespace Github.Ulex.ZenSharp.Integration
             var scopePoints = provider.ProvideScopePoints(templateContext);
             if (ltgConfig.Tree != null)
             {
-                var template = new Template("", "", "", true, true, false, TemplateApplicability.Live)
+                var template = new Template("", "", "", true, true, false, new [] { TemplateApplicability.Live })
                 {
                     UID = Guid.NewGuid()
                 };
