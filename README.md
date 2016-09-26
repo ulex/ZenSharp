@@ -12,8 +12,8 @@ How it's work:
 
 How do I get it?
 ---
-You can install directly into ReSharper 2016.2 via the Extension Manager in the
-ReSharper menu. (2016.1, 10, 9.2, 9.0, 8.2, 8.2 support removed, but binary version still available in ReSharper gallery)
+You can install directly into ReSharper 2016.3 via the Extension Manager in the
+ReSharper menu. (2016.2, 2016.1, 10, 9.2, 9.0, 8.2, 8.2 support removed, but binary version still available in ReSharper gallery)
 
 Predefined templates
 ---
