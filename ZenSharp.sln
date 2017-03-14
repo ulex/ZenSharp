@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "ZenSharp.Core", "ZenSharp.Core\ZenSharp.Core.nproj", "{EFA574E2-DE9C-4017-BB5C-8FC4CD8D5E80}"
 EndProject

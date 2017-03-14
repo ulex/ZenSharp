@@ -2,12 +2,11 @@
 using JetBrains.Application.DataContext;
 using JetBrains.Application.Settings;
 using JetBrains.IDE;
+using JetBrains.ProjectModel.DataContext;
 using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.UI.ActionsRevised;
 using JetBrains.UI.MenuGroups;
 using JetBrains.Util;
-
-using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -24,7 +23,7 @@ namespace Github.Ulex.ZenSharp.Integration
     {
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
         {
-            var solution = context.GetData(DataConstants.SOLUTION);
+            var solution = context.GetData(ProjectModelDataConstants.SOLUTION);
             return solution != null;
         }
 
@@ -34,7 +33,7 @@ namespace Github.Ulex.ZenSharp.Integration
             var ctx = store.BindToContextTransient(ContextRange.ApplicationWide);
             var settings = ctx.GetKey<ZenSharpSettings>(SettingsOptimization.DoMeSlowly);
 
-            var solution = context.GetData(DataConstants.SOLUTION);
+            var solution = context.GetData(ProjectModelDataConstants.SOLUTION);
             EditorManager.GetInstance(solution)
                 .OpenFile(
                     FileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename)),
