@@ -32,7 +32,7 @@ ZenSharp shipped with a lot of standard templates.
 | ppsA+p   | `public string A {get; protected set;} $END$`          | **p**ublic **p**roperty **s**tring more access!**p**rotected                |
 | \_rs     | `private readonly string $name$; $END$ `               | [**_** is private] **r**eadonly **s**tring                                  |
 | pvm      | `public virtual void $name$($END$) { } `               | **p**ublic **v**irtual **m**ethod                                           |
-| pM~s     | `public static IEnumerable<string> $name$($END$) { } ` | public [static **M**ethod] _returning_ [**~** is IEnumerable] of **s**tring |
+| pM\~s     | `public static IEnumerable<string> $name$($END$) { } ` | public [static **M**ethod] _returning_ [**\~** is IEnumerable] of **s**tring |
 | pamb     | `public abstract bool $name$($END$) { } `              | **p**ublic **a**bstract **m**ethod **b**ool                                 |
 | pmiaTest | `public int[] Test() { $END$ }`                        | **p**ublic **m**ethod _returning_ **i**nt **a**rray Name                    |
 
@@ -142,6 +142,12 @@ ZenSharp written in C# and Nemerle programming language. You can install it from
 ZenSharp depend on nuget packages ReSharper.SDK and nunit.framwork. Use nuget package restore for them.
 
 After this, ZenSharp can be built either msbuild or Visual Studio.
+
+External links
+---
+https://blog.jetbrains.com/dotnet/2015/12/22/end-of-year-round-up-of-resharper-10-extensions/
+https://garyng.github.io/gtil-gitbook/ReSharper/resharper-plugin-zensharp.html
+
 
 <!--
 vim:tw=140:spell:
