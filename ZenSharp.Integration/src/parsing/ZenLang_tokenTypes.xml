@@ -1,0 +1,54 @@
+<ClrRegexTokens Dynamic="True">
+
+  <TokenTypeClass>ClrRegexTokenTypes</TokenTypeClass>
+  <TokenTypeNamespace>JetBrains.ReSharper.Psi.RegExp.ClrRegex.Parsing</TokenTypeNamespace>
+
+  <Tokens NodeType="ClrRegexTokenNodeType" TokenElement="ClrRegexTokenBase">
+    <Token name="DIGIT" representation="Digit" />
+    <Token name="LETTER" representation="Letter" />
+    <Token name="OTHER" representation="Character" />
+    <Token name="INVALID" representation="Invalid Character" />
+    <Token name="ESCAPE" representation="Escape Character" />
+    <Token name="CLASS" representation="Character Class" />
+    <Token name="BACKREFERENCE" representation="Backreference" />
+    <Token name="LETTER_OPTION" representation="Option character" />
+  
+    <Token name="NAMED_BACKREFERENCE" representation="\\k" />
+    <Token name="UNICODE_NAMED_BLOCK" representation="\\p" />
+    <Token name="NONUNICODE_NAMED_BLOCK" representation="\\P" />
+  
+    <Token name="ESCAPE_LOWER_B" representation="\\b" />
+    <Token name="ESCAPE_LOWER_Z" representation="\\z" />
+    <Token name="ESCAPE_UPPER_B" representation="\\B" />  
+    <Token name="ESCAPE_UPPER_Z" representation="\\Z" />
+    <Token name="ESCAPE_UPPER_A" representation="\\A" />
+    <Token name="ESCAPE_UPPER_G" representation="\\G" />
+  
+    <Token name="CAROT" representation="^" />
+    <Token name="DOLLAR" representation="$" />
+    <Token name="DASH" representation="-" />
+    <Token name="DOT" representation="." />
+    <Token name="COMMA" representation="," />
+    <Token name="PLUS" representation="+" />
+    <Token name="QUESTION" representation="?" />
+    <Token name="EXCLAMATION" representation="!" />
+    <Token name="EQUAL" representation="=" />
+    <Token name="PIPE" representation="|" />
+    <Token name="STAR" representation="*" />
+    <Token name="AMPER" representation="&amp;" />
+    <Token name="APOSTROPHE" representation="'" />
+    <Token name="GRAVEACCENT" representation="`" />
+    <Token name="UNDERLINE" representation="_" />
+    <Token name="COLON" representation=":" />
+  
+    <Token name="LBRACKET" representation="[" />
+    <Token name="RBRACKET" representation="]" />
+    <Token name="LPARENTH" representation="(" />
+    <Token name="RPARENTH" representation=")" />
+    <Token name="GT" representation=">" />
+    <Token name="LT" representation="&lt;" />
+    <Token name="LBRACE" representation="{" />
+    <Token name="RBRACE" representation="}" />
+  </Tokens>
+  
+</ClrRegexTokens>

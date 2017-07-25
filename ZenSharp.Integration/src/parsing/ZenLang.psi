@@ -1,0 +1,439 @@
+options {
+  parserPackage="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Gen";
+  parserClassName="ClrRegexParserGenerated";
+  psiInterfacePackageName="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Tree";
+  psiStubsPackageName="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Impl.Tree";
+  psiStubsBaseClass="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Impl.Tree.ClrRegexCompositeElement";
+  tokenClassName="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Impl.Tree.ClrRegexToken";
+  tokenTypePackageName="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Parsing";
+  tokenTypeClassName="ClrRegexTokenTypes";
+  parserTargetSubdir="Parsing/RegExp";
+  psiInterfacesTargetSubdir="Psi/RegExp";
+  psiStubsTargetSubdir="Psi/RegExp/Impl";
+  elementTypePrefix="";
+  visitorClassName="TreeNodeVisitor";
+  visitorMethodSuffix="";
+  testTargetSubdir="Psi/Test/RegExp";
+  disableReflection;
+  separateHierarchies;
+  acceptModifier="";
+  visitorSuperClassName="JetBrains.ReSharper.Psi.RegExp.ClrRegex.TreeNodeVisitorBase";
+  "treeElementClassFQName"="JetBrains.ReSharper.Psi.ExtensionsAPI.Tree.TreeElement";
+  "leafElementClassFQName"="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Impl.Tree.ClrRegexLeafElement";
+  "compositeElementClassFQName"="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Impl.Tree.ClrRegexCompositeElement";
+  "psiElementVisitorClassFQName"="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Tree.TreeNodeVisitor";
+  "unexpectedTokenClassFQName"="Parsing.UnexpectedToken";
+  "syntaxErrorClassFQName"="Parsing.SyntaxError";
+  "parserGenRuntimePackageName"="Parsing";
+  "createTokenElementMethodFQName"="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Impl.Factory.createTokenElement";
+  "visitMethodPrefix"="Visit";
+  "lexerClassName"="JetBrains.ReSharper.Psi.Parsing.ILexer";
+  "psiClassesPrefix"="";
+  "psiElementClassFQName"="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Tree.IClrRegexTreeNode";
+  customImplPackage="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Impl.Tree";
+  customInterfacePackage="JetBrains.ReSharper.Psi.ClrRegex.RegExp.Tree";
+  "interfaceNamePrefix"="I"; 
+  "tokenElementClassFQName"="JetBrains.ReSharper.Psi.Tree.ITokenNode";   
+  "customImplSuffix"="";
+  "objectClassFQName"="System.Object";
+  publicChildRolePrefix="REGEXP_";
+  tokenBitsetThreshold=4;
+  elementTypeBaseClass="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Impl.Tree.ClrRegexCompositeNodeType";
+  parserMessagesClass="JetBrains.ReSharper.Psi.RegExp.ClrRegex.Parsing.ParserMessages";
+  generateWorkingPsi;
+}
+
+//
+// Basic concepts 
+//
+
+errorhandling clrRegularExpressionFile options {
+  stubBase="ClrRegexFileBase";
+}
+:
+  BORDER
+  clrRegularExpression<REGEXP_EXPRESSION, RegularExpression>
+  BORDER
+;
+
+errorhandling clrRegularExpression 
+:
+  clrConcatenationRegularExpression<REGEXP_EXPRESSION, ConcatenationRegularExpressions>
+  (
+    PIPE<REGEXP_PIPE, Pipes>
+    clrConcatenationRegularExpression<REGEXP_EXPRESSION, ConcatenationRegularExpressions>
+  )*
+;
+
+errorhandling clrConcatenationRegularExpression
+:
+  clrQuantifiableRegularExpression<REGEXP_EXPRESSION, QuantifiableRegularExpressions>*
+;
+
+//
+// Quantifiable regular expression
+//
+
+errorhandling clrQuantifiableRegularExpression 
+:
+  clrRegexQuantifierOwner<REGEXP_QUANTIFIER_OWNER, Owner> 
+  clrRegexQuantifier<REGEXP_QUANTIFIER, Quantifier>?
+;
+
+errorhandling interface clrRegexQuantifierOwner
+:
+  clrRegexGroup | 
+  clrRegexCharacter | 
+  clrRegexSet |
+  clrRegexAnchor
+;
+
+errorhandling clrRegexQuantifier options { customParseFunction; }
+:
+  (
+    STAR<REGEXP_STAR, Star> | 
+    PLUS<REGEXP_PLUS, Plus> | 
+    QUESTION<REGEXP_QUESTION, Question> | 
+    clrRegexNumericQuantifier<REGEXP_NUMERIC, Numeric>
+  ) 
+  (QUESTION<REGEXP_NONE, OptionalQuestion>)? 
+;
+
+errorhandling clrRegexNumericQuantifier
+:
+  LBRACE<REGEXP_LBRACE, LBrace> 
+  clrRegexNumber<REGEXP_NUMBER, Number> 
+  (
+    COMMA<REGEXP_COMMA, Comma>
+    clrRegexNumber<REGEXP_SECONDARYNUMBER, SecondaryNumber>?
+  )?
+  RBRACE<REGEXP_RBRACE, RBrace> 
+;
+
+//
+// Anchors
+//
+
+errorhandling interface clrRegexAnchor
+:
+  clrRegexStartAnchor |
+  clrRegexEndAnchor |
+  clrRegexBorderAnchor
+;
+
+errorhandling clrRegexStartAnchor
+:
+  CAROT |
+  ESCAPE_UPPER_A |
+  ESCAPE_UPPER_G
+;
+
+errorhandling clrRegexEndAnchor
+:
+  DOLLAR |
+  ESCAPE_LOWER_Z |
+  ESCAPE_UPPER_Z
+;
+
+errorhandling clrRegexBorderAnchor
+:
+  ESCAPE_LOWER_B |
+  ESCAPE_UPPER_B
+;
+
+//
+// Groups
+//
+
+interface clrRegexGroup options { customParseFunction; }
+:
+  clrRegexSimpleGroup |
+  clrRegexNamedGroup |
+  clrRegexPrefixGroup |
+  clrRegexOptionGroup |
+  clrRegexAlternationGroup
+;
+
+errorhandling clrRegexSimpleGroup
+:
+  LPARENTH<REGEXP_LPARENTH, LParenth>
+  clrRegularExpression<REGEXP_EXPRESSION, RegularExpression>?
+  RPARENTH<REGEXP_RPARENTH, RParenth>
+;
+
+errorhandling clrRegexNamedGroup
+:
+  LPARENTH<REGEXP_LPARENTH, LParenth>
+  QUESTION<REGEXP_QUESTION, QuestionSign>
+  clrRegexGroupName<REGEXP_NAME, GroupName>
+  clrRegularExpression<REGEXP_EXPRESSION, RegularExpression>?
+  RPARENTH<REGEXP_RPARENTH, RParenth>
+;
+
+errorhandling clrRegexPrefixGroup
+:
+  LPARENTH<REGEXP_LPARENTH, LParenth>
+  QUESTION<REGEXP_QUESTION, QuestionSign>
+  clrRegexGroupPrefix<REGEXP_PREFIX, Prefix>
+  clrRegularExpression<REGEXP_EXPRESSION, RegularExpression>?
+  RPARENTH<REGEXP_RPARENTH, RParenth>
+;
+
+errorhandling clrRegexOptionGroup
+:
+  LPARENTH<REGEXP_LPARENTH, LParenth>
+  QUESTION<REGEXP_QUESTION, QuestionSign>
+  (LETTER_OPTION<REGEXP_OPTION, Options>)* 
+  (
+    DASH<REGEXP_DASH, Dash>
+    LETTER_OPTION<REGEXP_OPTION, Options>+
+  )?
+  (
+    COLON<REGEXP_NONE, Colon> 
+    clrRegularExpression<REGEXP_EXPRESSION, RegularExpression>
+  )?
+  RPARENTH<REGEXP_RPARENTH, RParenth>
+;
+
+errorhandling clrRegexAlternationGroup
+:
+  LPARENTH<REGEXP_LPARENTH, LParenth>
+  QUESTION<REGEXP_QUESTION, QuestionSign>
+  LPARENTH<REGEXP_ALTLPARENTH, AltLParenth>
+  (
+    QUESTION<REGEXP_QUESTION2, Prefix>
+    EQUAL<REGEXP_EQUAL2, LongPrefix>
+  )?
+  (
+    (clrRegexName clrRegularExpression?) |
+    (clrRegexNumber clrRegularExpression?) |
+    clrRegularExpression
+  )
+  RPARENTH<REGEXP_ALTRPARENTH, AltRParenth>
+  clrConcatenationRegularExpression
+  (
+    PIPE<REGEXP_PIPE, Pipe>
+    clrConcatenationRegularExpression
+  )?
+  RPARENTH<REGEXP_RPARENTH, RParenth>
+;
+
+errorhandling clrRegexGroupPrefix
+:
+  COLON<REGEXP_COLON, Prefix> |
+  EQUAL<REGEXP_EQUAL, Prefix> |
+  EXCLAMATION<REGEXP_EXCLAMATION, Prefix> |    
+  GT<REGEXP_GT, Prefix> |
+  LT<REGEXP_LT, Lt>
+  (
+    EQUAL<REGEXP_EQUAL2, LongPrefix> | 
+    EXCLAMATION<REGEXP_EXCLAMATION2, LongPrefix>
+  )
+;
+
+errorhandling clrRegexGroupName
+:
+  (
+    LT<REGEXP_LT, Lt>
+    clrRegexGroupNameValue
+    GT<REGEXP_GT, Gt>
+  ) |
+  (
+    APOSTROPHE<REGEXP_LT, Lt>
+    clrRegexGroupNameValue
+    APOSTROPHE<REGEXP_GT, Gt>
+  )
+;
+
+private errorhandling clrRegexGroupNameValue
+:
+  (
+    clrRegexName<REGEXP_NAME, Name>
+    (
+      DASH<REGEXP_DASH, Dash>
+      clrRegexName<REGEXP_SECONDARYNAME, SecondaryName>
+    )?
+  ) |
+  (
+    DASH<REGEXP_DASH, Dash>
+    clrRegexName<REGEXP_SECONDARYNAME, SecondaryName>
+  )
+;
+
+//
+// Sets
+//
+
+errorhandling clrRegexSet
+:
+  LBRACKET<REGEXP_LBRACKET, LBracket>
+  CAROT<REGEXP_NONE, NegativeMark>? 
+  clrRegexSetBody<REGEXP_BODY, Body>
+  RBRACKET<REGEXP_RBRACKET, RBracket>
+;
+
+errorhandling clrRegexSetBody
+:
+  RBRACKET?      // Construction '[]]' is set of one ']'
+  clrRegexSetBodyItem*
+;
+
+errorhandling interface clrRegexSetBodyItem options { customParseFunction; }
+:    
+  clrRegexSetBodyCharacter |
+  clrRegexSetRange |
+  clrRegexNestedSet
+;
+
+errorhandling clrRegexNestedSet
+:
+  DASH<REGEXP_DASH, Dash>
+  clrRegexSet<REGEXP_BODY, InnerSet>
+;
+
+errorhandling clrRegexSetRange
+:
+  clrRegexSetRangeItem<REGEXP_RANGE_MIN, Min>
+  DASH<REGEXP_DASH, Dash>
+  clrRegexSetRangeItem<REGEXP_RANGE_MAX, Max>
+;
+
+clrRegexSetRangeItem
+:
+  letter |
+  digit
+;
+
+errorhandling interface clrRegexSetBodyCharacter
+:    
+  clrRegexSymbolCharacter |
+  clrRegexInvalidCharacter |
+  clrRegexEscapeCharacter |
+  clrRegexRegularCharacter |
+  clrRegexSetCharacter
+;
+
+// Set can contains any 'system' character as-is, except ']'
+errorhandling clrRegexSetCharacter
+:
+  ESCAPE_LOWER_B |
+  CAROT |
+  DOLLAR |
+  PLUS |
+  STAR |
+  QUESTION |
+  DOT |
+  PIPE |
+  LBRACKET |
+  LPARENTH |
+  RPARENTH
+;
+
+//
+// Characters
+//
+
+errorhandling interface clrRegexCharacter
+:
+  clrRegexSymbolCharacter |
+  clrRegexInvalidCharacter |
+  clrRegexEscapeCharacter |
+  clrRegexRegularCharacter |
+  clrRegexBracketCharacter
+;
+
+errorhandling clrRegexSymbolCharacter
+:
+  digit |
+  letter |
+  WHITESPACE |
+  OTHER |    
+  COMMA |
+  DASH |
+  EXCLAMATION |
+  EQUAL |
+  AMPER |
+  APOSTROPHE |
+  GRAVEACCENT |
+  UNDERLINE |
+  COLON |
+  GT |
+  LT |
+  LBRACE |
+  RBRACE
+;
+
+errorhandling clrRegexInvalidCharacter
+:
+  INVALID
+;
+
+errorhandling clrRegexBracketCharacter
+:
+  RBRACKET
+;
+
+errorhandling clrRegexEscapeCharacter
+:
+  ESCAPE  
+;
+
+errorhandling clrRegexRegularCharacter
+:
+  DOT |
+  CLASS |
+  BACKREFERENCE |
+  clrRegexNamedBackreference |
+  clrRegexNamedBlock
+;
+
+errorhandling clrRegexNamedBackreference
+:
+  NAMED_BACKREFERENCE
+  (
+    (
+      LT<REGEXP_LT, Lt>
+      (clrRegexName<REGEXP_NAME, Name> | clrRegexNumber<REGEXP_NAME, NAME>)
+      GT<REGEXP_GT, Gt>
+    ) |
+    (
+      APOSTROPHE<REGEXP_LT, Lt>
+      (clrRegexName<REGEXP_NAME, Name> | clrRegexNumber<REGEXP_NAME, NAME>)
+      APOSTROPHE<REGEXP_GT, Gt>
+    )
+  )
+;
+ 
+errorhandling clrRegexNamedBlock
+:
+  (UNICODE_NAMED_BLOCK | NONUNICODE_NAMED_BLOCK)
+  LBRACE<REGEXP_LBRACE, LBrace>
+  clrRegexName<REGEXP_NAME, Name>
+  RBRACE<REGEXP_RBRACE, RBrace>
+;
+
+//
+// Common
+//
+
+clrRegexName
+:
+  letter
+  (letter | digit | UNDERLINE)*
+;
+
+private letter
+:
+  LETTER |
+  LETTER_OPTION
+;
+
+clrRegexNumber
+:
+  digit+
+;
+
+private digit
+:
+  DIGIT
+;

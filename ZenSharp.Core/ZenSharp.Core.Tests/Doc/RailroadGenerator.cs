@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
@@ -163,4 +163,4 @@ namespace ZenSharp.Core.Tests.Doc
             return string.Format("NonTerminal('{0}{1}')", leafRule.Expand, leafRule.Short);
         }
     }
-}
+}*/

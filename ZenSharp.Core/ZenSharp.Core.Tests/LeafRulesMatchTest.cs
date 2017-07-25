@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 
 using NUnit.Framework;
@@ -50,4 +50,4 @@ namespace ZenSharp.Core.Tests
             Assert.AreEqual(rule.Match("wr").Short, "");
         }
     }
-}
+}*/

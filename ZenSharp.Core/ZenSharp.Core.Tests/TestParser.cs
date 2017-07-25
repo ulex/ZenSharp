@@ -1,4 +1,5 @@
-﻿using Github.Ulex.ZenSharp.Core;
+﻿/*
+using Github.Ulex.ZenSharp.Core;
 
 using NUnit.Framework;
 
@@ -17,3 +18,4 @@ namespace ZenSharp.Core.Tests
         }
     }
 }
+*/

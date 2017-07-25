@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.IO;
 
 using Github.Ulex.ZenSharp.Core;
@@ -131,4 +131,4 @@ namespace Github.Ulex.ZenSharp.Integration
             _watcher.Dispose();
         }
     }
-}
+}*/

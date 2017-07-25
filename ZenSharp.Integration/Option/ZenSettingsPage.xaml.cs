@@ -33,12 +33,12 @@ namespace Github.Ulex.ZenSharp.Integration
             settings.SetBinding(lifetime, (ZenSharpSettings s) => s.TreeFilename, this, PathProperty);
             InitializeComponent();
             Id = pageId;
-            _zenWatcher = Shell.Instance.GetComponent<LtgConfigWatcher>();
+            // _zenWatcher = Shell.Instance.GetComponent<LtgConfigWatcher>();
             // show exception info if any
             OnOk();
         }
 
-        private readonly LtgConfigWatcher _zenWatcher;
+        // private readonly LtgConfigWatcher _zenWatcher;
 
         public static readonly DependencyProperty PathProperty = DependencyProperty.Register(
             "Path",
@@ -78,8 +78,8 @@ namespace Github.Ulex.ZenSharp.Integration
             {
                 // todo: use settings notification options
                 var fullPath = ZenSharpSettings.GetTreePath(Path);
-                _zenWatcher.Reload(fullPath);
-                _zenWatcher.ReinitializeWatcher(fullPath);
+                // _zenWatcher.Reload(fullPath);
+                // _zenWatcher.ReinitializeWatcher(fullPath);
                 return true;
             }
             catch (Exception exception)
