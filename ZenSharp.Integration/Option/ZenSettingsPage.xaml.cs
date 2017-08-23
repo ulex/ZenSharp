@@ -5,12 +5,12 @@ using System.Windows.Navigation;
 
 using JetBrains.Application.Components;
 using JetBrains.Application.Settings;
+using JetBrains.Application.UI.Options;
+using JetBrains.Application.UI.Options.OptionPages;
+using JetBrains.Application.UI.Options.Options.ThemedIcons;
+using JetBrains.Application.UI.UIAutomation;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Resources.Shell;
-using JetBrains.UI.CrossFramework;
-using JetBrains.UI.Options;
-using JetBrains.UI.Options.OptionPages;
-using JetBrains.UI.Resources;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
 

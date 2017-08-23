@@ -1,11 +1,12 @@
-﻿using JetBrains.ActionManagement;
-using JetBrains.Application.DataContext;
+﻿using JetBrains.Application.DataContext;
 using JetBrains.Application.Settings;
+using JetBrains.Application.UI.Actions;
+using JetBrains.Application.UI.Actions.MenuGroups;
+using JetBrains.Application.UI.ActionsRevised.Menu;
+using JetBrains.Application.UI.ActionSystem.ActionsRevised.Menu;
 using JetBrains.IDE;
 using JetBrains.ProjectModel.DataContext;
 using JetBrains.ReSharper.Resources.Shell;
-using JetBrains.UI.ActionsRevised;
-using JetBrains.UI.MenuGroups;
 using JetBrains.Util;
 
 namespace Github.Ulex.ZenSharp.Integration
@@ -18,7 +19,7 @@ namespace Github.Ulex.ZenSharp.Integration
         }
     }
 
-    [Action("Edit ZenSharp templates", Id = 11122233)]
+    [Action("Edit ZenSharp templates")]
     public class EditConfigActionHandler : IExecutableAction
     {
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
@@ -33,12 +34,11 @@ namespace Github.Ulex.ZenSharp.Integration
             var ctx = store.BindToContextTransient(ContextRange.ApplicationWide);
             var settings = ctx.GetKey<ZenSharpSettings>(SettingsOptimization.DoMeSlowly);
 
-            var solution = context.GetData(ProjectModelDataConstants.SOLUTION);
+            var solution = context.GetData(ProjectModelDataConstants.SOLUTION).NotNull("solution != null");
             EditorManager.GetInstance(solution)
                 .OpenFile(
                     FileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename)),
-                    true,
-                    TabOptions.Default);
+                    OpenFileOptions.DefaultActivate);
         }
     }
 }

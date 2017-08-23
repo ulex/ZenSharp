@@ -107,7 +107,7 @@ namespace Github.Ulex.ZenSharp.Integration
                 }
                 catch (Exception e)
                 {
-                    Log.Error("Exception during match", e);
+                    Log.LogException(LoggingLevel.ERROR, e, ExceptionOrigin.Assertion, "Exception during match");
                     return null;
                 }
             }
@@ -140,7 +140,8 @@ namespace Github.Ulex.ZenSharp.Integration
         private static MatchingResult CreateMatchingResult(string prefix)
         {
             // todo: review parameters
-            return new MatchingResult(prefix.Length, "z", 1, MatcherScore.NoTypos);
+            var enableAllFlags = MatcherScore.Highest - 1;
+            return new MatchingResult(prefix.Length, "a", 1, enableAllFlags);
         }
 
         private string FillText(string prefix, LiveTemplateMatcher.MatchResult matchResult)

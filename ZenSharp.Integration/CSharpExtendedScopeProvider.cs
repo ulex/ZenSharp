@@ -23,7 +23,7 @@ namespace Github.Ulex.ZenSharp.Integration
         public IEnumerable<string> ProvideScopePoints(TemplateAcceptanceContext tacContext)
         {
             var solution = tacContext.Solution;
-            var document = tacContext.Document;
+            var document = tacContext.SelectionRange.Document;
             if (document == null)
             {
                 yield break;
@@ -41,7 +41,7 @@ namespace Github.Ulex.ZenSharp.Integration
                 {
                     psiFiles.CommitAllDocuments();
                 }
-                int caretOffset = tacContext.CaretOffset;
+                int caretOffset = tacContext.CaretOffset.Offset;
                 string prefix = LiveTemplatesManager.GetPrefix(document, caretOffset);
                 var documentRange = new DocumentRange(document, caretOffset - prefix.Length);
                 if (!documentRange.IsValid())

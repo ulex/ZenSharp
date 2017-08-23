@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-
+using JetBrains.DocumentModel;
 using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Feature.Services.CodeCompletion;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion.Infrastructure;
@@ -29,15 +28,11 @@ namespace Github.Ulex.ZenSharp.Integration
             return context.ReplaceRangeWithJoinedArguments.Length != 0;
         }
 
-        protected override bool AddLookupItems(CSharpCodeCompletionContext context, GroupedItemsCollector collector)
+        protected override bool AddLookupItems(CSharpCodeCompletionContext context, IItemsCollector collector)
         {
             Log.Info("Add lookupitems");
 
             var solution = context.PsiModule.GetSolution();
-            if (solution == null)
-            {
-                return false;
-            }
 
             var ltgConfig = Shell.Instance.GetComponent<LtgConfigWatcher>();
 
@@ -48,14 +43,13 @@ namespace Github.Ulex.ZenSharp.Integration
             var offset = textControl.Caret.Offset();
             var templateContext = new TemplateAcceptanceContext(
                 solution,
-                textControl.Document,
-                offset,
-                new TextRange(offset));
+                new DocumentOffset(textControl.Document, offset), 
+                new DocumentRange(textControl.Document, offset));
 
             var scopePoints = provider.ProvideScopePoints(templateContext);
             if (ltgConfig.Tree != null)
             {
-                var template = new Template("", "", "", true, true, false, new [] { TemplateApplicability.Live })
+                var template = new Template("", "", "", true, true, false, new[] {TemplateApplicability.Live})
                 {
                     UID = Guid.NewGuid()
                 };
