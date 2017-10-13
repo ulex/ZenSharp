@@ -4,7 +4,7 @@ ReSharper ZenSharp plugin
 A shortcuts language for defining ReSharper live template items. You can
 specify your own live template scheme using flexible language.
 
-How it's work:
+How does it work:
 
 ![example1](https://raw.githubusercontent.com/ulex/ZenSharp/master/doc/screen1.gif)
 
