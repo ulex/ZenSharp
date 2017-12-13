@@ -1,7 +1,7 @@
 ReSharper ZenSharp plugin
 ==============
 
-A shortcuts language for defining ReSharper live template items. You can
+A shortcuts language for defining [ReSharper](https://www.jetbrains.com/resharper/) live template items. You can
 specify your own live template scheme using flexible language.
 
 How it's work:
@@ -12,8 +12,8 @@ How it's work:
 
 How do I get it?
 ---
-You can install directly into ReSharper 2017.1 via the Extension Manager in the
-ReSharper menu. (2016.3, 2016.2, 2016.1, 10, 9.2, 9.0, 8.2, 8.2 support removed, but binary version still available in ReSharper gallery)
+You can install directly into ReSharper 2017.3…8.2 via the Extension Manager in the
+ReSharper menu.
 
 Predefined templates
 ---
