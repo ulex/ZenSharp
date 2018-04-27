@@ -12,7 +12,7 @@ How it's work:
 
 How do I get it?
 ---
-You can install directly into ReSharper 2017.3…8.2 via the Extension Manager in the
+You can install directly into ReSharper 2018.1…8.2 via the Extension Manager in the
 ReSharper menu.
 
 Predefined templates

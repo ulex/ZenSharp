@@ -10,6 +10,7 @@
 Free and open source. More information on github.
     </description>
     <releaseNotes>
+      Support for 2018.1
       Bug fix, new syntax.
     </releaseNotes>
     <copyright>Alexander Ulitin</copyright>
