@@ -10,8 +10,7 @@
 Free and open source. More information on github.
     </description>
     <releaseNotes>
-      Support for 2018.1
-      Bug fix, new syntax.
+      Support 2018.2
     </releaseNotes>
     <copyright>Alexander Ulitin</copyright>
     <tags>livetemplates code completion ltg</tags>
