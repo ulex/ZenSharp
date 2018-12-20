@@ -1,32 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\JetBrains.ReSharper.SDK.Internal.182.0.20180821.122427\build\net461\JetBrains.ReSharper.SDK.Internal.props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.Internal.182.0.20180821.122427\build\net461\JetBrains.ReSharper.SDK.Internal.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.VisualStudio.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.VisualStudio.props" Condition="Exists('..\packages\JetBrains.Psi.Features.VisualStudio.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.VisualStudio.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.Features.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Features.props" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Features.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Features.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.test.Framework.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.test.Framework.props" Condition="Exists('..\packages\JetBrains.Psi.Features.test.Framework.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.test.Framework.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.UnitTesting.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UnitTesting.props" Condition="Exists('..\packages\JetBrains.Psi.Features.UnitTesting.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UnitTesting.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.props" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.Diagramming.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Diagramming.props" Condition="Exists('..\packages\JetBrains.Psi.Features.Diagramming.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Diagramming.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Core.props" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Core.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.SolutionBuilder.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.SolutionBuilder.props" Condition="Exists('..\packages\JetBrains.Psi.Features.SolutionBuilder.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.SolutionBuilder.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.src.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.src.props" Condition="Exists('..\packages\JetBrains.Psi.Features.src.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.src.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Core.props" Condition="Exists('..\packages\JetBrains.Psi.Features.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Core.props')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.Tasks.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Tasks.props" Condition="Exists('..\packages\JetBrains.Psi.Features.Tasks.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Tasks.props')" />
-  <Import Project="..\packages\JetBrains.Platform.VisualStudio.182.0.20180821.113634\build\net461\JetBrains.Platform.VisualStudio.props" Condition="Exists('..\packages\JetBrains.Platform.VisualStudio.182.0.20180821.113634\build\net461\JetBrains.Platform.VisualStudio.props')" />
-  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Ide.props" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Ide.props')" />
-  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Text.props" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Text.props')" />
-  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Shell.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Shell.props" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Shell.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Shell.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Tests.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Tests.Framework.props" Condition="Exists('..\packages\JetBrains.Platform.Tests.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Tests.Framework.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Sdk.182.0.20180821.113634\build\net461\JetBrains.Platform.Sdk.props" Condition="Exists('..\packages\JetBrains.Platform.Sdk.182.0.20180821.113634\build\net461\JetBrains.Platform.Sdk.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.props" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.props" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Core.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Ide.props" Condition="Exists('..\packages\JetBrains.Platform.Core.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Ide.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Core.MsBuild.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.MsBuild.props" Condition="Exists('..\packages\JetBrains.Platform.Core.MsBuild.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.MsBuild.props')" />
-  <Import Project="..\packages\JetBrains.Platform.RdProtocol.182.0.20180821.113634\build\net461\JetBrains.Platform.RdProtocol.props" Condition="Exists('..\packages\JetBrains.Platform.RdProtocol.182.0.20180821.113634\build\net461\JetBrains.Platform.RdProtocol.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Interop.CommandLine.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.CommandLine.props" Condition="Exists('..\packages\JetBrains.Platform.Interop.CommandLine.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.CommandLine.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Core.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Text.props" Condition="Exists('..\packages\JetBrains.Platform.Core.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Text.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Core.Shell.182.0.20180819.121759\build\net461\JetBrains.Platform.Core.Shell.props" Condition="Exists('..\packages\JetBrains.Platform.Core.Shell.182.0.20180819.121759\build\net461\JetBrains.Platform.Core.Shell.props')" />
-  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.props" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.props')" />
+  <Import Project="..\packages\JetBrains.ReSharper.SDK.Internal.183.0.20181217.125022\build\net461\JetBrains.ReSharper.SDK.Internal.props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.Internal.183.0.20181217.125022\build\net461\JetBrains.ReSharper.SDK.Internal.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.VisualStudio.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.VisualStudio.props" Condition="Exists('..\packages\JetBrains.Psi.Features.VisualStudio.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.VisualStudio.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.Features.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Features.props" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Features.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Features.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.test.Framework.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.test.Framework.props" Condition="Exists('..\packages\JetBrains.Psi.Features.test.Framework.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.test.Framework.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.UnitTesting.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UnitTesting.props" Condition="Exists('..\packages\JetBrains.Psi.Features.UnitTesting.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UnitTesting.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.props" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.Diagramming.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Diagramming.props" Condition="Exists('..\packages\JetBrains.Psi.Features.Diagramming.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Diagramming.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Core.props" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Core.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.SolutionBuilder.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.SolutionBuilder.props" Condition="Exists('..\packages\JetBrains.Psi.Features.SolutionBuilder.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.SolutionBuilder.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.src.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.src.props" Condition="Exists('..\packages\JetBrains.Psi.Features.src.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.src.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Core.props" Condition="Exists('..\packages\JetBrains.Psi.Features.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Core.props')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.Tasks.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Tasks.props" Condition="Exists('..\packages\JetBrains.Psi.Features.Tasks.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Tasks.props')" />
+  <Import Project="..\packages\JetBrains.Platform.VisualStudio.183.0.20181217.72716\build\net461\JetBrains.Platform.VisualStudio.props" Condition="Exists('..\packages\JetBrains.Platform.VisualStudio.183.0.20181217.72716\build\net461\JetBrains.Platform.VisualStudio.props')" />
+  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Ide.props" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Ide.props')" />
+  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Text.props" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Text.props')" />
+  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Shell.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Shell.props" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Shell.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Shell.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Tests.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Tests.Framework.props" Condition="Exists('..\packages\JetBrains.Platform.Tests.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Tests.Framework.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Sdk.183.0.20181217.72716\build\net461\JetBrains.Platform.Sdk.props" Condition="Exists('..\packages\JetBrains.Platform.Sdk.183.0.20181217.72716\build\net461\JetBrains.Platform.Sdk.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.props" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.props" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Core.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Ide.props" Condition="Exists('..\packages\JetBrains.Platform.Core.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Ide.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Core.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Text.props" Condition="Exists('..\packages\JetBrains.Platform.Core.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Text.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Core.MsBuild.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.MsBuild.props" Condition="Exists('..\packages\JetBrains.Platform.Core.MsBuild.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.MsBuild.props')" />
+  <Import Project="..\packages\JetBrains.Platform.RdProtocol.183.0.20181217.72716\build\net461\JetBrains.Platform.RdProtocol.props" Condition="Exists('..\packages\JetBrains.Platform.RdProtocol.183.0.20181217.72716\build\net461\JetBrains.Platform.RdProtocol.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Interop.CommandLine.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.CommandLine.props" Condition="Exists('..\packages\JetBrains.Platform.Interop.CommandLine.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.CommandLine.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Core.Shell.183.0.20181217.72320\build\net461\JetBrains.Platform.Core.Shell.props" Condition="Exists('..\packages\JetBrains.Platform.Core.Shell.183.0.20181217.72320\build\net461\JetBrains.Platform.Core.Shell.props')" />
+  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.props" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.props')" />
+  <Import Project="..\packages\JetBrains.ExternalAnnotations.10.2.54\build\JetBrains.ExternalAnnotations.props" Condition="Exists('..\packages\JetBrains.ExternalAnnotations.10.2.54\build\JetBrains.ExternalAnnotations.props')" />
   <Import Project="..\packages\JetBrains.Build.Platform.Tasks.ProxyToSolutionCompiledTask.2.0.20170904.2\build\JetBrains.Build.Platform.Tasks.ProxyToSolutionCompiledTask.Props" Condition="Exists('..\packages\JetBrains.Build.Platform.Tasks.ProxyToSolutionCompiledTask.2.0.20170904.2\build\JetBrains.Build.Platform.Tasks.ProxyToSolutionCompiledTask.Props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -109,6 +110,10 @@
     <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
     </Reference>
+    <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.6749.38075, Culture=neutral, PublicKeyToken=af5372d9166ac06b, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.SharpZipLib.Stripped.0.87.20180624.19\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -130,11 +135,55 @@
       <HintPath>..\packages\JetBrains.MahApps.Metro.1.5.0.1\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.CodeAnalysis, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Features, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.CSharp.Features.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.CSharp.Workspaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Features, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.Features.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.VisualBasic, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.VisualBasic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.VisualBasic.Features, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.VisualBasic.Features.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Workspaces, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.CodeAnalysis.Workspaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Deployment.Compression, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Microsoft.Deployment.Compression.Cab.3.11.0\lib\net20\Microsoft.Deployment.Compression.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Deployment.Compression.Cab, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Microsoft.Deployment.Compression.Cab.3.11.0\lib\net20\Microsoft.Deployment.Compression.Cab.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DiaSymReader, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.DiaSymReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.DiaSymReader.PortablePdb, Version=1.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\Microsoft.DiaSymReader.PortablePdb.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -169,50 +218,65 @@
     <Reference Include="NHunspell, Version=1.2.5554.16953, Culture=neutral, PublicKeyToken=1ac793ea843b4366, processorArchitecture=MSIL">
       <HintPath>..\packages\NHunspell.1.2.5554.16953\lib\net\NHunspell.dll</HintPath>
     </Reference>
-    <Reference Include="NuGet.Commands, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.Commands.dll</HintPath>
+    <Reference Include="NuGet.Commands, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.Commands.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Common, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.Common.dll</HintPath>
+    <Reference Include="NuGet.Common, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Configuration, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.Configuration.dll</HintPath>
+    <Reference Include="NuGet.Configuration, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.Configuration.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Core, Version=2.14.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Core.2.14.1.20180704\lib\net40-Client\NuGet.Core.dll</HintPath>
+    <Reference Include="NuGet.Core, Version=2.14.0.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Core.2.14.1.20181128\lib\net40-Client\NuGet.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Credentials, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.Credentials.dll</HintPath>
+    <Reference Include="NuGet.Credentials, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.Credentials.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.DependencyResolver.Core, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.DependencyResolver.Core.dll</HintPath>
+    <Reference Include="NuGet.DependencyResolver.Core, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.DependencyResolver.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Frameworks, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Frameworks.4.7.0.20180704\lib\net46\NuGet.Frameworks.dll</HintPath>
+    <Reference Include="NuGet.Frameworks, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Frameworks.4.9.1.20181128\lib\net46\NuGet.Frameworks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.LibraryModel, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.LibraryModel.dll</HintPath>
+    <Reference Include="NuGet.LibraryModel, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.LibraryModel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.PackageManagement, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.PackageManagement.dll</HintPath>
+    <Reference Include="NuGet.PackageManagement, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.PackageManagement.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Packaging, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.Packaging.dll</HintPath>
+    <Reference Include="NuGet.Packaging, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.Packaging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Packaging.Core, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.Packaging.Core.dll</HintPath>
+    <Reference Include="NuGet.Packaging.Core, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.Packaging.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.ProjectModel, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.ProjectModel.dll</HintPath>
+    <Reference Include="NuGet.ProjectModel, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.ProjectModel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Protocol, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.Protocol.dll</HintPath>
+    <Reference Include="NuGet.Protocol, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.Protocol.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Resolver, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.7.0.20180704\lib\net46\NuGet.Resolver.dll</HintPath>
+    <Reference Include="NuGet.Resolver, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Ultimate.4.9.1.20181128\lib\net46\NuGet.Resolver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NuGet.Versioning, Version=4.7.0.18070, Culture=neutral, PublicKeyToken=5aaa11a165479571, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.NuGet.Versioning.4.7.0.20180704\lib\net46\NuGet.Versioning.dll</HintPath>
+    <Reference Include="NuGet.Versioning, Version=4.9.1.18117, Culture=neutral, PublicKeyToken=5aaa11a165479571">
+      <HintPath>..\packages\JetBrains.NuGet.Versioning.4.9.1.20181128\lib\net46\NuGet.Versioning.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
@@ -232,18 +296,70 @@
       <HintPath>..\packages\Sprache.JetBrains.2.1.0\lib\net40\Sprache.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Composition.AttributedModel, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Composition.AttributedModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.Hosting, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Composition.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.Runtime, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Composition.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.TypedParts, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Composition.TypedParts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Reflection.Metadata, Version=1.4.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Reflection.Metadata.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Text.Encoding.CodePages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Threading.Thread.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -255,6 +371,10 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\JetBrains.Roslyn.References.Repack.42.42.20181026.113330\lib\Net\System.Xml.XPath.XDocument.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Vestris.ResourceLib, Version=1.4.33.0, Culture=neutral, PublicKeyToken=ec632d8ba5e5750d, processorArchitecture=MSIL">
       <HintPath>..\packages\Vestris.ResourceLib.JetBrains.1.4.20150303.0\lib\Net\Vestris.ResourceLib.dll</HintPath>
     </Reference>
@@ -271,8 +391,9 @@
     <Reference Include="xunit.runner.utility.net452, Version=2.3.1.3858, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.runner.utility.2.3.1\lib\net452\xunit.runner.utility.net452.dll</HintPath>
     </Reference>
-    <Reference Include="YamlDotNet, Version=4.2.1.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
-      <HintPath>..\packages\YamlDotNet.Signed.4.2.1\lib\net35\YamlDotNet.dll</HintPath>
+    <Reference Include="YamlDotNet, Version=5.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e">
+      <HintPath>..\packages\YamlDotNet.Signed.5.2.1\lib\net45\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ZenSharp.Core, Version=1.0.6051.26661, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -302,89 +423,90 @@
     <Error Condition="!Exists('..\packages\Antlr2.Tools.2.7.6.4\build\Antlr2.Tools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Antlr2.Tools.2.7.6.4\build\Antlr2.Tools.targets'))" />
     <Error Condition="!Exists('..\packages\JetBrains.Build.Platform.Tasks.ProxyToSolutionCompiledTask.2.0.20170904.2\build\JetBrains.Build.Platform.Tasks.ProxyToSolutionCompiledTask.Props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Build.Platform.Tasks.ProxyToSolutionCompiledTask.2.0.20170904.2\build\JetBrains.Build.Platform.Tasks.ProxyToSolutionCompiledTask.Props'))" />
     <Error Condition="!Exists('..\packages\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.2.0.20151217.1\build\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.2.0.20151217.1\build\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.Targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Shell.182.0.20180819.121759\build\net461\JetBrains.Platform.Core.Shell.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Shell.182.0.20180819.121759\build\net461\JetBrains.Platform.Core.Shell.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Shell.182.0.20180819.121759\build\net461\JetBrains.Platform.Core.Shell.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Shell.182.0.20180819.121759\build\net461\JetBrains.Platform.Core.Shell.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Text.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Text.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Text.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Text.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.CommandLine.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.CommandLine.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.CommandLine.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.CommandLine.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.CommandLine.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.CommandLine.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.CommandLine.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.CommandLine.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.RdProtocol.182.0.20180821.113634\build\net461\JetBrains.Platform.RdProtocol.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.RdProtocol.182.0.20180821.113634\build\net461\JetBrains.Platform.RdProtocol.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.RdProtocol.182.0.20180821.113634\build\net461\JetBrains.Platform.RdProtocol.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.RdProtocol.182.0.20180821.113634\build\net461\JetBrains.Platform.RdProtocol.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.MsBuild.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.MsBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.MsBuild.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.MsBuild.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.MsBuild.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.MsBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.MsBuild.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.MsBuild.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Ide.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Ide.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Ide.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Ide.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Sdk.182.0.20180821.113634\build\net461\JetBrains.Platform.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Sdk.182.0.20180821.113634\build\net461\JetBrains.Platform.Sdk.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Sdk.182.0.20180821.113634\build\net461\JetBrains.Platform.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Sdk.182.0.20180821.113634\build\net461\JetBrains.Platform.Sdk.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Tests.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Tests.Framework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Tests.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Tests.Framework.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.Tests.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Tests.Framework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Tests.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Tests.Framework.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Shell.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Shell.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Shell.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Shell.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Shell.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Shell.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Shell.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Shell.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Text.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Text.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Text.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Text.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Ide.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Ide.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Ide.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Ide.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.VisualStudio.182.0.20180821.113634\build\net461\JetBrains.Platform.VisualStudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.VisualStudio.182.0.20180821.113634\build\net461\JetBrains.Platform.VisualStudio.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Platform.VisualStudio.182.0.20180821.113634\build\net461\JetBrains.Platform.VisualStudio.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.VisualStudio.182.0.20180821.113634\build\net461\JetBrains.Platform.VisualStudio.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Tasks.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Tasks.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Tasks.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Tasks.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Tasks.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Tasks.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Tasks.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Tasks.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Core.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Core.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.src.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.src.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.src.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.src.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.src.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.src.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.src.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.src.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.SolutionBuilder.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.SolutionBuilder.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.SolutionBuilder.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.SolutionBuilder.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.SolutionBuilder.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.SolutionBuilder.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.SolutionBuilder.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.SolutionBuilder.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Core.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Core.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Diagramming.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Diagramming.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Diagramming.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Diagramming.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Diagramming.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Diagramming.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Diagramming.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Diagramming.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UnitTesting.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UnitTesting.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UnitTesting.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UnitTesting.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UnitTesting.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UnitTesting.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UnitTesting.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UnitTesting.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.test.Framework.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.test.Framework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.test.Framework.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.test.Framework.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.test.Framework.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.test.Framework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.test.Framework.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.test.Framework.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Features.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Features.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.Features.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Features.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Features.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Features.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.Features.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Features.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.VisualStudio.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.VisualStudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.VisualStudio.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.VisualStudio.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.VisualStudio.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.VisualStudio.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.VisualStudio.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.VisualStudio.targets'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.ReSharper.SDK.Internal.182.0.20180821.122427\build\net461\JetBrains.ReSharper.SDK.Internal.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.ReSharper.SDK.Internal.182.0.20180821.122427\build\net461\JetBrains.ReSharper.SDK.Internal.props'))" />
-    <Error Condition="!Exists('..\packages\JetBrains.ReSharper.SDK.Internal.182.0.20180821.122427\build\net461\JetBrains.ReSharper.SDK.Internal.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.ReSharper.SDK.Internal.182.0.20180821.122427\build\net461\JetBrains.ReSharper.SDK.Internal.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.ExternalAnnotations.10.2.54\build\JetBrains.ExternalAnnotations.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.ExternalAnnotations.10.2.54\build\JetBrains.ExternalAnnotations.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Shell.183.0.20181217.72320\build\net461\JetBrains.Platform.Core.Shell.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Shell.183.0.20181217.72320\build\net461\JetBrains.Platform.Core.Shell.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Shell.183.0.20181217.72320\build\net461\JetBrains.Platform.Core.Shell.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Shell.183.0.20181217.72320\build\net461\JetBrains.Platform.Core.Shell.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.CommandLine.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.CommandLine.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.CommandLine.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.CommandLine.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.CommandLine.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.CommandLine.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.CommandLine.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.CommandLine.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.RdProtocol.183.0.20181217.72716\build\net461\JetBrains.Platform.RdProtocol.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.RdProtocol.183.0.20181217.72716\build\net461\JetBrains.Platform.RdProtocol.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.RdProtocol.183.0.20181217.72716\build\net461\JetBrains.Platform.RdProtocol.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.RdProtocol.183.0.20181217.72716\build\net461\JetBrains.Platform.RdProtocol.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.MsBuild.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.MsBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.MsBuild.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.MsBuild.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.MsBuild.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.MsBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.MsBuild.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.MsBuild.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Text.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Text.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Text.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Text.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Ide.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Ide.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Core.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Ide.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Core.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Ide.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Sdk.183.0.20181217.72716\build\net461\JetBrains.Platform.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Sdk.183.0.20181217.72716\build\net461\JetBrains.Platform.Sdk.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Sdk.183.0.20181217.72716\build\net461\JetBrains.Platform.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Sdk.183.0.20181217.72716\build\net461\JetBrains.Platform.Sdk.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Tests.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Tests.Framework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Tests.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Tests.Framework.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.Tests.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Tests.Framework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.Tests.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Tests.Framework.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Shell.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Shell.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Shell.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Shell.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Shell.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Shell.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Shell.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Shell.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Text.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Text.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Text.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Text.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Ide.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Ide.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.UIInteractive.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Ide.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.UIInteractive.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Ide.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.VisualStudio.183.0.20181217.72716\build\net461\JetBrains.Platform.VisualStudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.VisualStudio.183.0.20181217.72716\build\net461\JetBrains.Platform.VisualStudio.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Platform.VisualStudio.183.0.20181217.72716\build\net461\JetBrains.Platform.VisualStudio.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Platform.VisualStudio.183.0.20181217.72716\build\net461\JetBrains.Platform.VisualStudio.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Tasks.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Tasks.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Tasks.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Tasks.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Tasks.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Tasks.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Tasks.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Tasks.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Core.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.src.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.src.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.src.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.src.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.src.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.src.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.src.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.src.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.SolutionBuilder.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.SolutionBuilder.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.SolutionBuilder.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.SolutionBuilder.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.SolutionBuilder.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.SolutionBuilder.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.SolutionBuilder.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.SolutionBuilder.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Core.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Diagramming.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Diagramming.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Diagramming.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Diagramming.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.Diagramming.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Diagramming.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.Diagramming.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Diagramming.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UnitTesting.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UnitTesting.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UnitTesting.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UnitTesting.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UnitTesting.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UnitTesting.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UnitTesting.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UnitTesting.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.test.Framework.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.test.Framework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.test.Framework.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.test.Framework.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.test.Framework.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.test.Framework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.test.Framework.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.test.Framework.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Features.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Features.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.Features.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Features.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Features.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Features.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.UIInteractive.Features.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Features.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.VisualStudio.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.VisualStudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.VisualStudio.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.VisualStudio.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.Psi.Features.VisualStudio.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.VisualStudio.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.Psi.Features.VisualStudio.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.VisualStudio.targets'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.ReSharper.SDK.Internal.183.0.20181217.125022\build\net461\JetBrains.ReSharper.SDK.Internal.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.ReSharper.SDK.Internal.183.0.20181217.125022\build\net461\JetBrains.ReSharper.SDK.Internal.props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.ReSharper.SDK.Internal.183.0.20181217.125022\build\net461\JetBrains.ReSharper.SDK.Internal.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.ReSharper.SDK.Internal.183.0.20181217.125022\build\net461\JetBrains.ReSharper.SDK.Internal.targets'))" />
   </Target>
   <Import Project="..\packages\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.2.0.20151217.1\build\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.Targets" Condition="Exists('..\packages\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.2.0.20151217.1\build\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.Targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Core.Shell.182.0.20180819.121759\build\net461\JetBrains.Platform.Core.Shell.targets" Condition="Exists('..\packages\JetBrains.Platform.Core.Shell.182.0.20180819.121759\build\net461\JetBrains.Platform.Core.Shell.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Core.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Text.targets" Condition="Exists('..\packages\JetBrains.Platform.Core.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Text.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Interop.CommandLine.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.CommandLine.targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.CommandLine.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.CommandLine.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.RdProtocol.182.0.20180821.113634\build\net461\JetBrains.Platform.RdProtocol.targets" Condition="Exists('..\packages\JetBrains.Platform.RdProtocol.182.0.20180821.113634\build\net461\JetBrains.Platform.RdProtocol.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Core.MsBuild.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.MsBuild.targets" Condition="Exists('..\packages\JetBrains.Platform.Core.MsBuild.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.MsBuild.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Core.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Ide.targets" Condition="Exists('..\packages\JetBrains.Platform.Core.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Core.Ide.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Sdk.182.0.20180821.113634\build\net461\JetBrains.Platform.Sdk.targets" Condition="Exists('..\packages\JetBrains.Platform.Sdk.182.0.20180821.113634\build\net461\JetBrains.Platform.Sdk.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.Tests.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Tests.Framework.targets" Condition="Exists('..\packages\JetBrains.Platform.Tests.Framework.182.0.20180821.113634\build\net461\JetBrains.Platform.Tests.Framework.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Shell.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Shell.targets" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Shell.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Shell.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Text.targets" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Text.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Text.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Ide.targets" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Ide.182.0.20180821.113634\build\net461\JetBrains.Platform.UIInteractive.Ide.targets')" />
-  <Import Project="..\packages\JetBrains.Platform.VisualStudio.182.0.20180821.113634\build\net461\JetBrains.Platform.VisualStudio.targets" Condition="Exists('..\packages\JetBrains.Platform.VisualStudio.182.0.20180821.113634\build\net461\JetBrains.Platform.VisualStudio.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.Tasks.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Tasks.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.Tasks.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Tasks.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Core.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Core.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.src.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.src.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.src.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.src.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.SolutionBuilder.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.SolutionBuilder.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.SolutionBuilder.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.SolutionBuilder.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Core.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Core.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Core.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.Diagramming.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Diagramming.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.Diagramming.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.Diagramming.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.UnitTesting.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UnitTesting.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.UnitTesting.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UnitTesting.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.test.Framework.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.test.Framework.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.test.Framework.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.test.Framework.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.Features.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Features.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Features.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.UIInteractive.Features.targets')" />
-  <Import Project="..\packages\JetBrains.Psi.Features.VisualStudio.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.VisualStudio.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.VisualStudio.182.0.20180821.114120\build\net461\JetBrains.Psi.Features.VisualStudio.targets')" />
-  <Import Project="..\packages\JetBrains.ReSharper.SDK.Internal.182.0.20180821.122427\build\net461\JetBrains.ReSharper.SDK.Internal.targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.Internal.182.0.20180821.122427\build\net461\JetBrains.ReSharper.SDK.Internal.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Framework.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Core.Shell.183.0.20181217.72320\build\net461\JetBrains.Platform.Core.Shell.targets" Condition="Exists('..\packages\JetBrains.Platform.Core.Shell.183.0.20181217.72320\build\net461\JetBrains.Platform.Core.Shell.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Interop.CommandLine.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.CommandLine.targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.CommandLine.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.CommandLine.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.RdProtocol.183.0.20181217.72716\build\net461\JetBrains.Platform.RdProtocol.targets" Condition="Exists('..\packages\JetBrains.Platform.RdProtocol.183.0.20181217.72716\build\net461\JetBrains.Platform.RdProtocol.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Core.MsBuild.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.MsBuild.targets" Condition="Exists('..\packages\JetBrains.Platform.Core.MsBuild.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.MsBuild.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Core.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Text.targets" Condition="Exists('..\packages\JetBrains.Platform.Core.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Text.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Core.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Ide.targets" Condition="Exists('..\packages\JetBrains.Platform.Core.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Core.Ide.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Console.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.Interop.dotMemoryUnit.Interop.Ide.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Sdk.183.0.20181217.72716\build\net461\JetBrains.Platform.Sdk.targets" Condition="Exists('..\packages\JetBrains.Platform.Sdk.183.0.20181217.72716\build\net461\JetBrains.Platform.Sdk.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.Tests.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Tests.Framework.targets" Condition="Exists('..\packages\JetBrains.Platform.Tests.Framework.183.0.20181217.72716\build\net461\JetBrains.Platform.Tests.Framework.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Shell.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Shell.targets" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Shell.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Shell.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Text.targets" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Text.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Text.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.UIInteractive.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Ide.targets" Condition="Exists('..\packages\JetBrains.Platform.UIInteractive.Ide.183.0.20181217.72716\build\net461\JetBrains.Platform.UIInteractive.Ide.targets')" />
+  <Import Project="..\packages\JetBrains.Platform.VisualStudio.183.0.20181217.72716\build\net461\JetBrains.Platform.VisualStudio.targets" Condition="Exists('..\packages\JetBrains.Platform.VisualStudio.183.0.20181217.72716\build\net461\JetBrains.Platform.VisualStudio.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.Tasks.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Tasks.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.Tasks.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Tasks.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Core.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Core.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.src.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.src.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.src.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.src.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.SolutionBuilder.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.SolutionBuilder.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.SolutionBuilder.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.SolutionBuilder.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Core.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Core.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Core.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.Diagramming.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Diagramming.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.Diagramming.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.Diagramming.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.SolutionAnalysis.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.UnitTesting.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UnitTesting.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.UnitTesting.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UnitTesting.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.test.Framework.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.test.Framework.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.test.Framework.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.test.Framework.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.UIInteractive.Features.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Features.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.UIInteractive.Features.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.UIInteractive.Features.targets')" />
+  <Import Project="..\packages\JetBrains.Psi.Features.VisualStudio.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.VisualStudio.targets" Condition="Exists('..\packages\JetBrains.Psi.Features.VisualStudio.183.0.20181217.121206\build\net461\JetBrains.Psi.Features.VisualStudio.targets')" />
+  <Import Project="..\packages\JetBrains.ReSharper.SDK.Internal.183.0.20181217.125022\build\net461\JetBrains.ReSharper.SDK.Internal.targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.Internal.183.0.20181217.125022\build\net461\JetBrains.ReSharper.SDK.Internal.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

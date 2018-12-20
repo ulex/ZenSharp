@@ -1,5 +1,6 @@
 @echo off
-SET PATH=%PATH%;C:\Windows\Microsoft.NET\Framework64\v4.0.30319
+REM SET PATH=%PATH%;C:\Windows\Microsoft.NET\Framework64\v4.0.30319
+SET PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin;%PATH%
 SET HostFullIdentifier=
 
 if not defined version set /P VERSION=Version:
