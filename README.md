@@ -4,15 +4,13 @@ ReSharper ZenSharp plugin
 A shortcuts language for defining [ReSharper](https://www.jetbrains.com/resharper/) live template items. You can
 specify your own live template scheme using flexible language.
 
-How does it work:
-
 ![example1](https://raw.githubusercontent.com/ulex/ZenSharp/master/doc/screen1.gif)
 
 ![example2](https://raw.githubusercontent.com/ulex/ZenSharp/master/doc/screen2.gif)
 
 How do I get it?
 ---
-You can install directly into ReSharper 2018.1…8.2 via the Extension Manager in the
+You can install directly into ReSharper 2019.1…8.2 via the Extension Manager in the
 ReSharper menu.
 
 Predefined templates
