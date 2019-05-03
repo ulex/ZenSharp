@@ -4,6 +4,7 @@ using JetBrains.Application.UI.Actions;
 using JetBrains.Application.UI.Actions.MenuGroups;
 using JetBrains.Application.UI.ActionsRevised.Menu;
 using JetBrains.Application.UI.ActionSystem.ActionsRevised.Menu;
+using JetBrains.Diagnostics;
 using JetBrains.IDE;
 using JetBrains.ProjectModel.DataContext;
 using JetBrains.ReSharper.Resources.Shell;
@@ -35,10 +36,8 @@ namespace Github.Ulex.ZenSharp.Integration
             var settings = ctx.GetKey<ZenSharpSettings>(SettingsOptimization.DoMeSlowly);
 
             var solution = context.GetData(ProjectModelDataConstants.SOLUTION).NotNull("solution != null");
-            EditorManager.GetInstance(solution)
-                .OpenFile(
-                    FileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename)),
-                    OpenFileOptions.DefaultActivate);
+            var fsp = FileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename));
+            EditorManager.GetInstance(solution).OpenFileAsync(fsp, OpenFileOptions.DefaultActivate);
         }
     }
 }

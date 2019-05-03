@@ -7,15 +7,16 @@
     <authors>Alexander Ulitin</authors>
     <description>
       A shortcuts language for defining ReSharper live template items. You can specify your own live template scheme using flexible language.
-Free and open source. More information on github.
+Free and open source. For more information, see Github.
     </description>
     <releaseNotes>
-      Support 2018.3
+      Support 2019.1
     </releaseNotes>
     <copyright>Alexander Ulitin</copyright>
     <tags>livetemplates code completion ltg</tags>
     <projectUrl>https://github.com/ulex/ZenSharp</projectUrl>
     <iconUrl>https://raw.github.com/ulex/IntroduceNsAlias/master/icon.png</iconUrl>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <dependencies>
       <dependency id="$DependencyId$" version="$DependencyVersion$"/>
     </dependencies>
