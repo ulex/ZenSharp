@@ -21,6 +21,7 @@ namespace Github.Ulex.ZenSharp.Integration
     /// <summary>
     ///     todo: remove inherence
     /// </summary>
+    
     internal class ZenSharpLookupItem : TemplateLookupItem, ILookupItem
     {
         private static readonly ILogger Log = Logger.GetLogger(typeof(ZenSharpLookupItem));
@@ -74,7 +75,7 @@ namespace Github.Ulex.ZenSharp.Integration
             return true;
         }
 
-        MatchingResult ILookupItem.Match(PrefixMatcher prefixMatcher, ITextControl textControl)
+        MatchingResult ILookupItem.Match(PrefixMatcher prefixMatcher)
         {
             string prefix = prefixMatcher.Prefix;
             if (string.IsNullOrEmpty(prefix)) return null;
