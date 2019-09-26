@@ -28,7 +28,7 @@ namespace Github.Ulex.ZenSharp.Integration
             {
                 yield break;
             }
-            var psiSource = document.GetPsiSourceFile(solution);
+            var psiSource = tacContext.SourceFile;
             if (psiSource == null)
             {
                 yield break;
@@ -48,6 +48,9 @@ namespace Github.Ulex.ZenSharp.Integration
                 {
                     yield break;
                 }
+
+                yield return psiSource.PrimaryPsiLanguage.Name;
+                
                 var file = psiSource.GetPsiFile<CSharpLanguage>(documentRange);
                 if (file == null || !Equals(file.Language, CSharpLanguage.Instance))
                 {
