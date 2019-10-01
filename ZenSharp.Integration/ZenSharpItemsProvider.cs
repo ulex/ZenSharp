@@ -18,21 +18,24 @@ using JetBrains.Util.Logging;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
-    [Language(typeof(CSharpLanguage))]
-    internal class ZenSharpItemsProvider : ItemsProviderOfSpecificContext<CSharpCodeCompletionContext>
+    [Language(typeof(KnownLanguage))]
+    internal class ZenSharpItemsProvider : ItemsProviderOfSpecificContext<ISpecificCodeCompletionContext>
     {
         private static readonly ILogger Log = Logger.GetLogger(typeof(ZenSharpItemsProvider));
 
-        protected override bool IsAvailable(CSharpCodeCompletionContext context)
+        protected override bool IsAvailable(ISpecificCodeCompletionContext context)
         {
-            return context.ReplaceRangeWithJoinedArguments.Length != 0;
+            if (context is CSharpCodeCompletionContext csContext && csContext.ReplaceRangeWithJoinedArguments.Length == 0)
+                return false;
+
+            return true;
         }
 
-        protected override bool AddLookupItems(CSharpCodeCompletionContext context, IItemsCollector collector)
+        protected override bool AddLookupItems(ISpecificCodeCompletionContext context, IItemsCollector collector)
         {
             Log.Info("Add lookupitems");
 
-            var solution = context.PsiModule.GetSolution();
+            var solution = context.BasicContext.Solution;
 
             var ltgConfig = Shell.Instance.GetComponent<LtgConfigWatcher>();
 
