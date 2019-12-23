@@ -98,8 +98,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="JetBrains.Platform.Core.Ide">
+      <Version>193.0.20191219.91958</Version>
+    </PackageReference>
     <PackageReference Include="JetBrains.ReSharper.SDK">
-      <Version>2019.2.0</Version>
+      <Version>2019.3.1</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

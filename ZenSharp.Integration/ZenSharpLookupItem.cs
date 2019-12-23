@@ -9,12 +9,14 @@ using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupI
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Util;
+using JetBrains.ReSharper.Roslyn.Host.Models;
 using JetBrains.Text;
 using JetBrains.TextControl;
 using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
+using LoggingLevel = JetBrains.Diagnostics.LoggingLevel;
 
 namespace Github.Ulex.ZenSharp.Integration
 {
@@ -142,7 +144,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             // todo: review parameters
             var enableAllFlags = MatcherScore.Highest - 1;
-            return new MatchingResult(prefix.Length, "a", 1, enableAllFlags);
+            return new MatchingResult(prefix.Length, 1, enableAllFlags);
         }
 
         private string FillText(string prefix, LiveTemplateMatcher.MatchResult matchResult)
