@@ -10,7 +10,7 @@ specify your own live template scheme using flexible language.
 
 How do I get it?
 ---
-You can install directly into ReSharper 8.2…2019.3 via the Extension Manager in the
+You can install directly into ReSharper 8.2…2020.1 via the Extension Manager in the
 ReSharper menu.
 
 Predefined templates
@@ -149,15 +149,15 @@ https://garyng.github.io/gtil-gitbook/ReSharper/resharper-plugin-zensharp.html
 
 <!--
 HOW TO UPGRADE:
-1. Copy latest version from https://www.nuget.org/packages/JetBrains.ReSharper.SDK/
-2. Update ZenSharp.Integration/ZenSharp.Integration.csproj with latest version (from visual studio, manual does not seem to work)
-3. Update supported versions in README.md
-4. Update release notes in ZenSharp.nuspec
-5. Update version spec in buildNuPack.ps1
-6. Check compilation in Visual Studio
-7. Build package by running build.bat
-8. Install and check plugin
-9. push to plugins.jetbrains.com via Publish.ps1
+1. Update ZenSharp.Integration/ZenSharp.Integration.csproj ReSharperSDK to latest version (from visual studio)
+2. Update supported versions in README.md
+3. Update release notes in ZenSharp.nuspec
+4. Update version spec in buildNuPack.ps1
+5. Check compilation in Visual Studio
+6. Build package by running build.bat
+7. Install and check plugin
+8. Push to plugins.jetbrains.com via Publish.ps1
+9. Commit and push this repo
 
 vim:tw=140:spell:
 -->
