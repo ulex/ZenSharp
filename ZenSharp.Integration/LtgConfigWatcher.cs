@@ -5,6 +5,8 @@ using Github.Ulex.ZenSharp.Core;
 
 using JetBrains.Application;
 using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.Lifetimes;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
 
@@ -15,21 +17,24 @@ namespace Github.Ulex.ZenSharp.Integration
     {
         private static readonly ILogger Log = Logger.GetLogger(typeof(LtgConfigWatcher));
 
-        private readonly IContextBoundSettingsStore _boundSettings;
+        private readonly IContextBoundSettingsStoreLive _boundSettings;
 
         private FileSystemWatcher _watcher;
 
         private GenerateTree _tree;
+        private IProperty<string> _filepath;
 
-        public LtgConfigWatcher(ISettingsStore settingsStore)
+        public LtgConfigWatcher(Lifetime lifetime, ISettingsStore settingsStore)
         {
-            _boundSettings = settingsStore.BindToContextTransient(ContextRange.ApplicationWide);
-            Initialize();
+            _boundSettings = settingsStore.BindToContextLive(lifetime, ContextRange.ApplicationWide);
+            _filepath = _boundSettings.GetValueProperty<string>(lifetime, _boundSettings.Schema.GetScalarEntry((ZenSharpSettings s) => s.TreeFilename), null);
+
+            _filepath.Change.Advise_HasNew(lifetime, v => Initialize(v.New));
         }
 
-        private void Initialize()
+        private void Initialize(string settingsPath)
         {
-            var path = ZenSharpSettings.GetTreePath(ZenSettings.TreeFilename);
+            var path = ZenSharpSettings.GetTreePath(settingsPath);
             try
             {
                 ReinitializeWatcher(path);
@@ -92,14 +97,6 @@ namespace Github.Ulex.ZenSharp.Integration
             {
                 Log.Error("Error updating ltg config:");
                 MessageBox.ShowError(string.Format("Sorry for this stupid notification type, but some problem occupied when loading ZenSharp config: {0}", e.Message), "ZenSharp error");
-            }
-        }
-
-        private ZenSharpSettings ZenSettings
-        {
-            get
-            {
-                return _boundSettings.GetKey<ZenSharpSettings>(SettingsOptimization.DoMeSlowly);
             }
         }
 
