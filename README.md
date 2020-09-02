@@ -10,7 +10,7 @@ specify your own live template scheme using flexible language.
 
 How do I get it?
 ---
-You can install directly into ReSharper 8.2…2020.1 via the Extension Manager in the
+You can install directly into ReSharper 8.2…2020.2 via the Extension Manager in the
 ReSharper menu.
 
 Predefined templates

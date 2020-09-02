@@ -48,7 +48,7 @@ namespace ZenSharp.Core.Tests.Doc
 
         private const string DocDir = SolutionDir + "doc\\";
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
             _tree = new LtgParser().Parse(File.ReadAllText(TemplatesRelativePath)).Value;

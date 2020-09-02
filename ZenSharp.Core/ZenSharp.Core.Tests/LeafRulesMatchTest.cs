@@ -22,11 +22,14 @@ namespace ZenSharp.Core.Tests
             Assert.IsFalse(rule.Match("wr").Success);
         }
 
-        [Test, ExpectedException(typeof(NotImplementedException))]
+        [Test]
         public void TestNonTerminal()
         {
-            var rule = new LeafRule.NonTerminal("short7");
-            rule.Match("wr");
+            Assert.Throws<NotImplementedException>(() =>
+            {
+                var rule = new LeafRule.NonTerminal("short7");
+                rule.Match("wr");
+            });
         }
 
         [Test]

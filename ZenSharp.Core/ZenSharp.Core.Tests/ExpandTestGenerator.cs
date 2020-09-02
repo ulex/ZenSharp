@@ -121,7 +121,7 @@ scope ""InCSharpStatement"" {
         #endregion Input of ltg
         private GenerateTree _tree;
         private LiveTemplateMatcher _ltm;
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void LoadTree()
         {
             _tree = new LtgParser().ParseAll(_content);
@@ -154,7 +154,7 @@ scope ""house"" {
         #endregion Input of ltg
         private GenerateTree _tree;
         private LiveTemplateMatcher _ltm;
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void LoadTree()
         {
             _tree = new LtgParser().ParseAll(_content);

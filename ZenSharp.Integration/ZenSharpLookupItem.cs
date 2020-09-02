@@ -4,14 +4,11 @@ using System.Linq;
 
 using Github.Ulex.ZenSharp.Core;
 using Github.Ulex.ZenSharp.Integration.Extension;
-using JetBrains.Diagnostics;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Util;
-using JetBrains.ReSharper.Roslyn.Host.Models;
 using JetBrains.Text;
-using JetBrains.TextControl;
 using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
 using JetBrains.Util;
