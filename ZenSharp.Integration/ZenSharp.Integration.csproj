@@ -99,10 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Lifetimes">
-      <Version>2021.2.0</Version>
+      <Version>2021.3.4</Version>
     </PackageReference>
     <PackageReference Include="JetBrains.ReSharper.SDK">
-      <Version>2021.2.0</Version>
+      <Version>2021.3.0-eap04</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

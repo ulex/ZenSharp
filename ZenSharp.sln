@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "ZenSharp.Core", "ZenSharp.Core\ZenSharp.Core.nproj", "{EFA574E2-DE9C-4017-BB5C-8FC4CD8D5E80}"
 EndProject
@@ -38,6 +38,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0F533A6E-E130-11E4-88A7-74D435B9EFD1} = {7D63C907-EF8D-43B0-B94A-18A316C8D6C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {749E95FE-73F6-40C5-8C5F-D462882FEEB7}

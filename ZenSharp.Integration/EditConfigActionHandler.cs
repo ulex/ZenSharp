@@ -36,7 +36,7 @@ namespace Github.Ulex.ZenSharp.Integration
             var settings = ctx.GetKey<ZenSharpSettings>(SettingsOptimization.DoMeSlowly);
 
             var solution = context.GetData(ProjectModelDataConstants.SOLUTION).NotNull("solution != null");
-            var fsp = FileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename));
+            var fsp = VirtualFileSystemPath.CreateByCanonicalPath(ZenSharpSettings.GetTreePath(settings.TreeFilename), InteractionContext.Local);
             EditorManager.GetInstance(solution).OpenFileAsync(fsp, OpenFileOptions.DefaultActivate);
         }
     }
