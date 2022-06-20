@@ -10,7 +10,7 @@
 Free and open source. For more information, see Github.
     </description>
     <releaseNotes>
-      Support 2021.3 EAP4 +
+      Support 2022.2 +
     </releaseNotes>
     <copyright>Alexander Ulitin</copyright>
     <tags>livetemplates code completion ltg</tags>
@@ -23,6 +23,7 @@ Free and open source. For more information, see Github.
   </metadata>
   <files>
     <!--<file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\vAny\plugins\"/>-->
+    <file src="third-party-libraries.json"              target=""/>
 
     <file src="bin\Release\Nemerle.dll"                 target="$TargetDir$\"/>
     <file src="bin\Release\Nemerle.Peg.dll"             target="$TargetDir$\"/>

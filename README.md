@@ -150,14 +150,13 @@ https://garyng.github.io/gtil-gitbook/ReSharper/resharper-plugin-zensharp.html
 <!--
 HOW TO UPGRADE:
 1. Update ZenSharp.Integration/ZenSharp.Integration.csproj ReSharperSDK and Lifetime to latest version (from visual studio)
-2. Update supported versions in README.md
-3. Update release notes in ZenSharp.nuspec
-4. Update version spec in buildNuPack.ps1
-5. Check compilation in Visual Studio
-6. Build package by running build.bat
-7. Install and check plugin
-8. Push to plugins.jetbrains.com via marketplace
-9. Commit and push this repo
+2. Update release notes in ZenSharp.nuspec
+3. Update version spec in buildNuPack.ps1
+4. Check compilation in Visual Studio
+5. Build package by running build.bat
+6. Install and check plugin
+7. Push to plugins.jetbrains.com via marketplace
+8. Commit and push this repo
 
 vim:tw=140:spell:
 -->
