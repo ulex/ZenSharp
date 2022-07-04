@@ -23,7 +23,7 @@ Free and open source. For more information, see Github.
   </metadata>
   <files>
     <!--<file src="ZenSharp.Integration\Templates.ltg" target="ReSharper\vAny\plugins\"/>-->
-    <file src="third-party-libraries.json"              target=""/>
+    <file src="dependencies.json"                       target=""/>
 
     <file src="bin\Release\Nemerle.dll"                 target="$TargetDir$\"/>
     <file src="bin\Release\Nemerle.Peg.dll"             target="$TargetDir$\"/>
