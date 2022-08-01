@@ -109,6 +109,10 @@ namespace Github.Ulex.ZenSharp.Integration
                     {
                         yield return "InCSharpStruct";
                     }
+                    if (treeNode.GetContainingNode<IRecordDeclaration>() != null)
+                    {
+                        yield return "InCSharpRecord";
+                    }
                 }
                 else
                 {
