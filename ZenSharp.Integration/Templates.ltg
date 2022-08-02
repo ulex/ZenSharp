@@ -55,11 +55,11 @@ field ::= access ("readonly "=r)? type space identifier ("="="=" identifier2 ";"
 
 // Classes:
 classAtributes ::= ("[NUnit.Framework.TestFixtureAttribute]" = tf)?
-class ::= classAtributes access ("sealed "=s)? ("class"=c | "static class"=C) space  classBody
+class ::= classAtributes access ("sealed "=S)? ("class"=c | "static class"=C) space  classBody
 classBody ::= identifier (" : "=":" type)? "{" cursor "}"
 
 // Records:
-record ::= access ("abstract "=a | "sealed "=s | "readonly "=r)? "record "=R ("struct "=s)? identifier recordArgsList record_inheritance ";"
+record ::= access ("abstract "=a | "sealed "=S | "readonly "=r)? "record "=R ("struct "=s)? identifier recordArgsList record_inheritance ";"
 record_inheritance ::= (" : "=":" type "( " cursor " )")?
 recordArgsList ::=  "(" ((""="," | ""="(") recordArg)? ")"
 recordArg ::= type " " identifier2 (", "="," recordArg)?
