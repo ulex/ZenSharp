@@ -6,8 +6,10 @@ using Github.Ulex.ZenSharp.Core;
 using Github.Ulex.ZenSharp.Integration.Extension;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Util;
+using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Text;
 using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
@@ -39,7 +41,7 @@ namespace Github.Ulex.ZenSharp.Integration
         private string _displayName;
 
         public ZenSharpLookupItem(Template template, GenerateTree tree, IEnumerable<string> scopes, IconId iconId)
-            : base(template, true)
+            : base(template, true, Shell.Instance.GetComponent<TemplatesLocalizationManager>())
         {
             _tree = tree;
             _scopes = scopes;
