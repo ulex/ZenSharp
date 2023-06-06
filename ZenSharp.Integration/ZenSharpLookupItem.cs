@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Github.Ulex.ZenSharp.Core;
 using Github.Ulex.ZenSharp.Integration.Extension;
+using JetBrains.Diagnostics;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.LookupItems;
 using JetBrains.ReSharper.Feature.Services.CodeCompletion.Infrastructure.Match;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates;
@@ -15,7 +15,7 @@ using JetBrains.UI.Icons;
 using JetBrains.UI.RichText;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
-using LoggingLevel = JetBrains.Diagnostics.LoggingLevel;
+// using LoggingLevel = JetBrains.Diagnostics.LoggingLevel;
 
 namespace Github.Ulex.ZenSharp.Integration
 {

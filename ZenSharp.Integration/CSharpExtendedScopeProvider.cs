@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Application;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.CSharp.CodeCompletion;
@@ -26,14 +27,15 @@ namespace Github.Ulex.ZenSharp.Integration
             var document = tacContext.SelectionRange.Document;
             if (document == null)
             {
-                yield break;
+                return Array.Empty<string>();
             }
             var psiSource = tacContext.SourceFile;
             if (psiSource == null)
             {
-                yield break;
+                return Array.Empty<string>();
             }
 
+            var points = new List<string>();
             using (ReadLockCookie.Create())
             {
                 var psiFiles = solution.GetPsiServices().Files;
@@ -46,26 +48,26 @@ namespace Github.Ulex.ZenSharp.Integration
                 var documentRange = new DocumentRange(document, caretOffset - prefix.Length);
                 if (!documentRange.IsValid())
                 {
-                    yield break;
+                    return Enumerable.Empty<string>();
                 }
 
-                yield return psiSource.PrimaryPsiLanguage.Name;
+                points.Add(psiSource.PrimaryPsiLanguage.Name);
                 
                 var file = psiSource.GetPsiFile<CSharpLanguage>(documentRange);
                 if (file == null || !Equals(file.Language, CSharpLanguage.Instance))
                 {
-                    yield break;
+                    return points;
                 }
                 var element = file.FindTokenAt(document, caretOffset - prefix.Length);
                 if (element == null)
                 {
-                    yield break;
+                    return points;
                 }
 
-                yield return "InCSharpFile";
+                points.Add("InCSharpFile");
                 var treeNode = element;
 
-                if (treeNode.GetContainingNode<IDocCommentNode>(true) != null) yield break;
+                if (treeNode.GetContainingNode<IDocCommentNode>(true) != null) return points;
 
                 if (treeNode is ICSharpCommentNode || treeNode is IPreprocessorDirective)
                 {
@@ -73,45 +75,45 @@ namespace Github.Ulex.ZenSharp.Integration
                 }
                 if (treeNode == null)
                 {
-                    yield break;
+                    return points;
                 }
 
                 var context = CSharpReparseContext.FindContext(treeNode);
                 if (context == null)
                 {
-                    yield break;
+                    return points;
                 }
 
                 if (treeNode.GetContainingNode<IEnumDeclaration>() != null)
                 {
-                    yield return "InCSharpEnum";
+                    points.Add("InCSharpEnum");
                 }
 
                 var containingType = treeNode.GetContainingNode<ICSharpTypeDeclaration>(true);
                 if (containingType == null && TestNode<ICSharpNamespaceDeclaration>(context, "namespace N {}", false))
                 {
-                    yield return "InCSharpTypeAndNamespace";
+                    points.Add("InCSharpTypeAndNamespace");
                 }
                 else if (TestNode<IMethodDeclaration>(context, "void foo() {}", false))
                 {
-                    yield return "InCSharpTypeMember";
+                    points.Add("InCSharpTypeMember");
                     // Extend here: 
                     // Already in type member, 
                     if (treeNode.GetContainingNode<IInterfaceDeclaration>() != null)
                     {
-                        yield return "InCSharpInterface";
+                        points.Add("InCSharpInterface");
                     }
                     if (treeNode.GetContainingNode<IClassDeclaration>() != null)
                     {
-                        yield return "InCSharpClass";
+                        points.Add("InCSharpClass");
                     }
                     if (treeNode.GetContainingNode<IStructDeclaration>() != null)
                     {
-                        yield return "InCSharpStruct";
+                        points.Add("InCSharpStruct");
                     }
                     if (treeNode.GetContainingNode<IRecordDeclaration>() != null)
                     {
-                        yield return "InCSharpRecord";
+                        points.Add("InCSharpRecord");
                     }
                 }
                 else
@@ -119,18 +121,20 @@ namespace Github.Ulex.ZenSharp.Integration
                     bool acceptsExpression = TestNode<IPostfixOperatorExpression>(context, "a++", true);
                     if (TestNode<IBreakStatement>(context, "break;", false))
                     {
-                        yield return "InCSharpStatement";
+                        points.Add("InCSharpStatement");
                     }
                     else if (acceptsExpression)
                     {
-                        yield return "InCSharpExpression";
+                        points.Add("InCSharpExpression");
                     }
                     if (!acceptsExpression && TestNode<IQuerySelectClause>(context, "select x", false))
                     {
-                        yield return "InCSharpQuery";
+                        points.Add("InCSharpQuery");
                     }
                 }
             }
+
+            return points;
         }
 
         private static bool TestNode<T>(CSharpReparseContext context, string text, bool strictStart = false)

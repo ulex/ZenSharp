@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Navigation;
-using JetBrains.Annotations;
 using JetBrains.Application.Components;
 using JetBrains.Application.Settings;
 using JetBrains.Application.UI.Options;
@@ -15,7 +14,6 @@ using JetBrains.Lifetimes;
 using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
-
 using Microsoft.Win32;
 
 namespace Github.Ulex.ZenSharp.Integration

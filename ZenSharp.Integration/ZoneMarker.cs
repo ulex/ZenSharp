@@ -1,5 +1,5 @@
 ﻿using JetBrains.Application.BuildScript.Application.Zones;
-using JetBrains.Platform.VisualStudio.Protocol.BuildScript;
+using JetBrains.Platform.VisualStudio.Protocol.Zones;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.TextControl;
 

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-
 using Github.Ulex.ZenSharp.Core;
-
 using JetBrains.Application;
 using JetBrains.Application.Settings;
 using JetBrains.DataFlow;
