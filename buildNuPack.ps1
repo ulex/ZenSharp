@@ -10,7 +10,7 @@ $packages = @{
         'PackageVersion' = $version;
         'DependencyId' = 'Wave';
         'DependencyVersion' = '232';
-        'IntegrationDll' = 'bin\Release\ZenSharp.Integration.dll';
+        'IntegrationDll' = 'ZenSharp.Integration\bin\Release\net472-windows\ZenSharp.Integration.dll';
         'TargetDir' = 'DotFiles\';
     };
 }
