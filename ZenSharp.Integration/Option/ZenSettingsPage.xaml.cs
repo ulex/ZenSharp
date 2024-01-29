@@ -4,14 +4,12 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Navigation;
-using JetBrains.Application.Components;
 using JetBrains.Application.Settings;
 using JetBrains.Application.UI.Options;
 using JetBrains.Application.UI.Options.OptionPages;
 using JetBrains.Application.UI.Options.Options.ThemedIcons;
-using JetBrains.Application.UI.UIAutomation;
+using JetBrains.DataFlow;
 using JetBrains.Lifetimes;
-using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
 using Microsoft.Win32;
@@ -28,70 +26,23 @@ namespace Github.Ulex.ZenSharp.Integration
 
         private static readonly ILogger Log = Logger.GetLogger(typeof(ZenSettingsPage));
 
-        public ZenSettingsPage(Lifetime lifetime, OptionsSettingsSmartContext settings, IComponentContainer container)
+        public IProperty<string> Path { get; private set; }
+
+        public ZenSettingsPage(Lifetime lifetime, OptionsSettingsSmartContext settings)
         {
-            settings.SetBinding(lifetime, (ZenSharpSettings s) => s.TreeFilename, this, PathProperty);
+            Path = new Property<string>("Path");
+            settings.SetBinding(lifetime, (ZenSharpSettings s) => s.TreeFilename, Path);
             InitializeComponent();
             Id = pageId;
-            _zenWatcher = Shell.Instance.GetComponent<LtgConfigWatcher>();
             // show exception info if any
             OnOk();
         }
 
-        private readonly LtgConfigWatcher _zenWatcher;
-
-        public static readonly DependencyProperty PathProperty = DependencyProperty.Register(
-            "Path",
-            typeof(string),
-            typeof(ZenSettingsPage),
-            new PropertyMetadata(default(string)));
-
-        public string Path
-        {
-            get { return (string)GetValue(PathProperty); }
-            set { SetValue(PathProperty, value); }
-        }
-
-        public static readonly DependencyProperty PostValidationErrorProperty =
-            DependencyProperty.Register(
-                "PostValidationError",
-                typeof(Exception),
-                typeof(ZenSettingsPage),
-                new PropertyMetadata(default(Exception)));
-
-        public Exception PostValidationError
-        {
-            get { return (Exception)GetValue(PostValidationErrorProperty); }
-            set { SetValue(PostValidationErrorProperty, value); }
-        }
-
-        public string Id { get; private set; }
+        public string Id { get; }
 
         public bool OnOk()
         {
             return true;
-        }
-
-        public bool ValidatePage()
-        {
-            try
-            {
-                // todo: use settings notification options
-                var fullPath = ZenSharpSettings.GetTreePath(Path);
-                _zenWatcher.Reload(fullPath);
-                _zenWatcher.ReinitializeWatcher(fullPath);
-                return true;
-            }
-            catch (Exception exception)
-            {
-                PostValidationError = exception;
-                return false;
-            }
-        }
-
-        public EitherControl Control
-        {
-            get { return this; }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -101,7 +52,7 @@ namespace Github.Ulex.ZenSharp.Integration
                 var dialog = new OpenFileDialog() { CheckFileExists = true, DefaultExt = "ltg", ValidateNames = true };
                 if (dialog.ShowDialog() == true)
                 {
-                    Path = dialog.FileName;
+                    Path.Value = dialog.FileName;
                 }
             }
             catch (Exception exception)

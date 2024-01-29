@@ -11,9 +11,9 @@
     <EmbeddedResource Include="Templates.ltg" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Lifetimes" Version="2023.2.1" />
+    <PackageReference Include="JetBrains.Lifetimes" Version="2024.1.1-preview7" />
     <PackageReference Include="JetBrains.ReSharper.SDK">
-      <Version>2023.2.0-eap02</Version>
+      <Version>2024.1.0-eap02</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
