@@ -154,7 +154,7 @@ HOW TO UPGRADE:
 3. Update version spec in buildNuPack.ps1
 4. Check compilation in Visual Studio
 5. Build package by running build.bat
-6. Install and check plugin
+6. Install and check plugin from bin/Releases
 7. Push to plugins.jetbrains.com via marketplace
 8. Commit and push this repo
 

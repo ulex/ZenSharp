@@ -1,6 +1,6 @@
 @echo off
 REM SET PATH=%PATH%;C:\Windows\Microsoft.NET\Framework64\v4.0.30319
-SET PATH=C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin;%PATH%
+SET PATH=C:\Program Files\Microsoft Visual Studio\18\Insiders\MSBuild\Current\Bin;%PATH%
 SET HostFullIdentifier=
 
 if not defined version set /P VERSION=Version:
