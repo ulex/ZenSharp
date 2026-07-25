@@ -9,7 +9,7 @@ $packages = @{
 		'PackageId' = 'Ulex.ZenSharp';
         'PackageVersion' = $version;
         'DependencyId' = 'Wave';
-        'DependencyVersion' = '253';
+        'DependencyVersion' = '262';
         'IntegrationDll' = 'ZenSharp.Integration\bin\Release\net472-windows\ZenSharp.Integration.dll';
         'TargetDir' = 'DotFiles\';
     };
