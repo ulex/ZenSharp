@@ -23,7 +23,7 @@ namespace Github.Ulex.ZenSharp.Integration
     ///     todo: remove inherence
     /// </summary>
     
-    internal class ZenSharpLookupItem : TemplateLookupItem, ILookupItem
+    internal class ZenSharpLookupItem : TemplateLookupItem, ILookupItemWithDeclarativeMatcher
     {
         private static readonly ILogger Log = Logger.GetLogger(typeof(ZenSharpLookupItem));
 
@@ -40,6 +40,8 @@ namespace Github.Ulex.ZenSharp.Integration
 
         private string _displayName;
 
+        private readonly LookupItemMatcher _matchingRule;
+
         public ZenSharpLookupItem(Template template, GenerateTree tree, IEnumerable<string> scopes, IconId iconId)
             : base(template, true, Shell.Instance.GetComponent<TemplatesLocalizationManager>())
         {
@@ -49,6 +51,7 @@ namespace Github.Ulex.ZenSharp.Integration
             Log.Info("Creating ZenSharpLookupItem with template = {0}", template);
             _iconId = iconId;
             _displayName = _template.Text;
+            _matchingRule = new ZenSharpLookupItemMatcher(this);
         }
 
         RichText ILookupItem.DisplayName
@@ -76,7 +79,11 @@ namespace Github.Ulex.ZenSharp.Integration
             return true;
         }
 
-        MatchingResult ILookupItem.Match(PrefixMatcher prefixMatcher)
+        public string TextToMatch => _displayName;
+
+        public LookupItemMatcher MatchingRule => _matchingRule;
+
+        private MatchingResult MatchPrefix(PrefixMatcher prefixMatcher)
         {
             string prefix = prefixMatcher.Prefix;
             if (string.IsNullOrEmpty(prefix)) return null;
@@ -143,7 +150,7 @@ namespace Github.Ulex.ZenSharp.Integration
         {
             // todo: review parameters
             var enableAllFlags = MatcherScore.Highest - 1;
-            return new MatchingResult(prefix.Length, 1, enableAllFlags);
+            return new MatchingResult(prefix.Length, enableAllFlags);
         }
 
         private string FillText(string prefix, LiveTemplateMatcher.MatchResult matchResult)
@@ -184,6 +191,21 @@ namespace Github.Ulex.ZenSharp.Integration
                     Log.Trace("Place holder macro: {0}, {1}", macros, rule.Name);
                     _template.Fields.Add(new TemplateField(rule.Name, macros, 0));
                 }
+            }
+        }
+
+        private sealed class ZenSharpLookupItemMatcher : LookupItemMatcher
+        {
+            private readonly ZenSharpLookupItem _item;
+
+            public ZenSharpLookupItemMatcher(ZenSharpLookupItem item)
+            {
+                _item = item;
+            }
+
+            public override MatchingResult Match(PrefixMatcher prefixMatcher, string textToMatch, int startIndex, int length)
+            {
+                return _item.MatchPrefix(prefixMatcher);
             }
         }
     }

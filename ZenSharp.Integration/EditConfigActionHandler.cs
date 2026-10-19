@@ -22,9 +22,11 @@ namespace Github.Ulex.ZenSharp.Integration
         }
     }
 
-    [Action("Edit ZenSharp templates")]
+    [Action(typeof(EditConfigActionHandler), nameof(ActionText))]
     public class EditConfigActionHandler : IExecutableAction
     {
+        public static string ActionText => "Edit ZenSharp templates";
+
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
         {
             var solution = context.GetData(ProjectModelDataConstants.SOLUTION);

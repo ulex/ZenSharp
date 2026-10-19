@@ -44,8 +44,9 @@ namespace Github.Ulex.ZenSharp.Integration
                     psiFiles.CommitAllDocuments();
                 }
                 int caretOffset = tacContext.CaretOffset.Offset;
-                string prefix = LiveTemplatesManager.GetPrefix(document, caretOffset);
-                var documentRange = new DocumentRange(document, caretOffset - prefix.Length);
+                string prefix = LiveTemplatesManager.GetPrefix(new DocumentOffset(document, caretOffset));
+                var documentOffset = new DocumentOffset(document, caretOffset - prefix.Length);
+                var documentRange = new DocumentRange(documentOffset);
                 if (!documentRange.IsValid())
                 {
                     return Enumerable.Empty<string>();
@@ -58,7 +59,8 @@ namespace Github.Ulex.ZenSharp.Integration
                 {
                     return points;
                 }
-                var element = file.FindTokenAt(document, caretOffset - prefix.Length);
+                var treeRange = file.Translate(documentRange);
+                var element = file.FindTokenAt(documentOffset);
                 if (element == null)
                 {
                     return points;
@@ -78,7 +80,7 @@ namespace Github.Ulex.ZenSharp.Integration
                     return points;
                 }
 
-                var context = CSharpReparseContext.FindContext(treeNode);
+                var context = CSharpReparseContextEx.FindContext(file, treeRange);
                 if (context == null)
                 {
                     return points;
@@ -137,12 +139,12 @@ namespace Github.Ulex.ZenSharp.Integration
             return points;
         }
 
-        private static bool TestNode<T>(CSharpReparseContext context, string text, bool strictStart = false)
+        private static bool TestNode<T>(CSharpReparseContextEx context, string text, bool strictStart = false)
             where T : ITreeNode
         {
             var node = context.Parse(text);
-            var tokenAt1 = node.FindTokenAt(new TreeOffset(context.WholeTextLength - 1));
-            var treeTextOffset = new TreeOffset(context.OriginalTextLength);
+            var treeTextOffset = new TreeOffset(context.HeadLength);
+            var tokenAt1 = node.FindTokenAt(new TreeOffset(context.HeadLength + text.Length - 1));
             var tokenAt2 = node.FindTokenAt(treeTextOffset);
             if (tokenAt1 == null || tokenAt2 == null)
             {
@@ -151,7 +153,7 @@ namespace Github.Ulex.ZenSharp.Integration
             var errorNodeFinder = new ErrorNodeFinder(tokenAt1);
             errorNodeFinder.FindLastError(node);
             if (errorNodeFinder.Error != null
-                && errorNodeFinder.Error.GetTreeStartOffset().Offset >= context.OriginalTextLength)
+                && errorNodeFinder.Error.GetTreeStartOffset().Offset >= context.HeadLength)
             {
                 return false;
             }
